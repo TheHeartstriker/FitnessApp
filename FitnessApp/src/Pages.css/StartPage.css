@@ -25,10 +25,15 @@ a {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  border: none;
+  background-image: url("./src/Images/StartPage.svg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   margin: 0;
   padding: 0;
-  height: 100vh;
-  background: linear-gradient(to bottom, var(--Cyan-2), white);
+  height: 110vh;
+  width: 100vw;
 }
 
 .NavContainer {
@@ -39,7 +44,7 @@ a {
   top: 0;
   width: 100%;
   height: 10vh;
-  background: linear-gradient(to bottom, transparent, var(--Blue-1));
+  background-color: var(--grey-1);
 }
 
 .ViewBtn {
