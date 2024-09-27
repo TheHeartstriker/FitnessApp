@@ -2,14 +2,23 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 function StartPage() {
+  const handleMoveDown = () => {
+    window.scrollTo({
+      top: window.innerHeight, // Scroll down by one viewport height
+      behavior: "smooth", // Smooth scrolling
+    });
+  };
+
   return (
     <div className="StartPageContainer">
-      <h1>Hello user this is a lightweight modular fitness tracker</h1>
-      <button>Workouts</button>
+      <h1>The is FGraph a lightweight fitness tracker</h1>
+      <button className="MoveDown" onClick={handleMoveDown}>
+        Workouts
+      </button>
 
       <div className="NavContainer">
-        <Link to="/view">
-          <h3 className="NavBtn On">View</h3>
+        <Link to="/daily">
+          <h3 className="NavBtn On">Daily</h3>
         </Link>
 
         <Link to="/create">
