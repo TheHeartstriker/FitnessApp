@@ -1,0 +1,8 @@
+.DailyPageContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 85vh;
+  margin-top: 50px;
+}
