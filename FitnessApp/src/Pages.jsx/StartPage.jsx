@@ -17,12 +17,16 @@ function StartPage() {
       </button>
 
       <div className="NavContainer">
+        <Link to="/">
+          <h3 className="NavBtn On">View</h3>
+        </Link>
+
         <Link to="/daily">
           <h3 className="NavBtn On">Daily</h3>
         </Link>
 
-        <Link to="/create">
-          <h3 className="NavBtn On">Create</h3>
+        <Link to="/login">
+          <h3 className="NavBtn On">Login</h3>
         </Link>
       </div>
     </div>
