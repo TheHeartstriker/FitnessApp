@@ -2,19 +2,22 @@
   /* Netural */
   --grey: hsl(0, 0%, 50%);
   --grey-1: hsl(0, 0%, 30%);
+  --grey-2: hsl(0, 0%, 15%);
 
-  /* Greens */
+  /* Blues */
   --Blue-1: hsl(234, 100%, 50%);
   --Blue-2: hsl(234, 100%, 35%);
-  /* Pinks */
+  --Blue-3: hsl(234, 100%, 20%);
+  /* Cyans */
   --Cyan-1: hsl(202, 100%, 50%);
   --Cyan-2: hsl(202, 100%, 35%);
+  --Cyan-3: hsl(202, 100%, 20%);
 }
 
 body {
   margin: 0;
   padding: 0;
-  font-family: "Roboto", sans-serif;
+  font-family: "Teko", sans-serif;
 }
 
 a {
@@ -61,6 +64,22 @@ a {
 }
 
 .NavBtn {
+  margin: 20px;
+  padding: 10px;
+  border: 2.5px solid white;
+  border-radius: 5px;
+  background: linear-gradient(to bottom, var(--grey-1), var(--Cyan-1));
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.MoveDown {
+  font-family: "Teko", sans-serif;
+  position: relative;
+  top: 45vh;
   margin: 20px;
   padding: 10px;
   border: 2.5px solid white;
