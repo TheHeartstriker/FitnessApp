@@ -17,8 +17,35 @@
 .ViewPageContainer {
   display: flex;
   align-items: center;
-  justify-content: center;
+  background-color: var(--grey-2);
   width: 100vw;
   height: 90vh;
-  margin-top: 50px;
+}
+
+.GraphContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 60%;
+  height: 70%;
+
+  left: 7%;
+  bottom: 10%;
+  border: 5px solid var(--grey-1);
+  border-radius: 10px;
+}
+
+.PercentageContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  left: 15%;
+
+  width: 20%;
+  height: 70%;
+  border: 5px solid var(--grey-1);
 }

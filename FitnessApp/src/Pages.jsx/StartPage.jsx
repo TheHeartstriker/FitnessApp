@@ -13,7 +13,7 @@ function StartPage() {
     <div className="StartPageContainer">
       <h1>The is FGraph a lightweight fitness tracker</h1>
       <button className="MoveDown" onClick={handleMoveDown}>
-        Workouts
+        Down
       </button>
 
       <div className="NavContainer">
