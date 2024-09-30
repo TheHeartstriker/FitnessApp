@@ -4,6 +4,7 @@ export const Provider = ({ children }) => {
   const [userid, setUserid] = useState("");
   const [IsSignedIn, setIsSignedIn] = useState(false);
   const [FitnessData, setFitnessData] = useState([]);
+  const [userId, setUserId] = useState("");
   return (
     <Context.Provider
       value={{
@@ -13,6 +14,8 @@ export const Provider = ({ children }) => {
         setFitnessData,
         IsSignedIn,
         setIsSignedIn,
+        userId,
+        setUserId,
       }}
     >
       {children}

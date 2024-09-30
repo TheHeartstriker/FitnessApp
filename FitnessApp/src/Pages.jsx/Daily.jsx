@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 function Daily() {
   //Todays data
@@ -9,6 +9,10 @@ function Daily() {
   const [weight, setWeight] = useState(0);
   const [zone, setZone] = useState("Zone1");
 
+  const workoutTimeRef = useRef(null);
+  const restingHeartRateRef = useRef(null);
+  const weightRef = useRef(null);
+  //Update workout time, resting heart rate and weight
   const updateWorkoutTime = (time) => {
     if (time < 0 || time != parseInt(time)) {
       alert("Please enter a valid time");
@@ -16,7 +20,7 @@ function Daily() {
     }
     setWorkoutTime(time);
   };
-
+  //Resting
   const updateRestingHeartRate = (rate) => {
     if (rate < 0 || rate > 135) {
       alert("Please go see a doctor");
@@ -29,7 +33,7 @@ function Daily() {
 
     setRestingHeartRate(rate);
   };
-
+  //Weight
   const updateWeight = (weight) => {
     if (weight < 0 || weight != parseInt(weight)) {
       alert("Please enter a valid weight");
@@ -37,21 +41,31 @@ function Daily() {
     }
     setWeight(weight);
   };
-
+  //Submit the resting heart rate, weight and workout time
   const submitRestingHeartRate = (rate) => {
     setDailyData((prevData) => ({
       ...prevData,
       HeartRate: parseInt(rate, 10),
     }));
+    restingHeartRateRef.current.value = "";
   };
-
+  //weight
   const submitWeight = (weight) => {
     setDailyData((prevData) => ({
       ...prevData,
       weight: parseInt(weight, 10),
     }));
+    weightRef.current.value = "";
   };
-
+  //workout time
+  function UpdateTime() {
+    setDailyData((prevData) => ({
+      ...prevData,
+      [zone]: (Number(prevData[zone]) || 0) + Number(workoutTime),
+    }));
+    workoutTimeRef.current.value = "";
+  }
+  //Update the zone
   const updateZone = (zone) => {
     setZone(zone);
   };
@@ -134,12 +148,6 @@ function Daily() {
     }
   }
 
-  function UpdateTime() {
-    setDailyData((prevData) => ({
-      ...prevData,
-      [zone]: (Number(prevData[zone]) || 0) + Number(workoutTime),
-    }));
-  }
   useEffect(() => {
     CreateData();
   }, []);
@@ -152,6 +160,7 @@ function Daily() {
     <div className="DailyPageContainer">
       <div className="InputContainer">
         <input
+          ref={workoutTimeRef}
           className="WorkHeart"
           type="text"
           placeholder="Enter workout time in minutes"
@@ -162,6 +171,7 @@ function Daily() {
         </button>
 
         <input
+          ref={restingHeartRateRef}
           className="WorkHeart"
           type="text"
           placeholder="Average resting heartrate"
@@ -175,6 +185,7 @@ function Daily() {
         </button>
 
         <input
+          ref={weightRef}
           className="WorkHeart"
           type="text"
           placeholder="Daily weight"
