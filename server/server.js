@@ -3,8 +3,8 @@ import cors from "cors";
 import mysql from "mysql2/promise";
 
 const app = express();
-//cors options
 
+//cors options
 const corsOptions = {
   origin: "http://localhost:5173",
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
@@ -12,17 +12,25 @@ const corsOptions = {
   optionsSuccessStatus: 204,
 };
 
+//For the database connection
+const pool = mysql.createPool({
+  host: process.env.MY_HOST,
+  user: process.env.MY_USER,
+  password: process.env.MY_PASS,
+  database: process.env.MY_DB,
+});
+
 app.use(cors(corsOptions));
 app.use(express.json());
 
-app.listen(5000, () => {
-  console.log("Server is running on port 5000");
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
 
-app.get("/api", async (req, res) => {
+app.post("/daily/workoutTime", async (req, res) => {
   try {
-    res.json({ message: "Hello from server!" });
   } catch (error) {
-    res.status(500).json({ error: "Internal Server Error" });
+    console.error(error);
   }
 });

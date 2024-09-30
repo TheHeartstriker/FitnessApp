@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function Daily() {
-  const [workoutTime, setWorkoutTime] = useState();
-  const [restingHeartRate, setRestingHeartRate] = useState();
-  const [weight, setWeight] = useState();
-  const [zone, setZone] = useState("");
+  //Todays data
+  const [DailyData, setDailyData] = useState([]);
+  //Data used to update the daily data
+  const [workoutTime, setWorkoutTime] = useState(0);
+  const [restingHeartRate, setRestingHeartRate] = useState(0);
+  const [weight, setWeight] = useState(0);
+  const [zone, setZone] = useState("Zone1");
 
   const updateWorkoutTime = (time) => {
     if (time < 0 || time != parseInt(time)) {
@@ -23,6 +26,7 @@ function Daily() {
       alert("Please enter a valid heart rate");
       return;
     }
+
     setRestingHeartRate(rate);
   };
 
@@ -34,9 +38,38 @@ function Daily() {
     setWeight(weight);
   };
 
+  const submitRestingHeartRate = (rate) => {
+    setDailyData((prevData) => ({
+      ...prevData,
+      HeartRate: parseInt(rate, 10),
+    }));
+  };
+
+  const submitWeight = (weight) => {
+    setDailyData((prevData) => ({
+      ...prevData,
+      weight: parseInt(weight, 10),
+    }));
+  };
+
   const updateZone = (zone) => {
     setZone(zone);
   };
+
+  function CreateData() {
+    const DailyData = {
+      Zone1: 0,
+      Zone2: 0,
+      Zone3: 0,
+      Zone4: 0,
+      Zone5: 0,
+      weight: 0,
+      HeartRate: 0,
+    };
+
+    setDailyData(DailyData);
+  }
+
   //Server requests split into three functions to reduce confusion
   async function saveWorkoutTime() {
     const options = {
@@ -101,6 +134,20 @@ function Daily() {
     }
   }
 
+  function UpdateTime() {
+    setDailyData((prevData) => ({
+      ...prevData,
+      [zone]: (Number(prevData[zone]) || 0) + Number(workoutTime),
+    }));
+  }
+  useEffect(() => {
+    CreateData();
+  }, []);
+
+  useEffect(() => {
+    console.log(DailyData);
+  }, [DailyData]);
+
   return (
     <div className="DailyPageContainer">
       <div className="InputContainer">
@@ -108,28 +155,34 @@ function Daily() {
           className="WorkHeart"
           type="text"
           placeholder="Enter workout time in minutes"
-          value={workoutTime}
           onChange={(e) => updateWorkoutTime(e.target.value)}
         ></input>
-        <button className="Submit">Save</button>
+        <button className="Submit" onClick={UpdateTime}>
+          Save
+        </button>
 
         <input
           className="WorkHeart"
           type="text"
           placeholder="Average resting heartrate"
-          value={restingHeartRate}
           onChange={(e) => updateRestingHeartRate(e.target.value)}
         ></input>
-        <button className="Submit">Save</button>
+        <button
+          className="Submit"
+          onClick={() => submitRestingHeartRate(restingHeartRate)}
+        >
+          Save
+        </button>
 
         <input
           className="WorkHeart"
           type="text"
           placeholder="Daily weight"
-          value={weight}
           onChange={(e) => updateWeight(e.target.value)}
         ></input>
-        <button className="Submit">Save</button>
+        <button className="Submit" onClick={() => submitWeight(weight)}>
+          Save
+        </button>
       </div>
 
       <div className="ZoneContainer">
