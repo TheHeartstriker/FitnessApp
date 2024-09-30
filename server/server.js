@@ -32,6 +32,28 @@ app.listen(PORT, () => {
 
 let userIdGet = "";
 
+app.post("/api/createDataPage", async (req, res) => {
+  const { Zone1, Zone2, Zone3, Zone4, Zone5, weight, HeartRate, Date } =
+    req.body;
+
+  try {
+    await createDataPage(
+      Zone1,
+      Zone2,
+      Zone3,
+      Zone4,
+      Zone5,
+      weight,
+      Date,
+      HeartRate,
+      userIdGet
+    );
+    res.status(201).send();
+  } catch (error) {
+    res.status(500).send({ message: "Internal server error", error });
+  }
+});
+
 // Sends username and login to the database and if successful sends the user id back to the front
 app.post("/api/login", async (req, res) => {
   const { username, password } = req.body;
@@ -100,6 +122,24 @@ async function signup(username, password, id) {
   }
 }
 
+//Login function
+async function login(username, password) {
+  try {
+    const [results] = await pool.query(
+      `SELECT * FROM login WHERE UserName = ? AND Pass_word = ?`,
+      [username, password]
+    );
+    //If the username and password match
+    if (results.length > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    console.error("Database query failed", error);
+  }
+}
+
 //Sees if the username is already in use
 async function checkUsername(username) {
   try {
@@ -131,6 +171,28 @@ async function GetUserId(username, password) {
     }
   } catch (error) {
     console.error("Database query failed", error);
+    throw error;
+  }
+}
+
+async function createDataPage(
+  zone1,
+  zone2,
+  zone3,
+  zone4,
+  zone5,
+  weight,
+  date,
+  heartRate,
+  userId
+) {
+  try {
+    const result = await pool.query(
+      `INSERT INTO dailyfitinfo (Zone1Time, Zone2Time, Zone3Time, Zone4Time, Zone5Time, weight, DateRecorded, resting_heart, userid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      [zone1, zone2, zone3, zone4, zone5, weight, date, heartRate, userId]
+    );
+    return result;
+  } catch (error) {
     throw error;
   }
 }

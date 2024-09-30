@@ -1,4 +1,4 @@
-import { useState, useRef, useContext } from "react";
+import { useState, useRef, useContext, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { Context } from "../Provider";
 
@@ -163,6 +163,39 @@ function LoginPage() {
       console.error("Error:", error);
     }
   }
+  //Creates the 'page' of data for the user on this spefic day if the user already has a page it will not create a new one
+  //Aka if the user logs in twice in one day it will not create a new page
+  async function CreateDataPage() {
+    const currentDate = new Date().toISOString().split("T")[0];
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        Zone1: 0,
+        Zone2: 0,
+        Zone3: 0,
+        Zone4: 0,
+        Zone5: 0,
+        weight: 0,
+        HeartRate: 0,
+        Date: currentDate,
+      }),
+    };
+    try {
+      await fetch("http://localhost:5000/api/createDataPage", options);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  }
+
+  useEffect(() => {
+    console.log("isSignedIn:", isSignedIn);
+    if (isSignedIn) {
+      CreateDataPage();
+    }
+  }, [isSignedIn]);
 
   return (
     <>
