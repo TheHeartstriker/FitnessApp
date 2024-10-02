@@ -107,16 +107,11 @@ app.put("/api/updateDataPage", async (req, res) => {
   const requestBody = req.body;
   const DataName = Object.keys(requestBody)[0];
   const Data = requestBody[DataName];
-  console.log("Running updateDataPage");
-  console.log(`DataName: ${DataName}, Data: ${Data}, userIdGet: ${userIdGet}`);
 
   try {
-    console.log("Trying to run updateToday");
     const result = await updateToday(userIdGet, Data, DataName);
-    console.log("Update successful:", result);
     res.status(200).send(result);
   } catch (error) {
-    console.error("Error in updateToday:", error);
     res.status(500).send({ message: "Internal server error", error });
   }
 });
@@ -246,10 +241,21 @@ async function checkToday(userId) {
   }
 }
 
+const allowedColumns = [
+  "resting_heart",
+  "Zone1Time",
+  "Zone2Time",
+  "Zone3Time",
+  "Zone4Time",
+  "Zone5Time",
+  "weight",
+];
+
 async function getFitData(userId) {
   try {
+    const columns = allowedColumns.join(", ");
     const [results] = await pool.query(
-      `SELECT * FROM dailyfitinfo WHERE userid = ?`,
+      `SELECT ${columns} FROM dailyfitinfo WHERE userid = ?`,
       [userId]
     );
     return results;
