@@ -37,6 +37,11 @@ app.post("/api/createDataPage", async (req, res) => {
     req.body;
 
   try {
+    if ((await checkToday(userIdGet)) == true) {
+      console.log("Already have a page for today");
+      res.status(200).send();
+      return;
+    }
     await createDataPage(
       Zone1,
       Zone2,
@@ -93,6 +98,33 @@ app.post("/api/checkUsername", async (req, res) => {
     } else {
       res.status(401).send(false);
     }
+  } catch (error) {
+    res.status(500).send({ message: "Internal server error", error });
+  }
+});
+
+app.put("/api/updateDataPage", async (req, res) => {
+  const requestBody = req.body;
+  const DataName = Object.keys(requestBody)[0];
+  const Data = requestBody[DataName];
+  console.log("Running updateDataPage");
+  console.log(`DataName: ${DataName}, Data: ${Data}, userIdGet: ${userIdGet}`);
+
+  try {
+    console.log("Trying to run updateToday");
+    const result = await updateToday(userIdGet, Data, DataName);
+    console.log("Update successful:", result);
+    res.status(200).send(result);
+  } catch (error) {
+    console.error("Error in updateToday:", error);
+    res.status(500).send({ message: "Internal server error", error });
+  }
+});
+
+app.get("/api/getFitData", async (req, res) => {
+  try {
+    const result = await getFitData(userIdGet);
+    res.status(200).send(result);
   } catch (error) {
     res.status(500).send({ message: "Internal server error", error });
   }
@@ -174,7 +206,8 @@ async function GetUserId(username, password) {
     throw error;
   }
 }
-
+//Creates a new data page for the day for a specific user
+//One can only have one page per day
 async function createDataPage(
   zone1,
   zone2,
@@ -193,6 +226,61 @@ async function createDataPage(
     );
     return result;
   } catch (error) {
+    throw error;
+  }
+}
+//Makes sure that the user does not have a page for the day already and if so returns true
+async function checkToday(userId) {
+  try {
+    const [results] = await pool.query(
+      `SELECT * FROM dailyfitinfo WHERE DateRecorded = CURDATE() AND userid = ?`,
+      [userId]
+    );
+    if (results.length > 0) {
+      return true;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function getFitData(userId) {
+  try {
+    const [results] = await pool.query(
+      `SELECT * FROM dailyfitinfo WHERE userid = ?`,
+      [userId]
+    );
+    return results;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function updateToday(userId, data, dataname) {
+  console.log("Running the query");
+  const allowedColumns = [
+    "resting_heart",
+    "Zone1Time",
+    "Zone2Time",
+    "Zone3Time",
+    "Zone4Time",
+    "Zone5Time",
+    "weight",
+  ]; // Add all allowed column names here
+
+  if (!allowedColumns.includes(dataname)) {
+    console.error("Invalid column name:", dataname);
+    throw new Error("Invalid column name");
+  }
+
+  try {
+    const query = `UPDATE dailyfitinfo SET ${dataname} = ? WHERE DateRecorded = CURDATE() AND userid = ?`;
+    const [results] = await pool.query(query, [data, userId]);
+    return results;
+  } catch (error) {
+    console.error("Error executing query:", error);
     throw error;
   }
 }

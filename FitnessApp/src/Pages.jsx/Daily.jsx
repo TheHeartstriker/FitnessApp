@@ -7,7 +7,7 @@ function Daily() {
   const [workoutTime, setWorkoutTime] = useState(0);
   const [restingHeartRate, setRestingHeartRate] = useState(0);
   const [weight, setWeight] = useState(0);
-  const [zone, setZone] = useState("Zone1");
+  const [zone, setZone] = useState("Zone1Time");
 
   const workoutTimeRef = useRef(null);
   const restingHeartRateRef = useRef(null);
@@ -42,29 +42,45 @@ function Daily() {
     setWeight(weight);
   };
   //Submit the resting heart rate, weight and workout time
-  const submitRestingHeartRate = (rate) => {
+  const submitRestingHeartRate = async (rate) => {
     setDailyData((prevData) => ({
       ...prevData,
       HeartRate: parseInt(rate, 10),
     }));
-    restingHeartRateRef.current.value = "";
+
+    try {
+      await saveData("resting_heart", rate);
+      restingHeartRateRef.current.value = "";
+    } catch (error) {
+      console.error(error);
+    }
   };
   //weight
-  const submitWeight = (weight) => {
+  const submitWeight = async (weight) => {
     setDailyData((prevData) => ({
       ...prevData,
       weight: parseInt(weight, 10),
     }));
-    weightRef.current.value = "";
+    try {
+      await saveData("weight", weight);
+      weightRef.current.value = "";
+    } catch (error) {
+      console.error(error);
+    }
   };
   //workout time
-  function UpdateTime() {
+  const UpdateTime = async () => {
     setDailyData((prevData) => ({
       ...prevData,
       [zone]: (Number(prevData[zone]) || 0) + Number(workoutTime),
     }));
-    workoutTimeRef.current.value = "";
-  }
+    try {
+      await saveData(zone, workoutTime);
+      workoutTimeRef.current.value = "";
+    } catch (error) {
+      console.error(error);
+    }
+  };
   //Update the zone
   const updateZone = (zone) => {
     setZone(zone);
@@ -84,65 +100,20 @@ function Daily() {
     setDailyData(DailyData);
   }
 
-  //Server requests split into three functions to reduce confusion
-  async function saveWorkoutTime() {
+  async function saveData(DataName, Data) {
     const options = {
-      method: "POST",
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ workoutTime: workoutTime, workoutZone: zone }),
+      body: JSON.stringify({ [DataName]: Data }),
     };
-
     try {
       const response = await fetch(
-        "http://localhost:5000/daily/workoutTime",
+        "http://localhost:5000/api/updateDataPage",
         options
       );
       const data = await response.json();
-      console.log(data);
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  async function saveRestingHeartRate() {
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ restingHeartRate: restingHeartRate }),
-    };
-
-    try {
-      const response = await fetch(
-        "http://localhost:5000/daily/restingHeartRate",
-        options
-      );
-      const data = await response.json();
-      console.log(data);
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  async function saveWeight() {
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ weight: weight }),
-    };
-
-    try {
-      const response = await fetch(
-        "http://localhost:5000/daily/weight",
-        options
-      );
-      const data = await response.json();
-      console.log(data);
     } catch (error) {
       console.error(error);
     }
@@ -198,7 +169,10 @@ function Daily() {
 
       <div className="ZoneContainer">
         <div className="Zone">
-          <button className="ZoneButton" onClick={() => updateZone("Zone1")}>
+          <button
+            className="ZoneButton"
+            onClick={() => updateZone("Zone1Time")}
+          >
             Zone 1
           </button>
           <h5>
@@ -208,14 +182,20 @@ function Daily() {
         </div>
 
         <div className="Zone">
-          <button className="ZoneButton" onClick={() => updateZone("Zone2")}>
+          <button
+            className="ZoneButton"
+            onClick={() => updateZone("Zone2Time")}
+          >
             Zone 2
           </button>
           <h5>When your heart beats at 60-70% of your maximum heart rate</h5>
         </div>
 
         <div className="Zone">
-          <button className="ZoneButton" onClick={() => updateZone("Zone3")}>
+          <button
+            className="ZoneButton"
+            onClick={() => updateZone("Zone3Time")}
+          >
             Zone 3
           </button>
           <h5>
@@ -225,7 +205,10 @@ function Daily() {
         </div>
 
         <div className="Zone">
-          <button className="ZoneButton" onClick={() => updateZone("Zone4")}>
+          <button
+            className="ZoneButton"
+            onClick={() => updateZone("Zone4Time")}
+          >
             Zone 4
           </button>
           <h5>
@@ -235,7 +218,10 @@ function Daily() {
         </div>
 
         <div className="Zone">
-          <button className="ZoneButton" onClick={() => updateZone("Zone5")}>
+          <button
+            className="ZoneButton"
+            onClick={() => updateZone("Zone5Time")}
+          >
             Zone 5
           </button>
           <h5>A heart rate at 90-100% of your maximum heart rate</h5>
