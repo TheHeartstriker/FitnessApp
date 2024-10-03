@@ -1,6 +1,11 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useContext, useEffect } from "react";
+import { v4 as uuidv4 } from "uuid";
+import { Context } from "../Provider";
 
 function LoginPage() {
+  //Important context values used across the app
+  const { isSignedIn, setIsSignedIn } = useContext(Context);
+  const { userId, setUserId } = useContext(Context);
   //Stores the username and password
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -67,6 +72,131 @@ function LoginPage() {
     }
   };
 
+  //Handle the server realted to login or signup
+  const handleSignOrLog = () => {
+    if (!CanClick) {
+      return;
+    }
+    if (login) {
+      handleLogin();
+    } else {
+      handleSignup();
+    }
+  };
+
+  //Sends the sign up data to be checked by the server and returns a response
+  //The response returns the user id and a true value if the sign up was successful that is used in creating tasks
+  const handleLogin = async () => {
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username, password }),
+    };
+
+    try {
+      const response = await fetch("http://localhost:5000/api/login", options);
+      const responseData = await response.json();
+      console.log("Response from server:", responseData);
+      if (responseData.success) {
+        AnimateBorderGreen();
+        setIsSignedIn(true);
+        setUserId(responseData.Id);
+      } else {
+        //If the login fails
+        AnimateBorderRed();
+        setIsSignedIn(false);
+        alert("Incorrect username or password");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+  //Sends the data to the server to be inserted into the database
+  const handleSignup = async () => {
+    if ((await CheckIfInUse(username)) === true) {
+      alert("Username is already in use");
+      AnimateBorderRed();
+      return;
+    }
+    let UserId = uuidv4();
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username, password, UserId }),
+    };
+    try {
+      await fetch("http://localhost:5000/api/signup", options);
+      setIsSignedIn(true);
+      setUserId(UserId);
+      AnimateBorderGreen();
+    } catch (error) {
+      AnimateBorderRed();
+      console.error("Error:", error);
+    }
+  };
+  //Checks if the username is in use by sending the username to the server and returning a response
+  async function CheckIfInUse() {
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username }),
+    };
+    try {
+      const response = await fetch(
+        "http://localhost:5000/api/checkUsername",
+        options
+      );
+      const responseData = await response.json();
+      console.log("Name in use", responseData);
+      if (responseData) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  }
+  //Creates the 'page' of data for the user on this spefic day if the user already has a page it will not create a new one
+  //Aka if the user logs in twice in one day it will not create a new page
+  async function CreateDataPage() {
+    const currentDate = new Date().toISOString().split("T")[0];
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        Zone1: 0,
+        Zone2: 0,
+        Zone3: 0,
+        Zone4: 0,
+        Zone5: 0,
+        weight: 0,
+        HeartRate: 0,
+        Date: currentDate,
+      }),
+    };
+    try {
+      await fetch("http://localhost:5000/api/createDataPage", options);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  }
+
+  useEffect(() => {
+    console.log("isSignedIn:", isSignedIn);
+    if (isSignedIn) {
+      CreateDataPage();
+    }
+  }, [isSignedIn]);
+
   return (
     <>
       {/* Outside container */}
@@ -90,7 +220,9 @@ function LoginPage() {
               placeholder="Password"
             />
           </div>
-          <button className="loginOrSign">{login ? "Login" : "Signup"}</button>
+          <button className="loginOrSign" onClick={handleSignOrLog}>
+            {login ? "Login" : "Signup"}
+          </button>
           <button className="Switch" onClick={handleSwitch}>
             {login ? "Switch to Signup" : "Switch to Login"}
           </button>

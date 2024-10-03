@@ -1,6 +1,8 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+//Routing imports
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Provider } from "./Provider";
 //Component imports
 import ViewPage from "./Pages.jsx/ViewPage.jsx";
 import StartPage from "./Pages.jsx/StartPage.jsx";
@@ -14,13 +16,15 @@ import "./Pages.css/Daily.css";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <BrowserRouter>
-      <StartPage />
-      <Routes>
-        <Route path="/" element={<ViewPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/daily" element={<Daily />} />
-      </Routes>
-    </BrowserRouter>
+    <Provider>
+      <BrowserRouter>
+        <StartPage />
+        <Routes>
+          <Route path="/" element={<ViewPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/daily" element={<Daily />} />
+        </Routes>
+      </BrowserRouter>
+    </Provider>
   </StrictMode>
 );
