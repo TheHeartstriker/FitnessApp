@@ -241,7 +241,18 @@ async function checkToday(userId) {
   }
 }
 
-const allowedColumns = [
+const allowedGetColumns = [
+  "resting_heart",
+  "Zone1Time",
+  "Zone2Time",
+  "Zone3Time",
+  "Zone4Time",
+  "Zone5Time",
+  "weight",
+  "DateRecorded",
+];
+
+const allowedUpdateColumns = [
   "resting_heart",
   "Zone1Time",
   "Zone2Time",
@@ -250,10 +261,9 @@ const allowedColumns = [
   "Zone5Time",
   "weight",
 ];
-
 async function getFitData(userId) {
   try {
-    const columns = allowedColumns.join(", ");
+    const columns = allowedGetColumns.join(", ");
     const [results] = await pool.query(
       `SELECT ${columns} FROM dailyfitinfo WHERE userid = ?`,
       [userId]
@@ -265,18 +275,7 @@ async function getFitData(userId) {
 }
 
 async function updateToday(userId, data, dataname) {
-  console.log("Running the query");
-  const allowedColumns = [
-    "resting_heart",
-    "Zone1Time",
-    "Zone2Time",
-    "Zone3Time",
-    "Zone4Time",
-    "Zone5Time",
-    "weight",
-  ]; // Add all allowed column names here
-
-  if (!allowedColumns.includes(dataname)) {
+  if (!allowedUpdateColumns.includes(dataname)) {
     console.error("Invalid column name:", dataname);
     throw new Error("Invalid column name");
   }
