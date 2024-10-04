@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useRef } from "react";
 import { Context } from "../Provider";
 
 function ViewPage() {
@@ -24,8 +24,48 @@ function ViewPage() {
     }
   }
 
+  const pieRef = useRef(null);
+
+  function Percentage(val) {
+    if (pieRef.current) {
+      pieRef.current.style.setProperty("--ng", val + "deg");
+    }
+  }
+
+  const [GraphPoints, setGraphPoints] = useState([
+    { start: 0, end: 0.5, value: 20, color: "red" },
+    { start: 0.5, end: 0.2, value: 20, color: "red" },
+    { start: 0.2, end: 0.4, value: 40, color: "red" },
+  ]);
+
+  const [GraphPoints2, setGraphPoints2] = useState([
+    { start: 0, end: 0.2, value: 20, color: "green" },
+    { start: 0.2, end: 0.5, value: 20, color: "green" },
+    { start: 0.5, end: 0.3, value: 40, color: "green" },
+  ]);
+
+  function NewGraph({ graphPoints }) {
+    return (
+      <>
+        {graphPoints.map((point, index) => (
+          <tr key={index}>
+            <td
+              style={{
+                "--start": point.start,
+                "--end": point.end,
+                "--color": point.color,
+              }}
+            >
+              {point.value}
+            </td>
+          </tr>
+        ))}
+      </>
+    );
+  }
+
   useEffect(() => {
-    console.log(data);
+    Percentage(290);
     if (isSignedIn) {
       fetchData();
     }
@@ -34,11 +74,21 @@ function ViewPage() {
   return (
     <div className="ViewPageContainer">
       <div className="GraphContainer">
-        <h1>Graph</h1>
+        <table className="area-chart">
+          <tbody>
+            <NewGraph graphPoints={GraphPoints} />
+            <NewGraph graphPoints={GraphPoints2} />
+          </tbody>
+        </table>
       </div>
 
       <div className="PercentageContainer">
-        <h1>Percentage</h1>
+        <div className="chart">
+          <div id="pie" ref={pieRef}></div>
+          <h3>
+            <span id="percentageVal">0</span>
+          </h3>
+        </div>
       </div>
     </div>
   );

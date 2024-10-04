@@ -49,3 +49,90 @@
   height: 70%;
   border: 5px solid var(--grey-1);
 }
+
+#pie {
+  /* Changes the angle the graident goes to */
+  --ng: 360deg;
+  /* The thickness or the non transperent area of the gradient */
+  --thickness: 10px;
+  --_inner: calc(70% - var(--thickness));
+  --_outer: calc(var(--_inner) + 1px);
+
+  /* Uses the inner and outer values to hide or fill in the center leaving only the thickness*/
+  mask: radial-gradient(circle, #0000 var(--_inner), #000 var(--_outer));
+
+  /* the conic gradient, transparent after --ng */
+  background-image: conic-gradient(
+    cyan,
+    deeppink,
+    lightpink,
+    cyan var(--ng),
+    #0000 0
+  );
+}
+
+#pie {
+  aspect-ratio: 1/1;
+  inline-size: 30vmin;
+  border-radius: 50%;
+}
+
+.chart {
+  display: grid;
+  place-items: center;
+}
+
+.chart > * {
+  grid-area: 1/1;
+}
+
+.chart > h3 {
+  font-variant-numeric: tabular-nums;
+}
+
+.area-chart {
+  /* Reset */
+  margin: 0;
+  padding: 0;
+  border: 0;
+
+  /* Dimensions */
+  width: 100%;
+  max-width: var(--chart-width, 600px);
+  height: var(--chart-height, 300px);
+  border-collapse: collapse;
+}
+.area-chart tbody {
+  width: 100%;
+  height: var(--chart-height, 300px);
+
+  /* Layout */
+  display: flex;
+  justify-content: stretch;
+  align-items: stretch;
+  flex-direction: row;
+}
+.area-chart tr {
+  position: relative;
+
+  /* Even size items */
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0;
+}
+.area-chart td {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  /* Color */
+  background: var(--color, rgba(0, 0, 0, 0.75));
+  clip-path: polygon(
+    0% calc(100% * (1 - var(--start))),
+    100% calc(100% * (1 - var(--end))),
+    100% 100%,
+    0% 100%
+  );
+}
