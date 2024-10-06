@@ -4,6 +4,10 @@ import { Context } from "../Provider";
 function ViewPage() {
   const { isSignedIn, setIsSignedIn } = useContext(Context);
   const [data, setData] = useState([]);
+  const [Time, setTime] = useState("Week");
+  const [Calories, setCalories] = useState(0);
+  const [Weight, setWeight] = useState(0);
+  const [Heart, setHeart] = useState(0);
 
   async function fetchData() {
     const options = {
@@ -31,41 +35,40 @@ function ViewPage() {
       pieRef.current.style.setProperty("--ng", val + "deg");
     }
   }
-
+  //Should not go beyond 20 objects
   const [GraphPoints, setGraphPoints] = useState([
-    { start: 0, end: 0.5, value: 20, color: "red" },
-    { start: 0.5, end: 0.2, value: 20, color: "red" },
-    { start: 0.2, end: 0.4, value: 40, color: "red" },
-  ]);
-
-  const [GraphPoints2, setGraphPoints2] = useState([
-    { start: 0, end: 0.2, value: 20, color: "green" },
-    { start: 0.2, end: 0.5, value: 20, color: "green" },
-    { start: 0.5, end: 0.3, value: 40, color: "green" },
+    {
+      "--clr": "#5eb344",
+      "--Shadow--clr": "#fcb72a",
+      "--val": "80",
+      labelName: "Zone 1",
+      DisplayVal: "80%",
+    },
   ]);
 
   function NewGraph({ graphPoints }) {
     return (
       <>
         {graphPoints.map((point, index) => (
-          <tr key={index}>
-            <td
-              style={{
-                "--start": point.start,
-                "--end": point.end,
-                "--color": point.color,
-              }}
-            >
-              {point.value}
-            </td>
-          </tr>
+          <div
+            className="item"
+            key={index}
+            style={{
+              "--clr": point["--clr"],
+              "--val": point["--val"],
+              "--Shadow--clr": point["--Shadow--clr"],
+            }}
+          >
+            <div className="label">{point.labelName}</div>
+            <div className="value">{point.DisplayVal}</div>
+          </div>
         ))}
       </>
     );
   }
 
   useEffect(() => {
-    Percentage(290);
+    Percentage(100);
     if (isSignedIn) {
       fetchData();
     }
@@ -74,12 +77,14 @@ function ViewPage() {
   return (
     <div className="ViewPageContainer">
       <div className="GraphContainer">
-        <table className="area-chart">
-          <tbody>
-            <NewGraph graphPoints={GraphPoints} />
-            <NewGraph graphPoints={GraphPoints2} />
-          </tbody>
-        </table>
+        <div className="simple-bar-chart">
+          <NewGraph graphPoints={GraphPoints} />
+        </div>
+        <div className="ButtonContainer">
+          <button>Week</button>
+          <button>Month</button>
+          <button>Year</button>
+        </div>
       </div>
 
       <div className="PercentageContainer">
@@ -88,6 +93,28 @@ function ViewPage() {
           <h3>
             <span id="percentageVal">0</span>
           </h3>
+        </div>
+      </div>
+      <div className="DataContainer">
+        <div className="Data">
+          <h3>Calories Burned</h3>
+          <h1>
+            Calories burrned this {Time} is around {Calories}
+          </h1>
+        </div>
+        <div className="Data">
+          <h3>Weight</h3>
+          <h1>
+            {Weight < 0
+              ? `You have lost ${Math.abs(Weight)} pounds`
+              : Weight > 0
+              ? `You have gained ${Weight} pounds`
+              : "No change in weight"}
+          </h1>
+        </div>
+        <div className="Data">
+          <h3>Heart</h3>
+          <h1>Your average heart resting heart rate is {Heart}</h1>
         </div>
       </div>
     </div>
