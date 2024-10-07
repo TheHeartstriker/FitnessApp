@@ -3,11 +3,29 @@ import { Context } from "../Provider";
 
 function ViewPage() {
   const { isSignedIn, setIsSignedIn } = useContext(Context);
+  ///Used to hold the data from the API
   const [data, setData] = useState([]);
-  const [Time, setTime] = useState("Week");
+  //Used to hold the data for the graph
+  const [Time, setTime] = useState("week");
   const [Calories, setCalories] = useState(0);
   const [Weight, setWeight] = useState(0);
   const [Heart, setHeart] = useState(0);
+  const [Zone, setZone] = useState({
+    Zone1: 0,
+    Zone2: 0,
+    Zone3: 0,
+    Zone4: 0,
+    Zone5: 0,
+  });
+  const pieRef = useRef(null);
+
+  function Percentage(val) {
+    if (pieRef.current) {
+      pieRef.current.style.setProperty("--ng", val + "deg");
+    }
+  }
+  //Should not go beyond 20 objects
+  const [GraphPoints, setGraphPoints] = useState([]);
 
   async function fetchData() {
     const options = {
@@ -27,25 +45,59 @@ function ViewPage() {
       console.error(error);
     }
   }
+  // Gets zone data based on a given time range / frame
+  function getDataByRange(timeRange) {
+    let Datey = new Date();
+    let startDate = new Date();
 
-  const pieRef = useRef(null);
-
-  function Percentage(val) {
-    if (pieRef.current) {
-      pieRef.current.style.setProperty("--ng", val + "deg");
+    // Calculate the start date based on the time range
+    if (timeRange === "week") {
+      startDate.setDate(Datey.getDate() - 7);
+    } else if (timeRange === "month") {
+      startDate.setMonth(Datey.getMonth() - 1);
+    } else if (timeRange === "year") {
+      startDate.setFullYear(Datey.getFullYear() - 1);
+    } else {
+      console.error("Invalid time range specified");
+      return;
     }
+
+    let newZone = { ...Zone };
+    console.log("Initial Zone:", newZone); // Log initial Zone structure
+
+    for (let i = 0; i < data.length; i++) {
+      let recordedDate = new Date(data[i].DateRecorded);
+      console.log(`Comparing ${recordedDate} with ${startDate} and ${Datey}`); // Log date comparison
+      if (recordedDate >= startDate && recordedDate <= Datey) {
+        console.log(data[i].Zone1Time, "Zone1");
+        newZone.Zone1 += data[i].Zone1Time;
+        newZone.Zone2 += data[i].Zone2Time;
+        newZone.Zone3 += data[i].Zone3Time;
+        newZone.Zone4 += data[i].Zone4Time;
+        newZone.Zone5 += data[i].Zone5Time;
+        console.log(
+          `Data recorded on ${recordedDate} is within the specified range.`
+        );
+      }
+    }
+
+    console.log("Updated Zone:", newZone); // Log updated Zone structure
+    setZone(newZone);
   }
-  //Should not go beyond 20 objects
-  const [GraphPoints, setGraphPoints] = useState([
-    {
+
+  //Sets the data for the graph
+  function ImposeData() {
+    const zoneKeys = Object.keys(Zone);
+    const newGraphPoints = zoneKeys.map((key) => ({
       "--clr": "#5eb344",
       "--Shadow--clr": "#fcb72a",
       "--val": "80",
-      labelName: "Zone 1",
-      DisplayVal: "80%",
-    },
-  ]);
-
+      labelName: key,
+      DisplayVal: Zone[key],
+    }));
+    setGraphPoints(newGraphPoints);
+  }
+  //Iterates over the graph points and returns the new graph or bar
   function NewGraph({ graphPoints }) {
     return (
       <>
@@ -66,6 +118,11 @@ function ViewPage() {
       </>
     );
   }
+
+  useEffect(() => {
+    getDataByRange(Time);
+    ImposeData();
+  }, [Time]);
 
   useEffect(() => {
     Percentage(100);
