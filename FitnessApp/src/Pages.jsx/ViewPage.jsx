@@ -45,6 +45,36 @@ function ViewPage() {
       console.error(error);
     }
   }
+
+  function SetWeightOrheart(Toaverage, ToSet) {
+    let TempWeight = 0;
+    let NonDay = 0;
+    let currentDate = new Date();
+    let lastWeekDate = new Date();
+    if (Time === "week") {
+      lastWeekDate.setDate(currentDate.getDate() - 7);
+    } else if (Time === "month") {
+      lastWeekDate.setMonth(currentDate.getMonth() - 1);
+    } else if (Time === "year") {
+      lastWeekDate.setFullYear(currentDate.getFullYear() - 1);
+    }
+    const objectsLastWeek = data.filter((item) => {
+      let recordedDate = new Date(item.DateRecorded);
+      return recordedDate >= lastWeekDate && recordedDate <= currentDate;
+    });
+    console.log(objectsLastWeek, "objectsLastWeek");
+    for (let i = 0; i < objectsLastWeek.length; i++) {
+      if (parseFloat(objectsLastWeek[i][Toaverage]) == 0) {
+        NonDay += 1;
+        continue;
+      }
+      TempWeight += parseFloat(objectsLastWeek[i][Toaverage]);
+    }
+
+    const validDays = objectsLastWeek.length - NonDay;
+    ToSet(parseFloat(TempWeight / validDays).toFixed(2));
+  }
+
   // Gets zone data based on a given time range / frame
   function getDataByRange(timeRange) {
     let Datey = new Date();
@@ -62,36 +92,53 @@ function ViewPage() {
       return;
     }
 
-    let newZone = { ...Zone };
-    console.log("Initial Zone:", newZone); // Log initial Zone structure
+    let newZone = {
+      Zone1: 0,
+      Zone2: 0,
+      Zone3: 0,
+      Zone4: 0,
+      Zone5: 0,
+    };
+
+    let TempCal = 0;
 
     for (let i = 0; i < data.length; i++) {
       let recordedDate = new Date(data[i].DateRecorded);
-      console.log(`Comparing ${recordedDate} with ${startDate} and ${Datey}`); // Log date comparison
       if (recordedDate >= startDate && recordedDate <= Datey) {
-        console.log(data[i].Zone1Time, "Zone1");
         newZone.Zone1 += data[i].Zone1Time;
         newZone.Zone2 += data[i].Zone2Time;
         newZone.Zone3 += data[i].Zone3Time;
         newZone.Zone4 += data[i].Zone4Time;
         newZone.Zone5 += data[i].Zone5Time;
-        console.log(
-          `Data recorded on ${recordedDate} is within the specified range.`
-        );
       }
     }
 
-    console.log("Updated Zone:", newZone); // Log updated Zone structure
+    TempCal +=
+      newZone.Zone1 * 4.5 +
+      newZone.Zone2 * 7.5 +
+      newZone.Zone3 * 11 +
+      newZone.Zone4 * 14.5 +
+      newZone.Zone5 * 16.5;
+    setCalories(TempCal);
     setZone(newZone);
+    ImposeData(newZone);
   }
 
   //Sets the data for the graph
-  function ImposeData() {
-    const zoneKeys = Object.keys(Zone);
+  function ImposeData(zonedata) {
+    let diviedFactor = 0;
+    if (Time === "week") {
+      diviedFactor = 7;
+    } else if (Time === "month") {
+      diviedFactor = 30;
+    } else if (Time === "year") {
+      diviedFactor = 365;
+    }
+    const zoneKeys = Object.keys(zonedata);
     const newGraphPoints = zoneKeys.map((key) => ({
       "--clr": "#5eb344",
       "--Shadow--clr": "#fcb72a",
-      "--val": "80",
+      "--val": Zone[key] / diviedFactor,
       labelName: key,
       DisplayVal: Zone[key],
     }));
@@ -120,9 +167,17 @@ function ViewPage() {
   }
 
   useEffect(() => {
-    getDataByRange(Time);
-    ImposeData();
+    if (isSignedIn) {
+      console.log(data, "data");
+      getDataByRange(Time);
+      SetWeightOrheart("weight", setWeight);
+      SetWeightOrheart("resting_heart", setHeart);
+    }
   }, [Time]);
+
+  useEffect(() => {
+    ImposeData(Zone);
+  }, [Zone]);
 
   useEffect(() => {
     Percentage(100);
@@ -138,9 +193,9 @@ function ViewPage() {
           <NewGraph graphPoints={GraphPoints} />
         </div>
         <div className="ButtonContainer">
-          <button>Week</button>
-          <button>Month</button>
-          <button>Year</button>
+          <button onClick={() => setTime("week")}>Week</button>
+          <button onClick={() => setTime("month")}>Month</button>
+          <button onClick={() => setTime("year")}>Year</button>
         </div>
       </div>
 
@@ -162,11 +217,7 @@ function ViewPage() {
         <div className="Data">
           <h3>Weight</h3>
           <h1>
-            {Weight < 0
-              ? `You have lost ${Math.abs(Weight)} pounds`
-              : Weight > 0
-              ? `You have gained ${Weight} pounds`
-              : "No change in weight"}
+            Your average weight this {Time} is around {Weight} pounds
           </h1>
         </div>
         <div className="Data">
