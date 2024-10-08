@@ -10,6 +10,7 @@ function ViewPage() {
   const [Calories, setCalories] = useState(0);
   const [Weight, setWeight] = useState(0);
   const [Heart, setHeart] = useState(0);
+  const [Percentagedata, setPercentagedata] = useState(0);
   const [Zone, setZone] = useState({
     Zone1: 0,
     Zone2: 0,
@@ -46,6 +47,53 @@ function ViewPage() {
     }
   }
 
+  function getPercentage() {
+    let closestData = null;
+    let closestDateDiff = Infinity;
+    let currentDate = new Date();
+    let todayData = null;
+
+    data.forEach((item) => {
+      let recordedDate = new Date(item.DateRecorded);
+      let dateDiff = Math.abs(currentDate - recordedDate);
+
+      // Check if the date is today
+      if (
+        recordedDate.getDate() === currentDate.getDate() &&
+        recordedDate.getMonth() === currentDate.getMonth() &&
+        recordedDate.getFullYear() === currentDate.getFullYear()
+      ) {
+        todayData = item;
+      } else if (dateDiff < closestDateDiff) {
+        closestDateDiff = dateDiff;
+        closestData = item;
+      }
+    });
+
+    if (closestData !== null && todayData !== null) {
+      let closestDataTime =
+        closestData.Zone1Time +
+        closestData.Zone2Time +
+        closestData.Zone3Time +
+        closestData.Zone4Time +
+        closestData.Zone5Time;
+      let todayDataTime =
+        todayData.Zone1Time +
+        todayData.Zone2Time +
+        todayData.Zone3Time +
+        todayData.Zone4Time +
+        todayData.Zone5Time;
+
+      if (closestDataTime !== 0) {
+        let percentage = (todayDataTime / closestDataTime) * 100;
+        setPercentagedata(percentage.toFixed(2));
+      } else {
+        setPercentagedata("0.00");
+      }
+    } else {
+      setPercentagedata("0.00");
+    }
+  }
   function SetWeightOrheart(Toaverage, ToSet) {
     let TempWeight = 0;
     let NonDay = 0;
@@ -127,6 +175,7 @@ function ViewPage() {
   //Sets the data for the graph
   function ImposeData(zonedata) {
     let diviedFactor = 0;
+    let light = 60; // Start with 60% as a number
     if (Time === "week") {
       diviedFactor = 7;
     } else if (Time === "month") {
@@ -135,13 +184,17 @@ function ViewPage() {
       diviedFactor = 365;
     }
     const zoneKeys = Object.keys(zonedata);
-    const newGraphPoints = zoneKeys.map((key) => ({
-      "--clr": "#5eb344",
-      "--Shadow--clr": "#fcb72a",
-      "--val": Zone[key] / diviedFactor,
-      labelName: key,
-      DisplayVal: Zone[key],
-    }));
+    const newGraphPoints = zoneKeys.map((key) => {
+      const hslaValue = `hsla(230, 100%, ${light}%, 1)`;
+      light -= 10; // Subtract 10% after each iteration
+      return {
+        "--clr": hslaValue,
+        "--Shadow--clr": "hsla(230, 100%, 50%, 0.5)",
+        "--val": zonedata[key] / diviedFactor,
+        labelName: key,
+        DisplayVal: zonedata[key],
+      };
+    });
     setGraphPoints(newGraphPoints);
   }
   //Iterates over the graph points and returns the new graph or bar
@@ -172,6 +225,7 @@ function ViewPage() {
       getDataByRange(Time);
       SetWeightOrheart("weight", setWeight);
       SetWeightOrheart("resting_heart", setHeart);
+      getPercentage();
     }
   }, [Time]);
 
@@ -180,7 +234,7 @@ function ViewPage() {
   }, [Zone]);
 
   useEffect(() => {
-    Percentage(100);
+    Percentage(Percentagedata * 3.6);
     if (isSignedIn) {
       fetchData();
     }
@@ -203,7 +257,9 @@ function ViewPage() {
         <div className="chart">
           <div id="pie" ref={pieRef}></div>
           <h3>
-            <span id="percentageVal">0</span>
+            <span id="percentageVal">
+              Today you have done {Percentagedata}% of yesterday
+            </span>
           </h3>
         </div>
       </div>
