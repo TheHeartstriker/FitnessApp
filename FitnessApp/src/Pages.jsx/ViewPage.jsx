@@ -5,12 +5,17 @@ function ViewPage() {
   const { isSignedIn, setIsSignedIn } = useContext(Context);
   ///Used to hold the data from the API
   const [data, setData] = useState([]);
-  //Used to hold the data for the graph
+  //Used to hold the time frame in which the data is being displayed and grabbed
   const [Time, setTime] = useState("week");
+  //Calories in spefic time frame
   const [Calories, setCalories] = useState(0);
+  //Weight in spefic time frame
   const [Weight, setWeight] = useState(0);
+  //Average resting heart rate in spefic time frame
   const [Heart, setHeart] = useState(0);
+  //Percentage displated in the pie chart like graphic
   const [Percentagedata, setPercentagedata] = useState(0);
+  //Used in the main graph displays the time spent in each zone in a spefic time frame
   const [Zone, setZone] = useState({
     Zone1: 0,
     Zone2: 0,
@@ -18,16 +23,12 @@ function ViewPage() {
     Zone4: 0,
     Zone5: 0,
   });
-  const pieRef = useRef(null);
-
-  function Percentage(val) {
-    if (pieRef.current) {
-      pieRef.current.style.setProperty("--ng", val + "deg");
-    }
-  }
-  //Should not go beyond 20 objects
+  //The info that is pushed to the html should not go beyond 20 objects
   const [GraphPoints, setGraphPoints] = useState([]);
-
+  //Refrence to the pie chart
+  const pieRef = useRef(null);
+  const [IsDatafetched, setIsDatafetched] = useState(false);
+  //Fetches the data from the API
   async function fetchData() {
     const options = {
       method: "GET",
@@ -42,14 +43,23 @@ function ViewPage() {
       );
       const data = await response.json();
       setData(data);
+      setIsDatafetched(true);
     } catch (error) {
       console.error(error);
     }
   }
-
+  //Allows the pie chart to be updated
+  function Percentage(val) {
+    console.log(val);
+    if (pieRef.current) {
+      pieRef.current.style.setProperty("--ng", val + "deg");
+    }
+  }
+  //Gets the percentage of the current day compared to the previous day
   function getPercentage() {
     let closestData = null;
     let closestDateDiff = Infinity;
+
     let currentDate = new Date();
     let todayData = null;
 
@@ -64,12 +74,13 @@ function ViewPage() {
         recordedDate.getFullYear() === currentDate.getFullYear()
       ) {
         todayData = item;
+        //If its the closest date then set it to the closest data
       } else if (dateDiff < closestDateDiff) {
         closestDateDiff = dateDiff;
         closestData = item;
       }
     });
-
+    //If we have found valid data then we can calculate the percentage
     if (closestData !== null && todayData !== null) {
       let closestDataTime =
         closestData.Zone1Time +
@@ -94,6 +105,7 @@ function ViewPage() {
       setPercentagedata("0.00");
     }
   }
+  //Goes through the data and calculates the average weight or heart rate in a spefied time frame
   function SetWeightOrheart(Toaverage, ToSet) {
     let TempWeight = 0;
     let NonDay = 0;
@@ -106,24 +118,24 @@ function ViewPage() {
     } else if (Time === "year") {
       lastWeekDate.setFullYear(currentDate.getFullYear() - 1);
     }
-    const objectsLastWeek = data.filter((item) => {
+    //Gets the data within the time frame
+    const TimeframeOb = data.filter((item) => {
       let recordedDate = new Date(item.DateRecorded);
       return recordedDate >= lastWeekDate && recordedDate <= currentDate;
     });
-    console.log(objectsLastWeek, "objectsLastWeek");
-    for (let i = 0; i < objectsLastWeek.length; i++) {
-      if (parseFloat(objectsLastWeek[i][Toaverage]) == 0) {
+    //Calculates the average weight or heart rate
+    for (let i = 0; i < TimeframeOb.length; i++) {
+      if (parseFloat(TimeframeOb[i][Toaverage]) == 0) {
         NonDay += 1;
         continue;
       }
-      TempWeight += parseFloat(objectsLastWeek[i][Toaverage]);
+      TempWeight += parseFloat(TimeframeOb[i][Toaverage]);
     }
-
-    const validDays = objectsLastWeek.length - NonDay;
+    const validDays = TimeframeOb.length - NonDay;
     ToSet(parseFloat(TempWeight / validDays).toFixed(2));
   }
 
-  // Gets zone data based on a given time range / frame
+  // Gets zone data and cals based on a given time range / frame
   function getDataByRange(timeRange) {
     let Datey = new Date();
     let startDate = new Date();
@@ -139,7 +151,7 @@ function ViewPage() {
       console.error("Invalid time range specified");
       return;
     }
-
+    //Temp variables to hold the new zone and calories
     let newZone = {
       Zone1: 0,
       Zone2: 0,
@@ -147,7 +159,6 @@ function ViewPage() {
       Zone4: 0,
       Zone5: 0,
     };
-
     let TempCal = 0;
 
     for (let i = 0; i < data.length; i++) {
@@ -172,7 +183,7 @@ function ViewPage() {
     ImposeData(newZone);
   }
 
-  //Sets the data for the graph
+  //Fill the graph points data with the zone data
   function ImposeData(zonedata) {
     let diviedFactor = 0;
     let light = 60; // Start with 60% as a number
@@ -186,7 +197,7 @@ function ViewPage() {
     const zoneKeys = Object.keys(zonedata);
     const newGraphPoints = zoneKeys.map((key) => {
       const hslaValue = `hsla(230, 100%, ${light}%, 1)`;
-      light -= 10; // Subtract 10% after each iteration
+      light -= 10;
       return {
         "--clr": hslaValue,
         "--Shadow--clr": "hsla(230, 100%, 50%, 0.5)",
@@ -220,25 +231,28 @@ function ViewPage() {
   }
 
   useEffect(() => {
-    if (isSignedIn) {
-      console.log(data, "data");
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    Percentage(Percentagedata * 3.6);
+  }, [Percentagedata]);
+
+  useEffect(() => {
+    if (IsDatafetched && isSignedIn) {
+      fetchData();
       getDataByRange(Time);
       SetWeightOrheart("weight", setWeight);
       SetWeightOrheart("resting_heart", setHeart);
       getPercentage();
     }
-  }, [Time]);
+  }, [IsDatafetched, Time]);
 
   useEffect(() => {
-    ImposeData(Zone);
-  }, [Zone]);
-
-  useEffect(() => {
-    Percentage(Percentagedata * 3.6);
-    if (isSignedIn) {
-      fetchData();
+    if (IsDatafetched) {
+      ImposeData(Zone);
     }
-  }, []);
+  }, [IsDatafetched, Zone]);
 
   return (
     <div className="ViewPageContainer">
