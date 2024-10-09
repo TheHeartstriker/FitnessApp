@@ -50,9 +50,12 @@ function ViewPage() {
   }
   //Allows the pie chart to be updated
   function Percentage(val) {
-    console.log(val);
     if (pieRef.current) {
-      pieRef.current.style.setProperty("--ng", val + "deg");
+      for (let i = 0; i < val + 1; i++) {
+        setTimeout(() => {
+          pieRef.current.style.setProperty("--ng", i * 3.6 + "deg");
+        }, i * 7.5); // 100ms delay for each iteration
+      }
     }
   }
   //Gets the percentage of the current day compared to the previous day
@@ -235,7 +238,7 @@ function ViewPage() {
   }, []);
 
   useEffect(() => {
-    Percentage(Percentagedata * 3.6);
+    Percentage(Percentagedata);
   }, [Percentagedata]);
 
   useEffect(() => {
