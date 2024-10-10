@@ -44,6 +44,7 @@
   border-radius: 10px;
   border: 5px solid var(--grey-1);
   background-color: var(--Cyan-1);
+  z-index: -2;
 }
 
 .Submit {
@@ -55,7 +56,26 @@
   border-radius: 50%;
   width: 100px;
   height: 100px;
-  z-index: 2;
+}
+
+.Submit::after,
+.Submit::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 50%;
+  left: 50%;
+  background-image: conic-gradient(var(--Neon-Blue), silver, var(--Neon-Blue));
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  border-radius: 50%;
+  z-index: -1;
+}
+
+.Submit::before {
+  filter: blur(1.5rem);
+  opacity: 0.5;
 }
 
 /* The container located on the righthand */

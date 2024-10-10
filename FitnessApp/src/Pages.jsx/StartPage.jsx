@@ -33,16 +33,16 @@ function StartPage() {
         {isSignedIn && (
           <>
             <Link to="/">
-              <h3 className="NavBtn On">View</h3>
+              <h3 className="NavBtn">View</h3>
             </Link>
             <Link to="/daily">
-              <h3 className="NavBtn On">Daily</h3>
+              <h3 className="NavBtn">Daily</h3>
             </Link>
           </>
         )}
 
         <Link to="/login">
-          <h3 className="NavBtn On">Login</h3>
+          <h3 className="NavBtn">Login</h3>
         </Link>
       </div>
     </div>
