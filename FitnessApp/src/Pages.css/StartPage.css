@@ -82,9 +82,15 @@ a {
   top: 45vh;
   margin: 20px;
   padding: 10px;
-  border: 2.5px solid white;
+  border: 5px solid var(--Cyan-3);
   border-radius: 5px;
-  background: linear-gradient(to bottom, var(--grey-1), var(--Cyan-1));
+  width: 50px;
+  height: 50px;
+
+  background-image: url("./src/Images/Downarrow.svg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   color: white;
   font-size: 1rem;
   font-weight: 600;

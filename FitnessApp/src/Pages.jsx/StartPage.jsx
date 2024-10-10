@@ -22,10 +22,12 @@ function StartPage() {
 
   return (
     <div className="StartPageContainer">
-      <h1>The is FGraph a lightweight fitness tracker</h1>
-      <button className="MoveDown" onClick={handleMoveDown}>
-        Down
-      </button>
+      <h1>
+        This is FGraph a simple lightweight fitness tracker meant to give you an
+        <br />
+        overhead view of your progress
+      </h1>
+      <button className="MoveDown" onClick={handleMoveDown}></button>
 
       <div className="NavContainer">
         {isSignedIn && (

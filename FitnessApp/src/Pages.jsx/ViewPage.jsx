@@ -54,7 +54,7 @@ function ViewPage() {
       for (let i = 0; i < val + 1; i++) {
         setTimeout(() => {
           pieRef.current.style.setProperty("--ng", i * 3.6 + "deg");
-        }, i * 7.5); // 100ms delay for each iteration
+        }, i * 25); // 100ms delay for each iteration
       }
     }
   }
@@ -238,7 +238,9 @@ function ViewPage() {
   }, []);
 
   useEffect(() => {
-    Percentage(Percentagedata);
+    if (isSignedIn) {
+      Percentage(Percentagedata);
+    }
   }, [Percentagedata]);
 
   useEffect(() => {
