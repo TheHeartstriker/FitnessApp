@@ -190,8 +190,27 @@ function LoginPage() {
     }
   }
 
+  const [BubblePoint, setBubblePoint] = useState([]);
+
+  function AddBubblePoint({ Points }) {
+    return Points.map((point, index) => {
+      return <span key={index} style={{ "--i": point.i }}></span>;
+    });
+  }
+  function CreateBubble() {
+    for (let i = 0; i < 30; i++) {
+      setBubblePoint((prev) => [
+        ...prev,
+        {
+          i: Math.floor(Math.random() * 50),
+        },
+      ]);
+    }
+    AddBubblePoint({ Points: BubblePoint });
+  }
+
   useEffect(() => {
-    console.log("isSignedIn:", isSignedIn);
+    CreateBubble();
     if (isSignedIn) {
       CreateDataPage();
     }
@@ -201,6 +220,9 @@ function LoginPage() {
     <>
       {/* Outside container */}
       <div className="LogSignContainer">
+        <div className="Background">
+          <AddBubblePoint Points={BubblePoint} />
+        </div>
         {/* The inside container that holds the text boxes */}
         <div className="LogSignPage">
           <div className="input-group">

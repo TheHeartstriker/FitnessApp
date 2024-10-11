@@ -3,6 +3,7 @@
   --grey: hsl(0, 0%, 50%);
   --grey-1: hsl(0, 0%, 30%);
   --grey-2: hsl(0, 0%, 15%);
+  --grey-3: hsl(0, 0%, 10%);
 
   /* Blues */
   --Blue-1: hsl(234, 100%, 50%);
@@ -16,12 +17,47 @@
 
 /* Container that holds the LogSingin box */
 .LogSignContainer {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: hsl(210, 100%, 50%);
+  overflow: hidden;
+  background-color: var(--grey-3);
   height: 90vh;
   width: 100vw;
+}
+
+.Background {
+  position: absolute;
+  display: flex;
+}
+
+.Background span {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  background: var(--Cyan-1);
+  margin: 0 4px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 10px #4fc3dc44, 0 0 50px #4fc3dc, 0 0 100px #4fc3dc,
+    0 0 150px #4fc3dc;
+  animation: animate 15s linear infinite;
+  animation-duration: calc(15s / var(--i) * 10);
+}
+
+.Background span:nth-child(even) {
+  background: silver;
+  box-shadow: 0 0 0 10px var(--grey-1), 0 0 50px silver, 0 0 100px silver,
+    0 0 150px silver;
+}
+
+@keyframes animate {
+  0% {
+    transform: translateY(100vh) scale(0);
+  }
+  100% {
+    transform: translateY(-10vh) scale(1);
+  }
 }
 
 /* The visable box that contains the text boxes */
@@ -34,10 +70,7 @@
   height: 50vh;
   width: 50vw;
   background: linear-gradient(to bottom, var(--Blue-1), silver);
-
-  border: 5px solid transparent;
-  border-image: linear-gradient(to right, var(--Blue-1), silver) 1;
-  border-radius: 5px;
+  border-radius: 100px;
 }
 
 .LogSignPage input {
