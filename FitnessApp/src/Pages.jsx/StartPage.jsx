@@ -1,11 +1,10 @@
 import { useState, useEffect, useContext } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../Provider";
 
 function StartPage() {
   const { isSignedIn, setIsSignedIn } = useContext(Context);
   const navigate = useNavigate();
-  const location = useLocation();
 
   const handleMoveDown = () => {
     window.scrollTo({

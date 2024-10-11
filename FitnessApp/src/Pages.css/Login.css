@@ -33,11 +33,16 @@
   justify-content: center;
   height: 50vh;
   width: 50vw;
-  background: linear-gradient(to bottom, var(--Blue-1), var(--Cyan-1));
+  background: linear-gradient(to bottom, var(--Blue-1), silver);
 
   border: 5px solid transparent;
-  border-image: linear-gradient(to right, var(--Blue-1), var(--Cyan-1)) 1;
+  border-image: linear-gradient(to right, var(--Blue-1), silver) 1;
   border-radius: 5px;
+}
+
+.LogSignPage input {
+  font-family: "Teko", sans-serif;
+  font-size: 1em;
 }
 
 /* The input group is the text boxes the are used to send the username and password */
@@ -52,6 +57,8 @@
 }
 /* The switch button */
 .Switch {
+  font-family: "Teko", sans-serif;
+  font-size: 1em;
   background-color: var(--Blue-1);
   margin: 10px;
   border: none;
@@ -61,8 +68,10 @@
 }
 /* The button that either logs the user in or signs them up */
 .loginOrSign {
+  font-family: "Teko", sans-serif;
+  font-size: 1em;
   width: 75px;
-  background-color: var(--Cyan-2);
+  background-color: silver;
   border: 2.5px solid var(--Blue-1);
   border-radius: 5px;
   margin: 10px;

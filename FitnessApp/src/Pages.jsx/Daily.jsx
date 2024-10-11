@@ -168,7 +168,7 @@ function Daily() {
       </div>
 
       <div className="ZoneContainer">
-        <div className="Zone">
+        <div className={`Zone ${zone === "Zone1Time" ? "On" : ""}`}>
           <button
             className="ZoneButton"
             onClick={() => updateZone("Zone1Time")}
@@ -181,7 +181,7 @@ function Daily() {
           </h5>
         </div>
 
-        <div className="Zone">
+        <div className={`Zone ${zone === "Zone2Time" ? "On" : ""}`}>
           <button
             className="ZoneButton"
             onClick={() => updateZone("Zone2Time")}
@@ -191,7 +191,7 @@ function Daily() {
           <h5>When your heart beats at 60-70% of your maximum heart rate</h5>
         </div>
 
-        <div className="Zone">
+        <div className={`Zone ${zone === "Zone3Time" ? "On" : ""}`}>
           <button
             className="ZoneButton"
             onClick={() => updateZone("Zone3Time")}
@@ -204,7 +204,7 @@ function Daily() {
           </h5>
         </div>
 
-        <div className="Zone">
+        <div className={`Zone ${zone === "Zone4Time" ? "On" : ""}`}>
           <button
             className="ZoneButton"
             onClick={() => updateZone("Zone4Time")}
@@ -217,7 +217,7 @@ function Daily() {
           </h5>
         </div>
 
-        <div className="Zone">
+        <div className={`Zone ${zone === "Zone5Time" ? "On" : ""}`}>
           <button
             className="ZoneButton"
             onClick={() => updateZone("Zone5Time")}

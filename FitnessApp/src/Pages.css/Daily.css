@@ -15,6 +15,12 @@
   --Cyan-3: hsl(202, 100%, 20%);
 }
 
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Teko", sans-serif;
+}
+
 .DailyPageContainer {
   background-color: var(--grey-2);
   display: flex;
@@ -105,6 +111,12 @@
   border: 5px solid var(--Cyan-2);
   border-radius: 5px;
   position: relative;
+  padding-right: 15%;
+  box-sizing: border-box;
+}
+
+.On {
+  background: linear-gradient(90deg, var(--grey-3), var(--Blue-2));
 }
 /* Button inside the container */
 .ZoneButton {
@@ -113,6 +125,6 @@
   width: 15%;
   height: 100%;
   border-radius: 5px;
+  border: 2.5px solid var(--Cyan-2);
   background-color: var(--Blue-2);
-  border: none;
 }
