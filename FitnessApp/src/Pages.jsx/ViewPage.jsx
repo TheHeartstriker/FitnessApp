@@ -266,9 +266,24 @@ function ViewPage() {
           <NewGraph graphPoints={GraphPoints} />
         </div>
         <div className="ButtonContainer">
-          <button onClick={() => setTime("week")}>Week</button>
-          <button onClick={() => setTime("month")}>Month</button>
-          <button onClick={() => setTime("year")}>Year</button>
+          <button
+            className={`${Time === "week" ? "On" : ""}`}
+            onClick={() => setTime("week")}
+          >
+            Week
+          </button>
+          <button
+            className={`${Time === "month" ? "On" : ""}`}
+            onClick={() => setTime("month")}
+          >
+            Month
+          </button>
+          <button
+            className={`${Time === "year" ? "On" : ""}`}
+            onClick={() => setTime("year")}
+          >
+            Year
+          </button>
         </div>
       </div>
 
@@ -284,20 +299,21 @@ function ViewPage() {
       </div>
       <div className="DataContainer">
         <div className="Data">
-          <h3>Calories Burned</h3>
-          <h1>
-            Calories burrned this {Time} is around {Calories}
-          </h1>
+          <h1>Calories Burned</h1>
+          <h3>
+            Calories burrned this {Time} is roughly around {Calories} based on
+            averages around your spefic workout zones
+          </h3>
         </div>
         <div className="Data">
-          <h3>Weight</h3>
-          <h1>
+          <h1>Weight</h1>
+          <h3>
             Your average weight this {Time} is around {Weight} pounds
-          </h1>
+          </h3>
         </div>
         <div className="Data">
-          <h3>Heart</h3>
-          <h1>Your average heart resting heart rate is {Heart}</h1>
+          <h1>Heart</h1>
+          <h3>Your average heart resting heart rate is {Heart}</h3>
         </div>
       </div>
     </div>
