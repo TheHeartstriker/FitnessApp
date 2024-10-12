@@ -117,20 +117,33 @@ a {
   font-family: "Teko", sans-serif;
   position: relative;
   top: 2vh;
-  margin: 20px;
-  padding: 10px;
   border: 5px solid var(--Cyan-3);
-  border-radius: 5px;
-  width: 50px;
-  height: 50px;
-
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+  box-shadow: 0 0 0 10px hsla(202, 100%, 50%, 0.5);
   background-image: url("./src/Images/Downarrow.svg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  color: white;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
   text-decoration: none;
+  animation: ShadowGrowShrink 2s infinite;
+  background-color: var(--Blue-1);
+}
+
+@keyframes ShadowGrowShrink {
+  0%,
+  100% {
+    box-shadow: 0 0 0 10px hsla(202, 100%, 50%, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 0 20px hsla(202, 100%, 50%, 0.5);
+  }
+}
+
+.MoveDown:hover {
+  background-color: var(--Blue-1);
 }

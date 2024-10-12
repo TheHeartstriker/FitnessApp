@@ -6,7 +6,7 @@ const BackgroundAnimation = () => {
   useEffect(() => {
     const createBubblePoints = () => {
       const points = [];
-      for (let i = 0; i < 30; i++) {
+      for (let i = 0; i < 50; i++) {
         points.push({ i: Math.floor(Math.random() * 50) });
       }
       setBubblePoints(points);
