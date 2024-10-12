@@ -43,6 +43,7 @@ function ViewPage() {
       );
       const data = await response.json();
       setData(data);
+      console.log(data);
       setIsDatafetched(true);
     } catch (error) {
       console.error(error);

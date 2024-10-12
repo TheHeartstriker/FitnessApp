@@ -1,11 +1,11 @@
 import { useState, useRef, useContext, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { Context } from "../Provider";
+import BackgroundAnimation from "../Background.jsx";
 
 function LoginPage() {
   //Important context values used across the app
   const { isSignedIn, setIsSignedIn } = useContext(Context);
-  const { userId, setUserId } = useContext(Context);
   //Stores the username and password
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -85,7 +85,7 @@ function LoginPage() {
   };
 
   //Sends the sign up data to be checked by the server and returns a response
-  //The response returns the user id and a true value if the sign up was successful that is used in creating tasks
+  //The response returns a true value if the sign up was successful that is used in creating tasks
   const handleLogin = async () => {
     const options = {
       method: "POST",
@@ -102,7 +102,6 @@ function LoginPage() {
       if (responseData.success) {
         AnimateBorderGreen();
         setIsSignedIn(true);
-        setUserId(responseData.Id);
       } else {
         //If the login fails
         AnimateBorderRed();
@@ -131,7 +130,6 @@ function LoginPage() {
     try {
       await fetch("http://localhost:5000/api/signup", options);
       setIsSignedIn(true);
-      setUserId(UserId);
       AnimateBorderGreen();
     } catch (error) {
       AnimateBorderRed();
@@ -197,6 +195,7 @@ function LoginPage() {
       return <span key={index} style={{ "--i": point.i }}></span>;
     });
   }
+
   function CreateBubble() {
     for (let i = 0; i < 30; i++) {
       setBubblePoint((prev) => [
@@ -210,6 +209,7 @@ function LoginPage() {
   }
 
   useEffect(() => {
+    console.log("Login Page");
     CreateBubble();
     if (isSignedIn) {
       CreateDataPage();
@@ -220,9 +220,7 @@ function LoginPage() {
     <>
       {/* Outside container */}
       <div className="LogSignContainer">
-        <div className="Background">
-          <AddBubblePoint Points={BubblePoint} />
-        </div>
+        <BackgroundAnimation />
         {/* The inside container that holds the text boxes */}
         <div className="LogSignPage">
           <div className="input-group">

@@ -115,7 +115,7 @@ body {
   box-sizing: border-box;
 }
 
-.On {
+.OnZone {
   background: linear-gradient(90deg, var(--grey-3), var(--Blue-2));
 }
 /* Button inside the container */
