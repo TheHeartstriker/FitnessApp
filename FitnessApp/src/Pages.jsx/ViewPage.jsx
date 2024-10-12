@@ -263,7 +263,7 @@ function ViewPage() {
   return (
     <div className="ViewPageContainer">
       <div className="GraphContainer">
-        <div className="simple-bar-chart">
+        <div className="BarChart">
           <NewGraph graphPoints={GraphPoints} />
         </div>
         <div className="ButtonContainer">

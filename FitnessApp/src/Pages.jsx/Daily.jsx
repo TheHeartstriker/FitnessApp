@@ -132,7 +132,7 @@ function Daily() {
       <div className="InputContainer">
         <input
           ref={workoutTimeRef}
-          className="WorkHeart"
+          className="WorkHeartTime"
           type="text"
           placeholder="Enter workout time in minutes"
           onChange={(e) => updateWorkoutTime(e.target.value)}
@@ -143,7 +143,7 @@ function Daily() {
 
         <input
           ref={restingHeartRateRef}
-          className="WorkHeart"
+          className="WorkHeartTime"
           type="text"
           placeholder="Average resting heartrate"
           onChange={(e) => updateRestingHeartRate(e.target.value)}
@@ -157,7 +157,7 @@ function Daily() {
 
         <input
           ref={weightRef}
-          className="WorkHeart"
+          className="WorkHeartTime"
           type="text"
           placeholder="Daily weight"
           onChange={(e) => updateWeight(e.target.value)}

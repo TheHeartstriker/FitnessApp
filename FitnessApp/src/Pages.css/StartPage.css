@@ -21,11 +21,7 @@ body {
   padding: 0;
   font-family: "Teko", sans-serif;
 }
-
-a {
-  text-decoration: none;
-}
-
+/* Holds the introduction */
 .Textscreen {
   position: relative;
   right: 24.5%;
@@ -37,7 +33,7 @@ a {
   padding: 10px;
   border-radius: 10px;
 }
-
+/* Overall container for the background */
 .StartPageContainer {
   display: flex;
   flex-direction: column;
@@ -54,7 +50,7 @@ a {
   width: 100vw;
   position: relative;
 }
-
+/* Helps center the textscreen text */
 .StartPageContainer h1 {
   position: absolute;
   top: 0;
@@ -62,7 +58,7 @@ a {
   margin: 0;
   padding: 10px;
 }
-
+/* The bottom bar that contains the buttons for naviagation */
 .NavContainer {
   display: flex;
   position: relative;
@@ -74,7 +70,7 @@ a {
   background-color: var(--grey-2);
   z-index: 1;
 }
-
+/* The button not including the border */
 .NavBtn {
   position: relative;
   margin: 20px;
@@ -87,7 +83,7 @@ a {
   cursor: pointer;
   text-decoration: none;
 }
-
+/* The border outside the button */
 .NavBtn::after,
 .NavBtn::before {
   content: "";
@@ -102,7 +98,7 @@ a {
   border-radius: 5px;
   z-index: -1;
 }
-
+/* Hover glow and base glow */
 .NavBtn::before {
   filter: blur(1.5rem);
   opacity: 0.5;
@@ -112,7 +108,7 @@ a {
   filter: blur(3rem);
   opacity: 1;
 }
-
+/* Move down button located at the main home screen */
 .MoveDown {
   font-family: "Teko", sans-serif;
   position: relative;
@@ -133,7 +129,7 @@ a {
   animation: ShadowGrowShrink 2s infinite;
   background-color: var(--Blue-1);
 }
-
+/* Grow or shrinking aura helps indicate to go downwards */
 @keyframes ShadowGrowShrink {
   0%,
   100% {
@@ -142,8 +138,4 @@ a {
   50% {
     box-shadow: 0 0 0 20px hsla(202, 100%, 50%, 0.5);
   }
-}
-
-.MoveDown:hover {
-  background-color: var(--Blue-1);
 }

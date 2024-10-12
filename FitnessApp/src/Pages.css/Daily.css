@@ -20,7 +20,7 @@ body {
   padding: 0;
   font-family: "Teko", sans-serif;
 }
-
+/* The container for the entire route */
 .DailyPageContainer {
   background-color: var(--grey-3);
   display: flex;
@@ -30,7 +30,7 @@ body {
   height: 90vh;
   justify-content: flex-end;
 }
-
+/* Where the text boxes are contained */
 .InputContainer {
   position: relative;
   display: flex;
@@ -42,8 +42,8 @@ body {
   height: 70%;
   z-index: 1;
 }
-
-.WorkHeart {
+/* Text boxes */
+.WorkHeartTime {
   position: relative;
   width: 50%;
   height: 100px;
@@ -52,7 +52,7 @@ body {
   background-color: var(--Cyan-1);
   z-index: -2;
 }
-
+/* Submit button */
 .Submit {
   position: relative;
   background-color: var(--Blue-2);
@@ -63,7 +63,7 @@ body {
   width: 100px;
   height: 100px;
 }
-
+/* Creates the colored border  */
 .Submit::after,
 .Submit::before {
   content: "";
@@ -78,7 +78,7 @@ body {
   border-radius: 50%;
   z-index: -1;
 }
-
+/* The glow given to the border */
 .Submit::before {
   filter: blur(1.5rem);
   opacity: 0.5;
@@ -114,7 +114,7 @@ body {
   padding-right: 15%;
   box-sizing: border-box;
 }
-
+/* On true indicator for the zones */
 .OnZone {
   background: linear-gradient(90deg, var(--grey-3), var(--Blue-2));
 }
