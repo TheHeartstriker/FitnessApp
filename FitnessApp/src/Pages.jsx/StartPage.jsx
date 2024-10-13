@@ -32,6 +32,7 @@ function StartPage() {
       <button className="MoveDown" onClick={handleMoveDown}></button>
 
       <div className="NavContainer">
+        {/* If they are not logged in they dont need to see these values */}
         {isSignedIn && (
           <>
             <Link to="/">

@@ -14,9 +14,9 @@ function LoginPage() {
   const [signup, setSignup] = useState(false);
   //Used in junction with the animation to stop the user from clicking multiple times
   const [CanClick, setCanClick] = useState(true);
-
+  //Refrence to the border
   const borderRef = useRef(null);
-  //Indicates faliure
+  //Adds a red border to the input fields to indicate failure
   function AnimateBorderRed() {
     const border = borderRef.current;
     border.classList.add("AnimatePulseRed");
@@ -26,7 +26,7 @@ function LoginPage() {
       setCanClick(true);
     }, 1500);
   }
-  //Indicates success
+  //Adds a green border to the input fields to indicate success
   function AnimateBorderGreen() {
     const border = borderRef.current;
     border.classList.add("AnimatePulseGreen");
@@ -36,8 +36,7 @@ function LoginPage() {
       border.classList.remove("AnimatePulseGreen");
     }, 1500);
   }
-
-  //Handling the event changes
+  //Handling the event changes for the username
   const handleUsernameChange = (event) => {
     if (event.target.value.length > 49) {
       alert("Username is too long");
@@ -49,7 +48,7 @@ function LoginPage() {
       setUsername(event.target.value);
     }
   };
-
+  //Handling the event changes for the password
   const handlePasswordChange = (event) => {
     if (event.target.value.length > 49) {
       alert("Password is too long");
@@ -71,8 +70,7 @@ function LoginPage() {
       setSignup(false);
     }
   };
-
-  //Handle the server realted to login or signup
+  //Calls the login or sign up function depending on the state of the login variable
   const handleSignOrLog = () => {
     if (!CanClick) {
       return;
@@ -98,7 +96,6 @@ function LoginPage() {
     try {
       const response = await fetch("http://localhost:5000/api/login", options);
       const responseData = await response.json();
-      console.log("Response from server:", responseData);
       if (responseData.success) {
         AnimateBorderGreen();
         setIsSignedIn(true);
@@ -188,29 +185,7 @@ function LoginPage() {
     }
   }
 
-  const [BubblePoint, setBubblePoint] = useState([]);
-
-  function AddBubblePoint({ Points }) {
-    return Points.map((point, index) => {
-      return <span key={index} style={{ "--i": point.i }}></span>;
-    });
-  }
-
-  function CreateBubble() {
-    for (let i = 0; i < 30; i++) {
-      setBubblePoint((prev) => [
-        ...prev,
-        {
-          i: Math.floor(Math.random() * 50),
-        },
-      ]);
-    }
-    AddBubblePoint({ Points: BubblePoint });
-  }
-
   useEffect(() => {
-    console.log("Login Page");
-    CreateBubble();
     if (isSignedIn) {
       CreateDataPage();
     }

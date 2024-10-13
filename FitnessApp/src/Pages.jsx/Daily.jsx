@@ -3,53 +3,45 @@ import { useEffect, useState, useRef } from "react";
 function Daily() {
   //Todays data
   const [DailyData, setDailyData] = useState([]);
-  //Data used to update the daily data
+  //Data spent in a spefic zone
   const [workoutTime, setWorkoutTime] = useState(0);
+  //Resting heart rate
   const [restingHeartRate, setRestingHeartRate] = useState(0);
+  //Weight
   const [weight, setWeight] = useState(0);
+  //Current zone the user has selected
   const [zone, setZone] = useState("Zone1Time");
-
+  //Refrences the text input fields
   const workoutTimeRef = useRef(null);
   const restingHeartRateRef = useRef(null);
   const weightRef = useRef(null);
-  //Update workout time, resting heart rate and weight
+  //Update workout time
   const updateWorkoutTime = (time) => {
-    if (time < 0 || time != parseInt(time)) {
-      alert("Please enter a valid time");
+    if (isNaN(time)) {
       return;
     }
     setWorkoutTime(time);
   };
   //Resting
   const updateRestingHeartRate = (rate) => {
-    if (rate < 0 || rate > 135) {
-      alert("Please go see a doctor");
+    if (isNaN(rate)) {
       return;
     }
-    if (rate != parseInt(rate)) {
-      alert("Please enter a valid heart rate");
-      return;
-    }
-
     setRestingHeartRate(rate);
   };
   //Weight
   const updateWeight = (weight) => {
-    if (weight < 0 || weight != parseInt(weight)) {
-      alert("Please enter a valid weight");
+    if (isNaN(weight)) {
       return;
     }
     setWeight(weight);
   };
-  //Submit the resting heart rate, weight and workout time
-  const submitRestingHeartRate = async (rate) => {
-    setDailyData((prevData) => ({
-      ...prevData,
-      HeartRate: parseInt(rate, 10),
-    }));
 
+  //Handlers for the submit button handles resting heart rate, weight and workout time
+  const submitRestingHeartRate = async (rate) => {
     try {
       await saveData("resting_heart", rate);
+      //Clear the input field
       restingHeartRateRef.current.value = "";
     } catch (error) {
       console.error(error);
@@ -57,49 +49,30 @@ function Daily() {
   };
   //weight
   const submitWeight = async (weight) => {
-    setDailyData((prevData) => ({
-      ...prevData,
-      weight: parseInt(weight, 10),
-    }));
     try {
       await saveData("weight", weight);
+      //Clear the input field
       weightRef.current.value = "";
     } catch (error) {
       console.error(error);
     }
   };
+
   //workout time
   const UpdateTime = async () => {
-    setDailyData((prevData) => ({
-      ...prevData,
-      [zone]: (Number(prevData[zone]) || 0) + Number(workoutTime),
-    }));
     try {
       await saveData(zone, workoutTime);
+      //Clear the input field
       workoutTimeRef.current.value = "";
     } catch (error) {
       console.error(error);
     }
   };
-  //Update the zone
+  //Update the current zone
   const updateZone = (zone) => {
     setZone(zone);
   };
-
-  function CreateData() {
-    const DailyData = {
-      Zone1: 0,
-      Zone2: 0,
-      Zone3: 0,
-      Zone4: 0,
-      Zone5: 0,
-      weight: 0,
-      HeartRate: 0,
-    };
-
-    setDailyData(DailyData);
-  }
-
+  //Sends data to the database to be saved
   async function saveData(DataName, Data) {
     const options = {
       method: "PUT",
@@ -119,14 +92,6 @@ function Daily() {
     }
   }
 
-  useEffect(() => {
-    CreateData();
-  }, []);
-
-  useEffect(() => {
-    console.log(DailyData);
-  }, [DailyData]);
-
   return (
     <div className="DailyPageContainer">
       <div className="InputContainer">
@@ -136,6 +101,9 @@ function Daily() {
           type="text"
           placeholder="Enter workout time in minutes"
           onChange={(e) => updateWorkoutTime(e.target.value)}
+          onInput={(e) => {
+            e.target.value = e.target.value.replace(/[^0-9]/g, "");
+          }}
         ></input>
         <button className="Submit" onClick={UpdateTime}>
           Save

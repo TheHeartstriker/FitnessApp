@@ -43,13 +43,12 @@ function ViewPage() {
       );
       const data = await response.json();
       setData(data);
-      console.log(data);
       setIsDatafetched(true);
     } catch (error) {
       console.error(error);
     }
   }
-  //Allows the pie chart to be updated
+  //Allows the pecentage to be displayed in the pie chart
   function Percentage(val) {
     if (pieRef.current) {
       for (let i = 0; i < val + 1; i++) {
@@ -59,12 +58,15 @@ function ViewPage() {
       }
     }
   }
-  //Gets the percentage of the current day compared to the previous day
+  //Gets the percentage of the current day compared to the last day the user worked out/logged in
   function getPercentage() {
+    //Closest data to the current date
     let closestData = null;
+    //Current closest date difference
     let closestDateDiff = Infinity;
-
+    //Current date
     let currentDate = new Date();
+    //Data for the current day
     let todayData = null;
 
     data.forEach((item) => {
@@ -112,20 +114,22 @@ function ViewPage() {
   //Goes through the data and calculates the average weight or heart rate in a spefied time frame
   function SetWeightOrheart(Toaverage, ToSet) {
     let TempWeight = 0;
+    //Helper value to keep track of days with no data and to not include them in the average
     let NonDay = 0;
     let currentDate = new Date();
-    let lastWeekDate = new Date();
+    let Lastdate = new Date();
+    //Sets the last date based on the time frame
     if (Time === "week") {
-      lastWeekDate.setDate(currentDate.getDate() - 7);
+      Lastdate.setDate(currentDate.getDate() - 7);
     } else if (Time === "month") {
-      lastWeekDate.setMonth(currentDate.getMonth() - 1);
+      Lastdate.setMonth(currentDate.getMonth() - 1);
     } else if (Time === "year") {
-      lastWeekDate.setFullYear(currentDate.getFullYear() - 1);
+      Lastdate.setFullYear(currentDate.getFullYear() - 1);
     }
-    //Gets the data within the time frame
+    //Gets the valid data within the time frame
     const TimeframeOb = data.filter((item) => {
       let recordedDate = new Date(item.DateRecorded);
-      return recordedDate >= lastWeekDate && recordedDate <= currentDate;
+      return recordedDate >= Lastdate && recordedDate <= currentDate;
     });
     //Calculates the average weight or heart rate
     for (let i = 0; i < TimeframeOb.length; i++) {
@@ -141,16 +145,16 @@ function ViewPage() {
 
   // Gets zone data and cals based on a given time range / frame
   function getDataByRange(timeRange) {
-    let Datey = new Date();
+    let Current = new Date();
     let startDate = new Date();
 
     // Calculate the start date based on the time range
     if (timeRange === "week") {
-      startDate.setDate(Datey.getDate() - 7);
+      startDate.setDate(Current.getDate() - 7);
     } else if (timeRange === "month") {
-      startDate.setMonth(Datey.getMonth() - 1);
+      startDate.setMonth(Current.getMonth() - 1);
     } else if (timeRange === "year") {
-      startDate.setFullYear(Datey.getFullYear() - 1);
+      startDate.setFullYear(Current.getFullYear() - 1);
     } else {
       console.error("Invalid time range specified");
       return;
@@ -164,10 +168,10 @@ function ViewPage() {
       Zone5: 0,
     };
     let TempCal = 0;
-
+    //Iterates over the data and calculates the new zone
     for (let i = 0; i < data.length; i++) {
       let recordedDate = new Date(data[i].DateRecorded);
-      if (recordedDate >= startDate && recordedDate <= Datey) {
+      if (recordedDate >= startDate && recordedDate <= Current) {
         newZone.Zone1 += data[i].Zone1Time;
         newZone.Zone2 += data[i].Zone2Time;
         newZone.Zone3 += data[i].Zone3Time;
@@ -175,7 +179,8 @@ function ViewPage() {
         newZone.Zone5 += data[i].Zone5Time;
       }
     }
-
+    //Calculates the calories based on the new zone
+    //These are based on rough estimates for the calories burned in each zone
     TempCal +=
       newZone.Zone1 * 4.5 +
       newZone.Zone2 * 7.5 +
@@ -184,6 +189,7 @@ function ViewPage() {
       newZone.Zone5 * 16.5;
     setCalories(TempCal);
     setZone(newZone);
+    //Impose the new data to the graph
     ImposeData(newZone);
   }
 
@@ -233,27 +239,26 @@ function ViewPage() {
       </>
     );
   }
-
+  //Fetches the data when the page is loaded
   useEffect(() => {
     fetchData();
   }, []);
-
+  //Calculates the percentage when the Percentagedata is updated
   useEffect(() => {
     if (isSignedIn) {
       Percentage(Percentagedata);
     }
   }, [Percentagedata]);
-
+  //When the data is fetched and the user is signed in we can calculate the data that we need to impose
   useEffect(() => {
     if (IsDatafetched && isSignedIn) {
-      fetchData();
       getDataByRange(Time);
       SetWeightOrheart("weight", setWeight);
       SetWeightOrheart("resting_heart", setHeart);
       getPercentage();
     }
   }, [IsDatafetched, Time]);
-
+  //When the data is fetched and the zone is updated we can impose the data to the graph
   useEffect(() => {
     if (IsDatafetched) {
       ImposeData(Zone);

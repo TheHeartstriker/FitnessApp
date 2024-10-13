@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 
 const BackgroundAnimation = () => {
+  //Animation used in the login and register page needs to be split to avoid re rendering the balls as the user interacts with the page
   const [bubblePoints, setBubblePoints] = useState([]);
-
+  //Create random points for bubbles and push them to the bubblePoints array
   useEffect(() => {
     const createBubblePoints = () => {
       const points = [];
@@ -14,7 +15,7 @@ const BackgroundAnimation = () => {
 
     createBubblePoints();
   }, []);
-
+  //Render
   return (
     <div className="Background">
       {bubblePoints.map((point, index) => (
