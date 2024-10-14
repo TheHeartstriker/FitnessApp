@@ -1,7 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { Context } from "../Provider";
 
 function StartPage() {
+  const { isSignedIn, setIsSignedIn } = useContext(Context);
+  const navigate = useNavigate();
+
   const handleMoveDown = () => {
     window.scrollTo({
       top: window.innerHeight, // Scroll down by one viewport height
@@ -9,24 +13,39 @@ function StartPage() {
     });
   };
 
+  useEffect(() => {
+    if (isSignedIn === false) {
+      navigate("/login");
+    }
+  }, [isSignedIn, navigate]);
+
   return (
     <div className="StartPageContainer">
-      <h1>The is FGraph a lightweight fitness tracker</h1>
-      <button className="MoveDown" onClick={handleMoveDown}>
-        Down
-      </button>
+      <div className="Textscreen">
+        <h1>
+          This is FGraph a simple lightweight fitness tracker meant to give you
+          an
+          <br />
+          overhead view of your progress
+        </h1>
+      </div>
+      <button className="MoveDown" onClick={handleMoveDown}></button>
 
       <div className="NavContainer">
-        <Link to="/">
-          <h3 className="NavBtn On">View</h3>
-        </Link>
-
-        <Link to="/daily">
-          <h3 className="NavBtn On">Daily</h3>
-        </Link>
+        {/* If they are not logged in they dont need to see these values */}
+        {isSignedIn && (
+          <>
+            <Link to="/">
+              <h3 className="NavBtn">View</h3>
+            </Link>
+            <Link to="/daily">
+              <h3 className="NavBtn">Daily</h3>
+            </Link>
+          </>
+        )}
 
         <Link to="/login">
-          <h3 className="NavBtn On">Login</h3>
+          <h3 className="NavBtn">Login</h3>
         </Link>
       </div>
     </div>

@@ -1,11 +1,11 @@
 import { useState, useRef, useContext, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { Context } from "../Provider";
+import BackgroundAnimation from "../Background.jsx";
 
 function LoginPage() {
   //Important context values used across the app
   const { isSignedIn, setIsSignedIn } = useContext(Context);
-  const { userId, setUserId } = useContext(Context);
   //Stores the username and password
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -14,9 +14,9 @@ function LoginPage() {
   const [signup, setSignup] = useState(false);
   //Used in junction with the animation to stop the user from clicking multiple times
   const [CanClick, setCanClick] = useState(true);
-
+  //Refrence to the border
   const borderRef = useRef(null);
-  //Indicates faliure
+  //Adds a red border to the input fields to indicate failure
   function AnimateBorderRed() {
     const border = borderRef.current;
     border.classList.add("AnimatePulseRed");
@@ -26,7 +26,7 @@ function LoginPage() {
       setCanClick(true);
     }, 1500);
   }
-  //Indicates success
+  //Adds a green border to the input fields to indicate success
   function AnimateBorderGreen() {
     const border = borderRef.current;
     border.classList.add("AnimatePulseGreen");
@@ -36,8 +36,7 @@ function LoginPage() {
       border.classList.remove("AnimatePulseGreen");
     }, 1500);
   }
-
-  //Handling the event changes
+  //Handling the event changes for the username
   const handleUsernameChange = (event) => {
     if (event.target.value.length > 49) {
       alert("Username is too long");
@@ -49,7 +48,7 @@ function LoginPage() {
       setUsername(event.target.value);
     }
   };
-
+  //Handling the event changes for the password
   const handlePasswordChange = (event) => {
     if (event.target.value.length > 49) {
       alert("Password is too long");
@@ -71,8 +70,7 @@ function LoginPage() {
       setSignup(false);
     }
   };
-
-  //Handle the server realted to login or signup
+  //Calls the login or sign up function depending on the state of the login variable
   const handleSignOrLog = () => {
     if (!CanClick) {
       return;
@@ -85,7 +83,7 @@ function LoginPage() {
   };
 
   //Sends the sign up data to be checked by the server and returns a response
-  //The response returns the user id and a true value if the sign up was successful that is used in creating tasks
+  //The response returns a true value if the sign up was successful that is used in creating tasks
   const handleLogin = async () => {
     const options = {
       method: "POST",
@@ -98,11 +96,9 @@ function LoginPage() {
     try {
       const response = await fetch("http://localhost:5000/api/login", options);
       const responseData = await response.json();
-      console.log("Response from server:", responseData);
       if (responseData.success) {
         AnimateBorderGreen();
         setIsSignedIn(true);
-        setUserId(responseData.Id);
       } else {
         //If the login fails
         AnimateBorderRed();
@@ -131,7 +127,6 @@ function LoginPage() {
     try {
       await fetch("http://localhost:5000/api/signup", options);
       setIsSignedIn(true);
-      setUserId(UserId);
       AnimateBorderGreen();
     } catch (error) {
       AnimateBorderRed();
@@ -191,7 +186,6 @@ function LoginPage() {
   }
 
   useEffect(() => {
-    console.log("isSignedIn:", isSignedIn);
     if (isSignedIn) {
       CreateDataPage();
     }
@@ -201,6 +195,7 @@ function LoginPage() {
     <>
       {/* Outside container */}
       <div className="LogSignContainer">
+        <BackgroundAnimation />
         {/* The inside container that holds the text boxes */}
         <div className="LogSignPage">
           <div className="input-group">

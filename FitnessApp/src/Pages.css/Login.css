@@ -3,6 +3,7 @@
   --grey: hsl(0, 0%, 50%);
   --grey-1: hsl(0, 0%, 30%);
   --grey-2: hsl(0, 0%, 15%);
+  --grey-3: hsl(0, 0%, 10%);
 
   /* Blues */
   --Blue-1: hsl(234, 100%, 50%);
@@ -16,10 +17,12 @@
 
 /* Container that holds the LogSingin box */
 .LogSignContainer {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: hsl(210, 100%, 50%);
+  overflow: hidden;
+  background-color: var(--grey-3);
   height: 90vh;
   width: 100vw;
 }
@@ -33,11 +36,13 @@
   justify-content: center;
   height: 50vh;
   width: 50vw;
-  background: linear-gradient(to bottom, var(--Blue-1), var(--Cyan-1));
+  background: linear-gradient(to bottom, var(--Blue-1), silver);
+  border-radius: 100px;
+}
 
-  border: 5px solid transparent;
-  border-image: linear-gradient(to right, var(--Blue-1), var(--Cyan-1)) 1;
-  border-radius: 5px;
+.LogSignPage input {
+  font-family: "Teko", sans-serif;
+  font-size: 1em;
 }
 
 /* The input group is the text boxes the are used to send the username and password */
@@ -52,6 +57,8 @@
 }
 /* The switch button */
 .Switch {
+  font-family: "Teko", sans-serif;
+  font-size: 1em;
   background-color: var(--Blue-1);
   margin: 10px;
   border: none;
@@ -61,8 +68,10 @@
 }
 /* The button that either logs the user in or signs them up */
 .loginOrSign {
+  font-family: "Teko", sans-serif;
+  font-size: 1em;
   width: 75px;
-  background-color: var(--Cyan-2);
+  background-color: silver;
   border: 2.5px solid var(--Blue-1);
   border-radius: 5px;
   margin: 10px;
@@ -71,11 +80,43 @@
 .AnimatePulseRed {
   animation: PulseRed 3s ease-in-out;
 }
-
 .AnimatePulseGreen {
   animation: PulseGreen 3s ease-in-out;
 }
+/* The bubble background can find the relevant jsx in the background.jsx file */
+.Background {
+  position: absolute;
+  display: flex;
+}
 
+.Background span {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  background: var(--Cyan-1);
+  margin: 0 4px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 10px #4fc3dc44, 0 0 50px #4fc3dc, 0 0 100px #4fc3dc,
+    0 0 150px #4fc3dc;
+  animation: animate 15s linear infinite;
+  animation-duration: calc(15s / var(--i) * 10);
+}
+
+.Background span:nth-child(even) {
+  background: silver;
+  box-shadow: 0 0 0 10px var(--grey-1), 0 0 50px silver, 0 0 100px silver,
+    0 0 150px silver;
+}
+
+@keyframes animate {
+  0% {
+    transform: translateY(100vh) scale(0);
+  }
+  100% {
+    transform: translateY(-10vh) scale(1);
+  }
+}
+/* Pulse indicators */
 @keyframes PulseRed {
   0% {
     border-color: hsl(0, 100%, 80%);

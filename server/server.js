@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import mysql from "mysql2/promise";
 import dotenv from "dotenv";
-
+//Configures the environment variables and express
 dotenv.config();
 const app = express();
 
@@ -14,14 +14,14 @@ const corsOptions = {
   optionsSuccessStatus: 204,
 };
 
-//For the database connection
+//Database pool
 const pool = mysql.createPool({
   host: process.env.MY_HOST,
   user: process.env.MY_USER,
   password: process.env.MY_PASS,
   database: process.env.MY_DB,
 });
-
+//Middleware
 app.use(cors(corsOptions));
 app.use(express.json());
 
@@ -29,14 +29,15 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
-
+//Stores the user id for the current user
 let userIdGet = "";
-
+//Creates a new data page for the user when they log in ubless they already have one for the day
 app.post("/api/createDataPage", async (req, res) => {
   const { Zone1, Zone2, Zone3, Zone4, Zone5, weight, HeartRate, Date } =
     req.body;
 
   try {
+    console.log(userIdGet);
     if ((await checkToday(userIdGet)) == true) {
       console.log("Already have a page for today");
       res.status(200).send();
@@ -67,7 +68,7 @@ app.post("/api/login", async (req, res) => {
     if (result) {
       const userId = await GetUserId(username, password);
       userIdGet = userId;
-      res.status(200).send({ success: true, Id: userId });
+      res.status(200).send({ success: true });
     } else {
       res.status(401).send(false);
     }
@@ -102,7 +103,7 @@ app.post("/api/checkUsername", async (req, res) => {
     res.status(500).send({ message: "Internal server error", error });
   }
 });
-
+//Updates the data page for the user when given the data and the data name
 app.put("/api/updateDataPage", async (req, res) => {
   const requestBody = req.body;
   const DataName = Object.keys(requestBody)[0];
@@ -115,7 +116,7 @@ app.put("/api/updateDataPage", async (req, res) => {
     res.status(500).send({ message: "Internal server error", error });
   }
 });
-
+//Gets the users past data
 app.get("/api/getFitData", async (req, res) => {
   try {
     const result = await getFitData(userIdGet);
@@ -126,6 +127,7 @@ app.get("/api/getFitData", async (req, res) => {
 });
 
 //Database functions
+//Signup function inserts the username, password, and user id into the database
 async function signup(username, password, id) {
   console.log(username, password, id);
   try {
@@ -150,6 +152,7 @@ async function signup(username, password, id) {
 }
 
 //Login function
+//Checks if the username and password match
 async function login(username, password) {
   try {
     const [results] = await pool.query(
@@ -240,7 +243,7 @@ async function checkToday(userId) {
     throw error;
   }
 }
-
+//Allowed columns for the get function
 const allowedGetColumns = [
   "resting_heart",
   "Zone1Time",
@@ -251,7 +254,7 @@ const allowedGetColumns = [
   "weight",
   "DateRecorded",
 ];
-
+//Allowed columns for the update function
 const allowedUpdateColumns = [
   "resting_heart",
   "Zone1Time",
@@ -261,6 +264,7 @@ const allowedUpdateColumns = [
   "Zone5Time",
   "weight",
 ];
+//Gets the users past data
 async function getFitData(userId) {
   try {
     const columns = allowedGetColumns.join(", ");
@@ -273,7 +277,7 @@ async function getFitData(userId) {
     throw error;
   }
 }
-
+//Updates the data page for the user
 async function updateToday(userId, data, dataname) {
   if (!allowedUpdateColumns.includes(dataname)) {
     console.error("Invalid column name:", dataname);

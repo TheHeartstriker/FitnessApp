@@ -3,6 +3,7 @@
   --grey: hsl(0, 0%, 50%);
   --grey-1: hsl(0, 0%, 30%);
   --grey-2: hsl(0, 0%, 15%);
+  --grey-3: hsl(0, 0%, 10%);
 
   /* Blues */
   --Blue-1: hsl(234, 100%, 50%);
@@ -13,15 +14,15 @@
   --Cyan-2: hsl(202, 100%, 35%);
   --Cyan-3: hsl(202, 100%, 20%);
 }
-
+/* The overall container at the bottom of the screen */
 .ViewPageContainer {
   display: flex;
   align-items: center;
-  background-color: var(--grey-2);
+  background-color: var(--grey-3);
   width: 100vw;
-  height: 190vh;
+  height: 150vh;
 }
-
+/* The graph container */
 .GraphContainer {
   position: relative;
   display: flex;
@@ -32,11 +33,11 @@
   height: 650px;
 
   left: 7%;
-  bottom: 10%;
+  bottom: 25%;
   border: 5px solid var(--grey-1);
-  border-radius: 10px;
+  border-radius: 5px;
 }
-
+/* The percentage container */
 .PercentageContainer {
   position: relative;
   display: flex;
@@ -44,12 +45,14 @@
   align-items: center;
   justify-content: center;
   left: 15%;
+  bottom: 15%;
 
   width: 500px;
-  height: 800px;
+  height: 95vh;
   border: 5px solid var(--grey-1);
+  border-radius: 5px;
 }
-
+/* Holds the text based data at the bottom of the page */
 .DataContainer {
   position: absolute;
   display: flex;
@@ -58,29 +61,66 @@
   flex-direction: column;
   width: 100%;
   height: 40%;
-  border: 5px solid var(--grey-1);
-  bottom: -190vh;
+  bottom: -150vh;
+}
+/* The data containers*/
+.Data {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
 }
 
+.Data h1 {
+  position: relative;
+  color: tan;
+  left: -100px;
+  z-index: 1;
+}
+/* Glowing h1 bar */
+.Data h1::after {
+  content: "";
+  background-color: silver;
+  height: 5px;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  z-index: -1;
+  box-shadow: 0 -10px 20px rgba(192, 192, 192, 0.9);
+}
+
+.Data h3 {
+  position: relative;
+  font-size: 1.7em;
+}
+/* Button container html is inside of the graph and pushed down */
 .ButtonContainer {
   position: absolute;
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  bottom: -10%;
+  bottom: -35%;
 }
-
+/* Button styles */
 .ButtonContainer button {
   width: 40%;
-  height: 50%;
-  border: none;
+  height: 150px;
+  border: 5px solid silver;
   border-radius: 10px;
-  background-color: var(--grey-1);
+  margin: 15px;
+  background-color: var(--Blue-3);
   color: white;
   font-size: 1.5rem;
 }
-
+/* On styles */
+.On {
+  box-shadow: 0 0px 20px rgb(255, 187, 0);
+}
+/* Percentage chart */
 #pie {
   /* Changes the angle the graident goes to */
   --ng: 360deg;
@@ -100,6 +140,8 @@
     cyan var(--ng),
     #0000 0
   );
+
+  background-color: hsla(0, 0%, 5%, 0.5);
 }
 
 #pie {
@@ -109,10 +151,9 @@
 }
 
 /* Overall container */
-.simple-bar-chart {
-  --line-color: currentcolor;
-  --line-opacity: 0.25;
-  --item-gap: 2%;
+.BarChart {
+  --item-gap: 0;
+  --padding-block: 1.5rem;
   width: 100%;
   height: 100%;
   display: grid;
@@ -121,30 +162,29 @@
   gap: var(--item-gap);
   align-items: end;
   padding-inline: var(--item-gap);
-  --padding-block: 1.5rem; /*space for labels*/
   padding-block: var(--padding-block);
 }
 /* The indivdual bars */
-.simple-bar-chart > .item {
+.BarChart > .item {
   height: calc(1% * var(--val));
   background-color: var(--clr);
   filter: drop-shadow(0 0 1rem var(--Shadow--clr));
   position: relative;
-  animation: item-height 1s ease forwards;
+  animation: item-height 3s ease forwards;
 }
 @keyframes item-height {
   from {
     height: 0;
   }
 }
-
-.simple-bar-chart > .item > * {
+/* Text position */
+.BarChart > .item > * {
   position: absolute;
   text-align: center;
 }
-.simple-bar-chart > .item > .label {
+.BarChart > .item > .label {
   inset: 100% 0 auto 0;
 }
-.simple-bar-chart > .item > .value {
+.BarChart > .item > .value {
   inset: auto 0 100% 0;
 }
