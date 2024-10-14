@@ -37,6 +37,7 @@ app.post("/api/createDataPage", async (req, res) => {
     req.body;
 
   try {
+    console.log(userIdGet);
     if ((await checkToday(userIdGet)) == true) {
       console.log("Already have a page for today");
       res.status(200).send();
@@ -66,6 +67,7 @@ app.post("/api/login", async (req, res) => {
     const result = await login(username, password);
     if (result) {
       const userId = await GetUserId(username, password);
+      userIdGet = userId;
       res.status(200).send({ success: true });
     } else {
       res.status(401).send(false);

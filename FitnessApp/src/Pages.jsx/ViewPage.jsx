@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext, useRef } from "react";
+import { useState, useEffect, useContext, useRef, useMemo } from "react";
 import { Context } from "../Provider";
 
 function ViewPage() {
@@ -144,54 +144,55 @@ function ViewPage() {
   }
 
   // Gets zone data and cals based on a given time range / frame
-  function getDataByRange(timeRange) {
-    let Current = new Date();
-    let startDate = new Date();
+  const memoizedDataByRange = useMemo(() => {
+    function getDataByRange(timeRange) {
+      let Current = new Date();
+      let startDate = new Date();
 
-    // Calculate the start date based on the time range
-    if (timeRange === "week") {
-      startDate.setDate(Current.getDate() - 7);
-    } else if (timeRange === "month") {
-      startDate.setMonth(Current.getMonth() - 1);
-    } else if (timeRange === "year") {
-      startDate.setFullYear(Current.getFullYear() - 1);
-    } else {
-      console.error("Invalid time range specified");
-      return;
-    }
-    //Temp variables to hold the new zone and calories
-    let newZone = {
-      Zone1: 0,
-      Zone2: 0,
-      Zone3: 0,
-      Zone4: 0,
-      Zone5: 0,
-    };
-    let TempCal = 0;
-    //Iterates over the data and calculates the new zone
-    for (let i = 0; i < data.length; i++) {
-      let recordedDate = new Date(data[i].DateRecorded);
-      if (recordedDate >= startDate && recordedDate <= Current) {
-        newZone.Zone1 += data[i].Zone1Time;
-        newZone.Zone2 += data[i].Zone2Time;
-        newZone.Zone3 += data[i].Zone3Time;
-        newZone.Zone4 += data[i].Zone4Time;
-        newZone.Zone5 += data[i].Zone5Time;
+      // Calculate the start date based on the time range
+      if (timeRange === "week") {
+        startDate.setDate(Current.getDate() - 7);
+      } else if (timeRange === "month") {
+        startDate.setMonth(Current.getMonth() - 1);
+      } else if (timeRange === "year") {
+        startDate.setFullYear(Current.getFullYear() - 1);
+      } else {
+        console.error("Invalid time range specified");
+        return;
       }
+      //Temp variables to hold the new zone and calories
+      let newZone = {
+        Zone1: 0,
+        Zone2: 0,
+        Zone3: 0,
+        Zone4: 0,
+        Zone5: 0,
+      };
+      let TempCal = 0;
+      //Iterates over the data and calculates the new zone
+      for (let i = 0; i < data.length; i++) {
+        let recordedDate = new Date(data[i].DateRecorded);
+        if (recordedDate >= startDate && recordedDate <= Current) {
+          newZone.Zone1 += data[i].Zone1Time;
+          newZone.Zone2 += data[i].Zone2Time;
+          newZone.Zone3 += data[i].Zone3Time;
+          newZone.Zone4 += data[i].Zone4Time;
+          newZone.Zone5 += data[i].Zone5Time;
+        }
+      }
+      //Calculates the calories based on the new zone
+      //These are based on rough estimates for the calories burned in each zone
+      TempCal +=
+        newZone.Zone1 * 4.5 +
+        newZone.Zone2 * 7.5 +
+        newZone.Zone3 * 11 +
+        newZone.Zone4 * 14.5 +
+        newZone.Zone5 * 16.5;
+      return { newZone, TempCal };
     }
-    //Calculates the calories based on the new zone
-    //These are based on rough estimates for the calories burned in each zone
-    TempCal +=
-      newZone.Zone1 * 4.5 +
-      newZone.Zone2 * 7.5 +
-      newZone.Zone3 * 11 +
-      newZone.Zone4 * 14.5 +
-      newZone.Zone5 * 16.5;
-    setCalories(TempCal);
-    setZone(newZone);
-    //Impose the new data to the graph
-    ImposeData(newZone);
-  }
+
+    return getDataByRange(Time);
+  }, [data, Time]);
 
   //Fill the graph points data with the zone data
   function ImposeData(zonedata) {
@@ -252,7 +253,8 @@ function ViewPage() {
   //When the data is fetched and the user is signed in we can calculate the data that we need to impose
   useEffect(() => {
     if (IsDatafetched && isSignedIn) {
-      getDataByRange(Time);
+      setZone(memoizedDataByRange.newZone);
+      setCalories(memoizedDataByRange.TempCal.toFixed(2));
       SetWeightOrheart("weight", setWeight);
       SetWeightOrheart("resting_heart", setHeart);
       getPercentage();
