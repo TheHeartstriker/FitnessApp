@@ -28,11 +28,12 @@ jobs:
           npm run test --if-present
 
       - name: Verify build output
+        shell: pwsh
         run: |
-          if [ ! -d "./FitnessApp/dist" ]; then
-            echo "Build output directory './FitnessApp/dist' does not exist."
+          if (-Not (Test-Path -Path "./FitnessApp/dist" -PathType Container)) {
+            Write-Error "Build output directory './FitnessApp/dist' does not exist."
             exit 1
-          fi
+          }
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
