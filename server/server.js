@@ -7,6 +7,15 @@ import rateLimit from "express-rate-limit";
 //Configures the environment variables and express
 dotenv.config();
 const app = express();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Serve static files from the frontend build directory
+app.use(express.static(path.join(__dirname, "./FitnessApp/dist")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "./FitnessApp/dist", "index.html"));
+});
 //Security middleware
 app.use(helmet());
 
