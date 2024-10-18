@@ -2,13 +2,24 @@ import express from "express";
 import cors from "cors";
 import mysql from "mysql2/promise";
 import dotenv from "dotenv";
+import helmet from "helmet";
+import rateLimit from "express-rate-limit";
 //Configures the environment variables and express
 dotenv.config();
 const app = express();
+//Security middleware
+app.use(helmet());
+
+//Rate limiter
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // limit each IP to 100 requests per windowMs
+});
+app.use(limiter);
 
 //cors options
 const corsOptions = {
-  origin: "http://localhost:5173",
+  origin: process.env.FRONTEND_URL,
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true,
   optionsSuccessStatus: 204,
@@ -20,18 +31,33 @@ const pool = mysql.createPool({
   user: process.env.MY_USER,
   password: process.env.MY_PASS,
   database: process.env.MY_DB,
+  ssl: {
+    rejectUnauthorized: false,
+  },
 });
 //Middleware
 app.use(cors(corsOptions));
 app.use(express.json());
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+
+// Example query to test the connection
+(async () => {
+  try {
+    const connection = await pool.getConnection();
+    console.log("Connected to the database");
+    connection.release();
+  } catch (err) {
+    console.error("Error connecting to the database: ", err);
+  }
+})();
+
 //Stores the user id for the current user
 let userIdGet = "";
-//Creates a new data page for the user when they log in ubless they already have one for the day
+//Creates a new data page for the user when they log in unless they already have one for the day
 app.post("/api/createDataPage", async (req, res) => {
   const { Zone1, Zone2, Zone3, Zone4, Zone5, weight, HeartRate, Date } =
     req.body;

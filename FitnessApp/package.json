@@ -2,7 +2,7 @@
   "name": "fitnessapp",
   "private": true,
   "version": "0.0.0",
-  "proxy": "http://localhost:5000",
+  "proxy": "${VITE_API_BASE_URL}",
   "type": "module",
   "scripts": {
     "dev": "vite",

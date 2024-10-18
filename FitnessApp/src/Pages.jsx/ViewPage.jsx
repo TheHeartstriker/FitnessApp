@@ -38,7 +38,7 @@ function ViewPage() {
     };
     try {
       const response = await fetch(
-        "http://localhost:5000/api/getFitData",
+        `${import.meta.env.VITE_API_BASE_URL}/api/getFitData`,
         options
       );
       const data = await response.json();
