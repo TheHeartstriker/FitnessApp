@@ -4,6 +4,7 @@ import mysql from "mysql2/promise";
 import dotenv from "dotenv";
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
+import { fileURLToPath } from "url";
 //Configures the environment variables and express
 dotenv.config();
 const app = express();
