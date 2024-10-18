@@ -27,11 +27,18 @@ jobs:
           npm run build --if-present
           npm run test --if-present
 
+      - name: Verify build output
+        run: |
+          if [ ! -d "./FitnessApp/dist" ]; then
+            echo "Build output directory './FitnessApp/dist' does not exist."
+            exit 1
+          fi
+
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: node-app
-          path: .
+          path: ./FitnessApp/dist
 
   deploy:
     runs-on: ubuntu-latest
@@ -40,7 +47,7 @@ jobs:
       name: "Production"
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
-      id-token: write #This is required for requesting the JWT
+      id-token: write # This is required for requesting the JWT
 
     steps:
       - name: Download artifact from build job
@@ -61,4 +68,4 @@ jobs:
         with:
           app-name: "FitnessWApp"
           slot-name: "Production"
-          package: .
+          package: ./FitnessApp/dist
