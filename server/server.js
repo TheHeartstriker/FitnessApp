@@ -31,9 +31,6 @@ const pool = mysql.createPool({
   user: process.env.MY_USER,
   password: process.env.MY_PASS,
   database: process.env.MY_DB,
-  ssl: {
-    rejectUnauthorized: false,
-  },
 });
 //Middleware
 app.use(cors(corsOptions));
@@ -43,18 +40,6 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
-
-// Example query to test the connection
-(async () => {
-  try {
-    const connection = await pool.getConnection();
-    console.log("Connected to the database");
-    connection.release();
-  } catch (err) {
-    console.error("Error connecting to the database: ", err);
-  }
-})();
-
 //Stores the user id for the current user
 let userIdGet = "";
 //Creates a new data page for the user when they log in unless they already have one for the day
