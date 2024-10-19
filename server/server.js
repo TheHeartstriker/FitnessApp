@@ -5,6 +5,8 @@ import dotenv from "dotenv";
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
 import path from "path";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
 
 //Configures the environment variables and express
 dotenv.config();
