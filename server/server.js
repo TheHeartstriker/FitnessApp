@@ -58,7 +58,10 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 // Serve static files from the 'server' directory
-app.use("/server", express.static(path.join(__dirname, "server")));
+app.use(
+  "/server",
+  express.static(path.join(__dirname, "site", "wwwroot", "server"))
+);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
