@@ -20,6 +20,10 @@ app.use(
         "'self'",
         "https://fitnessbackendwa-encwa0abazf0atbs.eastus2-01.azurewebsites.net",
       ],
+      scriptSrcElem: [
+        "'self'",
+        "https://fitnessbackendwa-encwa0abazf0atbs.eastus2-01.azurewebsites.net",
+      ],
       // Add other directives as needed
     },
   })
