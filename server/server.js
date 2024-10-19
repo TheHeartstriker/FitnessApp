@@ -23,7 +23,7 @@ app.use(
       scriptSrc: [
         "'self'",
         "'strict-dynamic'",
-        "https://fitnessappbackendwa-hagtb5bmbzfrehhz.eastus2-01.azurewebsites.net",
+        "fitnessappbackendwa-hagtb5bmbzfrehhz.eastus2-01.azurewebsites.net",
         "trusted-cdn.com",
       ],
       objectSrc: ["'none'"],
