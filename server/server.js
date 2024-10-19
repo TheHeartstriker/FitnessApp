@@ -56,6 +56,8 @@ app.listen(PORT, () => {
 });
 //Stores the user id for the current user
 let userIdGet = "";
+const BASE_URL =
+  "https://fitnessbackendwa-encwa0abazf0atbs.eastus2-01.azurewebsites.net";
 //Creates a new data page for the user when they log in unless they already have one for the day
 app.post("/api/createDataPage", async (req, res) => {
   const { Zone1, Zone2, Zone3, Zone4, Zone5, weight, HeartRate, Date } =
@@ -142,7 +144,7 @@ app.put("/api/updateDataPage", async (req, res) => {
   }
 });
 //Gets the users past data
-app.get("/api/getFitData", async (req, res) => {
+app.get(`${BASE_URL}/api/getFitData`, async (req, res) => {
   try {
     const result = await getFitData(userIdGet);
     res.status(200).send(result);
