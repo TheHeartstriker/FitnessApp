@@ -127,7 +127,7 @@ app.put("/api/updateDataPage", async (req, res) => {
   }
 });
 //Gets the users past data
-app.get(`${BASE_URL}/api/getFitData`, async (req, res) => {
+app.get("/api/getFitData", async (req, res) => {
   try {
     const result = await getFitData(userIdGet);
     res.status(200).send(result);
