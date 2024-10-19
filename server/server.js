@@ -21,6 +21,10 @@ app.use(
     directives: {
       defaultSrc: ["'self'"], // Allow resources from the same origin
       scriptSrc: ["'self'", "'unsafe-inline'", "trusted-cdn.com"], // Allow scripts from the same origin, inline scripts, or a trusted CDN
+      scriptSrcElem: [
+        "'self'",
+        "https://fitnessappbackendwa-hagtb5bmbzfrehhz.eastus2-01.azurewebsites.net",
+      ], // Allow scripts from the specific source
       objectSrc: ["'none'"], // Disallow <object>, <embed>, and <applet> elements
       upgradeInsecureRequests: [], // Upgrade HTTP requests to HTTPS
     },
