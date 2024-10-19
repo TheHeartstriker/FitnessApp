@@ -41,8 +41,6 @@ app.listen(PORT, () => {
 });
 //Stores the user id for the current user
 let userIdGet = "";
-const BASE_URL =
-  "https://fitnessbackendwa-encwa0abazf0atbs.eastus2-01.azurewebsites.net";
 //Creates a new data page for the user when they log in unless they already have one for the day
 app.post("/api/createDataPage", async (req, res) => {
   const { Zone1, Zone2, Zone3, Zone4, Zone5, weight, HeartRate, Date } =
