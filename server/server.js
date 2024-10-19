@@ -15,15 +15,14 @@ const app = express();
 app.set("trust proxy", true);
 
 // Set Content Security Policy using Helmet
+
 app.use(
   helmet.contentSecurityPolicy({
     directives: {
-      defaultSrc: ["'self'"],
-      scriptSrc: [
-        "'self'",
-        "https://fitnessappbackendwa-hagtb5bmbzfrehhz.eastus2-01.azurewebsites.net",
-      ],
-      // Add other directives as needed
+      defaultSrc: ["'self'"], // Allow resources from the same origin
+      scriptSrc: ["'self'", "'unsafe-inline'", "trusted-cdn.com"], // Allow scripts from the same origin, inline scripts, or a trusted CDN
+      objectSrc: ["'none'"], // Disallow <object>, <embed>, and <applet> elements
+      upgradeInsecureRequests: [], // Upgrade HTTP requests to HTTPS
     },
   })
 );
