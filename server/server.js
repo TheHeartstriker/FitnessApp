@@ -51,6 +51,13 @@ const pool = mysql.createPool({
 app.use(cors(corsOptions));
 app.use(express.json());
 
+app.use(express.static(path.join(__dirname, "public")));
+
+// Example route to serve index.cjs
+app.get("/server/index.cjs", (req, res) => {
+  res.sendFile(path.join(__dirname, "server", "index.cjs"));
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
