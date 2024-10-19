@@ -9,25 +9,6 @@ import rateLimit from "express-rate-limit";
 dotenv.config();
 const app = express();
 
-//Security middleware
-app.use(helmet());
-
-app.use(
-  helmet.contentSecurityPolicy({
-    directives: {
-      defaultSrc: ["'self'"],
-      scriptSrc: [
-        "'self'",
-        "https://fitnessbackendwa-encwa0abazf0atbs.eastus2-01.azurewebsites.net",
-      ],
-      scriptSrcElem: [
-        "'self'",
-        "https://fitnessbackendwa-encwa0abazf0atbs.eastus2-01.azurewebsites.net",
-      ],
-      // Add other directives as needed
-    },
-  })
-);
 //Rate limiter
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
