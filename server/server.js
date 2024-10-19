@@ -2,35 +2,11 @@ import express from "express";
 import cors from "cors";
 import mysql from "mysql2/promise";
 import dotenv from "dotenv";
-import helmet from "helmet";
 import rateLimit from "express-rate-limit";
-import path from "path";
-import { fileURLToPath } from "url";
-import { dirname } from "path";
 
 //Configures the environment variables and express
 dotenv.config();
 const app = express();
-
-app.set("trust proxy", true);
-
-// Set Content Security Policy using Helmet
-
-app.use(
-  helmet.contentSecurityPolicy({
-    directives: {
-      defaultSrc: ["'self'"],
-      scriptSrc: [
-        "'self'",
-        "'strict-dynamic'",
-        "fitnessappbackendwa-hagtb5bmbzfrehhz.eastus2-01.azurewebsites.net",
-        "trusted-cdn.com",
-      ],
-      objectSrc: ["'none'"],
-      upgradeInsecureRequests: [],
-    },
-  })
-);
 
 //Rate limiter
 const limiter = rateLimit({
@@ -57,16 +33,6 @@ const pool = mysql.createPool({
 //Middleware
 app.use(cors(corsOptions));
 app.use(express.json());
-
-// Resolve __dirname for ES module
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-// Serve static files from the 'server' directory
-app.use(
-  "/server",
-  express.static(path.join(__dirname, "site", "wwwroot", "server"))
-);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
