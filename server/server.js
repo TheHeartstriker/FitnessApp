@@ -52,11 +52,15 @@ const pool = mysql.createPool({
 app.use(cors(corsOptions));
 app.use(express.json());
 
+// Resolve __dirname for ES module
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 app.use(express.static(path.join(__dirname, "public")));
 
 // Example route to serve index.cjs
 app.get("/server/index.cjs", (req, res) => {
-  res.sendFile(path.join(__dirname, "server", "index.cjs"));
+  res.sendFile(path.join(__dirname, "index.cjs"));
 });
 
 const PORT = process.env.PORT || 3000;
