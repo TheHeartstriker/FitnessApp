@@ -11,6 +11,20 @@ const app = express();
 
 app.set("trust proxy", true);
 
+// Set Content Security Policy using Helmet
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: [
+        "'self'",
+        "https://fitnessappbackendwa-hagtb5bmbzfrehhz.eastus2-01.azurewebsites.net",
+      ],
+      // Add other directives as needed
+    },
+  })
+);
+
 //Rate limiter
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
