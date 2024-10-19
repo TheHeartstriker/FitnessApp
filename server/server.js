@@ -57,12 +57,8 @@ app.use(express.json());
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-app.use(express.static(path.join(__dirname, "public")));
-
-// Example route to serve index.cjs
-app.get("/server/index.cjs", (req, res) => {
-  res.sendFile(path.join(__dirname, "index.cjs"));
-});
+// Serve static files from the 'server' directory
+app.use("/server", express.static(path.join(__dirname, "server")));
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
