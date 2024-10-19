@@ -19,14 +19,15 @@ app.set("trust proxy", true);
 app.use(
   helmet.contentSecurityPolicy({
     directives: {
-      defaultSrc: ["'self'"], // Allow resources from the same origin
-      scriptSrc: ["'self'", "'unsafe-inline'", "trusted-cdn.com"], // Allow scripts from the same origin, inline scripts, or a trusted CDN
-      scriptSrcElem: [
+      defaultSrc: ["'self'"],
+      scriptSrc: [
         "'self'",
+        "'strict-dynamic'",
         "https://fitnessappbackendwa-hagtb5bmbzfrehhz.eastus2-01.azurewebsites.net",
-      ], // Allow scripts from the specific source
-      objectSrc: ["'none'"], // Disallow <object>, <embed>, and <applet> elements
-      upgradeInsecureRequests: [], // Upgrade HTTP requests to HTTPS
+        "trusted-cdn.com",
+      ],
+      objectSrc: ["'none'"],
+      upgradeInsecureRequests: [],
     },
   })
 );
