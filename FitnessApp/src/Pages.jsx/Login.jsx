@@ -164,7 +164,7 @@ function LoginPage() {
   //Creates the 'page' of data for the user on this spefic day if the user already has a page it will not create a new one
   //Aka if the user logs in twice in one day it will not create a new page
   async function CreateDataPage() {
-    const currentDate = new Date().toISOString().split("T")[0];
+    const currentDate = new Date().toLocaleDateString("en-CA");
     const options = {
       method: "POST",
       headers: {

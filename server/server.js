@@ -2,27 +2,20 @@ import express from "express";
 import cors from "cors";
 import mysql from "mysql2/promise";
 import dotenv from "dotenv";
-import rateLimit from "express-rate-limit";
 
 //Configures the environment variables and express
 dotenv.config();
 const app = express();
 
-//Rate limiter
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // limit each IP to 100 requests per windowMs
-});
-app.use(limiter);
-
 //cors options
 const corsOptions = {
-  origin: process.env.FRONTEND_URL,
+  origin: "http://localhost:5173",
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true,
   optionsSuccessStatus: 204,
 };
 
+//For the database connection
 //Database pool
 const pool = mysql.createPool({
   host: process.env.MY_HOST,
@@ -30,6 +23,7 @@ const pool = mysql.createPool({
   password: process.env.MY_PASS,
   database: process.env.MY_DB,
 });
+
 //Middleware
 app.use(cors(corsOptions));
 app.use(express.json());
@@ -38,8 +32,10 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+
 //Stores the user id for the current user
 let userIdGet = "";
+
 //Creates a new data page for the user when they log in unless they already have one for the day
 app.post("/api/createDataPage", async (req, res) => {
   const { Zone1, Zone2, Zone3, Zone4, Zone5, weight, HeartRate, Date } =
@@ -236,7 +232,6 @@ async function createDataPage(
     throw error;
   }
 }
-//Makes sure that the user does not have a page for the day already and if so returns true
 async function checkToday(userId) {
   try {
     const [results] = await pool.query(
