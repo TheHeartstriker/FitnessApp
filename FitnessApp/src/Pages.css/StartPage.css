@@ -40,7 +40,7 @@ body {
   justify-content: space-between;
   align-items: center;
   border: none;
-  background-image: url("./src/Images/StartPage.svg");
+  background-image: url("@/Images/StartPage.svg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -118,7 +118,7 @@ body {
   width: 70px;
   height: 70px;
   box-shadow: 0 0 0 10px hsla(202, 100%, 50%, 0.5);
-  background-image: url("./src/Images/Downarrow.svg");
+  background-image: url("@/Images/Downarrow.svg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
