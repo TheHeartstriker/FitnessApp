@@ -2,6 +2,8 @@ import express from "express";
 import cors from "cors";
 import mysql from "mysql2/promise";
 import dotenv from "dotenv";
+import jwt from "jsonwebtoken";
+import cookieParser from "cookie-parser";
 
 //Configures the environment variables and express
 dotenv.config();
@@ -27,6 +29,7 @@ const pool = mysql.createPool({
 //Middleware
 app.use(cors(corsOptions));
 app.use(express.json());
+app.use(cookieParser());
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
@@ -37,7 +40,7 @@ app.listen(PORT, () => {
 let userIdGet = "";
 
 //Creates a new data page for the user when they log in unless they already have one for the day
-app.post("/api/createDataPage", async (req, res) => {
+app.post("/api/createDataPage", authenticateJWT, async (req, res) => {
   const { Zone1, Zone2, Zone3, Zone4, Zone5, weight, HeartRate, Date } =
     req.body;
 
@@ -73,6 +76,14 @@ app.post("/api/login", async (req, res) => {
     if (result) {
       const userId = await GetUserId(username, password);
       userIdGet = userId;
+      const token = jwt.sign({ userId }, process.env.ACCESS_TOKEN_SECRET, {
+        expiresIn: "1h",
+      });
+      res.cookie("jwtToken", token, {
+        httpOnly: true,
+        secure: true,
+        sameSite: "strict",
+      });
       res.status(200).send({ success: true });
     } else {
       res.status(401).send(false);
@@ -88,6 +99,14 @@ app.post("/api/signup", async (req, res) => {
   try {
     userIdGet = UserId;
     await signup(username, password, UserId);
+    const token = jwt.sign({ UserId }, process.env.ACCESS_TOKEN_SECRET, {
+      expiresIn: "1h",
+    });
+    res.cookie("jwtToken", token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "strict",
+    });
     res.status(201).send();
   } catch (error) {
     res.status(500).send({ message: "Internal server error", error });
@@ -109,7 +128,7 @@ app.post("/api/checkUsername", async (req, res) => {
   }
 });
 //Updates the data page for the user when given the data and the data name
-app.put("/api/updateDataPage", async (req, res) => {
+app.put("/api/updateDataPage", authenticateJWT, async (req, res) => {
   const requestBody = req.body;
   const DataName = Object.keys(requestBody)[0];
   const Data = requestBody[DataName];
@@ -122,7 +141,7 @@ app.put("/api/updateDataPage", async (req, res) => {
   }
 });
 //Gets the users past data
-app.get("/api/getFitData", async (req, res) => {
+app.get("/api/getFitData", authenticateJWT, async (req, res) => {
   try {
     const result = await getFitData(userIdGet);
     res.status(200).send(result);
@@ -296,4 +315,15 @@ async function updateToday(userId, data, dataname) {
     console.error("Error executing query:", error);
     throw error;
   }
+}
+
+async function authenticateJWT(req, res, next) {
+  const token = req.cookies.jwtToken;
+  if (token == null) return res.sendStatus(401);
+
+  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+    if (err) return res.sendStatus(403);
+    req.user = user;
+    next();
+  });
 }

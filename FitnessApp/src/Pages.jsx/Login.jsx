@@ -90,6 +90,7 @@ function LoginPage() {
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
       body: JSON.stringify({ username, password }),
     };
 
@@ -125,6 +126,7 @@ function LoginPage() {
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
       body: JSON.stringify({ username, password, UserId }),
     };
     try {
@@ -180,6 +182,7 @@ function LoginPage() {
         HeartRate: 0,
         Date: currentDate,
       }),
+      credentials: "include",
     };
     try {
       await fetch(

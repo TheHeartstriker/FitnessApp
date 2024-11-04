@@ -79,6 +79,7 @@ function Daily() {
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
       body: JSON.stringify({ [DataName]: Data }),
     };
     try {

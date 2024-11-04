@@ -35,6 +35,7 @@ function ViewPage() {
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
     };
     try {
       const response = await fetch(
