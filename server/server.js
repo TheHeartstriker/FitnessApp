@@ -38,6 +38,15 @@ app.listen(PORT, () => {
 
 //Stores the user id for the current user
 let userIdGet = "";
+//Stores the date for the current user
+let dateGet = formatDateToMySQL(new Date());
+
+function formatDateToMySQL(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
 
 //Creates a new data page for the user when they log in unless they already have one for the day
 app.post("/api/createDataPage", authenticateJWT, async (req, res) => {
@@ -46,7 +55,7 @@ app.post("/api/createDataPage", authenticateJWT, async (req, res) => {
 
   try {
     console.log(userIdGet);
-    if ((await checkToday(userIdGet)) == true) {
+    if ((await checkToday(userIdGet, dateGet)) == true) {
       console.log("Already have a page for today");
       res.status(200).send();
       return;
@@ -76,12 +85,13 @@ app.post("/api/login", async (req, res) => {
     if (result) {
       const userId = await GetUserId(username, password);
       userIdGet = userId;
+      dateGet = formatDateToMySQL(new Date());
       const token = jwt.sign({ userId }, process.env.ACCESS_TOKEN_SECRET, {
         expiresIn: "1h",
       });
       res.cookie("jwtToken", token, {
         httpOnly: true,
-        secure: true,
+        secure: process.env.COOKIE_SECURE === "true",
         sameSite: "strict",
       });
       res.status(200).send({ success: true });
@@ -98,13 +108,14 @@ app.post("/api/signup", async (req, res) => {
   const { username, password, UserId } = req.body;
   try {
     userIdGet = UserId;
+    dateGet = formatDateToMySQL(new Date());
     await signup(username, password, UserId);
     const token = jwt.sign({ UserId }, process.env.ACCESS_TOKEN_SECRET, {
       expiresIn: "1h",
     });
     res.cookie("jwtToken", token, {
       httpOnly: true,
-      secure: true,
+      secure: process.env.COOKIE_SECURE === "true",
       sameSite: "strict",
     });
     res.status(201).send();
@@ -134,7 +145,7 @@ app.put("/api/updateDataPage", authenticateJWT, async (req, res) => {
   const Data = requestBody[DataName];
 
   try {
-    const result = await updateToday(userIdGet, Data, DataName);
+    const result = await updateToday(userIdGet, Data, DataName, dateGet);
     res.status(200).send(result);
   } catch (error) {
     res.status(500).send({ message: "Internal server error", error });
@@ -251,11 +262,11 @@ async function createDataPage(
     throw error;
   }
 }
-async function checkToday(userId) {
+async function checkToday(userId, date) {
   try {
     const [results] = await pool.query(
-      `SELECT * FROM dailyfitinfo WHERE DateRecorded = CURDATE() AND userid = ?`,
-      [userId]
+      `SELECT * FROM dailyfitinfo WHERE DateRecorded = ? AND userid = ?`,
+      [date, userId]
     );
     if (results.length > 0) {
       return true;
@@ -301,15 +312,15 @@ async function getFitData(userId) {
   }
 }
 //Updates the data page for the user
-async function updateToday(userId, data, dataname) {
+async function updateToday(userId, data, dataname, date) {
   if (!allowedUpdateColumns.includes(dataname)) {
     console.error("Invalid column name:", dataname);
     throw new Error("Invalid column name");
   }
 
   try {
-    const query = `UPDATE dailyfitinfo SET ${dataname} = ? WHERE DateRecorded = CURDATE() AND userid = ?`;
-    const [results] = await pool.query(query, [data, userId]);
+    const query = `UPDATE dailyfitinfo SET ${dataname} = ? WHERE DateRecorded = ? AND userid = ?`;
+    const [results] = await pool.query(query, [data, date, userId]);
     return results;
   } catch (error) {
     console.error("Error executing query:", error);
