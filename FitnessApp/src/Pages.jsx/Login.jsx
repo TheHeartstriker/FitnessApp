@@ -82,6 +82,13 @@ function LoginPage() {
     }
   };
 
+  function formatDateToMySQL(date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  }
+
   //Sends the sign up data to be checked by the server and returns a response
   //The response returns a true value if the sign up was successful that is used in creating tasks
   const handleLogin = async () => {
@@ -91,7 +98,11 @@ function LoginPage() {
         "Content-Type": "application/json",
       },
       credentials: "include",
-      body: JSON.stringify({ username, password }),
+      body: JSON.stringify({
+        username,
+        password,
+        date: formatDateToMySQL(new Date()),
+      }),
     };
 
     try {
@@ -127,7 +138,12 @@ function LoginPage() {
         "Content-Type": "application/json",
       },
       credentials: "include",
-      body: JSON.stringify({ username, password, UserId }),
+      body: JSON.stringify({
+        username,
+        password,
+        UserId,
+        date: formatDateToMySQL(new Date()),
+      }),
     };
     try {
       await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/signup`, options);

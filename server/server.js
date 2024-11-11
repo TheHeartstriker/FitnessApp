@@ -39,19 +39,11 @@ app.listen(PORT, () => {
 //Stores the user id for the current user
 let userIdGet = "";
 //Stores the date for the current user
-let dateGet = formatDateToMySQL(new Date());
-
-function formatDateToMySQL(date) {
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, "0");
-  const day = String(date.getDate()).padStart(2, "0");
-  return `${year}-${month}-${day}`;
-}
+let dateGet = "";
 
 //Creates a new data page for the user when they log in unless they already have one for the day
 app.post("/api/createDataPage", authenticateJWT, async (req, res) => {
-  const { Zone1, Zone2, Zone3, Zone4, Zone5, weight, HeartRate, Date } =
-    req.body;
+  const { Zone1, Zone2, Zone3, Zone4, Zone5, weight, HeartRate } = req.body;
 
   try {
     console.log(userIdGet);
@@ -67,7 +59,6 @@ app.post("/api/createDataPage", authenticateJWT, async (req, res) => {
       Zone4,
       Zone5,
       weight,
-      Date,
       HeartRate,
       userIdGet
     );
@@ -79,13 +70,13 @@ app.post("/api/createDataPage", authenticateJWT, async (req, res) => {
 
 // Sends username and login to the database and if successful sends the user id back to the front
 app.post("/api/login", async (req, res) => {
-  const { username, password } = req.body;
+  const { username, password, date } = req.body;
   try {
     const result = await login(username, password);
     if (result) {
       const userId = await GetUserId(username, password);
       userIdGet = userId;
-      dateGet = formatDateToMySQL(new Date());
+      dateGet = date;
       const token = jwt.sign({ userId }, process.env.ACCESS_TOKEN_SECRET, {
         expiresIn: "1h",
       });
@@ -105,10 +96,10 @@ app.post("/api/login", async (req, res) => {
 
 // Simply sends a username and password to the database to be inserted
 app.post("/api/signup", async (req, res) => {
-  const { username, password, UserId } = req.body;
+  const { username, password, UserId, date } = req.body;
   try {
     userIdGet = UserId;
-    dateGet = formatDateToMySQL(new Date());
+    dateGet = date;
     await signup(username, password, UserId);
     const token = jwt.sign({ UserId }, process.env.ACCESS_TOKEN_SECRET, {
       expiresIn: "1h",
@@ -248,14 +239,13 @@ async function createDataPage(
   zone4,
   zone5,
   weight,
-  date,
   heartRate,
   userId
 ) {
   try {
     const result = await pool.query(
       `INSERT INTO dailyfitinfo (Zone1Time, Zone2Time, Zone3Time, Zone4Time, Zone5Time, weight, DateRecorded, resting_heart, userid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-      [zone1, zone2, zone3, zone4, zone5, weight, date, heartRate, userId]
+      [zone1, zone2, zone3, zone4, zone5, weight, dateGet, heartRate, userId]
     );
     return result;
   } catch (error) {
