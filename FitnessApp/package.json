@@ -2,7 +2,6 @@
   "name": "fitnessapp",
   "private": true,
   "version": "0.0.0",
-  "proxy": "${VITE_API_BASE_URL}",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -14,6 +13,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.26.2",
+    "serve": "^14.2.4",
     "uuid": "^10.0.0"
   },
   "devDependencies": {

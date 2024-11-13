@@ -4,15 +4,21 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Provider } from "./Provider";
 //Component imports
-import ViewPage from "./Pages.jsx/ViewPage.jsx";
-import StartPage from "./Pages.jsx/StartPage.jsx";
-import LoginPage from "./Pages.jsx/Login.jsx";
-import Daily from "./Pages.jsx/Daily.jsx";
+import ViewPage from "./DataImpose/ViewPage.jsx";
+import StartPage from "./Landing/StartPage.jsx";
+import LoginPage from "./Login/Login.jsx";
+import Daily from "./Daily/Daily.jsx";
 //CSS imports
-import "./Pages.css/StartPage.css";
-import "./Pages.css/ViewPage.css";
-import "./Pages.css/Login.css";
-import "./Pages.css/Daily.css";
+import "./Landing/StartPage.css";
+import "./DataImpose/ViewPage.css";
+import "./Login/Login.css";
+import "./Daily/Daily.css";
+
+//
+//The daily page is the input page for the user to input their daily data into the server
+//Data impose is the main view page for the user to see their data on graphs and the like
+//Landing is the first page the user sees when they open the site before they scroll down
+//
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
