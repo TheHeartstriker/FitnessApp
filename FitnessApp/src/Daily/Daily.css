@@ -54,8 +54,11 @@ body {
 }
 /* Submit button */
 .Submit {
+  font-family: "Teko", sans-serif;
+  font-size: 1rem;
   position: relative;
-  background-color: var(--Blue-2);
+  cursor: pointer;
+  background-color: var(--grey-3);
   border: 15px solid var(--grey-2);
   bottom: 40px;
   padding: 10px;

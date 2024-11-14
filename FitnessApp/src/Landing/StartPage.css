@@ -21,18 +21,7 @@ body {
   padding: 0;
   font-family: "Teko", sans-serif;
 }
-/* Holds the introduction */
-.Textscreen {
-  position: relative;
-  right: 24.5%;
-  width: 50vw;
-  height: 15vh;
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  padding: 10px;
-  border-radius: 10px;
-}
+
 /* Overall container for the background */
 .StartPageContainer {
   display: flex;
@@ -120,14 +109,11 @@ body {
   box-shadow: 0 0 0 10px hsla(202, 100%, 50%, 0.5);
   background-image: url("@/Images/Downarrow.svg");
   background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  font-size: 1rem;
-  font-weight: 600;
   cursor: pointer;
-  text-decoration: none;
+
   animation: ShadowGrowShrink 2s infinite;
-  background-color: var(--Blue-1);
+  background-color: rgb(0, 60, 255);
+  margin-top: 45vh;
 }
 /* Grow or shrinking aura helps indicate to go downwards */
 @keyframes ShadowGrowShrink {

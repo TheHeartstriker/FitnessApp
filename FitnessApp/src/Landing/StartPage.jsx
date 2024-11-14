@@ -21,14 +21,6 @@ function StartPage() {
 
   return (
     <div className="StartPageContainer">
-      <div className="Textscreen">
-        <h1>
-          This is FGraph a simple lightweight fitness tracker meant to give you
-          an
-          <br />
-          overhead view of your progress
-        </h1>
-      </div>
       <button className="MoveDown" onClick={handleMoveDown}></button>
 
       <div className="NavContainer">

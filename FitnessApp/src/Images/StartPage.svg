@@ -1,32 +1,32 @@
-<svg width="2008" height="1088" viewBox="0 0 2008 1088" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <g filter="url(#filter0_d_1_2)">
-    <g clip-path="url(#clip0_1_2)">
-      <rect x="4" width="2000" height="1080" fill="white"/>
-      <rect x="4" width="2000" height="1080" fill="#1400FF"/>
-      <rect x="4" width="2000" height="1080" fill="url(#paint0_linear_1_2)" fill-opacity="0.4"/>
-      <path d="M-63 373C734.431 224.906 295.397 1108.7 1229.3 1132.78L1391 1129C1332.92 1132.9 1279.16 1134.07 1229.3 1132.78L-63 1163V373Z" fill="#0094FF"/>
-      <path fill-rule="evenodd" clip-rule="evenodd" d="M1265.49 416.603C1403.73 693.595 1564.86 1016.43 2004 1080V223.276C1957.58 222.059 1901.19 235.676 1840.37 250.362C1650.43 296.227 1417.31 352.519 1310 0H889C1072.16 29.2566 1162.47 210.203 1265.49 416.603Z" fill="#0B0086"/>
-      <path d="M2007 469C2050 543 1376 744 1286 0H2007C2002.67 18.6667 2007 113.8 2007 469Z" fill="#080064"/>
-    </g>
-    <rect x="4.5" y="0.5" width="1999" height="1079" stroke="black"/>
-  </g>
-  <defs>
-    <filter id="filter0_d_1_2" x="0" y="0" width="2008" height="1088" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
-      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-      <feOffset dy="4"/>
-      <feGaussianBlur stdDeviation="2"/>
-      <feComposite in2="hardAlpha" operator="out"/>
-      <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
-      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1_2"/>
-      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1_2" result="shape"/>
-    </filter>
-    <linearGradient id="paint0_linear_1_2" x1="4" y1="540" x2="2004" y2="540" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#0094FF"/>
-      <stop offset="0.525" stop-opacity="0.5"/>
-    </linearGradient>
-    <clipPath id="clip0_1_2">
-      <rect x="4" width="2000" height="1080" fill="white"/>
-    </clipPath>
-  </defs>
+<svg width="2568" height="1088" viewBox="0 0 2568 1088" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_d_1_2)">
+<g clip-path="url(#clip0_1_2)">
+<rect x="4" width="2560" height="1080" fill="white"/>
+<rect x="4" width="2562" height="1080" fill="#1400FF"/>
+<rect x="4" width="2562" height="1080" fill="url(#paint0_linear_1_2)" fill-opacity="0.4"/>
+<path d="M-47 -8.00559C939.642 -229.398 396.437 1091.82 1551.93 1127.82L1752 1122.17C1680.14 1128.01 1613.62 1129.75 1551.93 1127.82L-47 1173V-8.00559Z" fill="#0094FF"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M1863.49 460.603C2001.73 737.595 2162.86 1060.43 2602 1124V267.276C2555.58 266.059 2871.19 -37.3236 2810.37 -22.6375C2620.43 23.227 2387.31 79.5188 2280 -273L1426 -11C1609.16 18.2567 1760.47 254.203 1863.49 460.603Z" fill="#0B0086"/>
+<path d="M2610 422C2653 496 1979 697 1889 -47H2610C2605.67 -28.3333 2610 66.8 2610 422Z" fill="#080064"/>
+</g>
+<rect x="4.5" y="0.5" width="2559" height="1079" stroke="black"/>
+</g>
+<defs>
+<filter id="filter0_d_1_2" x="0" y="0" width="2568" height="1088" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="4"/>
+<feGaussianBlur stdDeviation="2"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1_2"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1_2" result="shape"/>
+</filter>
+<linearGradient id="paint0_linear_1_2" x1="4" y1="540" x2="2566" y2="540" gradientUnits="userSpaceOnUse">
+<stop stop-color="#0094FF"/>
+<stop offset="0.525" stop-opacity="0.5"/>
+</linearGradient>
+<clipPath id="clip0_1_2">
+<rect x="4" width="2560" height="1080" fill="white"/>
+</clipPath>
+</defs>
 </svg>
