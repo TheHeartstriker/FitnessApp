@@ -111,17 +111,26 @@ body {
   background-size: cover;
   cursor: pointer;
 
-  animation: ShadowGrowShrink 2s infinite;
+  animation: Heartbeat 3s infinite;
   background-color: rgb(0, 60, 255);
   margin-top: 45vh;
 }
-/* Grow or shrinking aura helps indicate to go downwards */
-@keyframes ShadowGrowShrink {
+
+@keyframes Heartbeat {
   0%,
   100% {
-    box-shadow: 0 0 0 10px hsla(202, 100%, 50%, 0.5);
+    box-shadow: 0 0 0 20px hsla(202, 100%, 50%, 0.5);
   }
-  50% {
+  20% {
+    box-shadow: 0 0 0 30px hsla(202, 100%, 50%, 0.5);
+  }
+  40% {
+    box-shadow: 0 0 0 20px hsla(202, 100%, 50%, 0.5);
+  }
+  60% {
+    box-shadow: 0 0 0 30px hsla(202, 100%, 50%, 0.5);
+  }
+  80% {
     box-shadow: 0 0 0 20px hsla(202, 100%, 50%, 0.5);
   }
 }
