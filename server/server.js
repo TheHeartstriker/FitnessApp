@@ -145,7 +145,16 @@ app.put("/api/updateDataPage", authenticateJWT, async (req, res) => {
 //Gets the users past data
 app.get("/api/getFitData", authenticateJWT, async (req, res) => {
   try {
-    const result = await getFitData(userIdGet);
+    const result = await getFitData(userIdGet, false);
+    res.status(200).send(result);
+  } catch (error) {
+    res.status(500).send({ message: "Internal server error", error });
+  }
+});
+
+app.get("/api/getSharedData", authenticateJWT, async (req, res) => {
+  try {
+    const result = await getFitData(userIdGet, true);
     res.status(200).send(result);
   } catch (error) {
     res.status(500).send({ message: "Internal server error", error });
@@ -288,15 +297,49 @@ const allowedUpdateColumns = [
   "Zone5Time",
   "weight",
 ];
-//Gets the users past data
-async function getFitData(userId) {
+//Gets the individual users data or collects all data that users are okay with sharing
+//Need to make the modified columns more efficient
+async function getFitData(userId, Share) {
+  if (Share) {
+    try {
+      const columns = allowedGetColumns.join(", ");
+      const [results] = await pool.query(
+        `SELECT ${columns} FROM dailyfitinfo WHERE share = 1`
+      );
+      const modifiedColumns = await Promise.all(
+        results.map(async (result) => {
+          const userName = await getUserNameById(result.userid);
+          return {
+            ...result,
+            UserName: userName,
+          };
+        })
+      );
+
+      return modifiedColumns;
+    } catch (error) {
+      throw error;
+    }
+  } else {
+    try {
+      const columns = allowedGetColumns.join(", ");
+      const [results] = await pool.query(
+        `SELECT ${columns} FROM dailyfitinfo WHERE userid = ?`,
+        [userId]
+      );
+      return results;
+    } catch (error) {
+      throw error;
+    }
+  }
+}
+async function getUserNameById(userid) {
   try {
-    const columns = allowedGetColumns.join(", ");
     const [results] = await pool.query(
-      `SELECT ${columns} FROM dailyfitinfo WHERE userid = ?`,
-      [userId]
+      `SELECT UserName FROM login WHERE UserId = ?`,
+      [userid]
     );
-    return results;
+    return results[0].UserName;
   } catch (error) {
     throw error;
   }
