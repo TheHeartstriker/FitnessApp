@@ -93,8 +93,30 @@ function Daily() {
     }
   }
 
+  async function UpdateShare() {
+    const options = {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+    };
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL}/api/updateShare`,
+        options
+      );
+      const data = await response.json();
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   return (
     <div className="DailyPageContainer">
+      <button className="ShareButton" onClick={UpdateShare}>
+        Share data with others?
+      </button>
       <div className="InputContainer">
         <input
           ref={workoutTimeRef}

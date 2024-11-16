@@ -22,6 +22,7 @@ body {
 }
 /* The container for the entire route */
 .DailyPageContainer {
+  position: relative;
   background-color: var(--grey-3);
   display: flex;
   align-items: center;
@@ -129,5 +130,17 @@ body {
   height: 100%;
   border-radius: 5px;
   border: 2.5px solid var(--Cyan-2);
+  background-color: var(--Blue-2);
+}
+
+.ShareButton {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  left: 0;
+  bottom: 0;
+  border-radius: 5px;
+  border: 2.5px solid var(--Cyan-2);
+  z-index: 1;
   background-color: var(--Blue-2);
 }

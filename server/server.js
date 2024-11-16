@@ -142,6 +142,15 @@ app.put("/api/updateDataPage", authenticateJWT, async (req, res) => {
     res.status(500).send({ message: "Internal server error", error });
   }
 });
+
+app.put("/api/updateShare", authenticateJWT, async (req, res) => {
+  try {
+    const result = await updateToday(userIdGet, true, "share", dateGet);
+    res.status(200).send(result);
+  } catch (error) {
+    res.status(500).send({ message: "Internal server error", error });
+  }
+});
 //Gets the users past data
 app.get("/api/getFitData", authenticateJWT, async (req, res) => {
   try {
@@ -296,6 +305,7 @@ const allowedUpdateColumns = [
   "Zone4Time",
   "Zone5Time",
   "weight",
+  "share",
 ];
 //Gets the individual users data or collects all data that users are okay with sharing
 //Need to make the modified columns more efficient
@@ -345,6 +355,7 @@ async function getUserNameById(userid) {
   }
 }
 //Updates the data page for the user
+//Takes in the userid to find the data and the data to update it with and the data name to know which column to update
 async function updateToday(userId, data, dataname, date) {
   if (!allowedUpdateColumns.includes(dataname)) {
     console.error("Invalid column name:", dataname);
@@ -352,8 +363,18 @@ async function updateToday(userId, data, dataname, date) {
   }
 
   try {
-    const query = `UPDATE dailyfitinfo SET ${dataname} = ? WHERE DateRecorded = ? AND userid = ?`;
-    const [results] = await pool.query(query, [data, date, userId]);
+    let query;
+    let queryParams;
+
+    if (dataname === "share") {
+      query = `UPDATE dailyfitinfo SET ${dataname} = ? WHERE userid = ?`;
+      queryParams = [data, userId];
+    } else {
+      query = `UPDATE dailyfitinfo SET ${dataname} = ? WHERE DateRecorded = ? AND userid = ?`;
+      queryParams = [data, date, userId];
+    }
+
+    const [results] = await pool.query(query, queryParams);
     return results;
   } catch (error) {
     console.error("Error executing query:", error);
