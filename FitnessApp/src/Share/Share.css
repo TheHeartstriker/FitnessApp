@@ -1,0 +1,22 @@
+:root {
+  /* Netural */
+  --grey: hsl(0, 0%, 50%);
+  --grey-1: hsl(0, 0%, 30%);
+  --grey-2: hsl(0, 0%, 15%);
+  --grey-3: hsl(0, 0%, 10%);
+
+  /* Blues */
+  --Blue-1: hsl(234, 100%, 50%);
+  --Blue-2: hsl(234, 100%, 35%);
+  --Blue-3: hsl(234, 100%, 20%);
+  /* Cyans */
+  --Cyan-1: hsl(202, 100%, 50%);
+  --Cyan-2: hsl(202, 100%, 35%);
+  --Cyan-3: hsl(202, 100%, 20%);
+}
+
+.ShareContainer {
+  background: var(--grey-3);
+  width: 100vw;
+  height: 90vh;
+}

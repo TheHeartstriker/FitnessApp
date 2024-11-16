@@ -1,10 +1,11 @@
 import { useState, useEffect, useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Context } from "../Provider";
 
 function StartPage() {
   const { isSignedIn, setIsSignedIn } = useContext(Context);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleMoveDown = () => {
     window.scrollTo({
@@ -14,16 +15,24 @@ function StartPage() {
   };
 
   useEffect(() => {
-    if (isSignedIn === false) {
+    if (
+      isSignedIn === false &&
+      location.pathname !== "/login" &&
+      location.pathname !== "/share"
+    ) {
       navigate("/login");
     }
-  }, [isSignedIn, navigate]);
+  }, [isSignedIn, navigate, location]);
 
   return (
     <div className="StartPageContainer">
       <button className="MoveDown" onClick={handleMoveDown}></button>
 
       <div className="NavContainer">
+        <Link to="/share">
+          <h3 className="NavBtn">Share</h3>
+        </Link>
+
         {/* If they are not logged in they dont need to see these values */}
         {isSignedIn && (
           <>
