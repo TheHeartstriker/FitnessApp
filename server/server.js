@@ -295,6 +295,7 @@ const allowedGetColumns = [
   "Zone5Time",
   "weight",
   "DateRecorded",
+  "userid",
 ];
 //Allowed columns for the update function
 const allowedUpdateColumns = [
@@ -318,9 +319,11 @@ async function getFitData(userId, Share) {
       );
       const modifiedColumns = await Promise.all(
         results.map(async (result) => {
+          //Result is undefined
           const userName = await getUserNameById(result.userid);
+          const { userid, ...rest } = result;
           return {
-            ...result,
+            ...rest,
             UserName: userName,
           };
         })
@@ -349,8 +352,12 @@ async function getUserNameById(userid) {
       `SELECT UserName FROM login WHERE UserId = ?`,
       [userid]
     );
+    if (results.length === 0) {
+      throw new Error(`User with ID ${userid} not found`);
+    }
     return results[0].UserName;
   } catch (error) {
+    console.error("Database query failed", error);
     throw error;
   }
 }

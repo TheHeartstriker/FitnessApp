@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 function Share() {
   const [data, setData] = useState({});
-
+  //Gets the shared data from the server based on usernames
   async function fetchData() {
     const options = {
       method: "GET",
@@ -17,6 +17,7 @@ function Share() {
       );
       const data = await response.json();
       setData(data);
+      console.log(data);
     } catch (error) {
       console.error(error);
     }
@@ -26,6 +27,10 @@ function Share() {
     fetchData();
   }, []);
 
-  return <div className="ShareContainer"></div>;
+  return (
+    <div className="ShareContainer">
+      <div className="Item"></div>
+    </div>
+  );
 }
 export default Share;
