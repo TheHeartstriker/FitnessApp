@@ -4,6 +4,7 @@
   --grey-1: hsl(0, 0%, 30%);
   --grey-2: hsl(0, 0%, 15%);
   --grey-3: hsl(0, 0%, 10%);
+  --grey-4: hsl(0, 0%, 5%);
 
   /* Blues */
   --Blue-1: hsl(234, 100%, 50%);
@@ -16,7 +17,32 @@
 }
 
 .ShareContainer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
   background: var(--grey-3);
   width: 100vw;
   height: 90vh;
+}
+
+.Item {
+  position: relative;
+  text-align: center;
+  border: 5px solid var(--Cyan-2);
+  box-shadow: 0 0 30px var(--Blue-3);
+
+  background-color: var(--grey-4);
+
+  margin: 75px;
+  aspect-ratio: 1 / 1;
+  border-radius: 5px;
+  color: #ffffff;
+  padding: 10px;
+  height: 50%;
+  width: 50%;
+  transition: transform 0.3s ease;
+}
+
+.Item:hover {
+  transform: scale(1.2);
 }
