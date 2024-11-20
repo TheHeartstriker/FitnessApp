@@ -81,24 +81,60 @@ function Share() {
         data[i].resting_heart / data[i].HeartDays,
         data[i].Days,
         result.TotalTime,
-        result.Avgzone
+        result.Avgzone,
+        result.Cal
       );
     }
   }
 
-  //Gets the total time tracked for each user
+  //Gets the average callories, average time for each zone and total time
   function GetTotalTime(GetAverage) {
-    let total = 0;
-    let Avg = 0;
-    GetAverage.forEach((element, index) => {
-      // console.log(`Processing element at index ${index}:`, element);
-      total += element[`Zone${index + 1}Time`];
-      Avg += element[`Zone${index + 1}Time`] * (index + 1);
+    let totalTime = 0;
+    // Array to store the total time for each zone
+    let zoneCounts = [0, 0, 0, 0, 0];
+
+    GetAverage.forEach((element) => {
+      // Sum all zone times
+      totalTime += element.Zone1Time;
+      totalTime += element.Zone2Time;
+      totalTime += element.Zone3Time;
+      totalTime += element.Zone4Time;
+      totalTime += element.Zone5Time;
+
+      // Add to zone counts
+      zoneCounts[0] += element.Zone1Time;
+      zoneCounts[1] += element.Zone2Time;
+      zoneCounts[2] += element.Zone3Time;
+      zoneCounts[3] += element.Zone4Time;
+      zoneCounts[4] += element.Zone5Time;
     });
-    return { TotalTime: total, Avgzone: Avg / total };
+
+    // Calculate average zone
+    let totalZones = zoneCounts.reduce(
+      (acc, time, index) => acc + time * (index + 1),
+      0
+    );
+    let averageZone = (totalZones / totalTime).toFixed(2);
+
+    return {
+      TotalTime: totalTime,
+      Avgzone: averageZone,
+      Cal: GetCalories(zoneCounts),
+    };
   }
 
-  function AddItem(Name, HeartRate, Days, TotalTime, Avgzone) {
+  function GetCalories(data) {
+    let TempCal = 0;
+    TempCal +=
+      data[0] * 4.5 +
+      data[1] * 7.5 +
+      data[2] * 11 +
+      data[3] * 14.5 +
+      data[4] * 16.5;
+    return TempCal;
+  }
+
+  function AddItem(Name, HeartRate, Days, TotalTime, Avgzone, Cal) {
     setItem((prevItems) => [
       ...prevItems,
       {
@@ -108,6 +144,7 @@ function Share() {
         Days: Days,
         TotalTime: TotalTime,
         Avgzone: Avgzone,
+        Cal: Cal,
       },
     ]);
   }
@@ -127,10 +164,11 @@ function Share() {
       {item.map((item) => (
         <div className="Item" key={item.id}>
           <h1>{item.Name}</h1>
-          <h2>Total Time tracked: {item.TotalTime}</h2>
-          <h2>Days track: {item.Days}</h2>
-          <h2>Avg Zone: {item.Avgzone}</h2>
-          <h2>Heart Rate: {item.HeartRate}</h2>
+          <h3>Total Time tracked: {item.TotalTime}</h3>
+          <h3>Days track: {item.Days}</h3>
+          <h3>Avg Zone: {item.Avgzone}</h3>
+          <h3>Heart Rate: {item.HeartRate}</h3>
+          <h3>Total estimated calories burned: {item.Cal}</h3>
         </div>
       ))}
     </div>
