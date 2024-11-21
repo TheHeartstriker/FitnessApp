@@ -11,6 +11,7 @@
   --Blue-2: hsl(234, 100%, 35%);
   --Blue-3: hsl(234, 100%, 20%);
   /* Cyans */
+  --Cyan-0: hsl(202, 100%, 80%);
   --Cyan-1: hsl(202, 100%, 50%);
   --Cyan-2: hsl(202, 100%, 35%);
   --Cyan-3: hsl(202, 100%, 20%);
@@ -22,7 +23,8 @@
   grid-template-rows: repeat(2, 1fr);
   background: var(--grey-3);
   width: 100vw;
-  height: 90vh;
+  min-height: 90vh;
+  height: auto;
 }
 
 .Item {
@@ -40,9 +42,17 @@
   padding: 10px;
   height: 50%;
   width: 50%;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.Item h3 {
+  font-size: 1rem;
+  margin: 0;
+  padding: 0;
+  color: var(--Cyan-0);
 }
 
 .Item:hover {
-  transform: scale(1.2);
+  transform: scale(1.4);
+  box-shadow: 0 0 80px hsla(234, 100%, 50%, 0.5);
 }

@@ -3,6 +3,10 @@ function Share() {
   const [data, setData] = useState([]);
   //Full elements with related data one for each user
   const [item, setItem] = useState([]);
+  //Used to reload the useeffect telling function to run and load the tabs
+  const [Datafetched, setDataFetched] = useState(false);
+  //The amount of tabs loaded
+  const [LoadedAmount, setLoadedAmount] = useState(8);
   //Gets the shared data from the server based on usernames
   async function fetchData() {
     const options = {
@@ -19,8 +23,8 @@ function Share() {
       );
       const data = await response.json();
       const sortedData = await SortByUserName(data);
-      console.log(data);
       setData(sortedData);
+      setDataFetched(true);
     } catch (error) {
       console.error(error);
     }
@@ -45,8 +49,7 @@ function Share() {
           ...rest,
         };
       } else {
-        // We have seen this UserName before so we merge the data
-        // Loop over the keys
+        // We have seen this UserName before so we merge the data and loop of its keys
         mergedData[UserName].Days += 1;
         Object.keys(rest).forEach((key) => {
           //Get the main combined datas value
@@ -70,7 +73,7 @@ function Share() {
     });
     return Object.values(mergedData);
   }
-
+  //Adds the items to the screen by looping over the formated data we created
   function TransposeData(data, start, end) {
     for (let i = start; i < end; i++) {
       console.log(data[i].resting_heart, "Dataheart");
@@ -122,7 +125,7 @@ function Share() {
       Cal: GetCalories(zoneCounts),
     };
   }
-
+  //Helper gets the calories
   function GetCalories(data) {
     let TempCal = 0;
     TempCal +=
@@ -133,7 +136,7 @@ function Share() {
       data[4] * 16.5;
     return TempCal;
   }
-
+  //Helper adds an item to the grid
   function AddItem(Name, HeartRate, Days, TotalTime, Avgzone, Cal) {
     setItem((prevItems) => [
       ...prevItems,
@@ -148,16 +151,36 @@ function Share() {
       },
     ]);
   }
-
+  //Helper function checks if adding 8 itself or adding 8 is to much for the data we have
+  function LoadTabs(data) {
+    if (LoadedAmount > data.length) {
+      setLoadedAmount(data.length);
+    }
+    return LoadedAmount;
+  }
+  //Checks if the user has scrolled to the bottom and if so make it load more tabs
+  useEffect(() => {
+    const handleScroll = () => {
+      if (
+        window.innerHeight + document.documentElement.scrollTop !==
+        document.documentElement.offsetHeight
+      )
+        return;
+      setLoadedAmount((prev) => prev + 8);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+  //fetches the data from the server
   useEffect(() => {
     fetchData();
   }, []);
+  //Puts the data onto the screen
   useEffect(() => {
-    console.log(data, "Data");
-    if (data) {
-      TransposeData(data, 0, data.length);
+    if (Datafetched) {
+      TransposeData(data, 0, LoadTabs(data));
     }
-  }, []);
+  }, [Datafetched, LoadedAmount]);
 
   return (
     <div className="ShareContainer">
