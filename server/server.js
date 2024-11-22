@@ -330,31 +330,33 @@ const allowedUpdateColumns = [
   "weight",
   "share",
 ];
-
+//Stores the username for each user id so we dont need to get the username by id
+//For a user we have already seen before
 let UserNameIdMap = {};
 
 //Gets the individual users data or collects all data that users are okay with sharing
-//Need to make the modified columns more efficient
 async function getFitData(userId, Share) {
   if (Share) {
     try {
+      //Formats the columns to be selected
       const columns = allowedGetColumns.join(", ");
       const [results] = await pool.query(
         `SELECT ${columns} FROM dailyfitinfo WHERE share = 1`
       );
+      //Iterates over the results and gets the username for each user used to define the user
+      //Without sending the user id to the front end
       const modifiedColumns = await Promise.all(
         results.map(async (result) => {
-          //Result is undefined
+          //Checks if the username is already in the map
           if (UserNameIdMap[result.userid]) {
             return {
               ...result,
               UserName: UserNameIdMap[result.userid],
             };
           }
-
+          //If not gets the username and adds it to the map
           const userName = await getUserNameById(result.userid);
           UserNameIdMap[result.userid] = userName;
-
           const { userid, ...rest } = result;
           return {
             ...rest,
@@ -380,6 +382,7 @@ async function getFitData(userId, Share) {
     }
   }
 }
+//Gets the username by the user id
 async function getUserNameById(userid) {
   try {
     const [results] = await pool.query(
