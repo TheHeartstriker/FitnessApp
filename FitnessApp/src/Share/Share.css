@@ -1,0 +1,58 @@
+:root {
+  /* Netural */
+  --grey: hsl(0, 0%, 50%);
+  --grey-1: hsl(0, 0%, 30%);
+  --grey-2: hsl(0, 0%, 15%);
+  --grey-3: hsl(0, 0%, 10%);
+  --grey-4: hsl(0, 0%, 5%);
+
+  /* Blues */
+  --Blue-1: hsl(234, 100%, 50%);
+  --Blue-2: hsl(234, 100%, 35%);
+  --Blue-3: hsl(234, 100%, 20%);
+  /* Cyans */
+  --Cyan-0: hsl(202, 100%, 80%);
+  --Cyan-1: hsl(202, 100%, 50%);
+  --Cyan-2: hsl(202, 100%, 35%);
+  --Cyan-3: hsl(202, 100%, 20%);
+}
+
+.ShareContainer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  background: var(--grey-3);
+  width: 100vw;
+  min-height: 90vh;
+  height: auto;
+}
+
+.Item {
+  position: relative;
+  text-align: center;
+  border: 5px solid var(--Cyan-2);
+  box-shadow: 0 0 30px var(--Blue-3);
+
+  background-color: var(--grey-4);
+
+  margin: 75px;
+  aspect-ratio: 1 / 1;
+  border-radius: 5px;
+  color: #ffffff;
+  padding: 10px;
+  height: 50%;
+  width: 50%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.Item h3 {
+  font-size: 1.5vh;
+  margin: 0;
+  padding: 0;
+  color: var(--Cyan-0);
+}
+
+.Item:hover {
+  transform: scale(1.4);
+  box-shadow: 0 0 80px hsla(234, 100%, 50%, 0.5);
+}

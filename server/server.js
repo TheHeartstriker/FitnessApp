@@ -142,10 +142,28 @@ app.put("/api/updateDataPage", authenticateJWT, async (req, res) => {
     res.status(500).send({ message: "Internal server error", error });
   }
 });
+
+app.put("/api/updateShare", authenticateJWT, async (req, res) => {
+  try {
+    const result = await updateToday(userIdGet, true, "share", dateGet);
+    res.status(200).send(result);
+  } catch (error) {
+    res.status(500).send({ message: "Internal server error", error });
+  }
+});
 //Gets the users past data
 app.get("/api/getFitData", authenticateJWT, async (req, res) => {
   try {
-    const result = await getFitData(userIdGet);
+    const result = await getFitData(userIdGet, false);
+    res.status(200).send(result);
+  } catch (error) {
+    res.status(500).send({ message: "Internal server error", error });
+  }
+});
+
+app.get("/api/getSharedData", async (req, res) => {
+  try {
+    const result = await getFitData(userIdGet, true);
     res.status(200).send(result);
   } catch (error) {
     res.status(500).send({ message: "Internal server error", error });
@@ -243,9 +261,31 @@ async function createDataPage(
   userId
 ) {
   try {
+    // Check if the user has a share value of 1
+    const [checkResult] = await pool.query(
+      `SELECT share FROM dailyfitinfo WHERE userid = ? AND share = 1`,
+      [userId]
+    );
+
+    let insertWith = 0;
+    if (checkResult.length > 0) {
+      insertWith = 1;
+    }
+
     const result = await pool.query(
-      `INSERT INTO dailyfitinfo (Zone1Time, Zone2Time, Zone3Time, Zone4Time, Zone5Time, weight, DateRecorded, resting_heart, userid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-      [zone1, zone2, zone3, zone4, zone5, weight, dateGet, heartRate, userId]
+      `INSERT INTO dailyfitinfo (Zone1Time, Zone2Time, Zone3Time, Zone4Time, Zone5Time, weight, DateRecorded, resting_heart, userid, share) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      [
+        zone1,
+        zone2,
+        zone3,
+        zone4,
+        zone5,
+        weight,
+        dateGet,
+        heartRate,
+        userId,
+        insertWith,
+      ]
     );
     return result;
   } catch (error) {
@@ -277,6 +317,7 @@ const allowedGetColumns = [
   "Zone5Time",
   "weight",
   "DateRecorded",
+  "userid",
 ];
 //Allowed columns for the update function
 const allowedUpdateColumns = [
@@ -287,21 +328,78 @@ const allowedUpdateColumns = [
   "Zone4Time",
   "Zone5Time",
   "weight",
+  "share",
 ];
-//Gets the users past data
-async function getFitData(userId) {
+//Stores the username for each user id so we dont need to get the username by id
+//For a user we have already seen before
+let UserNameIdMap = {};
+
+//Gets the individual users data or collects all data that users are okay with sharing
+async function getFitData(userId, Share) {
+  if (Share) {
+    try {
+      //Formats the columns to be selected
+      const columns = allowedGetColumns.join(", ");
+      const [results] = await pool.query(
+        `SELECT ${columns} FROM dailyfitinfo WHERE share = 1`
+      );
+      //Iterates over the results and gets the username for each user used to define the user
+      //Without sending the user id to the front end
+      const modifiedColumns = await Promise.all(
+        results.map(async (result) => {
+          //Checks if the username is already in the map
+          if (UserNameIdMap[result.userid]) {
+            return {
+              ...result,
+              UserName: UserNameIdMap[result.userid],
+            };
+          }
+          //If not gets the username and adds it to the map
+          const userName = await getUserNameById(result.userid);
+          UserNameIdMap[result.userid] = userName;
+          const { userid, ...rest } = result;
+          return {
+            ...rest,
+            UserName: userName,
+          };
+        })
+      );
+
+      return modifiedColumns;
+    } catch (error) {
+      throw error;
+    }
+  } else {
+    try {
+      const columns = allowedGetColumns.join(", ");
+      const [results] = await pool.query(
+        `SELECT ${columns} FROM dailyfitinfo WHERE userid = ?`,
+        [userId]
+      );
+      return results;
+    } catch (error) {
+      throw error;
+    }
+  }
+}
+//Gets the username by the user id
+async function getUserNameById(userid) {
   try {
-    const columns = allowedGetColumns.join(", ");
     const [results] = await pool.query(
-      `SELECT ${columns} FROM dailyfitinfo WHERE userid = ?`,
-      [userId]
+      `SELECT UserName FROM login WHERE UserId = ?`,
+      [userid]
     );
-    return results;
+    if (results.length === 0) {
+      throw new Error(`User with ID ${userid} not found`);
+    }
+    return results[0].UserName;
   } catch (error) {
+    console.error("Database query failed", error);
     throw error;
   }
 }
 //Updates the data page for the user
+//Takes in the userid to find the data and the data to update it with and the data name to know which column to update
 async function updateToday(userId, data, dataname, date) {
   if (!allowedUpdateColumns.includes(dataname)) {
     console.error("Invalid column name:", dataname);
@@ -309,8 +407,18 @@ async function updateToday(userId, data, dataname, date) {
   }
 
   try {
-    const query = `UPDATE dailyfitinfo SET ${dataname} = ? WHERE DateRecorded = ? AND userid = ?`;
-    const [results] = await pool.query(query, [data, date, userId]);
+    let query;
+    let queryParams;
+
+    if (dataname === "share") {
+      query = `UPDATE dailyfitinfo SET ${dataname} = ? WHERE userid = ?`;
+      queryParams = [data, userId];
+    } else {
+      query = `UPDATE dailyfitinfo SET ${dataname} = ? WHERE DateRecorded = ? AND userid = ?`;
+      queryParams = [data, date, userId];
+    }
+
+    const [results] = await pool.query(query, queryParams);
     return results;
   } catch (error) {
     console.error("Error executing query:", error);
