@@ -161,7 +161,7 @@ app.get("/api/getFitData", authenticateJWT, async (req, res) => {
   }
 });
 
-app.get("/api/getSharedData", authenticateJWT, async (req, res) => {
+app.get("/api/getSharedData", async (req, res) => {
   try {
     const result = await getFitData(userIdGet, true);
     res.status(200).send(result);
@@ -261,9 +261,31 @@ async function createDataPage(
   userId
 ) {
   try {
+    // Check if the user has a share value of 1
+    const [checkResult] = await pool.query(
+      `SELECT share FROM dailyfitinfo WHERE userid = ? AND share = 1`,
+      [userId]
+    );
+
+    let insertWith = 0;
+    if (checkResult.length > 0) {
+      insertWith = 1;
+    }
+
     const result = await pool.query(
-      `INSERT INTO dailyfitinfo (Zone1Time, Zone2Time, Zone3Time, Zone4Time, Zone5Time, weight, DateRecorded, resting_heart, userid) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-      [zone1, zone2, zone3, zone4, zone5, weight, dateGet, heartRate, userId]
+      `INSERT INTO dailyfitinfo (Zone1Time, Zone2Time, Zone3Time, Zone4Time, Zone5Time, weight, DateRecorded, resting_heart, userid, share) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      [
+        zone1,
+        zone2,
+        zone3,
+        zone4,
+        zone5,
+        weight,
+        dateGet,
+        heartRate,
+        userId,
+        insertWith,
+      ]
     );
     return result;
   } catch (error) {
@@ -308,6 +330,9 @@ const allowedUpdateColumns = [
   "weight",
   "share",
 ];
+
+let UserNameIdMap = {};
+
 //Gets the individual users data or collects all data that users are okay with sharing
 //Need to make the modified columns more efficient
 async function getFitData(userId, Share) {
@@ -320,7 +345,16 @@ async function getFitData(userId, Share) {
       const modifiedColumns = await Promise.all(
         results.map(async (result) => {
           //Result is undefined
+          if (UserNameIdMap[result.userid]) {
+            return {
+              ...result,
+              UserName: UserNameIdMap[result.userid],
+            };
+          }
+
           const userName = await getUserNameById(result.userid);
+          UserNameIdMap[result.userid] = userName;
+
           const { userid, ...rest } = result;
           return {
             ...rest,

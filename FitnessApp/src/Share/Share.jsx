@@ -14,7 +14,6 @@ function Share() {
       headers: {
         "Content-Type": "application/json",
       },
-      credentials: "include",
     };
     try {
       const response = await fetch(
@@ -153,10 +152,7 @@ function Share() {
   }
   //Helper function checks if adding 8 itself or adding 8 is to much for the data we have
   function LoadTabs(data) {
-    if (LoadedAmount > data.length) {
-      setLoadedAmount(data.length);
-    }
-    return LoadedAmount;
+    return Math.min(data.length, LoadedAmount);
   }
   //Checks if the user has scrolled to the bottom and if so make it load more tabs
   useEffect(() => {
@@ -166,7 +162,7 @@ function Share() {
         document.documentElement.offsetHeight
       )
         return;
-      setLoadedAmount((prev) => prev + 8);
+      setLoadedAmount((prev) => Math.min(prev + 8, data.length));
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -177,7 +173,8 @@ function Share() {
   }, []);
   //Puts the data onto the screen
   useEffect(() => {
-    if (Datafetched) {
+    if (Datafetched && data.length > 0) {
+      console.log(LoadTabs(data), "Dataaa");
       TransposeData(data, 0, LoadTabs(data));
     }
   }, [Datafetched, LoadedAmount]);
