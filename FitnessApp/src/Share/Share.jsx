@@ -74,9 +74,8 @@ function Share() {
   }
   //Adds the items to the screen by looping over the formated data we created
   function TransposeData(data, start, end) {
+    setItem([]);
     for (let i = start; i < end; i++) {
-      console.log(data[i].resting_heart, "Dataheart");
-      console.log(data[i].HeartDays, "DataValue");
       let result = GetTotalTime([data[i]]);
       AddItem(
         data[i].UserName,
@@ -152,7 +151,11 @@ function Share() {
   }
   //Helper function checks if adding 8 itself or adding 8 is to much for the data we have
   function LoadTabs(data) {
-    return Math.min(data.length, LoadedAmount);
+    if (LoadedAmount + 8 > data.length) {
+      return data.length;
+    } else {
+      return LoadedAmount + 8;
+    }
   }
   //Checks if the user has scrolled to the bottom and if so make it load more tabs
   useEffect(() => {
@@ -162,20 +165,19 @@ function Share() {
         document.documentElement.offsetHeight
       )
         return;
-      setLoadedAmount((prev) => Math.min(prev + 8, data.length));
+      setLoadedAmount((prevLoadedAmount) => LoadTabs(data));
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [data]);
   //fetches the data from the server
   useEffect(() => {
     fetchData();
   }, []);
   //Puts the data onto the screen
   useEffect(() => {
-    if (Datafetched && data.length > 0) {
-      console.log(LoadTabs(data), "Dataaa");
-      TransposeData(data, 0, LoadTabs(data));
+    if (Datafetched && LoadedAmount > 0) {
+      TransposeData(data, 0, LoadedAmount);
     }
   }, [Datafetched, LoadedAmount]);
 
