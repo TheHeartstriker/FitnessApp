@@ -16,7 +16,7 @@
   --Cyan-2: hsl(202, 100%, 35%);
   --Cyan-3: hsl(202, 100%, 20%);
 }
-
+/* The overall container for the share */
 .ShareContainer {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -26,7 +26,7 @@
   min-height: 90vh;
   height: auto;
 }
-
+/* Item container for displying user data */
 .Item {
   position: relative;
   text-align: center;

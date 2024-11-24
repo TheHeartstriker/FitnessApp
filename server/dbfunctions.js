@@ -197,8 +197,9 @@ async function updateToday(userId, data, dataname, date) {
     let queryParams;
 
     if (dataname === "share") {
-      query = `UPDATE dailyfitinfo SET ${dataname} = ? WHERE userid = ?`;
-      queryParams = [data, userId];
+      console.log("Should switch share");
+      query = `UPDATE dailyfitinfo SET ${dataname} = CASE WHEN ${dataname} = 1 THEN 0 ELSE 1 END WHERE userid = ?`;
+      queryParams = [userId];
     } else {
       query = `UPDATE dailyfitinfo SET ${dataname} = ? WHERE DateRecorded = ? AND userid = ?`;
       queryParams = [data, date, userId];
@@ -212,6 +213,22 @@ async function updateToday(userId, data, dataname, date) {
   }
 }
 
+async function seeIfShareTF(userId) {
+  try {
+    const [results] = await pool.query(
+      `SELECT share FROM dailyfitinfo WHERE userid = ?`,
+      [userId]
+    );
+    if (results.length > 0) {
+      return results[0].share === 1;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    throw error;
+  }
+}
+
 export {
   checkUsername,
   GetUserId,
@@ -219,4 +236,5 @@ export {
   updateToday,
   getFitData,
   checkToday,
+  seeIfShareTF,
 };

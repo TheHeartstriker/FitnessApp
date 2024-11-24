@@ -15,6 +15,8 @@ function Daily() {
   const workoutTimeRef = useRef(null);
   const restingHeartRateRef = useRef(null);
   const weightRef = useRef(null);
+  //Share state
+  const [Share, setShare] = useState(false);
   //Update workout time
   const updateWorkoutTime = (time) => {
     if (isNaN(time)) {
@@ -72,6 +74,15 @@ function Daily() {
   const updateZone = (zone) => {
     setZone(zone);
   };
+  //Helper if true set to false and vice versa
+  function ReShare(share) {
+    if (share === true) {
+      setShare(false);
+    } else {
+      setShare(true);
+    }
+  }
+
   //Sends data to the database to be saved
   async function saveData(DataName, Data) {
     const options = {
@@ -88,6 +99,27 @@ function Daily() {
         options
       );
       const data = await response.json();
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  //Checks if the user is sharing there data
+  async function getShareInfo() {
+    const options = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+    };
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_BASE_URL}/api/getShareInfo`,
+        options
+      );
+      const data = await response.json();
+      setShare(data);
+      console.log(data, "Data from share");
     } catch (error) {
       console.error(error);
     }
@@ -111,10 +143,19 @@ function Daily() {
       console.error(error);
     }
   }
+  //Get
+  useEffect(() => {
+    getShareInfo();
+  }, []);
 
   return (
     <div className="DailyPageContainer">
-      <button className="ShareButton" onClick={UpdateShare}>
+      <button
+        className={`ShareButton ${Share ? "True" : "False"}`}
+        onClick={() => {
+          UpdateShare(), ReShare(Share);
+        }}
+      >
         Share data with others?
       </button>
       <div className="InputContainer">

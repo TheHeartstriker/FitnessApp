@@ -12,6 +12,7 @@ import {
   updateToday,
   getFitData,
   checkToday,
+  seeIfShareTF,
 } from "./dbfunctions.js";
 //Import auth functions
 import { login, signup, authenticateJWT } from "./Auth.js";
@@ -155,6 +156,7 @@ app.put("/api/updateDataPage", authenticateJWT, async (req, res) => {
 });
 
 app.put("/api/updateShare", authenticateJWT, async (req, res) => {
+  console.log("Update share");
   try {
     const result = await updateToday(userIdGet, true, "share", dateGet);
     res.status(200).send(result);
@@ -178,6 +180,18 @@ app.get("/api/getSharedData", async (req, res) => {
     res.status(200).send(result);
   } catch (error) {
     res.status(500).send({ message: "Internal server error", error });
+  }
+});
+
+app.get("/api/getShareInfo", authenticateJWT, async (req, res) => {
+  try {
+    const result = await seeIfShareTF(userIdGet);
+    res.status(200).send(result);
+  } catch (error) {
+    console.log(error);
+    res
+      .status(500)
+      .send({ message: "Internal server error", error: error.message });
   }
 });
 

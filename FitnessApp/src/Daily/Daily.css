@@ -144,3 +144,20 @@ body {
   z-index: 1;
   background-color: var(--Blue-2);
 }
+
+.ShareButton.True {
+  color: white;
+  border: 2.5px green solid;
+  background: linear-gradient(
+    90deg,
+    darkgrey 0%,
+    lightgreen 50%,
+    lightgreen 100%
+  );
+}
+
+.ShareButton.False {
+  color: white;
+  border: 2.5px red solid;
+  background: linear-gradient(90deg, darkgrey 0%, red 50%, darkgrey 100%);
+}
