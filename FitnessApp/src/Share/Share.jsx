@@ -187,7 +187,7 @@ function Share() {
         <div className="Item" key={item.id}>
           <h1>{item.Name}</h1>
           <h3>Total Time tracked: {item.TotalTime}</h3>
-          <h3>Days track: {item.Days}</h3>
+          <h3>Days tracked: {item.Days}</h3>
           <h3>Avg Zone: {item.Avgzone}</h3>
           <h3>Heart Rate: {item.HeartRate}</h3>
           <h3>Total estimated calories burned: {item.Cal}</h3>
