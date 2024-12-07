@@ -159,6 +159,7 @@ function Daily() {
         Share data with others?
       </button>
       <div className="InputContainer">
+        <span className="Tooltip">?</span>
         <input
           ref={workoutTimeRef}
           className="WorkHeartTime"

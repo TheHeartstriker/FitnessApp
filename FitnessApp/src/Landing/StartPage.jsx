@@ -9,8 +9,8 @@ function StartPage() {
 
   const handleMoveDown = () => {
     window.scrollTo({
-      top: window.innerHeight, // Scroll down by one viewport height
-      behavior: "smooth", // Smooth scrolling
+      top: window.innerHeight,
+      behavior: "smooth",
     });
   };
 
