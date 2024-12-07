@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext, useRef, useMemo } from "react";
+import { BarChart } from "./BarChart.jsx";
 import { Context } from "../Provider";
 
 function ViewPage() {
@@ -16,6 +17,7 @@ function ViewPage() {
   //Percentage displated in the pie chart like graphic
   const [Percentagedata, setPercentagedata] = useState(0);
   //Used in the main graph displays the time spent in each zone in a spefic time frame
+  //Ps dont send more than 20 objects to the graph
   const [Zone, setZone] = useState({
     Zone1: 0,
     Zone2: 0,
@@ -23,8 +25,6 @@ function ViewPage() {
     Zone4: 0,
     Zone5: 0,
   });
-  //The info that is pushed to the html should not go beyond 20 objects
-  const [GraphPoints, setGraphPoints] = useState([]);
   //Refrence to the pie chart
   const pieRef = useRef(null);
   const [IsDatafetched, setIsDatafetched] = useState(false);
@@ -195,52 +195,6 @@ function ViewPage() {
     return getDataByRange(Time);
   }, [data, Time]);
 
-  //Fill the graph points data with the zone data
-  function ImposeData(zonedata) {
-    let diviedFactor = 0;
-    let light = 60; // Start with 60% as a number
-    if (Time === "week") {
-      diviedFactor = 7;
-    } else if (Time === "month") {
-      diviedFactor = 30;
-    } else if (Time === "year") {
-      diviedFactor = 365;
-    }
-    const zoneKeys = Object.keys(zonedata);
-    const newGraphPoints = zoneKeys.map((key) => {
-      const hslaValue = `hsla(230, 100%, ${light}%, 1)`;
-      light -= 10;
-      return {
-        "--clr": hslaValue,
-        "--Shadow--clr": "hsla(230, 100%, 50%, 0.5)",
-        "--val": zonedata[key] / diviedFactor,
-        labelName: key,
-        DisplayVal: zonedata[key],
-      };
-    });
-    setGraphPoints(newGraphPoints);
-  }
-  //Iterates over the graph points and returns the new graph or bar
-  function NewGraph({ graphPoints }) {
-    return (
-      <>
-        {graphPoints.map((point, index) => (
-          <div
-            className="item"
-            key={index}
-            style={{
-              "--clr": point["--clr"],
-              "--val": point["--val"],
-              "--Shadow--clr": point["--Shadow--clr"],
-            }}
-          >
-            <div className="label">{point.labelName}</div>
-            <div className="value">{point.DisplayVal}</div>
-          </div>
-        ))}
-      </>
-    );
-  }
   //Fetches the data when the page is loaded
   useEffect(() => {
     fetchData();
@@ -261,18 +215,13 @@ function ViewPage() {
       getPercentage();
     }
   }, [IsDatafetched, Time]);
-  //When the data is fetched and the zone is updated we can impose the data to the graph
-  useEffect(() => {
-    if (IsDatafetched) {
-      ImposeData(Zone);
-    }
-  }, [IsDatafetched, Zone]);
 
   return (
     <div className="ViewPageContainer">
       <div className="GraphContainer">
+        {/* The actual chart not its container */}
         <div className="BarChart">
-          <NewGraph graphPoints={GraphPoints} />
+          <BarChart graphData={Zone} Time={Time} />
         </div>
         <div className="ButtonContainer">
           <button
@@ -294,6 +243,10 @@ function ViewPage() {
             Year
           </button>
         </div>
+      </div>
+      <div className="GraphSwitchContainer">
+        <button className="BarChart"></button>
+        <button className="DateChart"></button>
       </div>
 
       <div className="PercentageContainer">

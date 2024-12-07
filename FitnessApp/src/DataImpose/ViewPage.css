@@ -47,11 +47,8 @@
   justify-content: center;
   left: 15%;
   bottom: 15%;
-
   width: 25vw;
   height: 95vh;
-  border: 5px solid var(--grey-1);
-  border-radius: 5px;
 }
 /* Holds the text based data at the bottom of the page */
 .DataContainer {
