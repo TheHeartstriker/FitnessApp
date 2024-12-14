@@ -52,7 +52,6 @@ function BarChart({ graphData, Time }) {
 
   useEffect(() => {
     ImposeData(graphData);
-    console.log("graphData", graphData);
   }, [graphData, Time]);
 
   return <NewGraph graphPoints={graphPoints} />;

@@ -16,6 +16,9 @@ function ViewPage() {
   const [Heart, setHeart] = useState(0);
   //Percentage displated in the pie chart like graphic
   const [Percentagedata, setPercentagedata] = useState(0);
+  //graph plot to be used
+  const [BarChartOnOff, setBarChartOnOff] = useState(true);
+  const [DayChartOnOff, setDayChartOnOff] = useState(false);
   //Used in the main graph displays the time spent in each zone in a spefic time frame
   //Ps dont send more than 20 objects to the graph
   const [Zone, setZone] = useState({
@@ -219,10 +222,21 @@ function ViewPage() {
   return (
     <div className="ViewPageContainer">
       <div className="GraphContainer">
-        {/* The actual chart not its container */}
-        <div className="BarChart">
-          <BarChart graphData={Zone} Time={Time} />
+        {/* The actual bar chart inside the GraphContainer */}
+        {BarChartOnOff && (
+          <div className="BarChart">
+            <BarChart graphData={Zone} Time={Time} />
+          </div>
+        )}
+        {DayChartOnOff && <div className="DayChart"></div>}
+
+        {/* Container for the buttons that switch graphs*/}
+        <div className="GraphSwitchContainer">
+          <button>Barchart</button>
+          <button>Daychart</button>
         </div>
+
+        {/* Container for week, month, and year buttons*/}
         <div className="ButtonContainer">
           <button
             className={`${Time === "week" ? "On" : ""}`}
@@ -243,10 +257,6 @@ function ViewPage() {
             Year
           </button>
         </div>
-      </div>
-      <div className="GraphSwitchContainer">
-        <button className="BarChart"></button>
-        <button className="DateChart"></button>
       </div>
 
       <div className="PercentageContainer">
