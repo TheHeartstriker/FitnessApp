@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext, useRef, useMemo } from "react";
-import { BarChart } from "./BarChart.jsx";
+import BarChart from "./BarChart.jsx";
+import DayChart from "./DayChart.jsx";
 import { Context } from "../Provider";
 
 function ViewPage() {
@@ -228,12 +229,24 @@ function ViewPage() {
             <BarChart graphData={Zone} Time={Time} />
           </div>
         )}
-        {DayChartOnOff && <div className="DayChart"></div>}
+        {DayChartOnOff && <DayChart />}
 
         {/* Container for the buttons that switch graphs*/}
         <div className="GraphSwitchContainer">
-          <button>Barchart</button>
-          <button>Daychart</button>
+          <button
+            onClick={() => {
+              setBarChartOnOff(true), setDayChartOnOff(false);
+            }}
+          >
+            Barchart
+          </button>
+          <button
+            onClick={() => {
+              setBarChartOnOff(false), setDayChartOnOff(true);
+            }}
+          >
+            Daychart
+          </button>
         </div>
 
         {/* Container for week, month, and year buttons*/}

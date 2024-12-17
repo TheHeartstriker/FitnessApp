@@ -57,4 +57,4 @@ function BarChart({ graphData, Time }) {
   return <NewGraph graphPoints={graphPoints} />;
 }
 
-export { BarChart };
+export default BarChart;
