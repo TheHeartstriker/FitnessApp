@@ -5,7 +5,7 @@ import { Context } from "../Provider";
 
 function ViewPage() {
   const { isSignedIn, setIsSignedIn } = useContext(Context);
-  ///Used to hold the data from the API
+  ///Used to hold the data from the API all the data realted to the user not sorted by time
   const [data, setData] = useState([]);
   //Used to hold the time frame in which the data is being displayed and grabbed
   const [Time, setTime] = useState("week");
@@ -229,7 +229,7 @@ function ViewPage() {
             <BarChart graphData={Zone} Time={Time} />
           </div>
         )}
-        {DayChartOnOff && <DayChart />}
+        {DayChartOnOff && <DayChart dataprop={data} TimeProp={Time} />}
 
         {/* Container for the buttons that switch graphs*/}
         <div className="GraphSwitchContainer">
