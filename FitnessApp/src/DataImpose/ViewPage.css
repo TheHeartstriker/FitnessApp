@@ -53,11 +53,7 @@
   border: 5px solid hsl(0, 0%, 5%);
   border-radius: 10px;
   margin: 15px;
-  background: radial-gradient(
-    circle,
-    rgba(19, 4, 235, 0.7) 0%,
-    rgba(192, 192, 192, 0.3) 70%
-  );
+  background-color: hsl(0, 0%, 2.5%);
   color: white;
   font-size: 1.5rem;
   position: relative;
@@ -137,11 +133,7 @@
   border: 5px solid hsl(0, 0%, 5%);
   border-radius: 10px;
   margin: 15px;
-  background: radial-gradient(
-    circle,
-    rgba(19, 4, 235, 0.7) 0%,
-    rgba(192, 192, 192, 0.3) 70%
-  );
+  background-color: hsl(0, 0%, 2.5%);
   color: white;
   font-size: 1.5rem;
   position: relative;
