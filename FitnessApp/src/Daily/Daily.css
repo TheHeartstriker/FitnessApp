@@ -161,3 +161,37 @@ body {
   border: 2.5px red solid;
   background: linear-gradient(90deg, darkgrey 0%, red 50%, darkgrey 100%);
 }
+/* Tool tip */
+.InputContainer span {
+  position: absolute;
+  font-size: large;
+  background-color: silver;
+  width: 5vh;
+  height: 5vh;
+  border-radius: 50%;
+  bottom: 100%;
+  left: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.InputContainer span::after {
+  content: "Data is saved per day so submiting 10min of work on zone1 and then 20min of work on zone1 will only save 20min of work";
+  position: absolute;
+  bottom: 80%;
+  background-color: silver;
+  color: black;
+  padding: 5px;
+  border-radius: 5px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+  right: 3%;
+  transform: translateX(-3%);
+}
+
+.InputContainer span:hover::after {
+  opacity: 1;
+}

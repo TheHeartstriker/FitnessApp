@@ -1,9 +1,11 @@
 import { useState, useEffect, useContext, useRef, useMemo } from "react";
+import BarChart from "./BarChart.jsx";
+import DayChart from "./DayChart.jsx";
 import { Context } from "../Provider";
 
 function ViewPage() {
   const { isSignedIn, setIsSignedIn } = useContext(Context);
-  ///Used to hold the data from the API
+  ///Used to hold the data from the API all the data realted to the user not sorted by time
   const [data, setData] = useState([]);
   //Used to hold the time frame in which the data is being displayed and grabbed
   const [Time, setTime] = useState("week");
@@ -15,7 +17,11 @@ function ViewPage() {
   const [Heart, setHeart] = useState(0);
   //Percentage displated in the pie chart like graphic
   const [Percentagedata, setPercentagedata] = useState(0);
+  //graph plot to be used
+  const [BarChartOnOff, setBarChartOnOff] = useState(true);
+  const [DayChartOnOff, setDayChartOnOff] = useState(false);
   //Used in the main graph displays the time spent in each zone in a spefic time frame
+  //Ps dont send more than 20 objects to the graph
   const [Zone, setZone] = useState({
     Zone1: 0,
     Zone2: 0,
@@ -23,8 +29,6 @@ function ViewPage() {
     Zone4: 0,
     Zone5: 0,
   });
-  //The info that is pushed to the html should not go beyond 20 objects
-  const [GraphPoints, setGraphPoints] = useState([]);
   //Refrence to the pie chart
   const pieRef = useRef(null);
   const [IsDatafetched, setIsDatafetched] = useState(false);
@@ -195,52 +199,6 @@ function ViewPage() {
     return getDataByRange(Time);
   }, [data, Time]);
 
-  //Fill the graph points data with the zone data
-  function ImposeData(zonedata) {
-    let diviedFactor = 0;
-    let light = 60; // Start with 60% as a number
-    if (Time === "week") {
-      diviedFactor = 7;
-    } else if (Time === "month") {
-      diviedFactor = 30;
-    } else if (Time === "year") {
-      diviedFactor = 365;
-    }
-    const zoneKeys = Object.keys(zonedata);
-    const newGraphPoints = zoneKeys.map((key) => {
-      const hslaValue = `hsla(230, 100%, ${light}%, 1)`;
-      light -= 10;
-      return {
-        "--clr": hslaValue,
-        "--Shadow--clr": "hsla(230, 100%, 50%, 0.5)",
-        "--val": zonedata[key] / diviedFactor,
-        labelName: key,
-        DisplayVal: zonedata[key],
-      };
-    });
-    setGraphPoints(newGraphPoints);
-  }
-  //Iterates over the graph points and returns the new graph or bar
-  function NewGraph({ graphPoints }) {
-    return (
-      <>
-        {graphPoints.map((point, index) => (
-          <div
-            className="item"
-            key={index}
-            style={{
-              "--clr": point["--clr"],
-              "--val": point["--val"],
-              "--Shadow--clr": point["--Shadow--clr"],
-            }}
-          >
-            <div className="label">{point.labelName}</div>
-            <div className="value">{point.DisplayVal}</div>
-          </div>
-        ))}
-      </>
-    );
-  }
   //Fetches the data when the page is loaded
   useEffect(() => {
     fetchData();
@@ -261,19 +219,37 @@ function ViewPage() {
       getPercentage();
     }
   }, [IsDatafetched, Time]);
-  //When the data is fetched and the zone is updated we can impose the data to the graph
-  useEffect(() => {
-    if (IsDatafetched) {
-      ImposeData(Zone);
-    }
-  }, [IsDatafetched, Zone]);
 
   return (
     <div className="ViewPageContainer">
       <div className="GraphContainer">
-        <div className="BarChart">
-          <NewGraph graphPoints={GraphPoints} />
+        {/* The actual bar chart inside the GraphContainer */}
+        {BarChartOnOff && (
+          <div className="BarChart">
+            <BarChart graphData={Zone} Time={Time} />
+          </div>
+        )}
+        {DayChartOnOff && <DayChart dataprop={data} TimeProp={Time} />}
+
+        {/* Container for the buttons that switch graphs*/}
+        <div className="GraphSwitchContainer">
+          <button
+            onClick={() => {
+              setBarChartOnOff(true), setDayChartOnOff(false);
+            }}
+          >
+            Barchart
+          </button>
+          <button
+            onClick={() => {
+              setBarChartOnOff(false), setDayChartOnOff(true);
+            }}
+          >
+            Daychart
+          </button>
         </div>
+
+        {/* Container for week, month, and year buttons*/}
         <div className="ButtonContainer">
           <button
             className={`${Time === "week" ? "On" : ""}`}
