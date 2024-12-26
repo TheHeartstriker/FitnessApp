@@ -59,9 +59,9 @@
 .Switch {
   font-family: "Teko", sans-serif;
   font-size: 1em;
-  background-color: var(--Blue-1);
+  background-color: var(--Blue-2);
   margin: 10px;
-  border: 5px solid black;
+  border: 5px solid silver;
   border-radius: 5px;
   height: 60px;
   width: 85px;

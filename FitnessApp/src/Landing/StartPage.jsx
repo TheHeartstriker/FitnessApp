@@ -29,8 +29,12 @@ function StartPage() {
       <button className="MoveDown" onClick={handleMoveDown}></button>
 
       <div className="NavContainer">
+        {/* Non conditional links */}
         <Link to="/share">
           <h3 className="NavBtn">Share</h3>
+        </Link>
+        <Link to="/login">
+          <h3 className="NavBtn">Login</h3>
         </Link>
 
         {/* If they are not logged in they dont need to see these values */}
@@ -44,10 +48,6 @@ function StartPage() {
             </Link>
           </>
         )}
-
-        <Link to="/login">
-          <h3 className="NavBtn">Login</h3>
-        </Link>
       </div>
     </div>
   );

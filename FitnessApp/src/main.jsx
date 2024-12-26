@@ -19,8 +19,9 @@ import "./Share/Share.css";
 //
 //The daily page is the input page for the user to input their daily data into the server
 //Data impose is the main view page for the user to see their data on graphs and the like
-//Landing is the first page the user sees when they open the site before they scroll down
+//Landing is the first page the user sees when they open the site before they scroll down also containing the navbar
 //Share is the page where the user can share their data with others
+//Login is the page where the user logs in and or registers
 //
 
 createRoot(document.getElementById("root")).render(
