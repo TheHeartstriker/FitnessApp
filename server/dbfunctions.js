@@ -129,6 +129,11 @@ async function getFitData(userId, Share) {
       const [results] = await pool.query(
         `SELECT ${columns} FROM dailyfitinfo WHERE share = 1`
       );
+
+      if (results.length === 0) {
+        return "No data to show";
+      }
+
       //Iterates over the results and gets the username for each user used to define the user
       //Without sending the user id to the front end
       const modifiedColumns = await Promise.all(
