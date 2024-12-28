@@ -31,6 +31,9 @@ function Share() {
 
   //Data is fetched by daily for every user so we need to merge the data into one element for each user
   async function SortByUserName(data) {
+    if (data.length === 0) {
+      return [];
+    }
     //Store the merged results
     const mergedData = {};
     // Loop through the data
@@ -76,6 +79,9 @@ function Share() {
   function TransposeData(data, start, end) {
     setItem([]);
     for (let i = start; i < end; i++) {
+      if (!data[i]) {
+        continue;
+      }
       let result = GetTotalTime([data[i]]);
       AddItem(
         data[i].UserName,
@@ -88,26 +94,35 @@ function Share() {
     }
   }
 
-  //Gets the average callories, average time for each zone and total time
+  // Gets the average calories, average time for each zone and total time
   function GetTotalTime(GetAverage) {
+    if (GetAverage.length === 0) {
+      return {
+        TotalTime: 0,
+        Avgzone: 0,
+        Cal: 0,
+      };
+    }
     let totalTime = 0;
     // Array to store the total time for each zone
     let zoneCounts = [0, 0, 0, 0, 0];
 
     GetAverage.forEach((element) => {
-      // Sum all zone times
-      totalTime += element.Zone1Time;
-      totalTime += element.Zone2Time;
-      totalTime += element.Zone3Time;
-      totalTime += element.Zone4Time;
-      totalTime += element.Zone5Time;
+      if (element) {
+        // Sum all zone times
+        totalTime += element.Zone1Time;
+        totalTime += element.Zone2Time;
+        totalTime += element.Zone3Time;
+        totalTime += element.Zone4Time;
+        totalTime += element.Zone5Time;
 
-      // Add to zone counts
-      zoneCounts[0] += element.Zone1Time;
-      zoneCounts[1] += element.Zone2Time;
-      zoneCounts[2] += element.Zone3Time;
-      zoneCounts[3] += element.Zone4Time;
-      zoneCounts[4] += element.Zone5Time;
+        // Add to zone counts
+        zoneCounts[0] += element.Zone1Time;
+        zoneCounts[1] += element.Zone2Time;
+        zoneCounts[2] += element.Zone3Time;
+        zoneCounts[3] += element.Zone4Time;
+        zoneCounts[4] += element.Zone5Time;
+      }
     });
 
     // Calculate average zone
@@ -176,7 +191,8 @@ function Share() {
   }, []);
   //Puts the data onto the screen
   useEffect(() => {
-    if (Datafetched && LoadedAmount > 0) {
+    if (Datafetched && LoadedAmount > 0 && data.length > 0) {
+      console.log(data);
       TransposeData(data, 0, LoadedAmount);
     }
   }, [Datafetched, LoadedAmount]);
