@@ -29,7 +29,7 @@ body {
   justify-content: space-between;
   align-items: center;
   border: none;
-  background-image: url("@/Images/StartPage.svg");
+  background-image: url("../Images/StartPage.svg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -38,6 +38,50 @@ body {
   height: 110vh;
   width: 100vw;
   position: relative;
+}
+
+.FrontSvg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+#Vector {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 0;
+  animation: dash 5s linear infinite, glow 1s ease-in-out infinite alternate;
+}
+
+@keyframes dash {
+  from {
+    stroke-dashoffset: 1000;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes glow {
+  from {
+    stroke: #00244b;
+    stroke-width: 2;
+    filter: drop-shadow(0 0 15px #00244b);
+  }
+  to {
+    stroke: #00f;
+    stroke-width: 4;
+    filter: drop-shadow(0 0 50px #00f);
+  }
+}
+
+@keyframes dash {
+  from {
+    stroke-dashoffset: 565.48;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
 }
 /* Helps center the textscreen text */
 .StartPageContainer h1 {
@@ -110,7 +154,7 @@ body {
   width: 70px;
   height: 70px;
   box-shadow: 0 0 0 10px hsla(202, 100%, 50%, 0.5);
-  background-image: url("@/Images/Downarrow.svg");
+  background-image: url("../Images/Downarrow.svg");
   background-size: cover;
   cursor: pointer;
 

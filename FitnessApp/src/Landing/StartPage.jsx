@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Context } from "../Provider";
+import FrontSvg from "../Images/Front";
 
 function StartPage() {
   const { isSignedIn, setIsSignedIn } = useContext(Context);
@@ -27,6 +28,7 @@ function StartPage() {
   return (
     <div className="StartPageContainer">
       <button className="MoveDown" onClick={handleMoveDown}></button>
+      <FrontSvg />
 
       <div className="NavContainer">
         {/* Non conditional links */}
