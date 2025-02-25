@@ -5,53 +5,26 @@ import FrontSvg from "../Images/Front";
 import Test from "../Images/Test.svg";
 
 function StartPage() {
-  //Checl for firefox
+  //Check for firefox
   const [Browser, setBrowser] = useState(false);
+  //Holds vector names
   const [VectorArray, setVectorArray] = useState([]);
-  const Amount = 15;
-  const { isSignedIn, setIsSignedIn } = useContext(Context);
+  //Amount of vectors to be filled
+  const Amount = 105; // 109 is max
   const SvgRef = useRef(null);
   const navigate = useNavigate();
-  const location = useLocation();
 
-  const handleMoveDown = () => {
-    window.scrollTo({
-      top: window.innerHeight,
-      behavior: "smooth",
-    });
+  const handleEnterClick = () => {
+    navigate("/Login"); // Replace "/desired-route" with the actual route you want to navigate to
   };
-
+  //Add the glow class to the vector
   function AddClass(id) {
     const vectorElement = SvgRef.current.querySelector(id);
     if (vectorElement) {
-      //Add the glow effect
       vectorElement.classList.add("VectorAni");
-      const fillColor = window.getComputedStyle(vectorElement).fill;
-      const fillColorArray = fillColor
-        .replace(/[^\d,]/g, "")
-        .split(",")
-        .map(Number);
-      let NewColor1 = [
-        255 - fillColorArray[0],
-        255 - fillColorArray[1],
-        255 - fillColorArray[2],
-      ];
-      let NewColor2 = [
-        255 - fillColorArray[0] * 0.9,
-        255 - fillColorArray[1] * 0.9,
-        255 - fillColorArray[2],
-      ];
-      vectorElement.style.setProperty(
-        "--VectorColor1",
-        `rgb(${NewColor1[0]}, ${NewColor1[1]}, ${NewColor1[2]})`
-      );
-      vectorElement.style.setProperty(
-        "--VectorColor2",
-        `rgb(${NewColor2[0]}, ${NewColor2[1]}, ${NewColor2[2]})`
-      );
     }
   }
-
+  //Fill the array with the vector names
   function Fillarray() {
     let TempArr = [];
     TempArr.push("#Vector");
@@ -59,9 +32,8 @@ function StartPage() {
       TempArr.push(`#Vector_${i}`);
     }
     setVectorArray(TempArr);
-    console.log(VectorArray);
   }
-
+  //Randomly select vectors to add the glow effect
   function RandomVec() {
     if (VectorArray.length < 50) return;
     for (let i = 0; i < Amount; i++) {
@@ -69,7 +41,7 @@ function StartPage() {
       AddClass(VectorArray[Random]);
     }
   }
-
+  //Check if the user is using firefox which has rastering issues
   useEffect(() => {
     const UserBrowser = navigator.userAgent;
     if (UserBrowser.includes("Firefox")) {
@@ -79,26 +51,24 @@ function StartPage() {
   }, [Browser]);
 
   useEffect(() => {
-    if (
-      isSignedIn === false &&
-      location.pathname !== "/login" &&
-      location.pathname !== "/share"
-    ) {
-      navigate("/login");
-    }
-  }, [isSignedIn, navigate, location]);
-
-  useEffect(() => {
     if (SvgRef.current) {
-      Fillarray();
-      RandomVec();
+      console.log(VectorArray.length);
+      if (VectorArray.length === 0) {
+        Fillarray();
+      }
+      if (VectorArray.length == 109) {
+        RandomVec();
+      }
     }
-  }, []);
+  }, [VectorArray]);
 
   return (
     <div className="StartPageContainer">
-      <button className="MoveDown" onClick={handleMoveDown}></button>
-      {/* Check for firefox has major rastoring error for a direct svg like this one */}
+      <button className="EnterBtn" onClick={handleEnterClick}>
+        Enter?
+        <div className="CubeBack"></div>
+      </button>
+      {/* Check for firefox rastor issues */}
       {Browser && (
         <div className="FrontSvg">
           <img src={Test} alt="Test" />
@@ -107,8 +77,7 @@ function StartPage() {
       {/* Normal svg background */}
       {!Browser && <FrontSvg ref={SvgRef} />}
 
-      <div className="NavContainer">
-        {/* Non conditional links */}
+      {/* <div className="NavContainer">
         <Link to="/share">
           <h3 className="NavBtn">Share</h3>
         </Link>
@@ -116,7 +85,6 @@ function StartPage() {
           <h3 className="NavBtn">Login</h3>
         </Link>
 
-        {/* If they are not logged in they dont need to see these values */}
         {isSignedIn && (
           <>
             <Link to="/">
@@ -127,7 +95,7 @@ function StartPage() {
             </Link>
           </>
         )}
-      </div>
+      </div> */}
     </div>
   );
 }

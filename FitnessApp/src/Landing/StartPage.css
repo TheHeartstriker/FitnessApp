@@ -24,20 +24,55 @@ body {
 
 /* Overall container for the background */
 .StartPageContainer {
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   border: none;
-  background-image: url("../Images/StartPage.svg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   margin: 0;
   padding: 0;
-  height: 110vh;
+  height: 100vh;
   width: 100vw;
   position: relative;
+}
+
+.EnterBtn {
+  font-family: "Teko", sans-serif;
+  font-size: 2rem;
+  position: relative;
+  width: 6vw;
+  height: 6vw;
+  background-color: #1b1b1b;
+  border-radius: 10px;
+  border: 3px solid #0082cd;
+  color: #00c4f8;
+}
+
+.CubeBack {
+  position: absolute;
+  width: 5.3vw;
+  height: 5.3vw;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  background-color: #000000;
+  border: 3px solid #00d4ff;
+  border-radius: 10px;
+  z-index: -1;
+  animation: rotate 7s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(405deg);
+  }
 }
 
 .FrontSvg {
@@ -46,6 +81,7 @@ body {
   left: 0;
   height: 100%;
   width: 100%;
+  z-index: -999;
 }
 /* Might help rastor errors */
 .FrontSvg svg {
@@ -59,8 +95,8 @@ body {
     glow 3s ease-in-out infinite alternate;
   stroke-width: 3px;
   /* Defaults */
-  --VectorColor1: #00244b;
-  --VectorColor2: #00f;
+  --VectorColor1: #00d4ff;
+  --VectorColor2: #a6fffb;
 }
 
 @keyframes dash {
@@ -81,42 +117,6 @@ body {
     stroke: var(--VectorColor2);
     filter: drop-shadow(0 0 50px var(--VectorColor2));
   }
-}
-
-/* Helps center the textscreen text */
-.StartPageContainer h1 {
-  position: absolute;
-  top: 0;
-  left: 0;
-  margin: 0;
-  padding: 10px;
-}
-/* The bottom bar that contains the buttons for naviagation */
-.NavContainer {
-  display: flex;
-  position: relative;
-  justify-content: flex-end;
-  align-items: center;
-  top: 0;
-  width: 100%;
-  height: 10vh;
-  background-color: var(--grey-2);
-  z-index: 1;
-}
-/* The button not including the border */
-.NavBtn {
-  position: relative;
-  margin: 20px;
-  padding: 10px;
-  border-radius: 5px;
-  background: linear-gradient(to bottom, var(--grey-1), var(--Cyan-1));
-  color: white;
-  font-size: 1.2rem;
-  font-weight: 600;
-  cursor: pointer;
-  width: 75px;
-  text-align: center;
-  text-decoration: none;
 }
 
 /* The border outside the button */
@@ -143,41 +143,4 @@ body {
 .NavBtn:hover::before {
   filter: blur(3rem);
   opacity: 1;
-}
-/* Move down button located at the main home screen */
-.MoveDown {
-  font-family: "Teko", sans-serif;
-  position: relative;
-  top: 2vh;
-  border: 5px solid var(--Cyan-3);
-  border-radius: 50%;
-  width: 70px;
-  height: 70px;
-  box-shadow: 0 0 0 10px hsla(202, 100%, 50%, 0.5);
-  background-image: url("../Images/Downarrow.svg");
-  background-size: cover;
-  cursor: pointer;
-
-  animation: Heartbeat 3s infinite;
-  background-color: rgb(0, 60, 255);
-  margin-top: 45vh;
-}
-
-@keyframes Heartbeat {
-  0%,
-  100% {
-    box-shadow: 0 0 0 20px hsla(202, 100%, 50%, 0.5);
-  }
-  20% {
-    box-shadow: 0 0 0 30px hsla(202, 100%, 50%, 0.5);
-  }
-  40% {
-    box-shadow: 0 0 0 20px hsla(202, 100%, 50%, 0.5);
-  }
-  60% {
-    box-shadow: 0 0 0 30px hsla(202, 100%, 50%, 0.5);
-  }
-  80% {
-    box-shadow: 0 0 0 20px hsla(202, 100%, 50%, 0.5);
-  }
 }

@@ -28,9 +28,9 @@ createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Provider>
       <BrowserRouter>
-        <StartPage />
         <Routes>
-          <Route path="/" element={<ViewPage />} />
+          <Route path="/" element={<StartPage />} />
+          <Route path="/view" element={<ViewPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/daily" element={<Daily />} />
           <Route path="/share" element={<Share />} />
