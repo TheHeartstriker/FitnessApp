@@ -1,8 +1,8 @@
-import React from "react";
+import React, { forwardRef } from "react";
 
-function FrontSvg() {
+const FrontSvg = forwardRef((props, ref) => {
   return (
-    <div className="FrontSvg">
+    <div className="FrontSvg" ref={ref}>
       <svg
         width="100%"
         height="100%"
@@ -10,6 +10,7 @@ function FrontSvg() {
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         preserveAspectRatio="none"
+        shapeRendering={"crispEdges"}
       >
         <g id="Frame 1" clipPath="url(#clip0_3_2)">
           <rect width="1980" height="1100" fill="white" />
@@ -815,6 +816,5 @@ function FrontSvg() {
       </svg>
     </div>
   );
-}
-
+});
 export default FrontSvg;

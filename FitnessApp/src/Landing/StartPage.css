@@ -47,10 +47,20 @@ body {
   height: 100%;
   width: 100%;
 }
-#Vector {
+/* Might help rastor errors */
+.FrontSvg svg {
+  shape-rendering: crispEdges;
+}
+
+.VectorAni {
   stroke-dasharray: 1000;
   stroke-dashoffset: 0;
-  animation: dash 5s linear infinite, glow 1s ease-in-out infinite alternate;
+  animation: dash 5s linear infinite alternate,
+    glow 3s ease-in-out infinite alternate;
+  stroke-width: 3px;
+  /* Defaults */
+  --VectorColor1: #00244b;
+  --VectorColor2: #00f;
 }
 
 @keyframes dash {
@@ -64,25 +74,15 @@ body {
 
 @keyframes glow {
   from {
-    stroke: #00244b;
-    stroke-width: 2;
-    filter: drop-shadow(0 0 15px #00244b);
+    stroke: var(--VectorColor1);
+    filter: drop-shadow(0 0 15px var(--VectorColor1));
   }
   to {
-    stroke: #00f;
-    stroke-width: 4;
-    filter: drop-shadow(0 0 50px #00f);
+    stroke: var(--VectorColor2);
+    filter: drop-shadow(0 0 50px var(--VectorColor2));
   }
 }
 
-@keyframes dash {
-  from {
-    stroke-dashoffset: 565.48;
-  }
-  to {
-    stroke-dashoffset: 0;
-  }
-}
 /* Helps center the textscreen text */
 .StartPageContainer h1 {
   position: absolute;
