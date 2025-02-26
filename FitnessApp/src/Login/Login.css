@@ -22,8 +22,8 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background-color: var(--grey-3);
-  height: 90vh;
+  background-color: #0a0a0a;
+  height: 100vh;
   width: 100vw;
 }
 
@@ -34,50 +34,69 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 50vh;
-  width: 50vw;
-  background: linear-gradient(to bottom, var(--Blue-1), silver);
+  height: 60vh;
+  width: 60vw;
+  background-color: #1b1b1b;
   border-radius: 100px;
+}
+
+.Gradient {
+  position: absolute;
+  border-radius: 100px;
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+  background: linear-gradient(to bottom right, #000e29, #005ee7 50%, #00d4ff);
 }
 
 .LogSignPage input {
   font-family: "Teko", sans-serif;
-  font-size: 1em;
+  font-size: 1rem;
+}
+
+.input-group {
+  z-index: 1;
 }
 
 /* The input group is the text boxes the are used to send the username and password */
 .input-group input {
   width: 500px;
-  height: 45px;
-  border: 10px solid silver;
+  height: 60px;
+  border: none;
   border-radius: 5px;
-  background-color: rgb(150, 150, 150);
+  background-color: #00c4f8;
   margin: 10px;
-  box-shadow: 0 8px 16px var(--Blue-3);
+  color: white;
+}
+
+.input-group input::placeholder {
+  color: black;
 }
 /* The switch button */
 .Switch {
   font-family: "Teko", sans-serif;
   font-size: 1em;
-  background-color: var(--Blue-2);
+  background-color: black;
   margin: 10px;
-  border: 5px solid silver;
+  border: none;
   border-radius: 5px;
-  height: 60px;
-  width: 85px;
-  color: white;
+  height: 70px;
+  width: 95px;
+  color: #00d4ff;
+  z-index: 1;
 }
 /* The button that either logs the user in or signs them up */
 .loginOrSign {
   font-family: "Teko", sans-serif;
   font-size: 1em;
-  color: white;
+  color: #00d4ff;
   width: 200px;
   height: 75px;
-  background: linear-gradient(to right, var(--Blue-1), orange);
+  background: black;
   border-radius: 50px;
   border: none;
   margin: 10px;
+  z-index: 1;
 }
 /* Animations to notifiy the user if something was successful */
 .AnimatePulseRed {

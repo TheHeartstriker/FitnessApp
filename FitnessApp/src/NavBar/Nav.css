@@ -1,0 +1,65 @@
+.NavBarContainer {
+  display: flex;
+  flex-direction: column;
+
+  width: 180px;
+  background-color: #1b1b1b;
+  color: white;
+  position: fixed; /* Add this line */
+  top: 0; /* Add this line */
+  left: 0; /* Add this line */
+  height: 100%; /* Make it full height */
+  transition: width 0.6s ease-in-out, height 0.6s ease-in-out;
+}
+.NavBarContainer.collapsed {
+  width: 75px;
+}
+/* Hamburger menu */
+.SideBar {
+  height: 185px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 35px;
+}
+/* Holds the li elemements */
+.NavBar {
+  padding: 0;
+  transition: max-height 0.3s ease-out;
+}
+
+.NavBar.collapsed li span {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+}
+
+.NavBar li {
+  padding: 10px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row-reverse;
+}
+
+.NavBar li:hover {
+  background-color: black;
+}
+
+.NavBar li span {
+  margin-left: 10px;
+  font-size: 2rem;
+  transition: max-height 0.3s ease-out;
+}
+
+.icons {
+  width: 50px;
+  height: 50px;
+  color: #00c4f8;
+  padding: 10px;
+  border: 3px solid #008ad3;
+  border-radius: 10px;
+  background-color: #0a0a0a;
+}

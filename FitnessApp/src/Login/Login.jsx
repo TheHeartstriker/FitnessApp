@@ -1,6 +1,7 @@
 import { useState, useRef, useContext, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { Context } from "../Provider";
+import { useNavigate } from "react-router-dom";
 import BackgroundAnimation from "../Background.jsx";
 
 function LoginPage() {
@@ -16,6 +17,7 @@ function LoginPage() {
   const [CanClick, setCanClick] = useState(true);
   //Refrence to the border
   const borderRef = useRef(null);
+  const navigate = useNavigate();
   //Adds a red border to the input fields to indicate failure
   function AnimateBorderRed() {
     const border = borderRef.current;
@@ -213,6 +215,7 @@ function LoginPage() {
   useEffect(() => {
     if (isSignedIn) {
       CreateDataPage();
+      navigate("/view");
     }
   }, [isSignedIn]);
 
@@ -223,6 +226,7 @@ function LoginPage() {
         <BackgroundAnimation />
         {/* The inside container that holds the text boxes */}
         <div className="LogSignPage">
+          <div className="Gradient"></div>
           <div className="input-group">
             <input
               ref={borderRef}

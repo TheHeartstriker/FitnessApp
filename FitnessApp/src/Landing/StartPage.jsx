@@ -1,6 +1,5 @@
 import { useState, useEffect, useContext, useRef } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { Context } from "../Provider";
 import FrontSvg from "../Images/Front";
 import Test from "../Images/Test.svg";
 
@@ -76,26 +75,6 @@ function StartPage() {
       )}
       {/* Normal svg background */}
       {!Browser && <FrontSvg ref={SvgRef} />}
-
-      {/* <div className="NavContainer">
-        <Link to="/share">
-          <h3 className="NavBtn">Share</h3>
-        </Link>
-        <Link to="/login">
-          <h3 className="NavBtn">Login</h3>
-        </Link>
-
-        {isSignedIn && (
-          <>
-            <Link to="/">
-              <h3 className="NavBtn">View</h3>
-            </Link>
-            <Link to="/daily">
-              <h3 className="NavBtn">Daily</h3>
-            </Link>
-          </>
-        )}
-      </div> */}
     </div>
   );
 }

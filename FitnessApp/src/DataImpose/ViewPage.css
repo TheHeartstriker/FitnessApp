@@ -18,7 +18,7 @@
 .ViewPageContainer {
   display: flex;
   align-items: center;
-  background-color: var(--grey-3);
+  background-color: #0a0a0a;
   width: 100vw;
   height: 150vh;
   box-sizing: border-box;
