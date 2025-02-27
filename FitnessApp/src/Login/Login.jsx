@@ -215,7 +215,6 @@ function LoginPage() {
   useEffect(() => {
     if (isSignedIn) {
       CreateDataPage();
-      navigate("/view");
     }
   }, [isSignedIn]);
 

@@ -33,16 +33,22 @@ function Nav() {
               <ShareIcon className="icons" />
             </div>
           </li>
-          <li onClick={() => navigate("/Login")}>
+          <li onClick={() => navigate("/login")}>
             {!isCollapsed && <span>Login</span>}
             <div className="iconContainer">
               <ArrowLeftEndOnRectangleIcon className="icons" />
             </div>
           </li>
-          <li>
+          <li onClick={() => navigate("/view")}>
             {!isCollapsed && <span>Stats</span>}
-            <div className="iconContainer" onClick={() => navigate("/view")}>
+            <div className="iconContainer">
               <AdjustmentsHorizontalIcon className="icons" />
+            </div>
+          </li>
+          <li onClick={() => navigate("/daily")}>
+            {!isCollapsed && <span>Daily</span>}
+            <div className="iconContainer">
+              <HeartIcon className="icons" />
             </div>
           </li>
         </ul>
