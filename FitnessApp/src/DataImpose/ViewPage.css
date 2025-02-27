@@ -20,7 +20,7 @@
   align-items: center;
   background-color: #0a0a0a;
   width: 100vw;
-  height: 150vh;
+  height: 200vh;
   box-sizing: border-box;
 }
 /* The graph container */
@@ -35,7 +35,7 @@
 
   left: 7%;
   bottom: 25%;
-  border: 5px solid var(--grey-1);
+  border: 5px solid #008ad3;
   border-radius: 5px;
 }
 /* The switch buttons under the graph */
@@ -50,16 +50,21 @@
 .GraphSwitchContainer button {
   width: 10vw;
   height: 7vh;
-  border: 5px solid hsl(0, 0%, 5%);
+  border: 2px solid #00d4ff;
   border-radius: 10px;
   margin: 15px;
-  background-color: hsl(0, 0%, 2.5%);
-  color: white;
+  background-color: Transparent;
+  color: #00d4ff;
   font-size: 1.5rem;
   position: relative;
   z-index: 1;
   overflow: hidden;
   cursor: pointer;
+  transition: 1s ease-in-out background-color, 1s ease-in-out color;
+}
+.GraphSwitchContainer button:hover {
+  background-color: #008ad3;
+  color: #1b1b1b;
 }
 /* The percentage container */
 .PercentageContainer {
@@ -82,7 +87,7 @@
   flex-direction: column;
   width: 100%;
   height: 40%;
-  bottom: -150vh;
+  bottom: -75vh;
 }
 /* The data containers*/
 .Data {
@@ -96,21 +101,21 @@
 
 .Data h1 {
   position: relative;
-  color: tan;
+  color: #00c4f8;
   left: -100px;
   z-index: 1;
 }
 /* Glowing h1 bar */
 .Data h1::after {
   content: "";
-  background-color: silver;
+  background-color: #008ad3;
   height: 5px;
   width: 100%;
   bottom: 0;
   left: 0;
   position: absolute;
   z-index: -1;
-  box-shadow: 0 -10px 20px rgba(192, 192, 192, 0.9);
+  box-shadow: 0 -10px 20px #008ad3;
 }
 
 .Data h3 {
@@ -130,22 +135,27 @@
 .ButtonContainer button {
   width: 40%;
   height: 150px;
-  border: 5px solid hsl(0, 0%, 5%);
-  border-radius: 10px;
+  border-radius: 20px;
+  border: none;
   margin: 15px;
-  background-color: hsl(0, 0%, 2.5%);
-  color: white;
+  background-color: #00c4f8;
+  color: #1b1b1b;
   font-size: 1.5rem;
   position: relative;
   z-index: 1;
   overflow: hidden;
   cursor: pointer;
+  transition: 0.5s ease-in-out background-color;
+}
+
+.ButtonContainer button:hover {
+  background-color: #008ad3;
 }
 
 /* On styles */
 .On {
-  box-shadow: 0 0px 20px rgb(255, 187, 0), 0 0px 30px rgb(0, 187, 255),
-    0 0px 40px rgb(187, 0, 255);
+  box-shadow: 0 0px 20px rgb(0, 14, 41), 0 0px 30px rgb(0, 94, 231),
+    0 0px 40px rgb(0, 212, 255);
 }
 /* Percentage chart */
 #pie {
@@ -160,13 +170,7 @@
   mask: radial-gradient(circle, #0000 var(--_inner), #000 var(--_outer));
 
   /* the conic gradient, transparent after --ng */
-  background-image: conic-gradient(
-    cyan,
-    deeppink,
-    lightpink,
-    cyan var(--ng),
-    #0000 0
-  );
+  background-image: conic-gradient(#000e29, #005ee7, #00d4ff, #0000 0);
 
   background-color: hsla(0, 0%, 5%, 0.5);
 }
@@ -185,6 +189,7 @@
   height: 100%;
   display: grid;
   position: relative;
+  color: white;
   grid-auto-flow: column;
   gap: var(--item-gap);
   align-items: end;

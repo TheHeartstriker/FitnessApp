@@ -40,7 +40,8 @@
   border-radius: 100px;
 }
 
-.Gradient {
+.LogSignPage::before {
+  content: "";
   position: absolute;
   border-radius: 100px;
   width: 100%;
@@ -76,27 +77,38 @@
 .Switch {
   font-family: "Teko", sans-serif;
   font-size: 1em;
-  background-color: black;
+  background-color: #005ee7;
   margin: 10px;
   border: none;
   border-radius: 5px;
   height: 70px;
   width: 95px;
-  color: #00d4ff;
+  color: #1b1b1b;
   z-index: 1;
+  transition: 1s ease-in-out background-color;
 }
+
+.Switch:hover {
+  background-color: #00d4ff;
+}
+
 /* The button that either logs the user in or signs them up */
 .loginOrSign {
   font-family: "Teko", sans-serif;
   font-size: 1em;
-  color: #00d4ff;
+  color: #1b1b1b;
   width: 200px;
   height: 75px;
-  background: black;
+  background: #00c4f8;
   border-radius: 50px;
   border: none;
   margin: 10px;
   z-index: 1;
+  transition: 1s ease-in-out background, 1s ease-in-out box-shadow;
+}
+.loginOrSign:hover {
+  box-shadow: 0 0 10px 5px #00c4f8;
+  background: #008ad3;
 }
 /* Animations to notifiy the user if something was successful */
 .AnimatePulseRed {

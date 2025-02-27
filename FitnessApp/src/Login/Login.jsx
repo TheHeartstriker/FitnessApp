@@ -226,7 +226,6 @@ function LoginPage() {
         <BackgroundAnimation />
         {/* The inside container that holds the text boxes */}
         <div className="LogSignPage">
-          <div className="Gradient"></div>
           <div className="input-group">
             <input
               ref={borderRef}
