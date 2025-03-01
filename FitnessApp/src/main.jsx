@@ -17,6 +17,7 @@ import "./Login/Login.css";
 import "./Daily/Daily.css";
 import "./Share/Share.css";
 import "./NavBar/Nav.css";
+import "./Site.css";
 
 //
 //The daily page is the input page for the user to input their daily data into the server

@@ -21,35 +21,27 @@ function Nav() {
   if (isSignedIn) {
     return (
       <div className={`NavBarContainer ${isCollapsed ? "collapsed" : ""}`}>
-        <div className="SideBar">
-          {/* The initial indicator */}
-          <Bars4Icon className="icons" onClick={handleIconClick} />
-        </div>
+        <div className="SideBar">{/* The initial indicator */}</div>
         {/* Items */}
         <ul className={`NavBar ${isCollapsed ? "collapsed" : ""}`}>
+          <li onClick={handleIconClick}>
+            <Bars4Icon className="icons" />
+          </li>
           <li onClick={() => navigate("/Share")}>
             {!isCollapsed && <span>Share</span>}
-            <div className="iconContainer">
-              <ShareIcon className="icons" />
-            </div>
+            <ShareIcon className="icons" />
           </li>
           <li onClick={() => navigate("/login")}>
             {!isCollapsed && <span>Login</span>}
-            <div className="iconContainer">
-              <ArrowLeftEndOnRectangleIcon className="icons" />
-            </div>
+            <ArrowLeftEndOnRectangleIcon className="icons" />
           </li>
           <li onClick={() => navigate("/view")}>
             {!isCollapsed && <span>Stats</span>}
-            <div className="iconContainer">
-              <AdjustmentsHorizontalIcon className="icons" />
-            </div>
+            <AdjustmentsHorizontalIcon className="icons" />
           </li>
           <li onClick={() => navigate("/daily")}>
             {!isCollapsed && <span>Daily</span>}
-            <div className="iconContainer">
-              <HeartIcon className="icons" />
-            </div>
+            <HeartIcon className="icons" />
           </li>
         </ul>
       </div>
