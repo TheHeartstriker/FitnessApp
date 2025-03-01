@@ -1,25 +1,18 @@
 :root {
-  /* Netural */
-  --grey: hsl(0, 0%, 50%);
-  --grey-1: hsl(0, 0%, 30%);
-  --grey-2: hsl(0, 0%, 15%);
-
-  /* Blues */
-  --Blue-1: hsl(234, 100%, 50%);
-  --Blue-2: hsl(234, 100%, 35%);
-  --Blue-3: hsl(234, 100%, 20%);
-  /* Cyans */
-  --Cyan-1: hsl(202, 100%, 50%);
-  --Cyan-2: hsl(202, 100%, 35%);
-  --Cyan-3: hsl(202, 100%, 20%);
-  /* Neon blue*/
-  --Neon-Blue: hsl(234, 100%, 50%);
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  font-family: "Teko", sans-serif;
+  /* Main color accents */
+  --Blue-1: #00c4f8;
+  --Blue-2: #008ad3;
+  /* Card backgrounds */
+  --Card-Basic: #1b1b1b;
+  /* Common gradient */
+  --Gradient1: #000e29;
+  --Gradient2: #005ee7;
+  --Gradient3: #00d4ff;
+  /* Common text */
+  --Text-White: #ffffff;
+  --Text-Blue: #00d4ff;
+  /* Basic background 'filler' space */
+  --Background: #0a0a0a;
 }
 
 /* Overall container for the background */
@@ -42,29 +35,36 @@ body {
 
 .EnterBtn {
   font-family: "Teko", sans-serif;
-  font-size: 2rem;
+  font-size: 3rem;
   position: relative;
-  width: 6vw;
-  height: 6vw;
-  background-color: #1b1b1b;
+  width: 15rem;
+  height: 15rem;
+  background-color: var(--Card-Basic);
   border-radius: 10px;
   border: 3px solid #0082cd;
-  color: #00c4f8;
+  color: var(--Blue-1);
   cursor: pointer;
+  transition: 1s ease background-color, 1s ease color, 1s ease box-shadow;
+}
+
+.EnterBtn:hover {
+  background-color: var(--Blue-1);
+  color: var(--Card-Basic);
+  box-shadow: 0 0 15px var(--Blue-2);
 }
 
 .CubeBack {
   position: absolute;
-  width: 5.3vw;
-  height: 5.3vw;
+  width: 13.5rem;
+  height: 13.5rem;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) rotate(45deg);
-  background-color: #000000;
-  border: 3px solid #00d4ff;
+  background-color: var(--Background);
+  border: 3px solid var(--Text-Blue);
   border-radius: 10px;
   z-index: -1;
-  animation: rotate 7s linear infinite;
+  animation: rotate 5s linear infinite;
 }
 
 @keyframes rotate {
@@ -118,30 +118,4 @@ body {
     stroke: var(--VectorColor2);
     filter: drop-shadow(0 0 50px var(--VectorColor2));
   }
-}
-
-/* The border outside the button */
-.NavBtn::after,
-.NavBtn::before {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 50%;
-  left: 50%;
-  background-image: conic-gradient(var(--Neon-Blue), silver, var(--Neon-Blue));
-  transform: translate(-50%, -50%);
-  padding: 7.5px;
-  border-radius: 5px;
-  z-index: -1;
-}
-/* Hover glow and base glow */
-.NavBtn::before {
-  filter: blur(1.5rem);
-  opacity: 0.5;
-}
-
-.NavBtn:hover::before {
-  filter: blur(3rem);
-  opacity: 1;
 }

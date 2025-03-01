@@ -1,29 +1,24 @@
 :root {
-  /* Netural */
-  --grey: hsl(0, 0%, 50%);
-  --grey-1: hsl(0, 0%, 30%);
-  --grey-2: hsl(0, 0%, 15%);
-  --grey-3: hsl(0, 0%, 10%);
-
-  /* Blues */
-  --Blue-1: hsl(234, 100%, 50%);
-  --Blue-2: hsl(234, 100%, 35%);
-  --Blue-3: hsl(234, 100%, 20%);
-  /* Cyans */
-  --Cyan-1: hsl(202, 100%, 50%);
-  --Cyan-2: hsl(202, 100%, 35%);
-  --Cyan-3: hsl(202, 100%, 20%);
+  /* Main color accents */
+  --Blue-1: #00c4f8;
+  --Blue-2: #008ad3;
+  /* Card backgrounds */
+  --Card-Basic: #1b1b1b;
+  /* Common gradient */
+  --Gradient1: #000e29;
+  --Gradient2: #005ee7;
+  --Gradient3: #00d4ff;
+  /* Common text */
+  --Text-White: #ffffff;
+  --Text-Blue: #00d4ff;
+  /* Basic background 'filler' space */
+  --Background: #0a0a0a;
 }
 
-body {
-  margin: 0;
-  padding: 0;
-  font-family: "Teko", sans-serif;
-}
 /* The container for the entire route */
 .DailyPageContainer {
   position: relative;
-  background-color: #0a0a0a;
+  background-color: var(--Background);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -42,7 +37,7 @@ body {
   width: 70%;
   height: 70%;
   z-index: 1;
-  color: #1b1b1b;
+  color: var(--Card-Basic);
 }
 /* Text boxes */
 .WorkHeartTime {
@@ -51,7 +46,7 @@ body {
   height: 100px;
   border-radius: 10px;
   border: none;
-  background-color: #00c4f8;
+  background-color: var(--Blue-1);
   z-index: -2;
 }
 .WorkHeartTime::placeholder {
@@ -60,12 +55,12 @@ body {
 /* Submit button */
 .Submit {
   font-family: "Teko", sans-serif;
-  font-size: 1rem;
+  font-size: 2rem;
   position: relative;
   cursor: pointer;
-  background-color: var(--grey-3);
-  border: 15px solid var(--grey-2);
-  color: #00c4f8;
+  background-color: var(--Card-Basic);
+  border: 15px solid var(--Blue-1);
+  color: var(--Blue-1);
   bottom: 40px;
   padding: 10px;
   border-radius: 50%;
@@ -75,7 +70,7 @@ body {
 }
 
 .Submit:hover {
-  background-color: #00d4ff;
+  background-color: var(--Gradient3);
   color: white;
 }
 /* Creates the colored border  */
@@ -87,7 +82,12 @@ body {
   height: 100%;
   top: 50%;
   left: 50%;
-  background-image: conic-gradient(#00c4f8, #008ad3, #00c4f8);
+  background-image: conic-gradient(
+    var(--Gradient1),
+    var(--Gradient2),
+    var(--Gradient3),
+    var(--Gradient1)
+  );
   transform: translate(-50%, -50%);
   padding: 20px;
   border-radius: 50%;
@@ -113,7 +113,7 @@ body {
 
 .ZoneContainer h5 {
   color: white;
-  font-size: 1rem;
+  font-size: 2rem;
   margin: 0;
   padding: 0;
 }
@@ -122,7 +122,7 @@ body {
 .Zone {
   width: 100%;
   height: 20%;
-  background-color: #1b1b1b;
+  background-color: var(--Card-Basic);
   border-radius: 5px;
   position: relative;
   padding-right: 15%;
@@ -142,13 +142,18 @@ body {
   right: 0;
   bottom: 0;
   opacity: 0.5;
-  background: linear-gradient(to bottom right, #000e29, #005ee7 50%, #00d4ff);
+  background: linear-gradient(
+    to bottom right,
+    var(--Gradient1),
+    var(--Gradient2) 50%,
+    var(--Gradient3)
+  );
   z-index: -1;
 }
 /* On true indicator for the zones */
 .OnZone {
-  background: linear-gradient(90deg, var(--grey-3), var(--Blue-2));
-  box-shadow: 0 0 50px 5px #008ad3;
+  background: linear-gradient(90deg, var(--Gradient1), var(--Blue-2));
+  box-shadow: 0 0 50px 5px var(--Blue-2);
 }
 /* Button inside the container */
 .ZoneButton {
@@ -158,49 +163,55 @@ body {
   height: 80%;
   border: none;
   border-radius: 15px;
-  background-color: #008ad3;
+  background-color: var(--Blue-2);
   transition: 0.6s ease background-color;
 }
 
 .ZoneButton:hover {
-  background-color: #00c4f8;
+  background-color: var(--Blue-1);
 }
 
 .ShareButton {
   position: absolute;
-  width: 100px;
-  height: 100px;
-  left: 0;
+  width: 20rem;
+  border-radius: 20px;
+  height: 10rem;
+  left: 40%;
   bottom: 0;
-  border-radius: 5px;
-  border: 2.5px solid var(--Cyan-2);
+  border: 2.5px solid var(--Blue-1);
   z-index: 1;
   background-color: var(--Blue-2);
+  transform: translateX(-50%);
 }
 
 .ShareButton.True {
   color: white;
-  border: 2.5px green solid;
+  border: 2.5px var(--Blue-1) solid;
   background: linear-gradient(
     90deg,
-    darkgrey 0%,
-    lightgreen 50%,
-    lightgreen 100%
+    var(--Gradient3) 0%,
+    var(--Gradient2) 50%,
+    var(--Gradient3) 100%
   );
 }
 
 .ShareButton.False {
   color: white;
   border: 2.5px red solid;
-  background: linear-gradient(90deg, darkgrey 0%, red 50%, darkgrey 100%);
+  background: linear-gradient(
+    90deg,
+    var(--Background) 0%,
+    red 50%,
+    var(--Background) 100%
+  );
 }
 /* Tool tip */
 .InputContainer span {
   position: absolute;
   font-size: large;
   background-color: transparent;
-  border: 3px solid #00d4ff;
-  color: #00d4ff;
+  border: 3px solid var(--Text-Blue);
+  color: var(--Text-Blue);
   width: 5vh;
   height: 5vh;
   border-radius: 50%;
@@ -215,7 +226,7 @@ body {
   content: "Data is saved per day so submiting 10min of work on zone1 and then 20min of work on zone1 will only save 20min of work";
   position: absolute;
   bottom: 80%;
-  background-color: #00c4f8;
+  background-color: var(--Blue-1);
   color: black;
   padding: 5px;
   border-radius: 5px;
