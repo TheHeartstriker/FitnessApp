@@ -1,26 +1,27 @@
 :root {
-  /* Netural */
-  --grey: hsl(0, 0%, 50%);
-  --grey-1: hsl(0, 0%, 30%);
-  --grey-2: hsl(0, 0%, 15%);
-  --grey-3: hsl(0, 0%, 10%);
-
-  /* Blues */
-  --Blue-1: hsl(234, 100%, 50%);
-  --Blue-2: hsl(234, 100%, 35%);
-  --Blue-3: hsl(234, 100%, 20%);
-  /* Cyans */
-  --Cyan-1: hsl(202, 100%, 50%);
-  --Cyan-2: hsl(202, 100%, 35%);
-  --Cyan-3: hsl(202, 100%, 20%);
+  /* Main color accents */
+  --Blue-1: #00c4f8;
+  --Blue-2: #008ad3;
+  /* Card backgrounds */
+  --Card-Basic: #1b1b1b;
+  /* Common gradient */
+  --Gradient1: #000e29;
+  --Gradient2: #005ee7;
+  --Gradient3: #00d4ff;
+  /* Common text */
+  --Text-White: #ffffff;
+  --Text-Blue: #00d4ff;
+  /* Basic background 'filler' space */
+  --Background: #0a0a0a;
 }
 /* The overall container at the bottom of the screen */
 .ViewPageContainer {
   display: flex;
   align-items: center;
-  background-color: var(--grey-3);
+  justify-content: center;
+  background-color: var(--Background);
   width: 100vw;
-  height: 150vh;
+  height: 200vh;
   box-sizing: border-box;
 }
 /* The graph container */
@@ -32,10 +33,8 @@
   justify-content: center;
   width: 55vw;
   height: 65vh;
-
-  left: 7%;
   bottom: 25%;
-  border: 5px solid var(--grey-1);
+  border: 5px solid var(--Blue-2);
   border-radius: 5px;
 }
 /* The switch buttons under the graph */
@@ -50,27 +49,35 @@
 .GraphSwitchContainer button {
   width: 10vw;
   height: 7vh;
-  border: 5px solid hsl(0, 0%, 5%);
+  font-style: sans-serif;
+  font-family: "Teko", sans-serif;
+  border: 2px solid var(--Text-Blue);
   border-radius: 10px;
   margin: 15px;
-  background-color: hsl(0, 0%, 2.5%);
-  color: white;
-  font-size: 1.5rem;
+  background-color: Transparent;
+  color: var(--Text-Blue);
+  font-size: 2.5rem;
   position: relative;
   z-index: 1;
   overflow: hidden;
   cursor: pointer;
+  transition: 1s ease-in-out background-color, 1s ease-in-out color;
+}
+.GraphSwitchContainer button:hover {
+  background-color: var(--Blue-2);
+  color: #1b1b1b;
 }
 /* The percentage container */
 .PercentageContainer {
   position: relative;
   display: flex;
-  flex-direction: column;
+  bottom: 25%;
   align-items: center;
-  justify-content: center;
-  left: 15%;
-  bottom: 15%;
-  width: 25vw;
+  text-align: center;
+  font-size: 1.5rem;
+  color: var(--Text-Blue);
+  left: 5%;
+  width: 30vw;
   height: 95vh;
 }
 /* Holds the text based data at the bottom of the page */
@@ -82,10 +89,12 @@
   flex-direction: column;
   width: 100%;
   height: 40%;
-  bottom: -150vh;
+  bottom: -75vh;
 }
 /* The data containers*/
 .Data {
+  color: var(--Blue-2);
+  font-size: 1.5rem;
   position: relative;
   display: flex;
   align-items: center;
@@ -96,21 +105,21 @@
 
 .Data h1 {
   position: relative;
-  color: tan;
+  color: var(--Blue-1);
   left: -100px;
   z-index: 1;
 }
 /* Glowing h1 bar */
 .Data h1::after {
   content: "";
-  background-color: silver;
+  background-color: var(--Blue-2);
   height: 5px;
   width: 100%;
   bottom: 0;
   left: 0;
   position: absolute;
   z-index: -1;
-  box-shadow: 0 -10px 20px rgba(192, 192, 192, 0.9);
+  box-shadow: 0 -10px 20px var(--Blue-2);
 }
 
 .Data h3 {
@@ -125,34 +134,41 @@
   justify-content: space-between;
   width: 100%;
   bottom: -38%;
+  font-size: 3rem;
 }
 /* Button styles */
 .ButtonContainer button {
+  font-family: "Teko", sans-serif;
   width: 40%;
   height: 150px;
-  border: 5px solid hsl(0, 0%, 5%);
-  border-radius: 10px;
+  border-radius: 20px;
+  border: none;
   margin: 15px;
-  background-color: hsl(0, 0%, 2.5%);
-  color: white;
-  font-size: 1.5rem;
+  background-color: var(--Blue-1);
+  color: var(--Card-Basic);
+  font-size: 3rem;
   position: relative;
   z-index: 1;
   overflow: hidden;
   cursor: pointer;
+  transition: 0.5s ease-in-out background-color;
+}
+
+.ButtonContainer button:hover {
+  background-color: #008ad3;
 }
 
 /* On styles */
 .On {
-  box-shadow: 0 0px 20px rgb(255, 187, 0), 0 0px 30px rgb(0, 187, 255),
-    0 0px 40px rgb(187, 0, 255);
+  box-shadow: 0 0px 20px rgb(0, 14, 41), 0 0px 30px rgb(0, 94, 231),
+    0 0px 40px rgb(0, 212, 255);
 }
 /* Percentage chart */
 #pie {
   /* Changes the angle the graident goes to */
   --ng: 360deg;
   /* The thickness or the non transperent area of the gradient */
-  --thickness: 10px;
+  --thickness: 15px;
   --_inner: calc(70% - var(--thickness));
   --_outer: calc(var(--_inner) + 1px);
 
@@ -160,20 +176,20 @@
   mask: radial-gradient(circle, #0000 var(--_inner), #000 var(--_outer));
 
   /* the conic gradient, transparent after --ng */
-  background-image: conic-gradient(
-    cyan,
-    deeppink,
-    lightpink,
-    cyan var(--ng),
-    #0000 0
-  );
+  background-image: conic-gradient(#000e29, #005ee7, var(--Text-Blue), #0000 0);
 
   background-color: hsla(0, 0%, 5%, 0.5);
 }
 
+.chart {
+  width: 100%;
+  height: auto;
+  position: relative;
+}
+
 #pie {
   aspect-ratio: 1/1;
-  inline-size: 30vmin;
+  inline-size: 100%;
   border-radius: 50%;
 }
 
@@ -185,6 +201,8 @@
   height: 100%;
   display: grid;
   position: relative;
+  color: white;
+  font-size: 1.5rem;
   grid-auto-flow: column;
   gap: var(--item-gap);
   align-items: end;

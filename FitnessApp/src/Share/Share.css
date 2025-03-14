@@ -1,20 +1,18 @@
 :root {
-  /* Netural */
-  --grey: hsl(0, 0%, 50%);
-  --grey-1: hsl(0, 0%, 30%);
-  --grey-2: hsl(0, 0%, 15%);
-  --grey-3: hsl(0, 0%, 10%);
-  --grey-4: hsl(0, 0%, 5%);
-
-  /* Blues */
-  --Blue-1: hsl(234, 100%, 50%);
-  --Blue-2: hsl(234, 100%, 35%);
-  --Blue-3: hsl(234, 100%, 20%);
-  /* Cyans */
-  --Cyan-0: hsl(202, 100%, 80%);
-  --Cyan-1: hsl(202, 100%, 50%);
-  --Cyan-2: hsl(202, 100%, 35%);
-  --Cyan-3: hsl(202, 100%, 20%);
+  /* Main color accents */
+  --Blue-1: #00c4f8;
+  --Blue-2: #008ad3;
+  /* Card backgrounds */
+  --Card-Basic: #1b1b1b;
+  /* Common gradient */
+  --Gradient1: #000e29;
+  --Gradient2: #005ee7;
+  --Gradient3: #00d4ff;
+  /* Common text */
+  --Text-White: #ffffff;
+  --Text-Blue: #00d4ff;
+  /* Basic background 'filler' space */
+  --Background: #0a0a0a;
 }
 /* The overall container for the share */
 .ShareContainer {
@@ -24,20 +22,42 @@
   grid-template-rows: repeat(2, minmax(250px, 1fr));
   grid-auto-rows: minmax(250px, auto);
   grid-auto-columns: minmax(250px, auto);
-  background: var(--grey-3);
+  background: #0a0a0a;
   width: 100vw;
-  min-height: 90vh;
+  min-height: 100vh;
   height: auto;
 }
+
+.Item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+  width: 100%;
+  height: 100%;
+  opacity: 0.3;
+  border-radius: 0;
+  background: linear-gradient(
+    to bottom right,
+    var(--Gradient1),
+    var(--Gradient2) 50%,
+    var(--Gradient3)
+  );
+  z-index: -1;
+}
+
 /* Item container for displying user data */
 .Item {
   position: relative;
   text-align: center;
-  border: 5px solid var(--Cyan-2);
+  border: 3px solid var(--Blue-1);
   box-shadow: 0 0 30px var(--Blue-3);
 
-  background-color: var(--grey-4);
-
+  background-color: var(--Card-Basic);
+  font-size: 2rem;
   margin: 75px;
   aspect-ratio: 1 / 1;
   border-radius: 5px;
@@ -45,14 +65,16 @@
   padding: 10px;
   height: 50%;
   width: 50%;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.7s ease, box-shadow 0.7s ease;
+  z-index: 1;
 }
 
 .Item h3 {
-  font-size: 1.5vh;
+  font-size: 1.5rem;
   margin: 0;
   padding: 0;
-  color: var(--Cyan-0);
+  color: var(--Text-Blue);
+  z-index: 2;
 }
 
 .Item:hover {

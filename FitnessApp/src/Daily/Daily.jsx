@@ -156,7 +156,7 @@ function Daily() {
           UpdateShare(), ReShare(Share);
         }}
       >
-        Share data with others?
+        {Share ? "Sharing with others" : "Not Sharing"}
       </button>
       <div className="InputContainer">
         <span className="Tooltip">?</span>

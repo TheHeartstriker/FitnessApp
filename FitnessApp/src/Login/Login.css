@@ -1,18 +1,18 @@
 :root {
-  /* Netural */
-  --grey: hsl(0, 0%, 50%);
-  --grey-1: hsl(0, 0%, 30%);
-  --grey-2: hsl(0, 0%, 15%);
-  --grey-3: hsl(0, 0%, 10%);
-
-  /* Blues */
-  --Blue-1: hsl(234, 100%, 50%);
-  --Blue-2: hsl(234, 100%, 35%);
-  --Blue-3: hsl(234, 100%, 20%);
-  /* Cyans */
-  --Cyan-1: hsl(202, 100%, 50%);
-  --Cyan-2: hsl(202, 100%, 35%);
-  --Cyan-3: hsl(202, 100%, 20%);
+  /* Main color accents */
+  --Blue-1: #00c4f8;
+  --Blue-2: #008ad3;
+  /* Card backgrounds */
+  --Card-Basic: #1b1b1b;
+  /* Common gradient */
+  --Gradient1: #000e29;
+  --Gradient2: #005ee7;
+  --Gradient3: #00d4ff;
+  /* Common text */
+  --Text-White: #ffffff;
+  --Text-Blue: #00d4ff;
+  /* Basic background 'filler' space */
+  --Background: #0a0a0a;
 }
 
 /* Container that holds the LogSingin box */
@@ -22,8 +22,8 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background-color: var(--grey-3);
-  height: 90vh;
+  background-color: var(--Background);
+  height: 100vh;
   width: 100vw;
 }
 
@@ -34,50 +34,92 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 50vh;
-  width: 50vw;
-  background: linear-gradient(to bottom, var(--Blue-1), silver);
+  height: 60vh;
+  width: 60vw;
+  background-color: var(--Card-Basic);
   border-radius: 100px;
+}
+
+.LogSignPage::before {
+  content: "";
+  position: absolute;
+  border-radius: 100px;
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+  background: linear-gradient(
+    to bottom right,
+    var(--Gradient1),
+    var(--Gradient2) 50%,
+    var(--Gradient3)
+  );
 }
 
 .LogSignPage input {
   font-family: "Teko", sans-serif;
-  font-size: 1em;
+  width: 100%;
+  font-size: 2rem;
+}
+
+.input-group {
+  z-index: 1;
+  width: 100%;
+  height: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* The input group is the text boxes the are used to send the username and password */
 .input-group input {
-  width: 500px;
-  height: 45px;
-  border: 10px solid silver;
+  width: 60%;
+  height: 80%;
+  border: none;
   border-radius: 5px;
-  background-color: rgb(150, 150, 150);
+  background-color: var(--Blue-1);
   margin: 10px;
-  box-shadow: 0 8px 16px var(--Blue-3);
+  color: white;
+}
+
+.input-group input::placeholder {
+  color: black;
 }
 /* The switch button */
 .Switch {
   font-family: "Teko", sans-serif;
-  font-size: 1em;
-  background-color: var(--Blue-2);
+  font-size: 2rem;
+  background-color: var(--Gradient2);
   margin: 10px;
-  border: 5px solid silver;
+  border: none;
   border-radius: 5px;
-  height: 60px;
-  width: 85px;
-  color: white;
+  height: 10%;
+  width: 11%;
+  color: #1b1b1b;
+  z-index: 1;
+  transition: 1s ease-in-out background-color;
 }
+
+.Switch:hover {
+  background-color: var(--Text-Blue);
+}
+
 /* The button that either logs the user in or signs them up */
 .loginOrSign {
   font-family: "Teko", sans-serif;
-  font-size: 1em;
-  color: white;
-  width: 200px;
-  height: 75px;
-  background: linear-gradient(to right, var(--Blue-1), orange);
+  font-size: 2rem;
+  color: #1b1b1b;
+  width: 20%;
+  height: 12%;
+  background: var(--Blue-1);
   border-radius: 50px;
   border: none;
   margin: 10px;
+  z-index: 1;
+  transition: 1s ease-in-out background, 1s ease-in-out box-shadow;
+}
+.loginOrSign:hover {
+  box-shadow: 0 0 10px 5px var(--Blue-1);
+  background: var(--Blue-2);
 }
 /* Animations to notifiy the user if something was successful */
 .AnimatePulseRed {

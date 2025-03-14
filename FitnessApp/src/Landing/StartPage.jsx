@@ -1,54 +1,80 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useRef } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { Context } from "../Provider";
+import FrontSvg from "../Images/Front";
+import Test from "../Images/Test.svg";
 
 function StartPage() {
-  const { isSignedIn, setIsSignedIn } = useContext(Context);
+  //Check for firefox
+  const [Browser, setBrowser] = useState(false);
+  //Holds vector names
+  const [VectorArray, setVectorArray] = useState([]);
+  //Amount of vectors to be filled
+  const Amount = 105; // 109 is max
+  const SvgRef = useRef(null);
   const navigate = useNavigate();
-  const location = useLocation();
 
-  const handleMoveDown = () => {
-    window.scrollTo({
-      top: window.innerHeight,
-      behavior: "smooth",
-    });
+  const handleEnterClick = () => {
+    navigate("/Login"); // Replace "/desired-route" with the actual route you want to navigate to
   };
+  //Add the glow class to the vector
+  function AddClass(id) {
+    const vectorElement = SvgRef.current.querySelector(id);
+    if (vectorElement) {
+      vectorElement.classList.add("VectorAni");
+    }
+  }
+  //Fill the array with the vector names
+  function Fillarray() {
+    let TempArr = [];
+    TempArr.push("#Vector");
+    for (let i = 0; i < 108; i++) {
+      TempArr.push(`#Vector_${i}`);
+    }
+    setVectorArray(TempArr);
+  }
+  //Randomly select vectors to add the glow effect
+  function RandomVec() {
+    if (VectorArray.length < 50) return;
+    for (let i = 0; i < Amount; i++) {
+      const Random = Math.floor(Math.random() * VectorArray.length);
+      AddClass(VectorArray[Random]);
+    }
+  }
+  //Check if the user is using firefox which has rastering issues
+  useEffect(() => {
+    const UserBrowser = navigator.userAgent;
+    if (UserBrowser.includes("Firefox")) {
+      setBrowser(true);
+    }
+    console.log(Browser);
+  }, [Browser]);
 
   useEffect(() => {
-    if (
-      isSignedIn === false &&
-      location.pathname !== "/login" &&
-      location.pathname !== "/share"
-    ) {
-      navigate("/login");
+    if (SvgRef.current) {
+      console.log(VectorArray.length);
+      if (VectorArray.length === 0) {
+        Fillarray();
+      }
+      if (VectorArray.length == 109) {
+        RandomVec();
+      }
     }
-  }, [isSignedIn, navigate, location]);
+  }, [VectorArray]);
 
   return (
     <div className="StartPageContainer">
-      <button className="MoveDown" onClick={handleMoveDown}></button>
-
-      <div className="NavContainer">
-        {/* Non conditional links */}
-        <Link to="/share">
-          <h3 className="NavBtn">Share</h3>
-        </Link>
-        <Link to="/login">
-          <h3 className="NavBtn">Login</h3>
-        </Link>
-
-        {/* If they are not logged in they dont need to see these values */}
-        {isSignedIn && (
-          <>
-            <Link to="/">
-              <h3 className="NavBtn">View</h3>
-            </Link>
-            <Link to="/daily">
-              <h3 className="NavBtn">Daily</h3>
-            </Link>
-          </>
-        )}
-      </div>
+      <button className="EnterBtn" onClick={handleEnterClick}>
+        Enter?
+        <div className="CubeBack"></div>
+      </button>
+      {/* Check for firefox rastor issues */}
+      {Browser && (
+        <div className="FrontSvg">
+          <img src={Test} alt="Test" />
+        </div>
+      )}
+      {/* Normal svg background */}
+      {!Browser && <FrontSvg ref={SvgRef} />}
     </div>
   );
 }

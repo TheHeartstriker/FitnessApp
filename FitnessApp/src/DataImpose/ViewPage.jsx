@@ -205,6 +205,7 @@ function ViewPage() {
   }, []);
   //Calculates the percentage when the Percentagedata is updated
   useEffect(() => {
+    console.log(isSignedIn);
     if (isSignedIn) {
       Percentage(Percentagedata);
     }

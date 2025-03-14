@@ -1,139 +1,121 @@
 :root {
-  /* Netural */
-  --grey: hsl(0, 0%, 50%);
-  --grey-1: hsl(0, 0%, 30%);
-  --grey-2: hsl(0, 0%, 15%);
-
-  /* Blues */
-  --Blue-1: hsl(234, 100%, 50%);
-  --Blue-2: hsl(234, 100%, 35%);
-  --Blue-3: hsl(234, 100%, 20%);
-  /* Cyans */
-  --Cyan-1: hsl(202, 100%, 50%);
-  --Cyan-2: hsl(202, 100%, 35%);
-  --Cyan-3: hsl(202, 100%, 20%);
-  /* Neon blue*/
-  --Neon-Blue: hsl(234, 100%, 50%);
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  font-family: "Teko", sans-serif;
+  /* Main color accents */
+  --Blue-1: #00c4f8;
+  --Blue-2: #008ad3;
+  /* Card backgrounds */
+  --Card-Basic: #1b1b1b;
+  /* Common gradient */
+  --Gradient1: #000e29;
+  --Gradient2: #005ee7;
+  --Gradient3: #00d4ff;
+  /* Common text */
+  --Text-White: #ffffff;
+  --Text-Blue: #00d4ff;
+  /* Basic background 'filler' space */
+  --Background: #0a0a0a;
 }
 
 /* Overall container for the background */
 .StartPageContainer {
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   border: none;
-  background-image: url("@/Images/StartPage.svg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   margin: 0;
   padding: 0;
-  height: 110vh;
+  height: 100vh;
   width: 100vw;
   position: relative;
 }
-/* Helps center the textscreen text */
-.StartPageContainer h1 {
+
+.EnterBtn {
+  font-family: "Teko", sans-serif;
+  font-size: 3rem;
+  position: relative;
+  width: 15rem;
+  height: 15rem;
+  background-color: var(--Card-Basic);
+  border-radius: 10px;
+  border: 3px solid #0082cd;
+  color: var(--Blue-1);
+  cursor: pointer;
+  transition: 1s ease background-color, 1s ease color, 1s ease box-shadow;
+}
+
+.EnterBtn:hover {
+  background-color: var(--Blue-1);
+  color: var(--Card-Basic);
+  box-shadow: 0 0 15px var(--Blue-2);
+}
+
+.CubeBack {
+  position: absolute;
+  width: 13.5rem;
+  height: 13.5rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  background-color: var(--Background);
+  border: 3px solid var(--Text-Blue);
+  border-radius: 10px;
+  z-index: -1;
+  animation: rotate 5s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(405deg);
+  }
+}
+
+.FrontSvg {
   position: absolute;
   top: 0;
   left: 0;
-  margin: 0;
-  padding: 10px;
-}
-/* The bottom bar that contains the buttons for naviagation */
-.NavContainer {
-  display: flex;
-  position: relative;
-  justify-content: flex-end;
-  align-items: center;
-  top: 0;
-  width: 100%;
-  height: 10vh;
-  background-color: var(--grey-2);
-  z-index: 1;
-}
-/* The button not including the border */
-.NavBtn {
-  position: relative;
-  margin: 20px;
-  padding: 10px;
-  border-radius: 5px;
-  background: linear-gradient(to bottom, var(--grey-1), var(--Cyan-1));
-  color: white;
-  font-size: 1.2rem;
-  font-weight: 600;
-  cursor: pointer;
-  width: 75px;
-  text-align: center;
-  text-decoration: none;
-}
-
-/* The border outside the button */
-.NavBtn::after,
-.NavBtn::before {
-  content: "";
-  position: absolute;
-  width: 100%;
   height: 100%;
-  top: 50%;
-  left: 50%;
-  background-image: conic-gradient(var(--Neon-Blue), silver, var(--Neon-Blue));
-  transform: translate(-50%, -50%);
-  padding: 7.5px;
-  border-radius: 5px;
-  z-index: -1;
+  width: 100%;
+  z-index: -999;
 }
-/* Hover glow and base glow */
-.NavBtn::before {
-  filter: blur(1.5rem);
-  opacity: 0.5;
+/* Might help rastor errors */
+.FrontSvg svg {
+  shape-rendering: crispEdges;
 }
 
-.NavBtn:hover::before {
-  filter: blur(3rem);
-  opacity: 1;
-}
-/* Move down button located at the main home screen */
-.MoveDown {
-  font-family: "Teko", sans-serif;
-  position: relative;
-  top: 2vh;
-  border: 5px solid var(--Cyan-3);
-  border-radius: 50%;
-  width: 70px;
-  height: 70px;
-  box-shadow: 0 0 0 10px hsla(202, 100%, 50%, 0.5);
-  background-image: url("@/Images/Downarrow.svg");
-  background-size: cover;
-  cursor: pointer;
-
-  animation: Heartbeat 3s infinite;
-  background-color: rgb(0, 60, 255);
-  margin-top: 45vh;
+.VectorAni {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 0;
+  animation: dash 5s linear infinite alternate,
+    glow 3s ease-in-out infinite alternate;
+  stroke-width: 3px;
+  /* Defaults */
+  --VectorColor1: #00d4ff;
+  --VectorColor2: #a6fffb;
 }
 
-@keyframes Heartbeat {
-  0%,
-  100% {
-    box-shadow: 0 0 0 20px hsla(202, 100%, 50%, 0.5);
+@keyframes dash {
+  from {
+    stroke-dashoffset: 1000;
   }
-  20% {
-    box-shadow: 0 0 0 30px hsla(202, 100%, 50%, 0.5);
+  to {
+    stroke-dashoffset: 0;
   }
-  40% {
-    box-shadow: 0 0 0 20px hsla(202, 100%, 50%, 0.5);
+}
+
+@keyframes glow {
+  from {
+    stroke: var(--VectorColor1);
+    filter: drop-shadow(0 0 15px var(--VectorColor1));
   }
-  60% {
-    box-shadow: 0 0 0 30px hsla(202, 100%, 50%, 0.5);
-  }
-  80% {
-    box-shadow: 0 0 0 20px hsla(202, 100%, 50%, 0.5);
+  to {
+    stroke: var(--VectorColor2);
+    filter: drop-shadow(0 0 50px var(--VectorColor2));
   }
 }
