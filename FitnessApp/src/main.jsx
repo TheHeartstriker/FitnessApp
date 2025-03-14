@@ -10,6 +10,7 @@ import LoginPage from "./Login/Login.jsx";
 import Daily from "./Daily/Daily.jsx";
 import Share from "./Share/Share.jsx";
 import Nav from "./NavBar/Nav.jsx";
+import PrivateRoute from "./Routes.jsx";
 //CSS imports
 import "./Site.css";
 import "./Landing/StartPage.css";
@@ -25,19 +26,23 @@ import "./NavBar/Nav.css";
 //Landing is the first page the user sees when they open the site before they scroll down also containing the navbar
 //Share is the page where the user can share their data with others
 //Login is the page where the user logs in and or registers
+//Nav is self explanatory, it is the navigation bar for the site
 //
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Provider>
-      <BrowserRouter>
+      <BrowserRouter future={{ v7_startTransition: true }}>
         <Nav />
         <Routes>
           <Route path="/" element={<StartPage />} />
-          <Route path="/view" element={<ViewPage />} />
+          <Route
+            path="/view"
+            element={<PrivateRoute element={<ViewPage />} />}
+          />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/daily" element={<Daily />} />
-          <Route path="/share" element={<Share />} />
+          <Route path="/daily" element={<PrivateRoute element={<Daily />} />} />
+          <Route path="/share" element={<PrivateRoute element={<Share />} />} />
         </Routes>
       </BrowserRouter>
     </Provider>
