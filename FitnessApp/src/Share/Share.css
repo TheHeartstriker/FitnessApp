@@ -57,7 +57,7 @@
   box-shadow: 0 0 30px var(--Blue-3);
 
   background-color: var(--Card-Basic);
-  font-size: 2rem;
+  font-size: 1.5rem;
   margin: 75px;
   aspect-ratio: 1 / 1;
   border-radius: 5px;
@@ -70,7 +70,7 @@
 }
 
 .Item h3 {
-  font-size: 1.5rem;
+  font-size: 0.8rem;
   margin: 0;
   padding: 0;
   color: var(--Text-Blue);

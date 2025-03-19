@@ -50,8 +50,8 @@
   position: relative;
   margin-top: 60px;
   margin-bottom: 60px;
-  width: 9rem;
-  height: 9rem;
+  width: 6rem;
+  height: 6rem;
   color: #00c4f8;
   border: 3px solid #008ad3;
   border-radius: 10px;
@@ -94,13 +94,13 @@
 
 .NavBar li span {
   margin-left: 10px;
-  font-size: 2rem;
+  font-size: 1.5rem;
   transition: max-height 0.3s ease-out;
 }
 
 .icons {
-  width: 7rem;
-  height: 7rem;
+  width: 4rem;
+  height: 4rem;
   color: #00c4f8;
   padding: 10px;
   border: 3px solid #008ad3;

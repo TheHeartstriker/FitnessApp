@@ -222,32 +222,51 @@ function LoginPage() {
     <>
       {/* Outside container */}
       <div className="LogSignContainer">
-        <BackgroundAnimation />
         {/* The inside container that holds the text boxes */}
         <div className="LogSignPage">
+          <h1>Please enter or create an account</h1>
+          <div className="UP-Container">
+            <h2>Username</h2>
+          </div>
           <div className="input-group">
             <input
               ref={borderRef}
               type="text"
               value={username}
               onChange={handleUsernameChange}
-              placeholder="Username"
             />
+          </div>
+          <div className="UP-Container">
+            <h2>Password</h2>
           </div>
           <div className="input-group">
             <input
               type="password"
               value={password}
               onChange={handlePasswordChange}
-              placeholder="Password"
             />
           </div>
-          <button className="loginOrSign" onClick={handleSignOrLog}>
-            {login ? "Login" : "Signup"}
-          </button>
-          <button className="Switch" onClick={handleSwitch}>
-            {login ? "Switch to Signup" : "Switch to Login"}
-          </button>
+          <div className="Button-Container-Login">
+            <button className="loginOrSign" onClick={handleSignOrLog}>
+              {login ? "Login" : "Signup"}
+            </button>
+            <button className="Switch" onClick={handleSwitch}>
+              {login ? "Switch to Signup" : "Switch to Login"}
+            </button>
+          </div>
+        </div>
+        <div className="WhatIsThis">
+          <div className="WhatIsThis-H1Main">
+            <h1>Welcome to FGraphs</h1>
+          </div>
+          <div className="WhatIsThis-H2">
+            <p>
+              What is FGraphs? Why does it exist? Well its a playground for both
+              code and gains. Built to flex and train my programming skills.
+              Built to be practical to the point. Hope you enjoy it! Have a good
+              Day😊
+            </p>
+          </div>
         </div>
       </div>
     </>

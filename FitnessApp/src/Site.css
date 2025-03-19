@@ -6,42 +6,35 @@ body {
   padding: 0;
 }
 
-html,
 body {
   font-family: "Teko", sans-serif;
 }
 
 @media (min-width: 2000px) {
   html {
-    font-size: 18px;
+    font-size: 20px;
   }
 }
 
-@media (min-width: 1400px) {
+@media (max-width: 1500px) {
   html {
-    font-size: 14px;
+    font-size: 13px;
   }
 }
 
-@media (min-width: 1200px) {
+@media (max-width: 1300px) {
   html {
-    font-size: 12px;
+    font-size: 11px;
   }
 }
 
-@media (min-width: 1000px) {
+@media (max-width: 1000px) {
   html {
-    font-size: 10px;
+    font-size: 9px;
   }
 }
 
-@media (min-width: 600px) {
-  html {
-    font-size: 8px;
-  }
-}
-
-@media (max-width: 599px) {
+@media (max-width: 600px) {
   html {
     font-size: 7px;
   }
