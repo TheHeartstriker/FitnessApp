@@ -18,7 +18,7 @@
 
 .NavContainer {
   position: absolute;
-  width: 7%;
+  width: 6%;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -56,13 +56,16 @@
   align-items: center;
   flex-direction: column;
   box-sizing: border-box;
-  transition: background-color 0.2s, opacity 0.2s, border-left 0.2s;
+  transition: background-color 0.3s ease-in-out, opacity 0.3s ease-in-out,
+    border-left 0.3s ease-in-out, color 0.3s ease-in-out;
+  cursor: pointer;
 }
 
 .NavIcon h1 {
   margin: 0;
   font-size: 1.5rem;
   color: var(--Text-White);
+  opacity: 0.7;
 }
 
 .Icon {
@@ -75,6 +78,31 @@
 .NavIcon:hover {
   background-color: var(--Card-Basic);
   border-left: var(--Blue-1) 5px solid;
+  opacity: 1;
+}
+
+.NavIcon:hover .Icon {
+  opacity: 1;
+  color: var(--Blue-1);
+}
+
+.NavIcon:hover h1 {
+  opacity: 1;
+}
+
+.NavIcon.Active {
+  background-color: var(--Card-Basic);
+  border-left: var(--Blue-1) 5px solid;
+  opacity: 1;
+}
+
+.NavIcon.Active h1 {
+  opacity: 1;
+}
+
+.NavIcon.Active .Icon {
+  opacity: 1;
+  color: var(--Blue-1);
 }
 
 .GithubIcon {
@@ -84,4 +112,9 @@
   transform: translateX(-50%);
   width: 100%;
   height: 10%;
+  background-image: url("../Images/Github.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
 }
