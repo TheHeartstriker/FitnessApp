@@ -37,8 +37,8 @@
   font-family: "Teko", sans-serif;
   font-size: 3rem;
   position: relative;
-  width: 15rem;
-  height: 15rem;
+  width: 15vh;
+  height: 15vh;
   background-color: var(--Card-Basic);
   border-radius: 10px;
   border: 3px solid #0082cd;
@@ -55,8 +55,8 @@
 
 .CubeBack {
   position: absolute;
-  width: 13.5rem;
-  height: 13.5rem;
+  width: 13vh;
+  height: 13vh;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) rotate(45deg);

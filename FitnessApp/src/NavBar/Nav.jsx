@@ -7,49 +7,68 @@ import {
   HeartIcon,
 } from "@heroicons/react/24/outline";
 import { Context } from "../Provider";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 function Nav() {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const { isSignedIn, setIsSignedIn } = useContext(Context);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleIconClick = () => {
     setIsCollapsed(!isCollapsed);
   };
 
-  if (isSignedIn) {
+  function GithubLink() {
+    window.open(
+      "https://github.com/TheHeartstriker/FitnessApp",
+      "_blank",
+      "noopener noreferrer"
+    );
+  }
+  if (location.pathname !== "/") {
     return (
-      <div className={`NavBarContainer ${isCollapsed ? "collapsed" : ""}`}>
-        {/* Items */}
-        <ul className={`NavBar ${isCollapsed ? "collapsed" : ""}`}>
-          <li
-            onClick={handleIconClick}
-            className={`MainIcon ${isCollapsed ? "collapsed" : ""}`}
+      <div className="NavContainer">
+        <div className="Ball" onClick={() => navigate("/")}></div>
+        <div className="NavContent">
+          <div
+            className={`NavIcon ${
+              location.pathname === "/login" ? "Active" : ""
+            }`}
+            onClick={() => navigate("/login")}
           >
-            <Bars4Icon />
-          </li>
-          {!isCollapsed && (
-            <>
-              <li onClick={() => navigate("/Share")}>
-                {!isCollapsed && <span>Share</span>}
-                <ShareIcon className="icons" />
-              </li>
-              <li onClick={() => navigate("/login")}>
-                {!isCollapsed && <span>Login</span>}
-                <ArrowLeftEndOnRectangleIcon className="icons" />
-              </li>
-              <li onClick={() => navigate("/view")}>
-                {!isCollapsed && <span>Stats</span>}
-                <AdjustmentsHorizontalIcon className="icons" />
-              </li>
-              <li onClick={() => navigate("/daily")}>
-                {!isCollapsed && <span>Daily</span>}
-                <HeartIcon className="icons" />
-              </li>
-            </>
-          )}
-        </ul>
+            <ArrowLeftEndOnRectangleIcon className="Icon"></ArrowLeftEndOnRectangleIcon>
+            <h1>Login</h1>
+          </div>
+          <div
+            className={`NavIcon ${
+              location.pathname === "/daily" ? "Active" : ""
+            }`}
+            onClick={() => navigate("/daily")}
+          >
+            <HeartIcon className="Icon"></HeartIcon>
+            <h1>Daily</h1>
+          </div>
+          <div
+            className={`NavIcon ${
+              location.pathname === "/view" ? "Active" : ""
+            }`}
+            onClick={() => navigate("/view")}
+          >
+            <AdjustmentsHorizontalIcon className="Icon"></AdjustmentsHorizontalIcon>
+            <h1>Stats</h1>
+          </div>
+          <div
+            className={`NavIcon ${
+              location.pathname === "/share" ? "Active" : ""
+            }`}
+            onClick={() => navigate("/share")}
+          >
+            <ShareIcon className="Icon"></ShareIcon>
+            <h1>Share</h1>
+          </div>
+        </div>
+        <div className="GithubIcon" onClick={() => GithubLink()}></div>
       </div>
     );
   }

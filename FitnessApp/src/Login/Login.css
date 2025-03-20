@@ -24,7 +24,8 @@
   overflow: hidden;
   background-color: var(--Background);
   height: 100vh;
-  width: 100vw;
+  width: 95vw;
+  margin-left: 5vw;
   gap: 50px;
 }
 
