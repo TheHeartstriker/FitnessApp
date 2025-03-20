@@ -42,7 +42,7 @@ createRoot(document.getElementById("root")).render(
           />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/daily" element={<PrivateRoute element={<Daily />} />} />
-          <Route path="/share" element={<PrivateRoute element={<Share />} />} />
+          <Route path="/share" element={<Share />} />
         </Routes>
       </BrowserRouter>
     </Provider>

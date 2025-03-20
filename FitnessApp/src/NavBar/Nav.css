@@ -17,8 +17,8 @@
 }
 
 .NavContainer {
-  position: absolute;
-  width: 6%;
+  position: fixed;
+  width: 5vw;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -37,6 +37,7 @@
   height: 5rem;
   border-radius: 50%;
   background-color: var(--Text-Blue);
+  cursor: pointer;
 }
 
 .NavContent {
@@ -117,4 +118,10 @@
   background-repeat: no-repeat;
   background-position: center;
   cursor: pointer;
+}
+
+@media (max-width: 1000px) {
+  .NavContainer {
+    width: 10vw;
+  }
 }
