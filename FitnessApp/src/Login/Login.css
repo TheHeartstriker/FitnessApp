@@ -131,6 +131,7 @@
 .LogSignPage input {
   width: 100%;
   font-size: 2rem;
+  font-family: "Teko", sans-serif;
 }
 
 .input-group {

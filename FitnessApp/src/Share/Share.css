@@ -23,7 +23,8 @@
   grid-auto-rows: minmax(250px, auto);
   grid-auto-columns: minmax(250px, auto);
   background: #0a0a0a;
-  width: 100vw;
+  width: 95vw;
+  margin-left: 5vw;
   min-height: 100vh;
   height: auto;
 }
@@ -51,6 +52,10 @@
 
 /* Item container for displying user data */
 .Item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   position: relative;
   text-align: center;
   border: 3px solid var(--Blue-1);
@@ -63,14 +68,14 @@
   border-radius: 5px;
   color: #ffffff;
   padding: 10px;
-  height: 50%;
-  width: 50%;
+  height: 25vh;
+  width: 25vh;
   transition: transform 0.7s ease, box-shadow 0.7s ease;
   z-index: 1;
 }
 
 .Item h3 {
-  font-size: 0.8rem;
+  font-size: 1rem;
   margin: 0;
   padding: 0;
   color: var(--Text-Blue);
@@ -80,4 +85,18 @@
 .Item:hover {
   transform: scale(1.4);
   box-shadow: 0 0 80px hsla(234, 100%, 50%, 0.5);
+}
+
+@media (max-width: 1000px) {
+  .Item {
+    height: 20vh;
+    width: 20vh;
+  }
+}
+
+@media (max-width: 800px) {
+  .Item {
+    height: 15vh;
+    width: 15vh;
+  }
 }

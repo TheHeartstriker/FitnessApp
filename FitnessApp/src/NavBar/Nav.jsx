@@ -15,10 +15,6 @@ function Nav() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const handleIconClick = () => {
-    setIsCollapsed(!isCollapsed);
-  };
-
   function GithubLink() {
     window.open(
       "https://github.com/TheHeartstriker/FitnessApp",
