@@ -119,7 +119,6 @@ function Daily() {
       );
       const data = await response.json();
       setShare(data);
-      console.log(data, "Data from share");
     } catch (error) {
       console.error(error);
     }

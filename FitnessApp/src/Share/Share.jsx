@@ -192,7 +192,6 @@ function Share() {
   //Puts the data onto the screen
   useEffect(() => {
     if (Datafetched && LoadedAmount > 0 && data.length > 0) {
-      console.log(data);
       TransposeData(data, 0, LoadedAmount);
     }
   }, [Datafetched, LoadedAmount]);
