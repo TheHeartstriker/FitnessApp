@@ -146,7 +146,7 @@ function LoginPage() {
       }),
     };
     try {
-      await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/signup`, options);
+      await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/register`, options);
       setIsSignedIn(true);
       AnimateBorderGreen();
     } catch (error) {

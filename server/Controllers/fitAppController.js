@@ -135,3 +135,35 @@ async function getAllSharedData(req, res, next) {
     next(error);
   }
 }
+
+async function seeIfShareTF(req, res, next) {
+  try {
+    const userId = req.user.id;
+    const sharedRecord = await dailyfitinfo.findOne({
+      where: {
+        userid: userId,
+        share: true,
+      },
+    });
+    if (!sharedRecord) {
+      return res
+        .status(404)
+        .json({ message: "No shared data found for the user" });
+    }
+
+    res
+      .status(200)
+      .json({ message: "User has shared data", data: sharedRecord });
+  } catch (error) {
+    next(error);
+  }
+}
+
+export {
+  createDataPage,
+  updateDataPage,
+  updateShare,
+  getFitData,
+  getAllSharedData,
+  seeIfShareTF,
+};
