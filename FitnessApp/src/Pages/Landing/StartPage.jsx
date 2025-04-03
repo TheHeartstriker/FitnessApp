@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext, useRef } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import FrontSvg from "../Images/Front";
-import Test from "../Images/Test.svg";
+import FrontSvg from "../../Assets/Front";
+import Test from "../../Assets/Test.svg";
 
 function StartPage() {
   //Check for firefox

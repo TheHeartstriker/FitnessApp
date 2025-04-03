@@ -6,7 +6,7 @@ import {
   ShareIcon,
   HeartIcon,
 } from "@heroicons/react/24/outline";
-import { Context } from "../Provider";
+import { Context } from "../../Routing/Provider";
 import { useNavigate, useLocation } from "react-router-dom";
 
 function Nav() {

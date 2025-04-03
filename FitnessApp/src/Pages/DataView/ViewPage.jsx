@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext, useRef, useMemo } from "react";
 import BarChart from "./BarChart.jsx";
 import DayChart from "./DayChart.jsx";
-import { Context } from "../Provider";
+import { Context } from "../../Routing/Provider";
 
 function ViewPage() {
   const { isSignedIn, setIsSignedIn } = useContext(Context);

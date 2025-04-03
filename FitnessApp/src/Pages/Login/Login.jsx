@@ -1,6 +1,6 @@
 import { useState, useRef, useContext, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { Context } from "../Provider";
+import { Context } from "../../Routing/Provider";
 import { useNavigate } from "react-router-dom";
 function LoginPage() {
   //Important context values used across the app
