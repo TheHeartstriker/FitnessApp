@@ -14,28 +14,15 @@ function LoginPage() {
   //Used in junction with the animation to stop the user from clicking multiple times
   const [CanClick, setCanClick] = useState(true);
   //Refrence to the border
-  const borderRef = useRef(null);
   const navigate = useNavigate();
-  //Adds a red border to the input fields to indicate failure
-  function AnimateBorderRed() {
-    const border = borderRef.current;
-    border.classList.add("AnimatePulseRed");
-    setCanClick(false);
-    setTimeout(() => {
-      border.classList.remove("AnimatePulseRed");
-      setCanClick(true);
-    }, 1500);
+
+  function formatDateToMySQL(date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
   }
-  //Adds a green border to the input fields to indicate success
-  function AnimateBorderGreen() {
-    const border = borderRef.current;
-    border.classList.add("AnimatePulseGreen");
-    setCanClick(false);
-    setTimeout(() => {
-      setCanClick(true);
-      border.classList.remove("AnimatePulseGreen");
-    }, 1500);
-  }
+
   //Handling the event changes for the username
   const handleUsernameChange = (event) => {
     if (event.target.value.length > 49) {
@@ -72,22 +59,12 @@ function LoginPage() {
   };
   //Calls the login or sign up function depending on the state of the login variable
   const handleSignOrLog = () => {
-    if (!CanClick) {
-      return;
-    }
     if (login) {
       handleLogin();
     } else {
       handleSignup();
     }
   };
-
-  function formatDateToMySQL(date) {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const day = String(date.getDate()).padStart(2, "0");
-    return `${year}-${month}-${day}`;
-  }
 
   //Sends the sign up data to be checked by the server and returns a response
   //The response returns a true value if the sign up was successful that is used in creating tasks
@@ -97,12 +74,11 @@ function LoginPage() {
       headers: {
         "Content-Type": "application/json",
       },
-      credentials: "include",
       body: JSON.stringify({
         username,
         password,
-        date: formatDateToMySQL(new Date()),
       }),
+      credentials: "include",
     };
 
     try {
@@ -110,15 +86,21 @@ function LoginPage() {
         `${import.meta.env.VITE_API_BASE_URL}/api/login`,
         options
       );
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error("Error:", errorData.message);
+        return;
+      }
       const responseData = await response.json();
+      console.log(responseData, "Response data");
       if (responseData.success) {
-        AnimateBorderGreen();
         setIsSignedIn(true);
+        console.log("Login successful");
       } else {
         //If the login fails
-        AnimateBorderRed();
         setIsSignedIn(false);
-        alert("Incorrect username or password");
+        console.error("Login failed:", responseData.message);
       }
     } catch (error) {
       console.error("Error:", error);
@@ -126,63 +108,43 @@ function LoginPage() {
   };
   //Sends the data to the server to be inserted into the database
   const handleSignup = async () => {
-    if ((await CheckIfInUse(username)) === true) {
-      alert("Username is already in use");
-      AnimateBorderRed();
-      return;
-    }
-    let UserId = uuidv4();
     const options = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      credentials: "include",
+
       body: JSON.stringify({
         username,
         password,
-        UserId,
-        date: formatDateToMySQL(new Date()),
       }),
+      credentials: "include",
     };
-    try {
-      await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/register`, options);
-      setIsSignedIn(true);
-      AnimateBorderGreen();
-    } catch (error) {
-      AnimateBorderRed();
-      console.error("Error:", error);
-    }
-  };
-  //Checks if the username is in use by sending the username to the server and returning a response
-  async function CheckIfInUse() {
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username }),
-    };
+
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_API_BASE_URL}/api/checkUsername`,
+        `${import.meta.env.VITE_API_BASE_URL}/api/register`,
         options
       );
+
       const responseData = await response.json();
-      console.log("Name in use", responseData);
-      if (responseData) {
-        return true;
+      if (responseData.success) {
+        setIsSignedIn(true);
       } else {
-        return false;
+        //If the sign up fails
+        setIsSignedIn(false);
+        alert("Error signing up");
       }
     } catch (error) {
       console.error("Error:", error);
     }
-  }
+  };
+
   //Creates the 'page' of data for the user on this spefic day if the user already has a page it will not create a new one
   //Aka if the user logs in twice in one day it will not create a new page
   async function CreateDataPage() {
-    const currentDate = new Date().toLocaleDateString("en-CA");
+    new Date().toLocaleDateString("en-CA");
+    const currentDate = formatDateToMySQL(new Date());
     const options = {
       method: "POST",
       headers: {
@@ -194,17 +156,23 @@ function LoginPage() {
         Zone3: 0,
         Zone4: 0,
         Zone5: 0,
-        weight: 0,
+        weight: 0.0,
         HeartRate: 0,
         Date: currentDate,
       }),
       credentials: "include",
     };
     try {
-      await fetch(
+      const response = await fetch(
         `${import.meta.env.VITE_API_BASE_URL}/api/createDataPage`,
         options
       );
+      const responseData = await response.json();
+      if (responseData.success) {
+        console.log("Data page created successfully");
+      } else {
+        console.error("Error creating data page:", responseData.message);
+      }
     } catch (error) {
       console.error("Error:", error);
     }
@@ -228,7 +196,6 @@ function LoginPage() {
           </div>
           <div className="input-group">
             <input
-              ref={borderRef}
               type="text"
               value={username}
               onChange={handleUsernameChange}

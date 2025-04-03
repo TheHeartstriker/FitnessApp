@@ -1,8 +1,11 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { User } from "./Models/Model.js";
 import dotenv from "dotenv";
 import { v4 as uuidv4 } from "uuid";
+
+import User from "../Models/AuthModel.js";
+
+dotenv.config();
 
 //Takes a username and password
 async function register(req, res, next) {
@@ -40,6 +43,7 @@ async function register(req, res, next) {
       maxAge: 24 * 60 * 60 * 1000,
     });
     return res.status(201).json({
+      success: true,
       message: "User created successfully",
       token: token,
     });
@@ -62,7 +66,7 @@ async function login(req, res, next) {
       return res.status(400).json({ message: "Invalid credentials" });
     }
 
-    const isPasswordValid = await bcrypt.compare(password, User.Password);
+    const isPasswordValid = await bcrypt.compare(password, user.Password);
 
     if (!isPasswordValid) {
       return res.status(400).json({ message: "Invalid credentials" });
@@ -82,6 +86,7 @@ async function login(req, res, next) {
       maxAge: 24 * 60 * 60 * 1000,
     });
     return res.status(200).json({
+      success: true,
       message: "Login successful",
       token: token,
     });

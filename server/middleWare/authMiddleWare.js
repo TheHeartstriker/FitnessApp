@@ -5,7 +5,7 @@ dotenv.config();
 
 function authenticate(req, res, next) {
   try {
-    const token = req.headers.authorization?.split(" ")[1];
+    const token = req.cookies?.jwtToken;
     if (!token) {
       return res.status(401).json({ message: "Authentication required" });
     }

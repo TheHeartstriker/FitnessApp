@@ -10,7 +10,16 @@ const ConfigDb = new Sequelize(
   {
     host: process.env.MY_HOST,
     dialect: "mysql",
+    logging: console.log,
   }
 );
+
+// ConfigDb.sync({ force: true })
+//   .then(() => {
+//     console.log("Database & tables created!");
+//   })
+//   .catch((error) => {
+//     console.error("Error creating database & tables:", error);
+//   });
 
 export default ConfigDb;

@@ -3,21 +3,28 @@ import ConfigDb from "../config/configDb.js";
 //
 // User model
 //
-const User = ConfigDb.define("User", {
-  UserId: {
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
-    primaryKey: true,
+const User = ConfigDb.define(
+  "User",
+  {
+    UserId: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      primaryKey: true,
+    },
+    UserName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
+    Password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
   },
-  UserName: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    unique: true,
-  },
-  Password: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-});
+  {
+    timestamps: true,
+    tableName: "user",
+  }
+);
 
 export default User;

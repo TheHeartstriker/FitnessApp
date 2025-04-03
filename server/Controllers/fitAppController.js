@@ -1,20 +1,20 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { User, dailyfitinfo } from "./Models/Model.js";
+import dailyfitinfo from "../Models/fitInfoModel.js";
+import User from "../Models/AuthModel.js";
 import dotenv from "dotenv";
 import { v4 as uuidv4 } from "uuid";
 
 async function createDataPage(req, res, next) {
   try {
-    const { Zone1, Zone2, Zone3, Zone4, Zone5, weight, HeartRate, date } =
+    const { Zone1, Zone2, Zone3, Zone4, Zone5, weight, HeartRate, Date } =
       req.body;
     const userId = req.user.id;
 
-    // Check if the user already has a record for today
     const existingRecord = await dailyfitinfo.findOne({
       where: {
-        userId: userId,
-        DateRecorded: date,
+        userid: userId,
+        DateRecorded: Date,
       },
     });
 
@@ -23,7 +23,6 @@ async function createDataPage(req, res, next) {
         .status(400)
         .json({ message: "Data page already exists for today" });
     }
-
     // Create a new data page for the user
     const newRecord = await dailyfitinfo.create({
       Zone1Time: Zone1,
@@ -33,8 +32,9 @@ async function createDataPage(req, res, next) {
       Zone5Time: Zone5,
       weight: weight,
       resting_heart: HeartRate,
-      DateRecorded: date,
+      DateRecorded: Date,
       userid: userId,
+      share: false,
     });
 
     res
