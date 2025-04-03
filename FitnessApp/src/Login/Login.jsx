@@ -150,13 +150,6 @@ function LoginPage() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        Zone1: 0,
-        Zone2: 0,
-        Zone3: 0,
-        Zone4: 0,
-        Zone5: 0,
-        weight: 0.0,
-        HeartRate: 0,
         Date: currentDate,
       }),
       credentials: "include",

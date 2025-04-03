@@ -14,6 +14,7 @@ const ConfigDb = new Sequelize(
   }
 );
 
+// For model debugging
 // ConfigDb.sync({ force: true })
 //   .then(() => {
 //     console.log("Database & tables created!");

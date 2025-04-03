@@ -8,6 +8,9 @@ function Share() {
   //The amount of tabs loaded
   const [LoadedAmount, setLoadedAmount] = useState(8);
   //Gets the shared data from the server based on usernames
+
+  //WARNING if there is no share data an error will be thrown
+
   async function fetchData() {
     const options = {
       method: "GET",

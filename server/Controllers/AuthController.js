@@ -7,28 +7,53 @@ import User from "../Models/AuthModel.js";
 
 dotenv.config();
 
+const PassUserMax = 249;
+
 //Takes a username and password
 async function register(req, res, next) {
   try {
     const { username, password } = req.body;
+    // Data validation
+    if (
+      username === undefined ||
+      password === undefined ||
+      username !== String(username) ||
+      password !== String(password) ||
+      username.length > PassUserMax ||
+      password.length > PassUserMax
+    ) {
+      return res.status(400).json({
+        message: "Invalid data, length, type or existance",
+        success: false,
+      });
+    }
 
+    // Check if username exists already
     const existUser = await User.findOne({
       where: {
         UserName: username,
       },
     });
     if (existUser) {
-      return res.status(400).json({ message: "User already exists" });
+      return res
+        .status(400)
+        .json({ message: "User already exists", success: false });
     }
 
+    // Hash the password and create a new user
     const hashedPassword = await bcrypt.hash(password, 12);
-
     const newUser = await User.create({
       UserId: uuidv4(),
       UserName: username,
       Password: hashedPassword,
     });
-
+    if (!newUser) {
+      return res.status(500).json({
+        message: "Failed to create user",
+        success: false,
+      });
+    }
+    // Generate a JWT token and set it in a cookie
     const token = jwt.sign(
       { id: newUser.UserId, username: newUser.UserName },
       process.env.ACCESS_TOKEN_SECRET,
@@ -55,23 +80,39 @@ async function register(req, res, next) {
 async function login(req, res, next) {
   try {
     const { username, password } = req.body;
-
+    // Data validation
+    if (
+      username === undefined ||
+      password === undefined ||
+      username !== String(username) ||
+      password !== String(password) ||
+      username.length > PassUserMax ||
+      password.length > PassUserMax
+    ) {
+      return res.status(400).json({
+        message: "Invalid data, length, type or existance",
+        success: false,
+      });
+    }
+    // Check if username exists
     const user = await User.findOne({
       where: {
         UserName: username,
       },
     });
-
+    //Compare password with the hashed password in the database and check if the user exists
     if (!user) {
-      return res.status(400).json({ message: "Invalid credentials" });
+      return res
+        .status(400)
+        .json({ message: "Invalid username", success: false });
     }
-
     const isPasswordValid = await bcrypt.compare(password, user.Password);
-
     if (!isPasswordValid) {
-      return res.status(400).json({ message: "Invalid credentials" });
+      return res
+        .status(400)
+        .json({ message: "Invalid credentials", success: false });
     }
-
+    // Generate a JWT token and set it in a cookie
     const token = jwt.sign(
       { id: user.UserId, username: user.UserName },
       process.env.ACCESS_TOKEN_SECRET,

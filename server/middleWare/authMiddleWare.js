@@ -7,15 +7,18 @@ function authenticate(req, res, next) {
   try {
     const token = req.cookies?.jwtToken;
     if (!token) {
-      return res.status(401).json({ message: "Authentication required" });
+      return res
+        .status(401)
+        .json({ message: "Authentication required", success: false });
     }
 
     const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
     req.user = decoded;
-    console.log(decoded, "Decoded token");
     next();
   } catch (error) {
-    res.status(401).json({ message: "Invalid or expired token" });
+    res
+      .status(401)
+      .json({ message: "Invalid or expired token", success: false });
   }
 }
 
