@@ -9,6 +9,7 @@ import {
   updateShare,
   getFitData,
   getAllSharedData,
+  getShareInfo,
 } from "./Controllers/fitAppController.js";
 
 const router = Router();
@@ -20,6 +21,6 @@ router.put("/updateDataPage", authenticate, updateDataPage);
 router.put("/updateShare", authenticate, updateShare);
 router.get("/getFitData", authenticate, getFitData);
 router.get("/getSharedData", authenticate, getAllSharedData);
-router.get("/getShareInfo", authenticate, getAllSharedData);
+router.get("/getShareInfo", authenticate, getShareInfo);
 
 export default router;

@@ -15,6 +15,15 @@ function Daily() {
   const workoutTimeRef = useRef(null);
   const restingHeartRateRef = useRef(null);
   const weightRef = useRef(null);
+  const currentDate = formatDateToMySQL(new Date());
+
+  function formatDateToMySQL(date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  }
+
   //Share state
   const [Share, setShare] = useState(false);
   //Update workout time
@@ -42,7 +51,7 @@ function Daily() {
   //Handlers for the submit button handles resting heart rate, weight and workout time
   const submitRestingHeartRate = async (rate) => {
     try {
-      await saveData("resting_heart", rate);
+      await saveData("resting_heart", rate, currentDate);
       //Clear the input field
       restingHeartRateRef.current.value = "";
     } catch (error) {
@@ -52,7 +61,7 @@ function Daily() {
   //weight
   const submitWeight = async (weight) => {
     try {
-      await saveData("weight", weight);
+      await saveData("weight", weight, currentDate);
       //Clear the input field
       weightRef.current.value = "";
     } catch (error) {
@@ -63,7 +72,7 @@ function Daily() {
   //workout time
   const UpdateTime = async () => {
     try {
-      await saveData(zone, workoutTime);
+      await saveData(zone, workoutTime, currentDate);
       //Clear the input field
       workoutTimeRef.current.value = "";
     } catch (error) {
@@ -84,14 +93,14 @@ function Daily() {
   }
 
   //Sends data to the database to be saved
-  async function saveData(DataName, Data) {
+  async function saveData(DataName, Data, Date) {
     const options = {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
       credentials: "include",
-      body: JSON.stringify({ [DataName]: Data }),
+      body: JSON.stringify({ DataName, Data, Date }),
     };
     try {
       const response = await fetch(
@@ -99,6 +108,11 @@ function Daily() {
         options
       );
       const data = await response.json();
+      if (data.success) {
+        console.log("Data updated successfully:", data);
+      } else {
+        console.error("Failed to update data:", data.message);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -118,7 +132,11 @@ function Daily() {
         options
       );
       const data = await response.json();
-      setShare(data);
+      if (data.success) {
+        setShare(true);
+      } else {
+        setShare(false);
+      }
     } catch (error) {
       console.error(error);
     }

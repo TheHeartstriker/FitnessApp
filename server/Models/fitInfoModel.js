@@ -1,5 +1,6 @@
 import { DataTypes, Sequelize } from "sequelize";
 import ConfigDb from "../config/configDb.js";
+import User from "./AuthModel.js";
 
 const dailyfitinfo = ConfigDb.define(
   "dailyfitinfo",
@@ -53,5 +54,10 @@ const dailyfitinfo = ConfigDb.define(
     tableName: "dailyfitinfo",
   }
 );
+
+dailyfitinfo.belongsTo(User, {
+  foreignKey: "userid",
+  targetKey: "UserId",
+});
 
 export default dailyfitinfo;

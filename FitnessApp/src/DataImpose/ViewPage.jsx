@@ -47,7 +47,8 @@ function ViewPage() {
         options
       );
       const data = await response.json();
-      setData(data);
+      console.log(data.fitData);
+      setData(data.fitData);
       setIsDatafetched(true);
     } catch (error) {
       console.error(error);

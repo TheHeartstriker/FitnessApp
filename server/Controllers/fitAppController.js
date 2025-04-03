@@ -47,23 +47,25 @@ async function createDataPage(req, res, next) {
 
 async function updateDataPage(req, res, next) {
   try {
-    const { Data, Dataname, date } = req.body;
+    const { Data, DataName, Date } = req.body;
+
+    console.log("Data:", Data, "Dataname:", DataName, "Date:", Date);
 
     const Page = await dailyfitinfo.findOne({
       where: {
         userid: req.user.id,
-        DateRecorded: date,
+        DateRecorded: Date,
       },
     });
     if (!Page) {
       return res.status(404).json({ message: "Data page not found" });
     }
     const updatedPage = await dailyfitinfo.update(
-      { [Dataname]: Data },
+      { [DataName]: Data },
       {
         where: {
           userId: req.user.id,
-          DateRecorded: date,
+          DateRecorded: Date,
         },
       }
     );
@@ -78,26 +80,40 @@ async function updateDataPage(req, res, next) {
 
 async function updateShare(req, res, next) {
   try {
-    const { share } = req.body;
+    const userId = req.user.id;
 
-    if (typeof share !== "boolean") {
-      return res
-        .status(400)
-        .json({ message: "Invalid share value. Must be a boolean." });
+    // Find the current share value for the user
+    const record = await dailyfitinfo.findOne({
+      where: {
+        userid: userId,
+      },
+    });
+
+    if (!record) {
+      return res.status(404).json({ message: "No record found to update" });
     }
 
+    // Toggle the share value
+    const newShareValue = !record.share;
+
+    // Update the share value in the database
     const [updatedRows] = await dailyfitinfo.update(
-      { share: share },
+      { share: newShareValue },
       {
         where: {
-          userid: req.user.id,
+          userid: userId,
         },
       }
     );
+
     if (updatedRows === 0) {
-      return res.status(404).json({ message: "No records found to update" });
+      return res.status(400).json({ message: "Failed to update share status" });
     }
-    res.status(200).json({ message: "Share status updated successfully" });
+
+    res.status(200).json({
+      message: "Share status updated successfully",
+      newShareValue: newShareValue,
+    });
   } catch (error) {
     next(error);
   }
@@ -114,7 +130,7 @@ async function getFitData(req, res, next) {
     if (!fitData) {
       return res.status(404).json({ message: "No fit data found" });
     }
-    res.status(200).json({ data: fitData });
+    res.status(200).json({ fitData });
   } catch (error) {
     next(error);
   }
@@ -126,11 +142,45 @@ async function getAllSharedData(req, res, next) {
       where: {
         share: true,
       },
+      include: [
+        {
+          model: User,
+          attributes: ["UserName"],
+        },
+      ],
     });
-    if (!sharedData) {
-      return res.status(404).json({ message: "No shared data found?" });
+
+    if (!sharedData || sharedData.length === 0) {
+      return res.status(404).json({ message: "No shared data found" });
     }
-    res.status(200).json({ data: sharedData });
+
+    const formattedData = sharedData.map((data) => {
+      const jsonData = data.toJSON();
+      return {
+        ...jsonData,
+        UserName: jsonData.User.UserName,
+      };
+    });
+
+    res.status(200).json({ formattedData });
+  } catch (error) {
+    next(error);
+  }
+}
+async function getShareInfo(req, res, next) {
+  try {
+    const userId = req.user.id;
+    const sharedRecord = await dailyfitinfo.findOne({
+      where: {
+        userid: userId,
+        share: true,
+      },
+    });
+    if (!sharedRecord) {
+      return res.status(404).json({ message: "No shared data found" });
+    }
+
+    res.status(200).json();
   } catch (error) {
     next(error);
   }
@@ -166,4 +216,5 @@ export {
   getFitData,
   getAllSharedData,
   seeIfShareTF,
+  getShareInfo,
 };

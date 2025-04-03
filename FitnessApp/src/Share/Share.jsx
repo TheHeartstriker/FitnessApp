@@ -14,6 +14,7 @@ function Share() {
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
     };
     try {
       const response = await fetch(
@@ -21,7 +22,8 @@ function Share() {
         options
       );
       const data = await response.json();
-      const sortedData = await SortByUserName(data);
+      console.log("Data:", data.formattedData);
+      const sortedData = await SortByUserName(data.formattedData);
       setData(sortedData);
       setDataFetched(true);
     } catch (error) {
