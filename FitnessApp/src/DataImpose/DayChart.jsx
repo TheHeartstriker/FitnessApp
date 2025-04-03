@@ -38,6 +38,7 @@ function DayChart({ dataprop, TimeProp }) {
     for (let i = 0; i < tempTimeArr.length; i++) {
       //The date we are checking this increment
       let record = data[dataIndex];
+      console.log("Record:", record);
       let recordDate = record
         ? new Date(record.DateRecorded).toISOString().split("T")[0]
         : null;

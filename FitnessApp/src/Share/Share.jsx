@@ -8,12 +8,16 @@ function Share() {
   //The amount of tabs loaded
   const [LoadedAmount, setLoadedAmount] = useState(8);
   //Gets the shared data from the server based on usernames
+
+  //WARNING if there is no share data an error will be thrown
+
   async function fetchData() {
     const options = {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
     };
     try {
       const response = await fetch(
@@ -21,7 +25,8 @@ function Share() {
         options
       );
       const data = await response.json();
-      const sortedData = await SortByUserName(data);
+      console.log("Data:", data.formattedData);
+      const sortedData = await SortByUserName(data.formattedData);
       setData(sortedData);
       setDataFetched(true);
     } catch (error) {
