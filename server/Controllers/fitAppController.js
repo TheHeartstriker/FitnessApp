@@ -223,13 +223,18 @@ async function getShareInfo(req, res, next) {
     const sharedRecord = await dailyfitinfo.findOne({
       where: {
         userid: userId,
-        share: true,
       },
     });
+
     if (!sharedRecord) {
       return res
         .status(404)
         .json({ message: "No shared data found", success: false });
+    }
+    if (!sharedRecord.share) {
+      return res
+        .status(200)
+        .json({ message: "Data exists but not shared", success: false });
     }
 
     res.status(200).json({ success: true });

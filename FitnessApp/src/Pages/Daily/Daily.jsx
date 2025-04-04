@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-
+import { saveData, getShareInfo, updateShare } from "../../Services/ApiFitness";
 function Daily() {
   //Todays data
   const [DailyData, setDailyData] = useState([]);
@@ -92,77 +92,17 @@ function Daily() {
     }
   }
 
-  //Sends data to the database to be saved
-  async function saveData(DataName, Data, Date) {
-    const options = {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-      body: JSON.stringify({ DataName, Data, Date }),
-    };
-    try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_BASE_URL}/api/updateDataPage`,
-        options
-      );
-      const data = await response.json();
-      if (data.success) {
-        console.log("Data updated successfully:", data);
-      } else {
-        console.error("Failed to update data:", data.message);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  }
-  //Checks if the user is sharing there data
-  async function getShareInfo() {
-    const options = {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-    };
-    try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_BASE_URL}/api/getShareInfo`,
-        options
-      );
-      const data = await response.json();
-      if (data.success) {
-        setShare(true);
-      } else {
-        setShare(false);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  async function UpdateShare() {
-    const options = {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-    };
-    try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_BASE_URL}/api/updateShare`,
-        options
-      );
-      const data = await response.json();
-    } catch (error) {
-      console.error(error);
-    }
-  }
   //Get
   useEffect(() => {
-    getShareInfo();
+    async function awaitShare() {
+      try {
+        const share = await getShareInfo();
+        setShare(share);
+      } catch (error) {
+        console.error("Error fetching share info:", error);
+      }
+    }
+    awaitShare();
   }, []);
 
   return (
@@ -170,7 +110,7 @@ function Daily() {
       <button
         className={`ShareButton ${Share ? "True" : "False"}`}
         onClick={() => {
-          UpdateShare(), ReShare(Share);
+          updateShare(), ReShare(Share);
         }}
       >
         {Share ? "Sharing with others" : "Not Sharing"}

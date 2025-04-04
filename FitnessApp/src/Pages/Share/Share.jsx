@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { fetchPublicShare } from "../../Services/ApiFitness";
 function Share() {
   const [data, setData] = useState([]);
   //Full elements with related data one for each user
@@ -10,29 +11,6 @@ function Share() {
   //Gets the shared data from the server based on usernames
 
   //WARNING if there is no share data an error will be thrown
-
-  async function fetchData() {
-    const options = {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-    };
-    try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_BASE_URL}/api/getSharedData`,
-        options
-      );
-      const data = await response.json();
-      console.log("Data:", data.formattedData);
-      const sortedData = await SortByUserName(data.formattedData);
-      setData(sortedData);
-      setDataFetched(true);
-    } catch (error) {
-      console.error(error);
-    }
-  }
 
   //Data is fetched by daily for every user so we need to merge the data into one element for each user
   async function SortByUserName(data) {
@@ -192,6 +170,16 @@ function Share() {
   }, [data]);
   //fetches the data from the server
   useEffect(() => {
+    async function fetchData() {
+      try {
+        const dataResponse = await fetchPublicShare();
+        const userFormat = await SortByUserName(dataResponse);
+        setData(userFormat);
+        setDataFetched(true);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
     fetchData();
   }, []);
   //Puts the data onto the screen

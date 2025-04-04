@@ -2,6 +2,7 @@ import { useState, useEffect, useContext, useRef, useMemo } from "react";
 import BarChart from "./BarChart.jsx";
 import DayChart from "./DayChart.jsx";
 import { Context } from "../../Routing/Provider";
+import { fetchData } from "../../Services/ApiFitness.jsx";
 
 function ViewPage() {
   const { isSignedIn, setIsSignedIn } = useContext(Context);
@@ -32,28 +33,7 @@ function ViewPage() {
   //Refrence to the pie chart
   const pieRef = useRef(null);
   const [IsDatafetched, setIsDatafetched] = useState(false);
-  //Fetches the data from the API
-  async function fetchData() {
-    const options = {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-    };
-    try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_BASE_URL}/api/getFitData`,
-        options
-      );
-      const data = await response.json();
-      console.log(data.fitData);
-      setData(data.fitData);
-      setIsDatafetched(true);
-    } catch (error) {
-      console.error(error);
-    }
-  }
+
   //Allows the pecentage to be displayed in the pie chart
   function Percentage(val) {
     if (pieRef.current) {
@@ -202,17 +182,25 @@ function ViewPage() {
 
   //Fetches the data when the page is loaded
   useEffect(() => {
-    fetchData();
+    async function fetchAwait() {
+      try {
+        const fetchedData = await fetchData();
+        setData(fetchedData);
+        console.log("Fetched data:", fetchedData);
+        setIsDatafetched(true);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+    fetchAwait();
   }, []);
   //Calculates the percentage when the Percentagedata is updated
   useEffect(() => {
-    if (isSignedIn) {
-      Percentage(Percentagedata);
-    }
+    Percentage(Percentagedata);
   }, [Percentagedata]);
   //When the data is fetched and the user is signed in we can calculate the data that we need to impose
   useEffect(() => {
-    if (IsDatafetched && isSignedIn) {
+    if (IsDatafetched) {
       setZone(memoizedDataByRange.newZone);
       setCalories(memoizedDataByRange.TempCal.toFixed(2));
       SetWeightOrheart("weight", setWeight);
