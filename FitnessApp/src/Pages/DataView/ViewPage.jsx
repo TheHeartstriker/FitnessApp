@@ -1,11 +1,9 @@
 import { useState, useEffect, useContext, useRef, useMemo } from "react";
 import BarChart from "./BarChart.jsx";
 import DayChart from "./DayChart.jsx";
-import { Context } from "../../Routing/Provider";
 import { fetchData } from "../../Services/ApiFitness.jsx";
 
 function ViewPage() {
-  const { isSignedIn, setIsSignedIn } = useContext(Context);
   ///Used to hold the data from the API all the data realted to the user not sorted by time
   const [data, setData] = useState([]);
   //Used to hold the time frame in which the data is being displayed and grabbed
@@ -40,7 +38,7 @@ function ViewPage() {
       for (let i = 0; i < val + 1; i++) {
         setTimeout(() => {
           pieRef.current.style.setProperty("--ng", i * 3.6 + "deg");
-        }, i * 25); // 100ms delay for each iteration
+        }, i * 25);
       }
     }
   }
@@ -130,6 +128,7 @@ function ViewPage() {
   }
 
   // Gets zone data and cals based on a given time range / frame
+  //Trying out useMemo
   const memoizedDataByRange = useMemo(() => {
     function getDataByRange(timeRange) {
       let Current = new Date();

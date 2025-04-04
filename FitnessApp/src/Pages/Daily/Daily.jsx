@@ -1,89 +1,75 @@
 import { useEffect, useState, useRef } from "react";
+import { formatDateToMySQL } from "../../Utils/FuncUtil";
 import { saveData, getShareInfo, updateShare } from "../../Services/ApiFitness";
 function Daily() {
-  //Todays data
-  const [DailyData, setDailyData] = useState([]);
-  //Data spent in a spefic zone
+  //Specific state for the daily page
   const [workoutTime, setWorkoutTime] = useState(0);
-  //Resting heart rate
   const [restingHeartRate, setRestingHeartRate] = useState(0);
-  //Weight
   const [weight, setWeight] = useState(0);
-  //Current zone the user has selected
   const [zone, setZone] = useState("Zone1Time");
   //Refrences the text input fields
   const workoutTimeRef = useRef(null);
   const restingHeartRateRef = useRef(null);
   const weightRef = useRef(null);
+  //Current date from user
   const currentDate = formatDateToMySQL(new Date());
-
-  function formatDateToMySQL(date) {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const day = String(date.getDate()).padStart(2, "0");
-    return `${year}-${month}-${day}`;
-  }
-
   //Share state
   const [Share, setShare] = useState(false);
-  //Update workout time
-  const updateWorkoutTime = (time) => {
+
+  //Handlers for the input fields
+  function updateWorkoutTime(time) {
     if (isNaN(time)) {
       return;
     }
     setWorkoutTime(time);
-  };
-  //Resting
-  const updateRestingHeartRate = (rate) => {
+  }
+  function updateRestingHeartRate(rate) {
     if (isNaN(rate)) {
       return;
     }
     setRestingHeartRate(rate);
-  };
-  //Weight
-  const updateWeight = (weight) => {
+  }
+  function updateWeight(weight) {
     if (isNaN(weight)) {
       return;
     }
     setWeight(weight);
-  };
+  }
 
-  //Handlers for the submit button handles resting heart rate, weight and workout time
-  const submitRestingHeartRate = async (rate) => {
+  // Handlers for the submit button handles resting heart rate, weight, and workout time sends data through the api
+  async function submitRestingHeartRate(rate) {
     try {
       await saveData("resting_heart", rate, currentDate);
-      //Clear the input field
+
       restingHeartRateRef.current.value = "";
     } catch (error) {
       console.error(error);
     }
-  };
-  //weight
-  const submitWeight = async (weight) => {
+  }
+  async function submitWeight(weight) {
     try {
       await saveData("weight", weight, currentDate);
-      //Clear the input field
+
       weightRef.current.value = "";
     } catch (error) {
       console.error(error);
     }
-  };
-
-  //workout time
-  const UpdateTime = async () => {
+  }
+  async function UpdateTime() {
     try {
       await saveData(zone, workoutTime, currentDate);
-      //Clear the input field
+
       workoutTimeRef.current.value = "";
     } catch (error) {
       console.error(error);
     }
-  };
-  //Update the current zone
-  const updateZone = (zone) => {
+  }
+  //Update the share value in the database
+  function updateZone(zone) {
     setZone(zone);
-  };
+  }
   //Helper if true set to false and vice versa
+  //Local state switch
   function ReShare(share) {
     if (share === true) {
       setShare(false);
@@ -92,7 +78,7 @@ function Daily() {
     }
   }
 
-  //Get
+  //Get share information from the database
   useEffect(() => {
     async function awaitShare() {
       try {

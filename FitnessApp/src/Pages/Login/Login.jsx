@@ -1,26 +1,17 @@
 import { useState, useRef, useContext, useEffect } from "react";
-import { Context } from "../../Routing/Provider";
 import { useNavigate } from "react-router-dom";
 import { handleLogin, handleSignup } from "../../Services/ApiAuth";
 import { createDataPage } from "../../Services/ApiFitness";
+import { formatDateToMySQL } from "../../Utils/FuncUtil";
 function LoginPage() {
-  //Important context values used across the app
-  const { isSignedIn, setIsSignedIn } = useContext(Context);
   //Stores the username and password
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   //Used to see which button name and function to use
   const [login, setLogin] = useState(false);
-  const [signup, setSignup] = useState(false);
+
   //Refrence to the border
   const navigate = useNavigate();
-
-  function formatDateToMySQL(date) {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, "0");
-    const day = String(date.getDate()).padStart(2, "0");
-    return `${year}-${month}-${day}`;
-  }
 
   //Handling the event changes for the username
   const handleUsernameChange = (event) => {
@@ -46,23 +37,17 @@ function LoginPage() {
       setPassword(event.target.value);
     }
   };
-  //Switch between login and signup
-  const handleSwitch = () => {
-    if (login) {
-      setLogin(false);
-      setSignup(true);
-    } else {
-      setLogin(true);
-      setSignup(false);
-    }
-  };
+
+  function handleSwitch() {
+    setLogin(!login);
+  }
 
   function createPage() {
     const currentDate = formatDateToMySQL(new Date());
     createDataPage(currentDate);
   }
-  //Calls the login or sign up function depending on the state of the login variable
-  const handleSignOrLog = () => {
+
+  function handleSignOrLog() {
     if (login) {
       let val = handleLogin(username, password);
       if (val) {
@@ -74,7 +59,7 @@ function LoginPage() {
         createPage();
       }
     }
-  };
+  }
 
   return (
     <>

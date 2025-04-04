@@ -13,9 +13,9 @@ function StartPage() {
   const SvgRef = useRef(null);
   const navigate = useNavigate();
 
-  const handleEnterClick = () => {
-    navigate("/Login"); // Replace "/desired-route" with the actual route you want to navigate to
-  };
+  function handleEnterClick() {
+    navigate("/Login");
+  }
   //Add the glow class to the vector
   function AddClass(id) {
     const vectorElement = SvgRef.current.querySelector(id);

@@ -14,7 +14,7 @@ function Share() {
 
   //Data is fetched by daily for every user so we need to merge the data into one element for each user
   async function SortByUserName(data) {
-    if (data.length === 0) {
+    if (data === undefined || data.length === 0) {
       return [];
     }
     //Store the merged results
@@ -184,7 +184,7 @@ function Share() {
   }, []);
   //Puts the data onto the screen
   useEffect(() => {
-    if (Datafetched && LoadedAmount > 0 && data.length > 0) {
+    if (Datafetched && LoadedAmount > 0 && data !== undefined) {
       TransposeData(data, 0, LoadedAmount);
     }
   }, [Datafetched, LoadedAmount]);
