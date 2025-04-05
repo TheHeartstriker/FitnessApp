@@ -22,5 +22,8 @@ router.put("/updateShare", authenticate, updateShare);
 router.get("/getFitData", authenticate, getFitData);
 router.get("/getSharedData", authenticate, getAllSharedData);
 router.get("/getShareInfo", authenticate, getShareInfo);
+router.get("/validate", authenticate, (req, res) => {
+  res.status(200).json({ isAuthenticated: true });
+});
 
 export default router;

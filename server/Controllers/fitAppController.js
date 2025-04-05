@@ -4,69 +4,63 @@ import dailyfitinfo from "../Models/fitInfoModel.js";
 import User from "../Models/AuthModel.js";
 import { v4 as uuidv4 } from "uuid";
 //Creates an empty data page for the user
-async function createDataPage(req, res, next) {
-  try {
-    const { Date } = req.body;
-    const userId = req.user.id;
-    //Data validation
-    if (Date === undefined || Date !== String(Date) || Date.length !== 10) {
-      return res
-        .status(400)
-        .json({ message: "Invalid format or type", success: false });
-    }
-    //Data page check for today
-    const existingRecord = await dailyfitinfo.findOne({
-      where: {
-        userid: userId,
-        DateRecorded: Date,
-      },
-    });
-    //If the user shares data
-    const share = await dailyfitinfo.findOne({
-      where: {
-        userid: userId,
-        share: true,
-      },
-    });
-    if (existingRecord) {
-      return res.status(400).json({
-        message: "Data page already exists for today",
-        success: false,
-      });
-    }
-    // Create a new data page for the user
-    const newRecord = await dailyfitinfo.create({
-      Zone1Time: 0,
-      Zone2Time: 0,
-      Zone3Time: 0,
-      Zone4Time: 0,
-      Zone5Time: 0,
-      weight: 0.0,
-      resting_heart: 0,
-      DateRecorded: Date,
-      userid: userId,
-      share: share ? share.share : false,
-    });
-
-    if (!newRecord) {
-      return res.status(500).json({
-        message: "Failed to create data page ",
-        success: false,
-      });
-    }
-
-    res
-      .status(201)
-      .json({ message: "Data page created successfully", success: true });
-  } catch (error) {
-    next(error);
+async function createDataPage({ Date, userId }) {
+  // Data validation
+  if (Date === undefined || typeof Date !== "string" || Date.length !== 10) {
+    throw new Error("Invalid format or type");
   }
+
+  // Check if a data page already exists for the given date
+  const existingRecord = await dailyfitinfo.findOne({
+    where: {
+      userid: userId,
+      DateRecorded: Date,
+    },
+  });
+
+  if (existingRecord) {
+    return;
+  }
+
+  // Check if the user has shared data
+  const share = await dailyfitinfo.findOne({
+    where: {
+      userid: userId,
+      share: true,
+    },
+  });
+
+  // Create a new data page
+  const newRecord = await dailyfitinfo.create({
+    Zone1Time: 0,
+    Zone2Time: 0,
+    Zone3Time: 0,
+    Zone4Time: 0,
+    Zone5Time: 0,
+    weight: 0.0,
+    resting_heart: 0,
+    DateRecorded: Date,
+    userid: userId,
+    share: share ? share.share : false,
+  });
+
+  if (!newRecord) {
+    throw new Error("Failed to create data page");
+  }
+
+  return true;
 }
 //Updates a certain data page for the user
 async function updateDataPage(req, res, next) {
   try {
     const { Data, DataName, Date } = req.body;
-    console.log(req.body);
+
+    //Create a data page
+    await createDataPage({
+      Date: Date,
+      userId: req.user.id,
+    });
+
     //Input validation
     if (
       DataName !== String(DataName) ||
@@ -223,13 +217,18 @@ async function getShareInfo(req, res, next) {
     const sharedRecord = await dailyfitinfo.findOne({
       where: {
         userid: userId,
-        share: true,
       },
     });
+
     if (!sharedRecord) {
       return res
         .status(404)
         .json({ message: "No shared data found", success: false });
+    }
+    if (!sharedRecord.share) {
+      return res
+        .status(200)
+        .json({ message: "Data exists but not shared", success: false });
     }
 
     res.status(200).json({ success: true });

@@ -1,20 +1,15 @@
-import { useState, useContext } from "react";
 import {
-  Bars4Icon,
   ArrowLeftEndOnRectangleIcon,
   AdjustmentsHorizontalIcon,
   ShareIcon,
   HeartIcon,
 } from "@heroicons/react/24/outline";
-import { Context } from "../Provider";
 import { useNavigate, useLocation } from "react-router-dom";
 
 function Nav() {
-  const [isCollapsed, setIsCollapsed] = useState(false);
-  const { isSignedIn, setIsSignedIn } = useContext(Context);
   const navigate = useNavigate();
   const location = useLocation();
-
+  //Open to the Github page of the project
   function GithubLink() {
     window.open(
       "https://github.com/TheHeartstriker/FitnessApp",

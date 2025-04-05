@@ -1,10 +1,9 @@
 import { useState, useEffect, useContext, useRef, useMemo } from "react";
 import BarChart from "./BarChart.jsx";
 import DayChart from "./DayChart.jsx";
-import { Context } from "../Provider";
+import { fetchData } from "../../Services/ApiFitness.jsx";
 
 function ViewPage() {
-  const { isSignedIn, setIsSignedIn } = useContext(Context);
   ///Used to hold the data from the API all the data realted to the user not sorted by time
   const [data, setData] = useState([]);
   //Used to hold the time frame in which the data is being displayed and grabbed
@@ -32,35 +31,14 @@ function ViewPage() {
   //Refrence to the pie chart
   const pieRef = useRef(null);
   const [IsDatafetched, setIsDatafetched] = useState(false);
-  //Fetches the data from the API
-  async function fetchData() {
-    const options = {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-    };
-    try {
-      const response = await fetch(
-        `${import.meta.env.VITE_API_BASE_URL}/api/getFitData`,
-        options
-      );
-      const data = await response.json();
-      console.log(data.fitData);
-      setData(data.fitData);
-      setIsDatafetched(true);
-    } catch (error) {
-      console.error(error);
-    }
-  }
+
   //Allows the pecentage to be displayed in the pie chart
   function Percentage(val) {
     if (pieRef.current) {
       for (let i = 0; i < val + 1; i++) {
         setTimeout(() => {
           pieRef.current.style.setProperty("--ng", i * 3.6 + "deg");
-        }, i * 25); // 100ms delay for each iteration
+        }, i * 25);
       }
     }
   }
@@ -150,6 +128,7 @@ function ViewPage() {
   }
 
   // Gets zone data and cals based on a given time range / frame
+  //Trying out useMemo
   const memoizedDataByRange = useMemo(() => {
     function getDataByRange(timeRange) {
       let Current = new Date();
@@ -202,17 +181,24 @@ function ViewPage() {
 
   //Fetches the data when the page is loaded
   useEffect(() => {
-    fetchData();
+    async function fetchAwait() {
+      try {
+        const fetchedData = await fetchData();
+        setData(fetchedData);
+        setIsDatafetched(true);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+    fetchAwait();
   }, []);
   //Calculates the percentage when the Percentagedata is updated
   useEffect(() => {
-    if (isSignedIn) {
-      Percentage(Percentagedata);
-    }
+    Percentage(Percentagedata);
   }, [Percentagedata]);
   //When the data is fetched and the user is signed in we can calculate the data that we need to impose
   useEffect(() => {
-    if (IsDatafetched && isSignedIn) {
+    if (IsDatafetched) {
       setZone(memoizedDataByRange.newZone);
       setCalories(memoizedDataByRange.TempCal.toFixed(2));
       SetWeightOrheart("weight", setWeight);

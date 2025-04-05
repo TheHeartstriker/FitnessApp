@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext, useRef } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import FrontSvg from "../Images/Front";
-import Test from "../Images/Test.svg";
+import FrontSvg from "../../Assets/Front";
+import Test from "../../Assets/Test.svg";
 
 function StartPage() {
   //Check for firefox
@@ -13,9 +13,9 @@ function StartPage() {
   const SvgRef = useRef(null);
   const navigate = useNavigate();
 
-  const handleEnterClick = () => {
-    navigate("/Login"); // Replace "/desired-route" with the actual route you want to navigate to
-  };
+  function handleEnterClick() {
+    navigate("/login");
+  }
   //Add the glow class to the vector
   function AddClass(id) {
     const vectorElement = SvgRef.current.querySelector(id);
@@ -46,12 +46,10 @@ function StartPage() {
     if (UserBrowser.includes("Firefox")) {
       setBrowser(true);
     }
-    console.log(Browser);
   }, [Browser]);
 
   useEffect(() => {
     if (SvgRef.current) {
-      console.log(VectorArray.length);
       if (VectorArray.length === 0) {
         Fillarray();
       }
