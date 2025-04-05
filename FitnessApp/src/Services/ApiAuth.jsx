@@ -69,6 +69,7 @@ export async function handleSignup(username, password) {
     const responseData = await response.json();
     if (responseData.success) {
       console.log(responseData.success, responseData.message || "No message");
+      return responseData.success;
     } else {
       console.error(
         "Login failed:",

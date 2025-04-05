@@ -14,7 +14,7 @@ function StartPage() {
   const navigate = useNavigate();
 
   function handleEnterClick() {
-    navigate("/Login");
+    navigate("/login");
   }
   //Add the glow class to the vector
   function AddClass(id) {
@@ -46,12 +46,10 @@ function StartPage() {
     if (UserBrowser.includes("Firefox")) {
       setBrowser(true);
     }
-    console.log(Browser);
   }, [Browser]);
 
   useEffect(() => {
     if (SvgRef.current) {
-      console.log(VectorArray.length);
       if (VectorArray.length === 0) {
         Fillarray();
       }

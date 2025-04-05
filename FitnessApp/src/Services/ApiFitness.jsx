@@ -1,36 +1,3 @@
-//Creates an empty data page for the user
-export async function createDataPage(Date) {
-  const options = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      Date,
-    }),
-    credentials: "include",
-  };
-  try {
-    const response = await fetch(
-      `${import.meta.env.VITE_API_BASE_URL}/api/createDataPage`,
-      options
-    );
-    if (!response.ok) {
-      const errorData = await response.json();
-      console.error("Error:", errorData.message);
-      return;
-    }
-    // Parse the response data and log it
-    const responseData = await response.json();
-    if (responseData.success) {
-      console.log("Data page created successfully");
-    } else {
-      console.error("Error creating data page:", responseData.message);
-    }
-  } catch (error) {
-    console.error("Error:", error);
-  }
-}
 ///Fetches the data from the server and formats it for the share page
 export async function fetchPublicShare() {
   const options = {

@@ -185,7 +185,6 @@ function ViewPage() {
       try {
         const fetchedData = await fetchData();
         setData(fetchedData);
-        console.log("Fetched data:", fetchedData);
         setIsDatafetched(true);
       } catch (error) {
         console.error("Error fetching data:", error);

@@ -1,7 +1,6 @@
 import { useState, useRef, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { handleLogin, handleSignup } from "../../Services/ApiAuth";
-import { createDataPage } from "../../Services/ApiFitness";
 import { formatDateToMySQL } from "../../Utils/FuncUtil";
 function LoginPage() {
   //Stores the username and password
@@ -9,9 +8,6 @@ function LoginPage() {
   const [password, setPassword] = useState("");
   //Used to see which button name and function to use
   const [login, setLogin] = useState(false);
-
-  //Refrence to the border
-  const navigate = useNavigate();
 
   //Handling the event changes for the username
   const handleUsernameChange = (event) => {
@@ -42,22 +38,11 @@ function LoginPage() {
     setLogin(!login);
   }
 
-  function createPage() {
-    const currentDate = formatDateToMySQL(new Date());
-    createDataPage(currentDate);
-  }
-
   function handleSignOrLog() {
     if (login) {
-      let val = handleLogin(username, password);
-      if (val) {
-        createPage();
-      }
+      handleLogin(username, password);
     } else {
-      let val = handleSignup(username, password);
-      if (val) {
-        createPage();
-      }
+      handleSignup(username, password);
     }
   }
 

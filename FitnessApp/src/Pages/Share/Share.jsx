@@ -8,10 +8,6 @@ function Share() {
   const [Datafetched, setDataFetched] = useState(false);
   //The amount of tabs loaded
   const [LoadedAmount, setLoadedAmount] = useState(8);
-  //Gets the shared data from the server based on usernames
-
-  //WARNING if there is no share data an error will be thrown
-
   //Data is fetched by daily for every user so we need to merge the data into one element for each user
   async function SortByUserName(data) {
     if (data === undefined || data.length === 0) {
@@ -187,7 +183,7 @@ function Share() {
     if (Datafetched && LoadedAmount > 0 && data !== undefined) {
       TransposeData(data, 0, LoadedAmount);
     }
-  }, [Datafetched, LoadedAmount]);
+  }, [Datafetched, data]);
 
   return (
     <div className="ShareContainer">
