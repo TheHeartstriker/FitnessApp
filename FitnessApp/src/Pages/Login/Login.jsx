@@ -1,7 +1,6 @@
 import { useState, useRef, useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { handleLogin, handleSignup } from "../../Services/ApiAuth";
-import { formatDateToMySQL } from "../../Utils/FuncUtil";
+import "./Login.css";
 function LoginPage() {
   //Stores the username and password
   const [username, setUsername] = useState("");

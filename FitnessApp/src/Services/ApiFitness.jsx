@@ -5,7 +5,6 @@ export async function fetchPublicShare() {
     headers: {
       "Content-Type": "application/json",
     },
-    credentials: "include",
   };
   try {
     const response = await fetch(

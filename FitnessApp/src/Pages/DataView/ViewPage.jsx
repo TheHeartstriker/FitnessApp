@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext, useRef, useMemo } from "react";
 import BarChart from "./BarChart.jsx";
 import DayChart from "./DayChart.jsx";
+import "./ViewPage.css";
 import { fetchData } from "../../Services/ApiFitness.jsx";
 
 function ViewPage() {

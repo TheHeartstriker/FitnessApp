@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchPublicShare } from "../../Services/ApiFitness";
+import "./Share.css";
 function Share() {
   const [data, setData] = useState([]);
   //Full elements with related data one for each user

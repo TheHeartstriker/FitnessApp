@@ -5,6 +5,7 @@ import {
   HeartIcon,
 } from "@heroicons/react/24/outline";
 import { useNavigate, useLocation } from "react-router-dom";
+import "./Nav.css";
 
 function Nav() {
   const navigate = useNavigate();

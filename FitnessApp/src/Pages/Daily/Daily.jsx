@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from "react";
+import "./Daily.css";
 import { formatDateToMySQL } from "../../Utils/FuncUtil";
 import { saveData, getShareInfo, updateShare } from "../../Services/ApiFitness";
 function Daily() {
