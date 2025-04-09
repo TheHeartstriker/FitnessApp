@@ -14,13 +14,14 @@ const ConfigDb = new Sequelize(
   }
 );
 
-// For model debugging
-// ConfigDb.sync({ force: true })
-//   .then(() => {
-//     console.log("Database & tables created!");
-//   })
-//   .catch((error) => {
-//     console.error("Error creating database & tables:", error);
-//   });
+if (process.env.Sync === "true") {
+  ConfigDb.sync({ force: true })
+    .then(() => {
+      console.log("Database & tables created!");
+    })
+    .catch((error) => {
+      console.error("Error creating database & tables:", error);
+    });
+}
 
 export default ConfigDb;
