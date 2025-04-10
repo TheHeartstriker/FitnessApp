@@ -1,44 +1,28 @@
 ///Fetches the data from the server and formats it for the share page
 export async function fetchPublicShare() {
-  const options = {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
   try {
     const response = await fetch(
-      `${import.meta.env.VITE_API_BASE_URL}/api/getSharedData`,
-      options
+      `${import.meta.env.VITE_API_BASE_URL}/api/getSharedData`
     );
     if (!response.ok) {
-      const errorData = await response.json();
-      console.error("Error:", errorData.message);
-      return;
+      throw new Error(`HTTP error ${response.status}: ${response.statusText}`);
     }
-    // Parse the response data and log it
+    // Log a possible error message from the server
     const responseData = await response.json();
-    if (responseData.success) {
-      console.log("Public share data fetched successfully");
-      return responseData.formattedData;
-    } else {
-      console.error(
-        "Error fetching public share data:",
-        responseData.message || "No message",
-        responseData.success || "No success message"
-      );
+    if (!responseData.success) {
+      throw new Error(responseData.message || "Failed to fetch shared data");
     }
+    return responseData;
   } catch (error) {
-    console.error("Error:", error);
+    console.error("Fetch error:", error.message);
+    throw error;
   }
 }
 //Gets all data related to a user
 export async function fetchData() {
   const options = {
     method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
+
     credentials: "include",
   };
   try {
@@ -106,9 +90,7 @@ export async function saveData(DataName, Data, Date) {
 export async function getShareInfo() {
   const options = {
     method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
+
     credentials: "include",
   };
   try {

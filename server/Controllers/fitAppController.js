@@ -1,8 +1,8 @@
-import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
 import dailyfitinfo from "../Models/fitInfoModel.js";
 import User from "../Models/AuthModel.js";
-import { v4 as uuidv4 } from "uuid";
+import Sequelize, { fn } from "sequelize";
+import { groupById } from "../utils/calorieZone.js";
+
 //Creates an empty data page for the user
 async function createDataPage({ Date, userId }) {
   // Data validation
@@ -178,32 +178,38 @@ async function getFitData(req, res, next) {
 // Could be optimized to use a single query with a join
 async function getAllSharedData(req, res, next) {
   try {
+    // Fetch all shared data
     const sharedData = await dailyfitinfo.findAll({
-      where: {
-        share: true,
-      },
+      where: { share: true },
+      attributes: [
+        "userid",
+        "DateRecorded",
+        "Zone1Time",
+        "Zone2Time",
+        "Zone3Time",
+        "Zone4Time",
+        "Zone5Time",
+        "resting_heart",
+      ],
       include: [
         {
           model: User,
           attributes: ["UserName"],
         },
       ],
+      order: [
+        ["userid", "ASC"],
+        ["DateRecorded", "ASC"],
+      ],
     });
-
-    if (!sharedData || sharedData.length === 0) {
+    // Check if shared data exists and we have a valid response
+    if (sharedData.length === 0) {
       return res
         .status(404)
         .json({ message: "No shared data found", success: false });
     }
-    // Format the data to include UserName
-    // and remove the UserId from the response
-    const formattedData = sharedData.map((data) => {
-      const jsonData = data.toJSON();
-      return {
-        ...jsonData,
-        UserName: jsonData.User.UserName,
-      };
-    });
+    // Format the data for the client
+    const formattedData = groupById(sharedData);
 
     res.status(200).json({ formattedData, success: true });
   } catch (error) {
