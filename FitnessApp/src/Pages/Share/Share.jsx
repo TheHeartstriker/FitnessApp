@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { fetchPublicShare } from "../../Services/ApiFitness";
-import "./Share.css";
+import { fetchPublicShare } from "../../services/apiFitness";
+import "./share.css";
 
 function Share() {
   const [fitnessRecords, setFitnessRecords] = useState([]);

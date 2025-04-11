@@ -1,21 +1,26 @@
+import { errorChecker } from "../Utils/apiError";
+//
+//Notes:
+// - Use a try catch block on frontend to catch errors from the server or store if there is no error
+// - Backend validates the data
+// - Backend always returns a success and message field in the response
+//
+
 ///Fetches the data from the server and formats it for the share page
 export async function fetchPublicShare() {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 10000);
   try {
     const response = await fetch(
-      `${import.meta.env.VITE_API_BASE_URL}/api/getSharedData`
+      `${import.meta.env.VITE_API_BASE_URL}/api/getSharedData`,
+      { signal: controller.signal }
     );
-    if (!response.ok) {
-      throw new Error(`HTTP error ${response.status}: ${response.statusText}`);
-    }
-    // Log a possible error message from the server
-    const responseData = await response.json();
-    if (!responseData.success) {
-      throw new Error(responseData.message || "Failed to fetch shared data");
-    }
-    return responseData;
+    clearTimeout(timeoutId);
+    return await errorChecker(response);
   } catch (error) {
+    clearTimeout(timeoutId);
     console.error("Fetch error:", error.message);
-    throw error;
+    return null;
   }
 }
 //Gets all data related to a user

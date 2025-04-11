@@ -1,11 +1,11 @@
 import { Routes, Route } from "react-router-dom";
 import PrivateRoutes from "./privateRoutes.jsx";
 import PublicRoutes from "./publicRoutes.jsx";
-import StartPage from "../Pages/Landing/StartPage.jsx";
-import LoginPage from "../Pages/Login/Login.jsx";
-import Daily from "../Pages/Daily/Daily.jsx";
-import Share from "../Pages/Share/Share.jsx";
-import ViewPage from "../Pages/DataView/ViewPage.jsx";
+import StartPage from "../pages/Landing/StartPage.jsx";
+import LoginPage from "../pages/Login/Login.jsx";
+import Daily from "../pages/Daily/Daily.jsx";
+import Share from "../pages/share/share.jsx";
+import ViewPage from "../pages/DataView/ViewPage.jsx";
 
 function AppRoutes() {
   return (

@@ -1,6 +1,6 @@
 import dailyfitinfo from "../Models/fitInfoModel.js";
 import User from "../Models/AuthModel.js";
-import Sequelize, { fn } from "sequelize";
+import { validateData } from "../utils/validateData.js";
 import { groupById } from "../utils/calorieZone.js";
 
 //Creates an empty data page for the user
@@ -202,7 +202,7 @@ async function getAllSharedData(req, res, next) {
         ["DateRecorded", "ASC"],
       ],
     });
-    // Check if shared data exists and we have a valid response
+    // Check if there is data to share
     if (sharedData.length === 0) {
       return res
         .status(404)
@@ -210,7 +210,14 @@ async function getAllSharedData(req, res, next) {
     }
     // Format the data for the client
     const formattedData = groupById(sharedData);
-
+    //Validate the data
+    validateData(formattedData, [
+      ["totalCalories", "number"],
+      ["totalTime", "number"],
+      ["caloriesPerDay", "number"],
+      ["UserName", "string"],
+      ["RestingHeart", "number"],
+    ]);
     res.status(200).json({ formattedData, success: true });
   } catch (error) {
     next(error);
