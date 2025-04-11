@@ -1,5 +1,10 @@
+import { errorChecker } from "../utils/apiError";
+
 // Handle user login
 export async function handleLogin(username, password) {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 10000);
+
   const options = {
     method: "POST",
     headers: {
@@ -10,6 +15,7 @@ export async function handleLogin(username, password) {
       password,
     }),
     credentials: "include",
+    signal: controller.signal,
   };
 
   try {
@@ -17,31 +23,18 @@ export async function handleLogin(username, password) {
       `${import.meta.env.VITE_API_BASE_URL}/api/login`,
       options
     );
-    // Check if the response is ok (status code 200-299)
-    if (!response.ok) {
-      const errorData = await response.json();
-      console.error("Error:", errorData.message);
-      return;
-    }
-    // Parse the response data and log it
-    const responseData = await response.json();
-    if (responseData.success) {
-      console.log(responseData.success, responseData.message || "No message");
-      return responseData.success;
-    } else {
-      console.error(
-        "Login failed:",
-        responseData.message || "No message",
-        responseData.success || "No success message"
-      );
-      return responseData.success;
-    }
+    clearTimeout(timeoutId);
+    return await errorChecker(response);
   } catch (error) {
+    clearTimeout(timeoutId);
     console.error("Error:", error);
+    throw error;
   }
 }
 // Input registration data
 export async function handleSignup(username, password) {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 10000);
   const options = {
     method: "POST",
     headers: {
@@ -52,6 +45,7 @@ export async function handleSignup(username, password) {
       password,
     }),
     credentials: "include",
+    signal: controller.signal,
   };
 
   try {
@@ -59,25 +53,11 @@ export async function handleSignup(username, password) {
       `${import.meta.env.VITE_API_BASE_URL}/api/register`,
       options
     );
-    // Check if the response is ok (status code 200-299)
-    if (!response.ok) {
-      const errorData = await response.json();
-      console.error("Error:", errorData.message);
-      return;
-    }
-    // Parse the response data and log it
-    const responseData = await response.json();
-    if (responseData.success) {
-      console.log(responseData.success, responseData.message || "No message");
-      return responseData.success;
-    } else {
-      console.error(
-        "Login failed:",
-        responseData.message || "No message",
-        responseData.success || "No success message"
-      );
-    }
+    clearTimeout(timeoutId);
+    return await errorChecker(response);
   } catch (error) {
+    clearTimeout(timeoutId);
     console.error("Error:", error);
+    throw error;
   }
 }

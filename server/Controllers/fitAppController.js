@@ -212,9 +212,9 @@ async function getAllSharedData(req, res, next) {
     const formattedData = groupById(sharedData);
     //Validate the data
     validateData(formattedData, [
-      ["totalCalories", "number"],
+      ["totalCalories", "string"],
       ["totalTime", "number"],
-      ["caloriesPerDay", "number"],
+      ["caloriesPerDay", "string"],
       ["UserName", "string"],
       ["RestingHeart", "number"],
     ]);

@@ -1,4 +1,4 @@
-import { errorChecker } from "../Utils/apiError";
+import { errorChecker } from "../utils/apiError";
 //
 //Notes:
 // - Use a try catch block on frontend to catch errors from the server or store if there is no error

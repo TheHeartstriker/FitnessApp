@@ -28,3 +28,16 @@ export function validateData(data, fieldTypes) {
     });
   });
 }
+// Checks if the length of the values is valid
+// Example:
+// const valArr = ["hi", "hello"];
+
+export function isValidLength(valArr, lengthArr) {
+  for (let i = 0; i < valArr.length; i++) {
+    if (valArr[i].length > lengthArr[i]) {
+      throw new Error(
+        `Invalid length for ${valArr[i]}: expected less than ${lengthArr[i]}, got ${valArr[i].length}`
+      );
+    }
+  }
+}
