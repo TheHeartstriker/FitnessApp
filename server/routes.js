@@ -2,12 +2,12 @@ import { Router } from "express";
 
 import { login, register } from "./Controllers/AuthController.js";
 import { authenticate } from "./middleWare/authMiddleWare.js";
+import { getFitData } from "./Controllers/dataView.js";
 
 import {
   createDataPage,
   updateDataPage,
   updateShare,
-  getFitData,
   getAllSharedData,
   getShareInfo,
 } from "./Controllers/fitAppController.js";

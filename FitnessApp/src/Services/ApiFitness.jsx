@@ -19,39 +19,22 @@ export async function fetchPublicShare() {
     return await errorChecker(response);
   } catch (error) {
     clearTimeout(timeoutId);
-    console.error("Fetch error:", error.message);
-    return null;
+    return error;
   }
 }
 //Gets all data related to a user
-export async function fetchData() {
-  const options = {
-    method: "GET",
-
-    credentials: "include",
-  };
+export async function fetchData(timeRange, allRecords) {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 10000);
   try {
     const response = await fetch(
-      `${import.meta.env.VITE_API_BASE_URL}/api/getFitData`,
-      options
+      `${
+        import.meta.env.VITE_API_BASE_URL
+      }/api/getFitData?timeRange=${timeRange}&allRecords=${allRecords}`,
+      { signal: controller.signal, credentials: "include" }
     );
-    if (!response.ok) {
-      const errorData = await response.json();
-      console.error("Error:", errorData.message);
-      return;
-    }
-    // Parse the response data and log it
-    const responseData = await response.json();
-    if (responseData.success) {
-      console.log("Data page fetched successfully");
-      return responseData.fitData;
-    } else {
-      console.error(
-        "Error fetching data page:",
-        responseData.message || "No message",
-        responseData.success || "No success message"
-      );
-    }
+    clearTimeout(timeoutId);
+    return await errorChecker(response);
   } catch (error) {
     console.error("Error:", error);
   }
