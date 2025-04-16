@@ -3,7 +3,6 @@ import BarChart from "./BarChart.jsx";
 import DayChart from "./DayChart.jsx";
 import "./ViewPage.css";
 import { fetchData } from "../../services/apiFitness.jsx";
-import { pie } from "d3";
 
 function ViewPage() {
   ///Used to hold the data from the API all the data realted to the user not sorted by time
@@ -17,8 +16,6 @@ function ViewPage() {
   const [Percentagedata, setPercentagedata] = useState(0);
   //graph plot to be used
   const [BarChartOnOff, setBarChartOnOff] = useState(true);
-  const [DayChartOnOff, setDayChartOnOff] = useState(false);
-
   //Refrence to the pie chart
   const pieRef = useRef(null);
   //Here but not implemented yet
@@ -27,6 +24,7 @@ function ViewPage() {
 
   //Allows the pecentage to be displayed in the pie chart
   function Percentage(val) {
+    if (!pieRef.current || Percentagedata !== 0) return;
     for (let i = 0; i < val + 1; i++) {
       setTimeout(() => {
         pieRef.current.style.setProperty("--ng", i * 3.6 + "deg");
@@ -50,9 +48,9 @@ function ViewPage() {
     }
     fetchAwait();
   }, []);
-  //Calculates the percentage when the Percentagedata is updated
+  //Initializes all the data that we need to display in the page
   useEffect(() => {
-    if (!data) return;
+    if (!data || !data.formattedData) return;
     setPercentagedata(data?.allFitData?.percentage);
     Percentage(data?.allFitData?.percentage);
     let formattedData = data?.formattedData;
@@ -60,6 +58,7 @@ function ViewPage() {
     setWeight(formattedData[0]?.avgWeight);
     setHeart(formattedData[0]?.avgRestingHeart);
   }, [data]);
+
   //When the data is fetched and the user is signed in we can calculate the data that we need to impose
 
   return (
@@ -71,20 +70,22 @@ function ViewPage() {
             <BarChart graphData={data.formattedData} Time={Time} />
           </div>
         )}
-        {/* {DayChartOnOff && <DayChart dataprop={data} TimeProp={Time} />} */}
+        {!BarChartOnOff && (
+          <DayChart dataprop={data?.allFitData?.fitData} TimeProp={Time} />
+        )}
 
         {/* Container for the buttons that switch graphs*/}
         <div className="GraphSwitchContainer">
           <button
             onClick={() => {
-              setBarChartOnOff(true), setDayChartOnOff(false);
+              setBarChartOnOff(true);
             }}
           >
             Barchart
           </button>
           <button
             onClick={() => {
-              setBarChartOnOff(false), setDayChartOnOff(true);
+              setBarChartOnOff(false);
             }}
           >
             Daychart

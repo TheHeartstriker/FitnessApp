@@ -5,7 +5,6 @@ function DayChart({ dataprop, TimeProp }) {
   const Time = TimeProp;
   const svgWidth = "100%";
   const svgHeight = "100%";
-  const [data, setData] = useState([dataprop]);
   const [timeArr, setTimeArr] = useState([]);
 
   //Create a array of the length of the time frame in Timeprop
@@ -22,44 +21,28 @@ function DayChart({ dataprop, TimeProp }) {
       console.error("Invalid Time Frame");
     }
   }
-  //Sort here so in fillTimeArr we can simply iterate at constant time instead of using find etc
-  function sortByDate(arr) {
-    setData(
-      arr.sort((a, b) => new Date(b.DateRecorded) - new Date(a.DateRecorded))
-    );
-  }
-
-  //Starts at current and goes backwards to fill the time array
   function fillTimeArr() {
     let dataIndex = 0;
-    //To track the date we are trying to find data for
-    let currentDate = new Date();
+    let currentDate = new Date(); // Todays date
     let tempTimeArr = Array(timeArr.length).fill(0);
+
     for (let i = 0; i < tempTimeArr.length; i++) {
-      //The date we are checking this increment
-      let record = data[dataIndex];
-      let recordDate = record
-        ? new Date(record.DateRecorded).toISOString().split("T")[0]
-        : null;
-      //We check if the date we are checking is the same as the date in the data
-      if (
-        //We remove the time from the date and compare
-        recordDate &&
-        recordDate === currentDate.toISOString().split("T")[0]
-      ) {
+      // Format currentDate as a string (YYYY-MM-DD) for comparison
+      const currentDateString = currentDate.toLocaleDateString("en-CA");
+      let record = dataprop[dataIndex];
+      let recordDate = record?.DateRecorded;
+      // Check if the record date matches the current date
+      if (recordDate && recordDate === currentDateString) {
         let TempTime = 0;
-        TempTime += data[dataIndex].Zone1Time;
-        TempTime += data[dataIndex].Zone2Time;
-        TempTime += data[dataIndex].Zone3Time;
-        TempTime += data[dataIndex].Zone4Time;
-        TempTime += data[dataIndex].Zone5Time;
+        TempTime += dataprop[dataIndex].totalZoneTime;
         tempTimeArr[i] = TempTime;
-        dataIndex += 1; // Move to the next record in data
       } else if (recordDate === null) {
-        // If no data is available for that day we make it 0
+        // If no data is available for that day, set it to 0
         tempTimeArr[i] = 0;
       }
-      //Move to the day before
+
+      // Move to the previous day
+      dataIndex += 1;
       currentDate.setDate(currentDate.getDate() - 1);
     }
     setTimeArr(tempTimeArr);
@@ -116,7 +99,6 @@ function DayChart({ dataprop, TimeProp }) {
   }
 
   useEffect(() => {
-    sortByDate(dataprop);
     createTimeArr();
   }, [Time]);
 
