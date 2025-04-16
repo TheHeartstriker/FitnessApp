@@ -1,8 +1,9 @@
-import { useState, useEffect, useContext, useRef, useMemo } from "react";
+import { useState, useEffect, useRef } from "react";
 import BarChart from "./BarChart.jsx";
 import DayChart from "./DayChart.jsx";
 import "./ViewPage.css";
 import { fetchData } from "../../services/apiFitness.jsx";
+import { pie } from "d3";
 
 function ViewPage() {
   ///Used to hold the data from the API all the data realted to the user not sorted by time
@@ -17,15 +18,7 @@ function ViewPage() {
   //graph plot to be used
   const [BarChartOnOff, setBarChartOnOff] = useState(true);
   const [DayChartOnOff, setDayChartOnOff] = useState(false);
-  //Used in the main graph displays the time spent in each zone in a spefic time frame
-  //Ps dont send more than 20 objects to the graph
-  const [Zone, setZone] = useState({
-    Zone1: 0,
-    Zone2: 0,
-    Zone3: 0,
-    Zone4: 0,
-    Zone5: 0,
-  });
+
   //Refrence to the pie chart
   const pieRef = useRef(null);
   //Here but not implemented yet
@@ -34,12 +27,10 @@ function ViewPage() {
 
   //Allows the pecentage to be displayed in the pie chart
   function Percentage(val) {
-    if (pieRef.current) {
-      for (let i = 0; i < val + 1; i++) {
-        setTimeout(() => {
-          pieRef.current.style.setProperty("--ng", i * 3.6 + "deg");
-        }, i * 25);
-      }
+    for (let i = 0; i < val + 1; i++) {
+      setTimeout(() => {
+        pieRef.current.style.setProperty("--ng", i * 3.6 + "deg");
+      }, i * 25);
     }
   }
 
@@ -61,8 +52,13 @@ function ViewPage() {
   }, []);
   //Calculates the percentage when the Percentagedata is updated
   useEffect(() => {
-    console.log("Data", data);
-    Percentage(data.formattedData[0].percentage);
+    if (!data) return;
+    setPercentagedata(data?.allFitData?.percentage);
+    Percentage(data?.allFitData?.percentage);
+    let formattedData = data?.formattedData;
+    setCalories(formattedData[0]?.caloriesBurned);
+    setWeight(formattedData[0]?.avgWeight);
+    setHeart(formattedData[0]?.avgRestingHeart);
   }, [data]);
   //When the data is fetched and the user is signed in we can calculate the data that we need to impose
 
@@ -72,10 +68,10 @@ function ViewPage() {
         {/* The actual bar chart inside the GraphContainer */}
         {BarChartOnOff && (
           <div className="BarChart">
-            <BarChart graphData={Zone} Time={Time} />
+            <BarChart graphData={data.formattedData} Time={Time} />
           </div>
         )}
-        {DayChartOnOff && <DayChart dataprop={data} TimeProp={Time} />}
+        {/* {DayChartOnOff && <DayChart dataprop={data} TimeProp={Time} />} */}
 
         {/* Container for the buttons that switch graphs*/}
         <div className="GraphSwitchContainer">

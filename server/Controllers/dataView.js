@@ -60,7 +60,7 @@ async function aggregated(userId, timeFrame) {
       success: false,
     };
   }
-
+  // - Format, formats and validates the data
   let formattedData = format(fitData);
   return formattedData;
 }
@@ -81,6 +81,7 @@ async function allRecordsQuery(userId, timeFrame, limit) {
     FROM dailyfitinfo
     WHERE userid = :userId
       AND DateRecorded >= :dateThreshold
+    ORDER BY DateRecorded DESC
     LIMIT :limit
   `;
 
@@ -89,12 +90,17 @@ async function allRecordsQuery(userId, timeFrame, limit) {
     type: sequelize.QueryTypes.SELECT,
   });
 
+  const percentage = getPercentage(fitData) || 0;
+  const validate = [{ percentage: percentage }];
+
+  //Validate data
   if (fitData.length === 0) {
     return {
       message: "No fit data found",
       success: false,
     };
   }
+  validateData(validate, [["percentage", "string"]]);
   validateData(fitData, [
     ["DateRecorded", "string"],
     ["Zone1Time", "number"],
@@ -104,8 +110,21 @@ async function allRecordsQuery(userId, timeFrame, limit) {
     ["Zone5Time", "number"],
     ["totalZoneTime", "number"],
   ]);
+  isValidLength(
+    [
+      fitData[0].DateRecorded,
+      fitData[0].Zone1Time,
+      fitData[0].Zone2Time,
+      fitData[0].Zone3Time,
+      fitData[0].Zone4Time,
+      fitData[0].Zone5Time,
+      fitData[0].totalZoneTime,
+      percentage,
+    ],
+    [10, 8, 8, 8, 8, 8, 8, 8]
+  );
 
-  return fitData;
+  return { fitData, percentage };
 }
 //
 // Healper functions
@@ -114,7 +133,6 @@ async function allRecordsQuery(userId, timeFrame, limit) {
 // - Validates the data for aggregated query
 function format(data) {
   // Collect necessary data from the fitData array oranganize it then send
-  let percentage = getPercentage(data) || 0;
   let caloriesBurned = calories(data[0].dataValues) || 0;
   let avgRestingHeart = data[0].dataValues.averageHeartRate || 0;
   let avgWeight = data[0].dataValues.averageWeight || 0;
@@ -127,7 +145,6 @@ function format(data) {
   };
   let formattedData = [
     {
-      percentage: parseFloat(percentage).toFixed(2),
       caloriesBurned: parseFloat(caloriesBurned).toFixed(2),
       avgRestingHeart: parseFloat(avgRestingHeart).toFixed(2),
       avgWeight: parseFloat(avgWeight).toFixed(2),
@@ -136,7 +153,6 @@ function format(data) {
   ];
   //Validate the data to be sent
   validateData(formattedData, [
-    ["percentage", "string"],
     ["caloriesBurned", "string"],
     ["avgRestingHeart", "string"],
     ["avgWeight", "string"],
@@ -144,7 +160,6 @@ function format(data) {
   ]);
   isValidLength(
     [
-      formattedData[0].percentage,
       formattedData[0].caloriesBurned,
       formattedData[0].avgRestingHeart,
       formattedData[0].avgWeight,
@@ -159,9 +174,6 @@ function getPercentage(fitData) {
   if (!fitData || fitData.length < 2) {
     return 0;
   }
-  // Sort the data by DateRecorded in descending order
-  fitData.sort((a, b) => new Date(b.DateRecorded) - new Date(a.DateRecorded));
-
   // Get the most recent data and the one right before it
   const mostRecent = fitData[0];
   const previous = fitData[1];
