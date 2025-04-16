@@ -3,20 +3,17 @@ import { Router } from "express";
 import { login, register } from "./Controllers/AuthController.js";
 import { authenticate } from "./middleWare/authMiddleWare.js";
 import { getFitData } from "./Controllers/dataView.js";
-
+import { getAllSharedData } from "./Controllers/fitAppController.js";
 import {
-  createDataPage,
   updateDataPage,
-  updateShare,
-  getAllSharedData,
   getShareInfo,
-} from "./Controllers/fitAppController.js";
+  updateShare,
+} from "./Controllers/dailyControl/daily.js";
 
 const router = Router();
 
 router.post("/login", login);
 router.post("/register", register);
-router.post("/createDataPage", authenticate, createDataPage);
 router.put("/updateDataPage", authenticate, updateDataPage);
 router.put("/updateShare", authenticate, updateShare);
 router.get("/getFitData", authenticate, getFitData);

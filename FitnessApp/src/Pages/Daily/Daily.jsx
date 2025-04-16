@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import "./Daily.css";
 import { formatDateToMySQL } from "../../Utils/FuncUtil";
-import { saveData, getShareInfo, updateShare } from "../../Services/ApiFitness";
+import { saveData, getShareInfo, updateShare } from "../../services/apiFitness";
 function Daily() {
   //Specific state for the daily page
   const [workoutTime, setWorkoutTime] = useState(0);
@@ -84,7 +84,7 @@ function Daily() {
     async function awaitShare() {
       try {
         const share = await getShareInfo();
-        setShare(share);
+        setShare(share.shared);
       } catch (error) {
         console.error("Error fetching share info:", error);
       }
