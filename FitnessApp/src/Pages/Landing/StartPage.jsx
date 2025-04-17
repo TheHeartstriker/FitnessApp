@@ -1,7 +1,6 @@
 import { useState, useEffect, useContext, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import FrontSvg from "../../Assets/Front";
-import Test from "../../Assets/Test.svg";
+import FrontSvg from "../../assets/Front.jsx";
 import "./startPage.css";
 
 function StartPage() {

@@ -1,9 +1,9 @@
 import { Router } from "express";
 
-import { login, register } from "./Controllers/AuthController.js";
+import { login, register } from "./Controllers/authController.js";
 import { authenticate } from "./middleWare/authMiddleWare.js";
 import { getFitData } from "./Controllers/dataView.js";
-import { getAllSharedData } from "./Controllers/fitAppController.js";
+import { getAllSharedData } from "./Controllers/share.js";
 import {
   updateDataPage,
   getShareInfo,

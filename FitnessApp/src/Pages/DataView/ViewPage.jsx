@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
-import BarChart from "./BarChart.jsx";
-import DayChart from "./DayChart.jsx";
+import BarChart from "./barChart.jsx";
+import DayChart from "./dayChart.jsx";
 import "./ViewPage.css";
 import { fetchData } from "../../services/apiFitness.jsx";
 

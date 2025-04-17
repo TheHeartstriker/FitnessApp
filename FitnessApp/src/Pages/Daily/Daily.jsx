@@ -18,44 +18,22 @@ function Daily() {
   const [Share, setShare] = useState(false);
 
   //Handlers for the input fields
-  function updateWorkoutTime(time) {
-    if (isNaN(time)) {
+  function setValue(value, set) {
+    if (isNaN(value)) {
       return;
     }
-    setWorkoutTime(time);
-  }
-  function updateRestingHeartRate(rate) {
-    if (isNaN(rate)) {
-      return;
-    }
-    setRestingHeartRate(rate);
-  }
-  function updateWeight(weight) {
-    if (isNaN(weight)) {
-      return;
-    }
-    setWeight(weight);
+    set(value);
   }
 
-  // Handlers for the submit button handles resting heart rate, weight, and workout time sends data through the api
-  async function submitRestingHeartRate(rate) {
+  async function submit(dbName, value, date, ref) {
     try {
-      await saveData("resting_heart", rate, currentDate);
-
-      restingHeartRateRef.current.value = "";
+      await saveData(dbName, value, date);
+      ref.current.value = "";
     } catch (error) {
       console.error(error);
     }
   }
-  async function submitWeight(weight) {
-    try {
-      await saveData("weight", weight, currentDate);
 
-      weightRef.current.value = "";
-    } catch (error) {
-      console.error(error);
-    }
-  }
   async function UpdateTime() {
     try {
       await saveData(zone, workoutTime, currentDate);
@@ -78,7 +56,6 @@ function Daily() {
       setShare(true);
     }
   }
-
   //Get share information from the database
   useEffect(() => {
     async function awaitShare() {
@@ -109,7 +86,7 @@ function Daily() {
           className="WorkHeartTime"
           type="text"
           placeholder="Enter workout time in minutes"
-          onChange={(e) => updateWorkoutTime(e.target.value)}
+          onChange={(e) => setValue(e.target.value, setWorkoutTime)}
           onInput={(e) => {
             e.target.value = e.target.value.replace(/[^0-9]/g, "");
           }}
@@ -123,11 +100,18 @@ function Daily() {
           className="WorkHeartTime"
           type="text"
           placeholder="Average resting heartrate"
-          onChange={(e) => updateRestingHeartRate(e.target.value)}
+          onChange={(e) => setValue(e.target.value, setRestingHeartRate)}
         ></input>
         <button
           className="Submit"
-          onClick={() => submitRestingHeartRate(restingHeartRate)}
+          onClick={() =>
+            submit(
+              "resting_heart",
+              restingHeartRate,
+              currentDate,
+              restingHeartRateRef
+            )
+          }
         >
           Save
         </button>
@@ -137,9 +121,12 @@ function Daily() {
           className="WorkHeartTime"
           type="text"
           placeholder="Daily weight"
-          onChange={(e) => updateWeight(e.target.value)}
+          onChange={(e) => setValue(e.target.value, setWeight)}
         ></input>
-        <button className="Submit" onClick={() => submitWeight(weight)}>
+        <button
+          className="Submit"
+          onClick={() => submit("weight", weight, currentDate, weightRef)}
+        >
           Save
         </button>
       </div>

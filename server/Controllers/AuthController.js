@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 import { v4 as uuidv4 } from "uuid";
 import { validateData, isValidLength } from "../utils/validateData.js";
 
-import User from "../Models/AuthModel.js";
+import User from "../Models/authModel.js";
 
 dotenv.config();
 

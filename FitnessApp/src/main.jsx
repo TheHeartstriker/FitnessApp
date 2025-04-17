@@ -1,8 +1,8 @@
 import React, { StrictMode } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { createRoot } from "react-dom/client";
-import Nav from "./Components/NavBar/Nav.jsx";
-import AppRoutes from "./Routing/indexRoute.jsx";
+import Nav from "./components/NavBar/Nav.jsx";
+import AppRoutes from "./routing/indexRoute.jsx";
 
 import "./Site.css";
 
