@@ -1,19 +1,10 @@
-import { getAppImports } from "./Utils/getImports";
+import React, { StrictMode } from "react";
+import { BrowserRouter } from "react-router-dom";
+import { createRoot } from "react-dom/client";
+import Nav from "./components/NavBar/Nav.jsx";
+import AppRoutes from "./routing/indexRoute.jsx";
 
-const {
-  StrictMode,
-  createRoot,
-  BrowserRouter,
-  Routes,
-  Route,
-  PrivateRoute,
-  ViewPage,
-  StartPage,
-  LoginPage,
-  Daily,
-  Share,
-  Nav,
-} = getAppImports();
+import "./Site.css";
 
 //
 //Pages contains the css and respective jsx for the page
@@ -28,29 +19,7 @@ createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter future={{ v7_startTransition: true }}>
       <Nav />
-      <Routes>
-        <Route path="/" element={<StartPage />} />
-        <Route
-          path="/view"
-          element={
-            <PrivateRoute>
-              {" "}
-              <ViewPage />{" "}
-            </PrivateRoute>
-          }
-        />
-        <Route path="/login" element={<LoginPage />} />
-        <Route
-          path="/daily"
-          element={
-            <PrivateRoute>
-              {" "}
-              <Daily />{" "}
-            </PrivateRoute>
-          }
-        />
-        <Route path="/share" element={<Share />} />
-      </Routes>
+      <AppRoutes />
     </BrowserRouter>
   </StrictMode>
 );

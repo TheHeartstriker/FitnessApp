@@ -51,7 +51,9 @@ function BarChart({ graphData, Time }) {
   }
 
   useEffect(() => {
-    ImposeData(graphData);
+    if (!graphData || graphData.length === 0) return;
+    let totals = graphData[0]?.totalTimeZones;
+    ImposeData(totals);
   }, [graphData, Time]);
 
   return <NewGraph graphPoints={graphPoints} />;

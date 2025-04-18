@@ -1,63 +1,54 @@
 import { useState, useEffect, useContext, useRef } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
-import FrontSvg from "../../Assets/Front";
-import Test from "../../Assets/Test.svg";
+import { useNavigate } from "react-router-dom";
+import FrontSvg from "../../assets/Front.jsx";
+import "./startPage.css";
 
 function StartPage() {
-  //Check for firefox
-  const [Browser, setBrowser] = useState(false);
   //Holds vector names
-  const [VectorArray, setVectorArray] = useState([]);
+  const [vectorArray, setvectorArray] = useState([]);
   //Amount of vectors to be filled
-  const Amount = 105; // 109 is max
-  const SvgRef = useRef(null);
+  const amount = 105; // 109 is max
+  const svgRef = useRef(null);
   const navigate = useNavigate();
-
+  //On click handler
   function handleEnterClick() {
     navigate("/login");
   }
   //Add the glow class to the vector
-  function AddClass(id) {
-    const vectorElement = SvgRef.current.querySelector(id);
+  function addClass(id) {
+    const vectorElement = svgRef.current.querySelector(id);
     if (vectorElement) {
       vectorElement.classList.add("VectorAni");
     }
   }
   //Fill the array with the vector names
-  function Fillarray() {
-    let TempArr = [];
-    TempArr.push("#Vector");
+  function fillArray() {
+    let tempArr = [];
+    tempArr.push("#Vector");
     for (let i = 0; i < 108; i++) {
-      TempArr.push(`#Vector_${i}`);
+      tempArr.push(`#Vector_${i}`);
     }
-    setVectorArray(TempArr);
+    setvectorArray(tempArr);
   }
   //Randomly select vectors to add the glow effect
-  function RandomVec() {
-    if (VectorArray.length < 50) return;
-    for (let i = 0; i < Amount; i++) {
-      const Random = Math.floor(Math.random() * VectorArray.length);
-      AddClass(VectorArray[Random]);
+  function randomVec() {
+    if (vectorArray.length < 50) return;
+    for (let i = 0; i < amount; i++) {
+      const Random = Math.floor(Math.random() * vectorArray.length);
+      addClass(vectorArray[Random]);
     }
   }
-  //Check if the user is using firefox which has rastering issues
-  useEffect(() => {
-    const UserBrowser = navigator.userAgent;
-    if (UserBrowser.includes("Firefox")) {
-      setBrowser(true);
-    }
-  }, [Browser]);
 
   useEffect(() => {
-    if (SvgRef.current) {
-      if (VectorArray.length === 0) {
-        Fillarray();
+    if (svgRef.current) {
+      if (vectorArray.length === 0) {
+        fillArray();
       }
-      if (VectorArray.length == 109) {
-        RandomVec();
+      if (vectorArray.length == 109) {
+        randomVec();
       }
     }
-  }, [VectorArray]);
+  }, [vectorArray]);
 
   return (
     <div className="StartPageContainer">
@@ -65,14 +56,8 @@ function StartPage() {
         Enter?
         <div className="CubeBack"></div>
       </button>
-      {/* Check for firefox rastor issues */}
-      {Browser && (
-        <div className="FrontSvg">
-          <img src={Test} alt="Test" />
-        </div>
-      )}
       {/* Normal svg background */}
-      {!Browser && <FrontSvg ref={SvgRef} />}
+      {<FrontSvg ref={svgRef} />}
     </div>
   );
 }

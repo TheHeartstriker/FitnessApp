@@ -141,6 +141,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: 5s ease-in-out border;
+}
+
+.input-group.Gpulse input {
+  animation: pulse-animationG 2.5s ease-in-out;
+  border-radius: 5px;
+}
+.input-group.Rpulse input {
+  animation: pulse-animationR 2.5s ease-in-out;
+  border-radius: 5px;
 }
 
 /* The input group is the text boxes the are used to send the username and password */
@@ -211,39 +221,26 @@
   animation: PulseGreen 3s ease-in-out;
 }
 
-/* Pulse indicators */
-@keyframes PulseRed {
+@keyframes pulse-animationG {
   0% {
-    border-color: hsl(0, 100%, 80%);
-  }
-  25% {
-    border-color: hsl(0, 100%, 75%);
+    border: 0px solid greenyellow;
   }
   50% {
-    border-color: hsl(0, 100%, 70%);
-  }
-  75% {
-    border-color: hsl(0, 100%, 65%);
+    border: 5px solid greenyellow;
   }
   100% {
-    border-color: hsl(0, 100%, 60%);
+    border: 0px solid greenyellow;
   }
 }
 
-@keyframes PulseGreen {
+@keyframes pulse-animationR {
   0% {
-    border-color: hsl(120, 100%, 85%);
-  }
-  25% {
-    border-color: hsl(120, 100%, 80%);
+    border: 0px solid red;
   }
   50% {
-    border-color: hsl(120, 100%, 75%);
-  }
-  75% {
-    border-color: hsl(120, 100%, 70%);
+    border: 5px solid red;
   }
   100% {
-    border-color: hsl(120, 100%, 60%);
+    border: 0px solid red;
   }
 }
