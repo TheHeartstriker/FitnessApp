@@ -165,28 +165,33 @@
 }
 /* Percentage chart */
 #pie {
-  /* Changes the angle the gradient goes to */
-  --ng: 0deg; /* Default value */
+  --ng: 15deg; /* Default value */
   --thickness: 15px;
   --_inner: calc(70% - var(--thickness));
   --_outer: calc(var(--_inner) + 1px);
 
-  /* Uses the inner and outer values to hide or fill in the center leaving only the thickness */
-  mask: radial-gradient(circle, #0000 var(--_inner), #000 var(--_outer));
+  /* Simplified mask */
+  mask: radial-gradient(circle, transparent var(--_inner), black var(--_outer));
   -webkit-mask: radial-gradient(
     circle,
-    #0000 var(--_inner),
-    #000 var(--_outer)
+    transparent var(--_inner),
+    black var(--_outer)
   );
 
-  /* The conic gradient, transparent after --ng */
-  background-image: conic-gradient(#000e29 0deg, #005ee7 var(--ng), #0000 0);
-
+  /* Fixed conic-gradient */
+  background-image: conic-gradient(
+    #000e29 0deg,
+    #0051e7 var(--ng),
+    transparent var(--ng)
+  );
   background-color: hsla(0, 0%, 5%, 0.5);
+
   z-index: 999;
   aspect-ratio: 1/1;
   inline-size: 100%;
   border-radius: 50%;
+  will-change: transform;
+  transform: rotate(0deg); /* Force repaint */
 }
 
 .chart {

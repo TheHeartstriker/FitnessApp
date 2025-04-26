@@ -90,7 +90,7 @@ async function allRecordsQuery(userId, timeFrame, limit) {
     type: sequelize.QueryTypes.SELECT,
   });
 
-  const percentage = getPercentage(fitData) || 0;
+  const percentage = getPercentage(fitData) || "0.00";
   const validate = [{ percentage: percentage }];
 
   //Validate data
@@ -196,7 +196,7 @@ function getPercentage(fitData) {
       return percentage.toFixed(2);
     }
   }
-  return 0;
+  return "0.00";
 }
 //Collects the calories burned based on the time spent in each zone
 //Mutiples are based on averages

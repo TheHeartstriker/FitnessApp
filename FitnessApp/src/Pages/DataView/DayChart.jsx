@@ -2,47 +2,39 @@ import { useEffect, useState } from "react";
 import * as d3 from "d3";
 
 function DayChart({ dataprop, TimeProp }) {
-  const Time = TimeProp;
   const svgWidth = "100%";
   const svgHeight = "100%";
   const [timeArr, setTimeArr] = useState([]);
 
-  //Create a array of the length of the time frame in Timeprop
-  function createTimeArr() {
-    const validFrames = {
-      week: 7,
-      month: 30,
-      year: 365,
-    };
-    const days = validFrames[Time.toLowerCase()];
-    if (days) {
-      setTimeArr(Array(days).fill(0));
-    } else {
-      console.error("Invalid Time Frame");
+  function timeToDays(time) {
+    if (time === "week") {
+      return 7;
+    }
+    if (time === "month") {
+      return 30;
+    }
+    if (time === "year") {
+      return 365;
     }
   }
-  function fillTimeArr() {
-    let dataIndex = 0;
-    let currentDate = new Date(); // Todays date
-    let tempTimeArr = Array(timeArr.length).fill(0);
 
+  async function fillTimeArr() {
+    let currentDate = new Date();
+    let tempTimeArr = Array(timeToDays(TimeProp)).fill(0);
     for (let i = 0; i < tempTimeArr.length; i++) {
       // Format currentDate as a string (YYYY-MM-DD) for comparison
       const currentDateString = currentDate.toLocaleDateString("en-CA");
-      let record = dataprop[dataIndex];
-      let recordDate = record?.DateRecorded;
-      // Check if the record date matches the current date
-      if (recordDate && recordDate === currentDateString) {
-        let TempTime = 0;
-        TempTime += dataprop[dataIndex].totalZoneTime;
-        tempTimeArr[i] = TempTime;
-      } else if (recordDate === null) {
-        // If no data is available for that day, set it to 0
-        tempTimeArr[i] = 0;
+
+      // Find a matching record for the current date
+      const record = dataprop.find(
+        (item) => item.DateRecorded === currentDateString
+      );
+
+      if (record) {
+        tempTimeArr[i] = record.totalZoneTime || 0;
       }
 
       // Move to the previous day
-      dataIndex += 1;
       currentDate.setDate(currentDate.getDate() - 1);
     }
     setTimeArr(tempTimeArr);
@@ -99,21 +91,19 @@ function DayChart({ dataprop, TimeProp }) {
   }
 
   useEffect(() => {
-    createTimeArr();
-  }, [Time]);
-
-  useEffect(() => {
-    if (timeArr.length > 0) {
-      fillTimeArr();
+    async function fillData() {
+      await fillTimeArr();
     }
-  }, [timeArr.length]);
+    fillData();
+  }, [TimeProp, dataprop]);
 
   useEffect(() => {
     MainCall();
     return () => {
       d3.select("#chart").select("svg").remove();
     };
-  }, [timeArr, Time]);
+  }, [timeArr]);
+
   return <div id="chart" className="DayChart"></div>;
 }
 

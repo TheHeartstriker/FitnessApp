@@ -22,9 +22,8 @@ function ViewPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  //Allows the pecentage to be displayed in the pie chart
   function Percentage(val) {
-    if (!pieRef.current || Percentagedata !== 0) return;
+    if (!pieRef.current) return;
     for (let i = 0; i < val + 1; i++) {
       setTimeout(() => {
         pieRef.current.style.setProperty("--ng", i * 3.6 + "deg");
@@ -36,8 +35,10 @@ function ViewPage() {
   useEffect(() => {
     async function fetchAwait() {
       try {
-        const fetchedData = await fetchData("week", true);
+        const fetchedData = await fetchData(`${Time}`, true);
         setData(fetchedData);
+        console.log("Fetched data:", data);
+
         setError(null);
         setLoading(false);
       } catch (error) {
@@ -47,13 +48,13 @@ function ViewPage() {
       }
     }
     fetchAwait();
-  }, []);
+  }, [Time]);
   //Initializes all the data that we need to display in the page
   useEffect(() => {
     if (!data || !data.formattedData) return;
+    let formattedData = data?.formattedData;
     setPercentagedata(data?.allFitData?.percentage);
     Percentage(data?.allFitData?.percentage);
-    let formattedData = data?.formattedData;
     setCalories(formattedData[0]?.caloriesBurned);
     setWeight(formattedData[0]?.avgWeight);
     setHeart(formattedData[0]?.avgRestingHeart);
@@ -67,7 +68,7 @@ function ViewPage() {
         {/* The actual bar chart inside the GraphContainer */}
         {BarChartOnOff && (
           <div className="BarChart">
-            <BarChart graphData={data.formattedData} Time={Time} />
+            <BarChart graphData={data?.formattedData} Time={Time} />
           </div>
         )}
         {!BarChartOnOff && (
