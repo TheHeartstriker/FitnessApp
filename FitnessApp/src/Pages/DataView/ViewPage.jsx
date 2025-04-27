@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import BarChart from "./barChart.jsx";
 import DayChart from "./dayChart.jsx";
-import "./ViewPage.css";
+import "./viewPage.css";
 import { fetchData } from "../../services/apiFitness.jsx";
 
 function ViewPage() {
@@ -16,21 +16,28 @@ function ViewPage() {
   const [Percentagedata, setPercentagedata] = useState(0);
   //graph plot to be used
   const [BarChartOnOff, setBarChartOnOff] = useState(true);
-  //Refrence to the pie chart
   const pieRef = useRef(null);
+  const percentageRef = useRef(null);
   //Here but not implemented yet
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   function Percentage(val) {
     if (!pieRef.current) return;
-    for (let i = 0; i < val + 1; i++) {
-      setTimeout(() => {
+    //clear timeouts and reset pie
+    if (percentageRef.current) {
+      percentageRef.current.forEach((timeout) => clearTimeout(timeout));
+    }
+    percentageRef.current = [];
+    pieRef.current.style.setProperty("--ng", 0 + "deg");
+    // animation
+    for (let i = 0; i <= val; i++) {
+      const timeout = setTimeout(() => {
         pieRef.current.style.setProperty("--ng", i * 3.6 + "deg");
       }, i * 25);
+      percentageRef.current.push(timeout);
     }
   }
-
   //Fetches the data when the page is loaded
   useEffect(() => {
     async function fetchAwait() {

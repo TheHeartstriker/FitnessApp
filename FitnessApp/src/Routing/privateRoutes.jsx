@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Navigate, useLocation } from "react-router-dom";
-import { checkAuthentication } from "../Services/apiGuards";
+import { checkAuthentication } from "../services/apiGuards";
 
 function PrivateRoutes({ children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(null);

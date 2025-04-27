@@ -1,6 +1,6 @@
 import { DataTypes, Sequelize } from "sequelize";
 import ConfigDb from "../config/configDb.js";
-import User from "./AuthModel.js";
+import User from "./authModel.js";
 
 const dailyfitinfo = ConfigDb.define(
   "dailyfitinfo",

@@ -1,5 +1,5 @@
 import { useState, useRef, useContext, useEffect } from "react";
-import { handleLogin, handleSignup } from "../../Services/ApiAuth";
+import { handleLogin, handleSignup } from "../../services/ApiAuth";
 import "./login.css";
 
 const MAX_INPUT_LENGTH = 50;

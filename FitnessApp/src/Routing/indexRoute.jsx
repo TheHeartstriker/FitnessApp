@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import PrivateRoutes from "./privateRoutes.jsx";
 import PublicRoutes from "./publicRoutes.jsx";
-import StartPage from "../pages/Landing/StartPage.jsx";
+import StartPage from "../pages/landing/startPage.jsx";
 import LoginPage from "../pages/login/login.jsx";
 import Daily from "../pages/daily/daily.jsx";
 import Share from "../pages/share/share.jsx";
