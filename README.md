@@ -1,8 +1,27 @@
-### Origin:
-I like fitness and I saw that there was a lot of fitness trackers and the like. They do things along the line of tracking sets and or diet and while that's great on the surface I found that tracking sets can be easily tracked in notepad along with a diet. I don't know if others ever felt the same but it kind of felt like a was of time. Although its a little hard to track diets daily and doing it in a closed of ecosystem in the form of an app loses its purpose of tracking everything precisely. So I wanted to make something that I would actually use and benefit from and maybe others would to.
+### Fgraphs
+A lightweight fitness application. I built this to be actually useful and something I could see myself using when I got started. It's also its own sort of training area for me to evolve my skills in web development.
 
-### Description:
-This app tracks a few simple metrics time, effort, weight and heartrate. It was meant to give a look at the overall progress without wasting your time. It tracks things like how much time you have spent in specific zones overall over a period of time and how many calories have you burned in that time. Average heart rate average weight etcetera. I find it nice to zoom out a bit and look at the total effort you have put in that's mainly what this app is a zoomed out look at what you or others with the share feature have done in a period of time.
+## Where its going 
+Currently my plan for expansion is as follows: better data visualization for users, more responsive UI, optimizations to frontend and backend. And that's pretty much it. I might add more features but currently I think about it as a product and culmination of my skills in the web. Still has a long way to go though!
 
-### Link
-If you want to check it out here is the link Link https://www.fgraphs.com
+## Tech Stack
+- **Frontend**: React, Javascript
+- **Backend**: Express, Mysql, sequalize 
+- **Styling**: D3, AnimeJs(not implemented yet)
+- **Hosting**: AWS's EC2 instance
+- **Build tool**: Vite
+
+## Features
+- **Data visualization & metrics**: Show estimates and statistical improvement based on data the user has given and display's them
+- **Data sharing**: Able to share your data with other user's if desired
+- **Interesting UI**: Custom design in figma using colors that match well and a interactive and interesting UI.
+
+## Link
+www.fgraphs.com 
+
+## ScreenShots
+
+![](./readmeAssets/FitscreenShot1.png)  
+![](./readmeAssets/FitscreenShot2.png)  
+![](./readmeAssets/FitscreenShot3.png)  
+![](./readmeAssets/FitscreenShot4.png)
