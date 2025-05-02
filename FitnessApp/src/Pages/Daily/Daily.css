@@ -48,6 +48,9 @@
   border: none;
   background-color: var(--Blue-1);
   z-index: -2;
+  outline: none;
+  font-size: 1.3rem;
+  font-family: "Teko", sans-serif;
 }
 .WorkHeartTime::placeholder {
   color: #1b1b1b;
@@ -173,37 +176,28 @@
 
 .ShareButton {
   position: absolute;
+  cursor: pointer;
   width: 10rem;
-  border-radius: 20px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
   height: 5rem;
   left: 40%;
   bottom: 0;
-  border: 2.5px solid var(--Blue-1);
+  font-size: 1.3rem;
+  font-family: "Teko", sans-serif;
+  border: none;
   z-index: 1;
   background-color: var(--Blue-2);
+  transition: 1s ease background-color, 1s ease color;
   transform: translateX(-50%);
 }
 
 .ShareButton.True {
-  color: white;
-  border: 2.5px var(--Blue-1) solid;
-  background: linear-gradient(
-    90deg,
-    var(--Gradient3) 0%,
-    var(--Gradient2) 50%,
-    var(--Gradient3) 100%
-  );
+  background-color: var(--Gradient2);
 }
 
 .ShareButton.False {
-  color: white;
-  border: 2.5px red solid;
-  background: linear-gradient(
-    90deg,
-    var(--Background) 0%,
-    red 50%,
-    var(--Background) 100%
-  );
+  background-color: red;
 }
 /* Tool tip */
 .InputContainer span {

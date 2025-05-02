@@ -162,6 +162,7 @@
   background-color: var(--Blue-1);
   margin: 10px;
   color: white;
+  outline: none;
 }
 
 .input-group input::placeholder {
@@ -187,7 +188,7 @@
   border-radius: 50px;
   border: none;
   z-index: 1;
-  transition: 1s ease-in-out background, 1s ease-in-out box-shadow;
+  transition: 0.5s ease-in-out transform;
 }
 /* The switch button */
 .Switch {
@@ -202,16 +203,15 @@
   color: #1b1b1b;
   z-index: 1;
   bottom: 15px;
-  transition: 1s ease-in-out background-color;
+  transition: 0.5s ease-in-out transform;
 }
 
 .Switch:hover {
-  background-color: var(--Text-Blue);
+  transform: scale(1.1);
 }
 
 .loginOrSign:hover {
-  box-shadow: 0 0 10px 5px var(--Blue-1);
-  background: var(--Blue-2);
+  transform: scale(1.1);
 }
 /* Animations to notifiy the user if something was successful */
 .AnimatePulseRed {
