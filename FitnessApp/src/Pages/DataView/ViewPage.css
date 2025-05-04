@@ -44,15 +44,15 @@
   justify-content: center;
   width: 55vw;
   height: 70vh;
-  background: #050505;
-  box-shadow: 0 0 30px 2px rgba(0, 94, 231, 0.5);
+  background: rgba(0, 14, 41, 0.25);
+  box-shadow: 0 0 30px 2px rgba(0, 94, 231, 0.25);
   padding: 15px;
   border-radius: 50px;
   transition: transform 0.5s ease-in-out;
 }
 
 .GraphContainer:hover {
-  transform: scale(1.015);
+  transform: scale(1.01);
 }
 
 /* The switch buttons under the graph */
@@ -97,13 +97,13 @@
   width: 30vw;
   padding: 10px;
   height: 95vh;
-  background: #050505;
-  box-shadow: 0 0 30px 2px rgba(0, 94, 231, 0.5);
+  background: rgba(0, 14, 41, 0.25);
+  box-shadow: 0 0 30px 2px rgba(0, 94, 231, 0.25);
   transition: transform 0.5s ease-in-out;
 }
 
 .PercentageContainer:hover {
-  transform: scale(1.015);
+  transform: scale(1.01);
 }
 
 /* Holds the text based data at the bottom of the page */
@@ -125,7 +125,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #000e29;
+  background-color: rgba(0, 14, 41, 0.5);
+
   border-radius: 25px;
   margin-top: 15px;
   width: 90%;

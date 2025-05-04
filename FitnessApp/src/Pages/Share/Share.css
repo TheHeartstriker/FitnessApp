@@ -40,7 +40,7 @@
   width: 100%;
   height: 100%;
   opacity: 0.3;
-  border-radius: 0;
+  border-radius: 25px;
   background: linear-gradient(
     to bottom right,
     var(--Gradient1),
@@ -65,12 +65,12 @@
   font-size: 1.5rem;
   margin: 75px;
   aspect-ratio: 1 / 1;
-  border-radius: 5px;
+  border-radius: 25px;
   color: #ffffff;
   padding: 10px;
   height: 25vh;
   width: 25vh;
-  transition: transform 0.7s ease, box-shadow 0.7s ease;
+  transition: transform 0.5s ease-in-out;
   z-index: 1;
 }
 
@@ -83,8 +83,7 @@
 }
 
 .Item:hover {
-  transform: scale(1.4);
-  box-shadow: 0 0 80px hsla(234, 100%, 50%, 0.5);
+  transform: scale(1.1);
 }
 
 @media (max-width: 1000px) {
