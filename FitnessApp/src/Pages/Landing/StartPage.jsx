@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext, useRef } from "react";
+import { animate } from "animejs";
 import { useNavigate } from "react-router-dom";
 import FrontSvg from "../../assets/Front.jsx";
 import "./startPage.css";
@@ -39,6 +40,14 @@ function StartPage() {
     }
   }
 
+  function startAnimation() {
+    animate(".EnterBtn", {
+      rotate: 90,
+      loop: true,
+      ease: "inOutExpo",
+    });
+  }
+
   useEffect(() => {
     if (svgRef.current) {
       if (vectorArray.length === 0) {
@@ -50,12 +59,16 @@ function StartPage() {
     }
   }, [vectorArray]);
 
+  useEffect(() => {
+    startAnimation();
+  }, []);
+
   return (
     <div className="StartPageContainer">
-      <button className="EnterBtn" onClick={handleEnterClick}>
-        Enter?
-        <div className="CubeBack"></div>
-      </button>
+      <div className="enterContainer">
+        <button className="EnterBtn" onClick={handleEnterClick}></button>
+        <h1 className="center-rotate-text">Enter?</h1>
+      </div>
       {/* Normal svg background */}
       {<FrontSvg ref={svgRef} />}
     </div>

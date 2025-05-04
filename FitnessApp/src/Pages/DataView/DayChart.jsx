@@ -72,7 +72,9 @@ function DayChart({ dataprop, TimeProp }) {
       .attr("y", y)
       .attr("width", width)
       .attr("height", height)
-      .attr("fill", color);
+      .attr("fill", color)
+      .attr("rx", 20)
+      .attr("ry", 20);
   }
   //This is the main call we create the svg of defined size and call the related functions to fill it
   function MainCall() {

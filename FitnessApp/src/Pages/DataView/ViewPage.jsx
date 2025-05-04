@@ -71,67 +71,67 @@ function ViewPage() {
 
   return (
     <div className="ViewPageContainer">
-      <div className="GraphContainer">
-        {/* The actual bar chart inside the GraphContainer */}
-        {BarChartOnOff && (
-          <div className="BarChart">
-            <BarChart graphData={data?.formattedData} Time={Time} />
-          </div>
-        )}
-        {!BarChartOnOff && (
-          <DayChart dataprop={data?.allFitData?.fitData} TimeProp={Time} />
-        )}
+      <div className="dataDisplayContainer">
+        <div className="GraphContainer">
+          {/* The actual bar chart inside the GraphContainer */}
+          {BarChartOnOff && (
+            <div className="BarChart">
+              <BarChart graphData={data?.formattedData} Time={Time} />
+            </div>
+          )}
+          {!BarChartOnOff && (
+            <DayChart dataprop={data?.allFitData?.fitData} TimeProp={Time} />
+          )}
 
-        {/* Container for the buttons that switch graphs*/}
-        <div className="GraphSwitchContainer">
-          <button
-            onClick={() => {
-              setBarChartOnOff(true);
-            }}
-          >
-            Barchart
-          </button>
-          <button
-            onClick={() => {
-              setBarChartOnOff(false);
-            }}
-          >
-            Daychart
-          </button>
+          {/* Container for the buttons that switch graphs*/}
+          <div className="GraphSwitchContainer">
+            <button
+              onClick={() => {
+                setBarChartOnOff(true);
+              }}
+            >
+              Barchart
+            </button>
+            <button
+              onClick={() => {
+                setBarChartOnOff(false);
+              }}
+            >
+              Daychart
+            </button>
+          </div>
         </div>
 
-        {/* Container for week, month, and year buttons*/}
-        <div className="ButtonContainer">
-          <button
-            className={`${Time === "week" ? "On" : ""}`}
-            onClick={() => setTime("week")}
-          >
-            Week
-          </button>
-          <button
-            className={`${Time === "month" ? "On" : ""}`}
-            onClick={() => setTime("month")}
-          >
-            Month
-          </button>
-          <button
-            className={`${Time === "year" ? "On" : ""}`}
-            onClick={() => setTime("year")}
-          >
-            Year
-          </button>
+        <div className="PercentageContainer">
+          <div className="chart">
+            <div id="pie" ref={pieRef}></div>
+            <h3>
+              <span id="percentageVal">
+                Today you have done {Percentagedata}% of yesterday
+              </span>
+            </h3>
+          </div>
         </div>
       </div>
-
-      <div className="PercentageContainer">
-        <div className="chart">
-          <div id="pie" ref={pieRef}></div>
-          <h3>
-            <span id="percentageVal">
-              Today you have done {Percentagedata}% of yesterday
-            </span>
-          </h3>
-        </div>
+      <div className="ButtonContainer">
+        <button
+          className={`${Time === "week" ? "On" : ""}`}
+          onClick={() => setTime("week")}
+        >
+          Week
+        </button>
+        <button
+          className={`${Time === "month" ? "On" : ""}`}
+          onClick={() => setTime("month")}
+        >
+          Month
+        </button>
+        <button
+          className={`${Time === "year" ? "On" : ""}`}
+          onClick={() => setTime("year")}
+        >
+          Year
+        </button>
       </div>
       <div className="DataContainer">
         <div className="Data">

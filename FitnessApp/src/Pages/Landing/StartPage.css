@@ -33,47 +33,46 @@
   position: relative;
 }
 
+.enterContainer {
+  display: flex;
+  justify-content: center;
+  width: 20vh;
+  height: 20vh;
+  align-items: center;
+  position: relative;
+}
+
 .EnterBtn {
   font-family: "Teko", sans-serif;
   font-size: 3rem;
   position: relative;
-  width: 15vh;
-  height: 15vh;
-  background-color: var(--Card-Basic);
+  width: 70%;
+  height: 70%;
+  background-color: var(--Blue-1);
   border-radius: 10px;
-  border: 3px solid #0082cd;
+  border: none;
   color: var(--Blue-1);
   cursor: pointer;
   transition: 1s ease background-color, 1s ease color, 1s ease box-shadow;
 }
 
 .EnterBtn:hover {
-  background-color: var(--Blue-1);
-  color: var(--Card-Basic);
+  background-color: var(--Gradient2);
+  color: var(--Text-White);
   box-shadow: 0 0 15px var(--Blue-2);
 }
 
-.CubeBack {
+.center-rotate-text {
   position: absolute;
-  width: 13vh;
-  height: 13vh;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) rotate(45deg);
-  background-color: var(--Background);
-  border: 3px solid var(--Text-Blue);
-  border-radius: 10px;
-  z-index: -1;
-  animation: rotate 5s linear infinite;
-}
-
-@keyframes rotate {
-  from {
-    transform: translate(-50%, -50%) rotate(45deg);
-  }
-  to {
-    transform: translate(-50%, -50%) rotate(405deg);
-  }
+  transform: translate(-50%, -50%);
+  font-family: "Teko", sans-serif;
+  margin: 0;
+  font-size: 2rem;
+  color: #0a0a0a;
+  text-align: center;
+  pointer-events: none;
 }
 
 .FrontSvg {

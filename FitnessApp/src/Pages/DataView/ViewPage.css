@@ -18,12 +18,23 @@
 .ViewPageContainer {
   display: flex;
   align-items: center;
-  justify-content: center;
+  flex-direction: column;
   background-color: var(--Background);
   width: 100vw;
   height: 200vh;
   box-sizing: border-box;
 }
+
+.dataDisplayContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+  height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
 /* The graph container */
 .GraphContainer {
   position: relative;
@@ -32,18 +43,24 @@
   align-items: center;
   justify-content: center;
   width: 55vw;
-  height: 65vh;
-  bottom: 25%;
-  border: 5px solid var(--Blue-2);
-  border-radius: 5px;
+  height: 70vh;
+  background: rgba(0, 14, 41, 0.25);
+  box-shadow: 0 0 30px 2px rgba(0, 94, 231, 0.25);
+  padding: 15px;
+  border-radius: 50px;
+  transition: transform 0.5s ease-in-out;
 }
+
+.GraphContainer:hover {
+  transform: scale(1.01);
+}
+
 /* The switch buttons under the graph */
 .GraphSwitchContainer {
-  position: absolute;
-  display: flex;
+  position: relative;
   align-items: center;
   justify-content: space-between;
-  top: 99%;
+  display: flex;
 }
 
 .GraphSwitchContainer button {
@@ -71,25 +88,34 @@
 .PercentageContainer {
   position: relative;
   display: flex;
-  bottom: 25%;
   align-items: center;
   text-align: center;
   font-size: 1.5rem;
+  border-radius: 50px;
   color: var(--Text-Blue);
   left: 5%;
   width: 30vw;
+  padding: 10px;
   height: 95vh;
+  background: rgba(0, 14, 41, 0.25);
+  box-shadow: 0 0 30px 2px rgba(0, 94, 231, 0.25);
+  transition: transform 0.5s ease-in-out;
 }
+
+.PercentageContainer:hover {
+  transform: scale(1.01);
+}
+
 /* Holds the text based data at the bottom of the page */
 .DataContainer {
-  position: absolute;
+  position: relative;
   display: flex;
   align-items: center;
-  justify-content: center;
   flex-direction: column;
-  width: 100%;
-  height: 40%;
-  bottom: -75vh;
+  margin-top: 150px;
+  width: 90%;
+  height: 20%;
+  gap: 15px;
 }
 /* The data containers*/
 .Data {
@@ -99,8 +125,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  background-color: rgba(0, 14, 41, 0.5);
+
+  border-radius: 25px;
+  margin-top: 15px;
+  width: 90%;
   height: 100%;
+  transition: 0.35s ease-in-out box-shadow, 0.5s ease-in-out transform;
+}
+
+.Data:hover {
+  box-shadow: 0 0 30px 2px rgba(0, 94, 231, 0.5);
+  transform: scale(1.015);
 }
 
 .Data h1 {
@@ -124,16 +160,17 @@
 
 .Data h3 {
   position: relative;
-  font-size: 1.7em;
+  font-size: 1.4em;
 }
 /* Button container html is inside of the graph and pushed down */
 .ButtonContainer {
-  position: absolute;
+  position: relative;
   display: flex;
   align-items: center;
+
   justify-content: space-between;
-  width: 100%;
-  bottom: -38%;
+  width: 75%;
+  margin: 20px;
   font-size: 3rem;
 }
 /* Button styles */
@@ -165,7 +202,7 @@
 }
 /* Percentage chart */
 #pie {
-  --ng: 15deg; /* Default value */
+  --ng: 0deg; /* Default value */
   --thickness: 15px;
   --_inner: calc(70% - var(--thickness));
   --_outer: calc(var(--_inner) + 1px);
@@ -191,7 +228,7 @@
   inline-size: 100%;
   border-radius: 50%;
   will-change: transform;
-  transform: rotate(0deg); /* Force repaint */
+  transform: rotate(0deg);
 }
 
 .chart {
@@ -204,7 +241,7 @@
   aspect-ratio: 1/1;
   inline-size: 100%;
   border-radius: 50%;
-  background-color: var(--Gradient1);
+  background-color: var(--Gradient2);
 }
 
 /* Styles for the bar chart container */
@@ -229,8 +266,15 @@
   background-color: var(--clr);
   filter: drop-shadow(0 0 1rem var(--Shadow--clr));
   position: relative;
+  border-radius: 25px;
+  transition: 0.5s ease-in-out transform;
   animation: item-height 3s ease forwards;
 }
+
+.item:hover {
+  transform: scale(1.1);
+}
+
 @keyframes item-height {
   from {
     height: 0;
