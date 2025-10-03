@@ -1,8 +1,47 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: "Teko", sans-serif;
+  font-family: "Inter", sans-serif;
 }
+
+html {
+  line-height: 1.6;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  line-height: 1.2;
+  font-family: "Poppins", sans-serif;
+}
+
+:root {
+  /* Neutrals */
+  --white-1: #f5f5f5;
+  --white-2: #e0e0e0;
+  --black-1: #1c1c1c;
+  --black-2: #121212;
+  /* Color palette */
+  --color-1: #250902;
+  --color-2: #38040e;
+  --color-3: #640d14;
+  --color-4: #800e13;
+  --color-5: #ad2831;
+  /* Spacing */
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2rem;
+  --space-5: 2.5rem;
+  --space-6: 3rem;
+}
+
 @media (min-width: 2000px) {
   html {
     font-size: 20px;

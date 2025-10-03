@@ -1,120 +1,87 @@
-:root {
-  /* Main color accents */
-  --Blue-1: #00c4f8;
-  --Blue-2: #008ad3;
-  /* Card backgrounds */
-  --Card-Basic: #1b1b1b;
-  /* Common gradient */
-  --Gradient1: #000e29;
-  --Gradient2: #005ee7;
-  --Gradient3: #00d4ff;
-  /* Common text */
-  --Text-White: #ffffff;
-  --Text-Blue: #00d4ff;
-  /* Basic background 'filler' space */
-  --Background: #0a0a0a;
-}
-
-/* Overall container for the background */
-.StartPageContainer {
-  overflow: hidden;
+.landing-page {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   justify-content: center;
-  align-items: center;
-  border: none;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  margin: 0;
-  padding: 0;
   height: 100vh;
-  width: 100vw;
-  position: relative;
+  width: 100%;
+  background-color: white;
 }
 
-.enterContainer {
-  display: flex;
-  justify-content: center;
-  width: 20vh;
-  height: 20vh;
-  align-items: center;
-  position: relative;
-}
-
-.EnterBtn {
-  font-family: "Teko", sans-serif;
-  font-size: 3rem;
-  position: relative;
-  width: 70%;
-  height: 70%;
-  background-color: var(--Blue-1);
-  border-radius: 10px;
-  border: none;
-  color: var(--Blue-1);
-  cursor: pointer;
-  transition: 1s ease background-color, 1s ease color, 1s ease box-shadow;
-}
-
-.EnterBtn:hover {
-  background-color: var(--Gradient2);
-  color: var(--Text-White);
-  box-shadow: 0 0 15px var(--Blue-2);
-}
-
-.center-rotate-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-family: "Teko", sans-serif;
-  margin: 0;
-  font-size: 2rem;
-  color: #0a0a0a;
-  text-align: center;
-  pointer-events: none;
-}
-
-.FrontSvg {
+.landing-background-svg {
   position: absolute;
   top: 0;
   left: 0;
   height: 100%;
   width: 100%;
-  z-index: -999;
-}
-/* Might help rastor errors */
-.FrontSvg svg {
-  shape-rendering: crispEdges;
-}
-
-.VectorAni {
-  stroke-dasharray: 1000;
-  stroke-dashoffset: 0;
-  animation: dash 5s linear infinite alternate,
-    glow 3s ease-in-out infinite alternate;
-  stroke-width: 3px;
-  /* Defaults */
-  --VectorColor1: #00d4ff;
-  --VectorColor2: #a6fffb;
+  overflow: hidden;
+  z-index: 0;
+  filter: blur(2.5px);
+  transform: scale(1.02); /* Slightly zooms in */
 }
 
-@keyframes dash {
-  from {
-    stroke-dashoffset: 1000;
-  }
-  to {
-    stroke-dashoffset: 0;
-  }
+.test-blur {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, var(--color-5) 0%, var(--color-1) 100%);
+  z-index: 1;
+  opacity: 0.4;
 }
 
-@keyframes glow {
-  from {
-    stroke: var(--VectorColor1);
-    filter: drop-shadow(0 0 15px var(--VectorColor1));
-  }
-  to {
-    stroke: var(--VectorColor2);
-    filter: drop-shadow(0 0 50px var(--VectorColor2));
-  }
+.landing-content {
+  z-index: 1;
+  color: var(--black-2);
+  padding: var(--space-4);
+}
+
+.landing-content h2 {
+  font-size: 1.5rem;
+  color: var(--color-1);
+  margin: 0;
+  margin-bottom: var(--space-2);
+}
+.landing-content h1 {
+  font-size: 4rem;
+  color: var(--white-1);
+  margin: 0;
+  margin-bottom: var(--space-2);
+}
+.landing-content h3 {
+  font-size: 3rem;
+  color: var(--white-1);
+  font-weight: 600;
+  margin: 0;
+  margin-bottom: var(--space-5);
+}
+
+.landing-content p {
+  font-size: 1.5rem;
+  color: var(--white-2);
+  max-width: 850px;
+}
+
+.primary-action-btn {
+  display: block;
+  margin-left: auto;
+  width: auto;
+  height: auto;
+  font-size: 1.25rem;
+  background-color: var(--color-1);
+  padding: var(--space-2);
+  border: none;
+  border-radius: 15px;
+  color: var(--color-5);
+  cursor: pointer;
+  transition: color 0.45s, background-color 0.45s ease-in-out;
+}
+
+.primary-action-btn:hover {
+  background-color: var(--color-5);
+  color: var(--color-1);
+}
+
+@media (max-width: 768px) {
 }
