@@ -1,32 +1,19 @@
 import express from "express";
-import cors from "cors";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
-import rateLimit from "express-rate-limit";
-
+//Middleware
 import errorHandler from "./middleWare/errorMiddleWare.js";
+import limiter from "./middleWare/rateMiddleWare.js";
+import corsMiddleware from "./middleWare/corsMiddleWare.js";
+//Routes
 import routes from "./routes.js";
 
 //Configures the environment variables and express
 dotenv.config();
 const app = express();
 
-//cors options
-const corsOptions = {
-  origin: process.env.FRONTEND_URL,
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  credentials: true,
-  optionsSuccessStatus: 204,
-};
-
-const limiter = rateLimit({
-  windowMs: 10 * 60 * 1000,
-  max: 100,
-  message: "Too many requests from this IP",
-});
-
 //Middleware
-app.use(cors(corsOptions));
+app.use(corsMiddleware);
 app.use(express.json());
 app.use(cookieParser());
 app.use(limiter);

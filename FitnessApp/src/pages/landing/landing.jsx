@@ -1,6 +1,7 @@
 import StartPage from "./startPage";
 import LoginPage from "./login";
-import PolyGridSvg from "../../assets/polyGrid";
+import Login from "./login";
+import Tribackground from "../../assets/triBackground";
 
 function LandingPage() {
   return (
@@ -8,7 +9,7 @@ function LandingPage() {
       <section className="landing-page">
         <div className="landing-background-svg">
           <div className="test-blur"></div>
-          <PolyGridSvg />
+          <Tribackground />
         </div>
         <div className="landing-content">
           <h2>THIS IS</h2>
@@ -23,8 +24,9 @@ function LandingPage() {
           <button className="primary-action-btn">Want to give it a try?</button>
         </div>
       </section>
-      {/* <StartPage /> */}
-      <LoginPage />
+      <section className="login-section">
+        <Login />
+      </section>
     </>
   );
 }

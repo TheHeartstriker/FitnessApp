@@ -1,28 +1,23 @@
-import { useState, useRef, useContext, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { handleLogin, handleSignup } from "../../services/ApiAuth";
 import "./login.css";
 
 const MAX_INPUT_LENGTH = 50;
-const COOLDOWN_TIME = 30000;
 const PULSE_TYPES = {
   SUCCESS: "Gpulse",
   ERROR: "Rpulse",
 };
 
-function LoginPage() {
-  //Stores the username and password
+function Login() {
+  // Stores the username and password
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  //Used to see which button name and function to use
+  // Used to see which button name and function to use
   const [login, setLogin] = useState(false);
-  //loading and error states
-  const [loading, setLoading] = useState(false);
+  // Loading and error states
   const [error, setError] = useState(null);
-  //Pulse for the border of the input fields
-  const [pulse, setPulse] = useState(false);
-  //cooldown for registering and logging in
-  const [cooldown, setCooldown] = useState(false);
-  //Length validation (can be longer than 50 characters)
+
+  // Length validation (can be longer than 50 characters)
   function handleChange(event, setter) {
     if (event.target.value.length > MAX_INPUT_LENGTH) {
       alert("Username or password cannot be longer than 50 characters");
@@ -38,125 +33,69 @@ function LoginPage() {
       }
     }
   }
-  //Call controllers to handle login and signup
+
+  // Call controllers to handle login and signup
   function handleSwitch() {
     setLogin(!login);
+    setError(null);
   }
-  async function handleSignOrLog() {
+
+  async function handleSignOrLog(event) {
+    event.preventDefault();
     setError(null);
     try {
-      setLoading(true);
       if (login) {
         await handleLogin(username, password);
       } else {
         await handleSignup(username, password);
         setCooldown(true);
       }
-      handlePulse(PULSE_TYPES.SUCCESS);
-      setLoading(false);
     } catch (error) {
-      handlePulse(PULSE_TYPES.ERROR);
       console.error("Error:", error.message);
       setError(error.message || "An error occurred");
-      setLoading(false);
     }
   }
-
-  function handlePulse(str) {
-    setPulse(str);
-    setTimeout(() => {
-      setPulse("");
-    }, 5000);
-  }
-
-  useEffect(() => {
-    if (cooldown) {
-      const timer = setTimeout(() => setCooldown(false), COOLDOWN_TIME);
-      return () => clearTimeout(timer);
-    }
-  }, [cooldown]);
 
   return (
-    <>
-      {/* Loading and error messages */}
-      {/* {loading && <p>Loading...</p>}
-      {error && <p>Error: {error}</p>} */}
+    <section className="login-section">
+      <div className="login-container">
+        <h2>{login ? "Welcome Back!" : "Create Account"}</h2>
 
-      {/* Entire page container */}
+        <form className="login-form" onSubmit={handleSignOrLog}>
+          <h3>Username</h3>
+          <input
+            type="text"
+            value={username}
+            onChange={(event) => handleChange(event, "username")}
+            placeholder="Enter username"
+            required
+          />
+          <h3>Password</h3>
+          <input
+            type="password"
+            value={password}
+            onChange={(event) => handleChange(event, "password")}
+            placeholder="Enter password"
+            required
+          />
+          <hr />
+          <button
+            type="submit"
+            className={error !== null ? "form-btn-error" : ""}
+          >
+            {" "}
+            {login ? "Login" : "Sign Up"}
+          </button>
+          <hr />
+        </form>
 
-      <div className="LogSignContainer">
-        {/* Input area */}
-        <div className="LogSignPage">
-          <h1>Please enter or create an account</h1>
-          {/* username */}
-          <div className="UP-Container">
-            <h2>Username</h2>
-          </div>
-          <div
-            className={`input-group ${
-              pulse === PULSE_TYPES.SUCCESS
-                ? PULSE_TYPES.SUCCESS
-                : pulse === PULSE_TYPES.ERROR
-                ? PULSE_TYPES.ERROR
-                : ""
-            }`}
-          >
-            <input
-              type="text"
-              value={username}
-              onChange={(event) => handleChange(event, "username")}
-            />
-          </div>
-          {/* password */}
-          <div className="UP-Container">
-            <h2>Password</h2>
-          </div>
-          <div
-            className={`input-group ${
-              pulse === PULSE_TYPES.SUCCESS
-                ? PULSE_TYPES.SUCCESS
-                : pulse === PULSE_TYPES.ERROR
-                ? PULSE_TYPES.ERROR
-                : ""
-            }`}
-          >
-            <input
-              type="password"
-              value={password}
-              onChange={(event) => handleChange(event, "password")}
-            />
-          </div>
-          {/* Switcher */}
-          <div className="Button-Container-Login">
-            <button
-              className="loginOrSign"
-              onClick={handleSignOrLog}
-              disabled={cooldown}
-            >
-              {login ? "Login" : "Signup"}
-            </button>
-            <button className="Switch" onClick={handleSwitch}>
-              {login ? "Switch to Signup" : "Switch to Login"}
-            </button>
-          </div>
-        </div>
-        {/* Explaination area */}
-        <div className="WhatIsThis">
-          <div className="WhatIsThis-H1Main">
-            <h1>Welcome to FGraphs</h1>
-          </div>
-          <div className="WhatIsThis-H2">
-            <p>
-              What is FGraphs? Why does it exist? Well its a playground for both
-              code and gains. Built to flex and train my programming skills.
-              Built to be practical to the point. Hope you enjoy it! Have a good
-              Day😊
-            </p>
-          </div>
-        </div>
+        <h3>{login ? "Need an account?" : "Already have an account?"}</h3>
+        <button className="switch-btn" onClick={handleSwitch}>
+          {login ? "Sign Up" : "Login"}
+        </button>
       </div>
-    </>
+    </section>
   );
 }
 
-export default LoginPage;
+export default Login;
