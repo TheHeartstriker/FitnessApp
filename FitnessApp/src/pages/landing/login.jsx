@@ -78,7 +78,6 @@ function Login() {
             placeholder="Enter password"
             required
           />
-          <hr />
           <button
             type="submit"
             className={error !== null ? "form-btn-error" : ""}

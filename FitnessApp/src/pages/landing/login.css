@@ -4,11 +4,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--color-1);
+  background-image: url("../../assets/loginGradient.svg");
 }
 
 .login-container {
-  background-color: var(--color-2);
+  background-color: var(--black-2);
   padding: var(--space-6);
   border-radius: 50px;
   text-align: center;
@@ -59,7 +59,7 @@
   font-size: 1rem;
   border: none;
   color: var(--color-1);
-  background-color: var(--color-4);
+  background-color: var(--color-5);
   border-radius: 25px;
 }
 
@@ -68,7 +68,7 @@
   width: 5rem;
   height: 5rem;
   cursor: pointer;
-  background-color: var(--color-5);
+  background-color: var(--color-3);
   color: var(--white-2);
   padding: var(--space-2);
   border: none;
