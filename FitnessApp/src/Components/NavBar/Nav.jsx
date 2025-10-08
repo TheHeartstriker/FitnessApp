@@ -1,69 +1,35 @@
-import {
-  ArrowLeftEndOnRectangleIcon,
-  AdjustmentsHorizontalIcon,
-  ShareIcon,
-  HeartIcon,
-} from "@heroicons/react/24/outline";
 import { useNavigate, useLocation } from "react-router-dom";
+import Logo from "../../assets/icons/logo.jsx";
 import "./Nav.css";
-
+import CubeIcon from "../../assets/icons/cube.jsx";
+import HeartIcon from "../../assets/icons/heart.jsx";
+import PeopleIcon from "../../assets/icons/people.jsx";
 function Nav() {
   const navigate = useNavigate();
   const location = useLocation();
-  //Open to the Github page of the project
-  function GithubLink() {
-    window.open(
-      "https://github.com/TheHeartstriker/FitnessApp",
-      "_blank",
-      "noopener noreferrer"
-    );
-  }
-  if (location.pathname !== "/") {
-    return (
-      <div className="NavContainer">
-        <div className="Ball" onClick={() => navigate("/")}></div>
-        <div className="NavContent">
-          <div
-            className={`NavIcon ${
-              location.pathname === "/login" ? "Active" : ""
-            }`}
-            onClick={() => navigate("/login")}
-          >
-            <ArrowLeftEndOnRectangleIcon className="Icon"></ArrowLeftEndOnRectangleIcon>
-            <h1>Login</h1>
-          </div>
-          <div
-            className={`NavIcon ${
-              location.pathname === "/daily" ? "Active" : ""
-            }`}
-            onClick={() => navigate("/daily")}
-          >
-            <HeartIcon className="Icon"></HeartIcon>
-            <h1>Daily</h1>
-          </div>
-          <div
-            className={`NavIcon ${
-              location.pathname === "/view" ? "Active" : ""
-            }`}
-            onClick={() => navigate("/view")}
-          >
-            <AdjustmentsHorizontalIcon className="Icon"></AdjustmentsHorizontalIcon>
-            <h1>Stats</h1>
-          </div>
-          <div
-            className={`NavIcon ${
-              location.pathname === "/share" ? "Active" : ""
-            }`}
-            onClick={() => navigate("/share")}
-          >
-            <ShareIcon className="Icon"></ShareIcon>
-            <h1>Share</h1>
-          </div>
+  return (
+    <nav className="nav-bar">
+      <div className="nav-logo-container">
+        <div className="nav-logo">
+          <Logo />
         </div>
-        <div className="GithubIcon" onClick={() => GithubLink()}></div>
+        <h1>FGraphs</h1>
       </div>
-    );
-  }
+      <button className="nav-bar-button" id="test-active">
+        <div className="on-bar-indicator"></div>
+        <CubeIcon />
+        <h2>Dashboard</h2>
+      </button>
+      <button className="nav-bar-button">
+        <HeartIcon />
+        <h2>Daily</h2>
+      </button>
+      <button className="nav-bar-button" id="share-button">
+        <PeopleIcon />
+        <h2>Share</h2>
+      </button>
+    </nav>
+  );
 }
 
 export default Nav;
