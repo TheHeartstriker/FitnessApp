@@ -48,14 +48,33 @@
   background: none;
 }
 
+.nav-bar-button.active {
+  color: var(--color-3);
+}
+
+.nav-bar-button.active svg path {
+  fill: var(--color-3);
+}
+
+.nav-bar-button.activeShare {
+  color: var(--color-3);
+}
+
+.nav-bar-button.activeShare svg path {
+  stroke: var(--color-3) !important;
+}
+
 .on-bar-indicator {
   position: absolute;
+  left: 0;
+  top: 0;
   width: 8px;
-  height: 75%;
-  background-color: var(--color-5);
+  height: 100%;
+  background-color: var(--color-3);
   border-radius: 0 50px 50px 0;
   margin: 0;
   padding: 0;
+  transition: top 0.3s ease;
 }
 
 .nav-bar-button h2 {
