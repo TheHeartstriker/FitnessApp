@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from "react";
-import BarChart from "./barChart.jsx";
-import DayChart from "./dayChart.jsx";
-import "./viewPage.css";
-import { fetchData } from "../../services/apiFitness.jsx";
+import BarChart from "../barChart.jsx";
+import DayChart from "../dayChart.jsx";
+import "./dashboard.css";
+import { fetchData } from "../../../services/apiFitness.jsx";
 
 function ViewPage() {
   ///Used to hold the data from the API all the data realted to the user not sorted by time

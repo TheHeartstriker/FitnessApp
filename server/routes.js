@@ -10,17 +10,17 @@ import {
   updateShare,
 } from "./Controllers/dailyControl/daily.js";
 
-const router = Router();
+const routes = Router();
 
-router.post("/login", login);
-router.post("/register", register);
-router.put("/updateDataPage", authenticate, updateDataPage);
-router.put("/updateShare", authenticate, updateShare);
-router.get("/getFitData", authenticate, getFitData);
-router.get("/getSharedData", getAllSharedData);
-router.get("/getShareInfo", authenticate, getShareInfo);
-router.get("/validate", authenticate, (req, res) => {
+routes.post("/login", login);
+routes.post("/register", register);
+routes.put("/updateDataPage", authenticate, updateDataPage);
+routes.put("/updateShare", authenticate, updateShare);
+routes.get("/getFitData", authenticate, getFitData);
+routes.get("/getSharedData", getAllSharedData);
+routes.get("/getShareInfo", authenticate, getShareInfo);
+routes.get("/validate", authenticate, (req, res) => {
   res.status(200).json({ isAuthenticated: true });
 });
 
-export default router;
+export default routes;

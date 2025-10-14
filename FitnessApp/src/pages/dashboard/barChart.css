@@ -1,0 +1,80 @@
+/* Bar chart stuff */
+.dashboard-top-chart {
+  width: 60%;
+  height: 100%;
+  background-color: var(--color-4);
+  display: flex;
+  flex-direction: column;
+  border-radius: 50px;
+}
+
+.dashboard-top-bar-chart {
+  width: 90%;
+  height: 100%;
+  display: flex;
+  margin: 0 auto;
+  justify-content: space-evenly;
+  border-radius: 50px;
+}
+
+/* Bars */
+.dashboard-bar-zone {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  border-radius: 100px;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  margin: var(--space-1);
+  background-color: var(--color-3);
+  box-shadow: 10px 10px 20px var(--light-1), 6px 6px 6px var(--light-1);
+}
+
+/* Remove margin-top from h4 */
+.dashboard-bar-zone h4 {
+  margin-top: 0;
+  color: var(--white-1);
+  font-weight: 400;
+  font-size: 1.2rem;
+}
+
+.dashboard-time-btn h4 {
+  font-weight: 600;
+}
+
+.dashboard-top-card {
+  width: 20%;
+  height: 100%;
+  background-color: var(--color-4);
+  border-radius: 50px;
+}
+/* Button and legend */
+.dashboard-time-btn {
+  width: 20%;
+  margin: var(--space-2);
+  border: none;
+  border-radius: 50px;
+  color: var(--color-5);
+  background-color: var(--color-1);
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.dashboard-bar-legend {
+  width: 90%;
+  display: flex;
+  justify-content: space-evenly;
+  margin: auto;
+  margin-top: var(--space-2);
+}
+
+.dashboard-bar-legend h5 {
+  color: var(--color-1);
+  font-weight: 300;
+  font-size: 1.1rem;
+  text-align: center;
+  margin: var(--space-1);
+  flex: 1;
+}
