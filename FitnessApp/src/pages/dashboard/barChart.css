@@ -1,6 +1,6 @@
 /* Bar chart stuff */
 .dashboard-top-chart {
-  width: 60%;
+  width: 55%;
   height: 100%;
   background-color: var(--color-4);
   display: flex;
@@ -44,12 +44,6 @@
   font-weight: 600;
 }
 
-.dashboard-top-card {
-  width: 20%;
-  height: 100%;
-  background-color: var(--color-4);
-  border-radius: 50px;
-}
 /* Button and legend */
 .dashboard-time-btn {
   width: 20%;

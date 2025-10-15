@@ -5,7 +5,6 @@ import Daily from "../pages/daily/daily.jsx";
 import Share from "../pages/share/share.jsx";
 import LandingPage from "../pages/landing/landing.jsx";
 //Current work
-import ViewPage from "../pages/dashboard/old/dashboard.jsx";
 import NewDashboard from "../pages/dashboard/dashboardNew.jsx";
 
 function AppRoutes() {

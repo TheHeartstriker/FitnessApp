@@ -9,7 +9,7 @@
   align-items: center;
   gap: var(--space-2);
 }
-/* Top dashboard */
+/* Top area */
 .dashboard-top {
   width: 100%;
   height: 50%;
@@ -18,20 +18,53 @@
   gap: var(--space-2);
 }
 
-/* Bottom dashboard */
+.dashboard-card {
+  width: 20%;
+  height: 100%;
+  background-color: var(--color-4);
+  border-radius: 50px;
+  padding: var(--space-3);
+}
+
+.dashboard-card h2 {
+  color: var(--white-1);
+  font-weight: 500;
+  padding: 0;
+  margin: 0;
+  font-size: 2.3rem;
+}
+
+.dashboard-card h3 {
+  color: var(--color-2);
+  font-weight: 400;
+  font-size: 5rem;
+  line-height: 85px;
+  padding: 0;
+  margin: 0;
+}
+
+.dashboard-card p {
+  color: var(--white-1);
+  font-weight: 300;
+  font-size: 1.5rem;
+  margin-top: var(--space-2);
+}
+
+.dashboard-card p span {
+  color: var(--color-2);
+}
+
+.dashboard-card.larger {
+  width: 25%;
+}
+
+/* Bottom area */
 .dashboard-bottom {
   width: 100%;
   height: 50%;
   display: flex;
   flex-direction: row;
   gap: var(--space-2);
-}
-
-.dashboard-bottom-chart {
-  width: 80%;
-  height: 100%;
-  background-color: var(--color-4);
-  border-radius: 50px;
 }
 
 .dashboard-bottom-card {

@@ -8,7 +8,7 @@ function TriBackground() {
       preserveAspectRatio="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g id="triangles (9) 1" clip-path="url(#clip0_2127_2193)">
+      <g id="triangles" clipPath="url(#clip0_2127_2193)">
         <path
           id="Vector"
           d="M993 523L1047 574L1030 514L993 523Z"

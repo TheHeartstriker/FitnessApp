@@ -1,0 +1,16 @@
+.dashboard-bottom-chart {
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background-color: var(--color-4);
+  border-radius: 50px;
+}
+
+.line-chart {
+  width: 90%;
+  height: 90%;
+  background-color: transparent;
+  border-radius: 8px;
+}
