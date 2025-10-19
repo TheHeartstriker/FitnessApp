@@ -35,7 +35,7 @@ h5 {
   --color-4: #032221;
   --color-5: #021b1a;
 
-  --light-1: hsla(159, 56%, 7%, 0.15);
+  --light-1: rgb(0, 223, 130, 0.09);
   /* Spacing */
   --space-1: 0.5rem;
   --space-2: 1rem;

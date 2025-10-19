@@ -1,25 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import * as d3 from "d3";
 import "./lineChart.css";
-
 function LineChart({ dataprop, TimeProp }) {
   const svgWidth = "100%";
   const svgHeight = "100%";
+  const drawDataRef = useRef({ background: 10, solid: 5 });
   const [timeArr, setTimeArr] = useState([]);
-  const colors = {};
 
-  function timeToDays(time) {
-    if (time === "week") {
-      return 7;
-    }
-    if (time === "month") {
-      return 30;
-    }
-    if (time === "year") {
-      return 365;
-    }
-  }
-
+  //Create's a array in order from most recent to least recent based on TimeProp length
+  //Fills timeArr with totalZoneTime values from dataprop
   async function fillTimeArr() {
     if (!dataprop || Object.keys(dataprop).length === 0) return;
 
@@ -29,7 +18,7 @@ function LineChart({ dataprop, TimeProp }) {
       : Object.values(dataprop);
 
     let currentDate = new Date();
-    let tempTimeArr = Array(timeToDays(TimeProp)).fill(0);
+    let tempTimeArr = Array(TimeProp).fill(0);
     for (let i = 0; i < tempTimeArr.length; i++) {
       // Format currentDate as a string (YYYY-MM-DD) for comparison
       const currentDateString = currentDate.toLocaleDateString("en-CA");
@@ -49,8 +38,14 @@ function LineChart({ dataprop, TimeProp }) {
     setTimeArr(tempTimeArr);
   }
 
+  function setCircleSizes() {
+    if (TimeProp > 60) {
+      drawDataRef.current = { background: 5, solid: 2.5 };
+    }
+  }
+
   //Draws the line graph based on the data in timeArr
-  function DrawDailyGraph(svg, pixelH, pixelW) {
+  function DrawDailyGraph(svg, pixelH, pixelW, drawData) {
     const reversedTemp = [...timeArr].reverse();
     const maxValue = Math.max(...reversedTemp, 0);
     const padding = 40;
@@ -60,7 +55,6 @@ function LineChart({ dataprop, TimeProp }) {
       .scaleLinear()
       .domain([0, reversedTemp.length - 1])
       .range([padding, pixelW - padding]);
-
     const yScale = d3
       .scaleLinear()
       .domain([0, maxValue])
@@ -82,7 +76,7 @@ function LineChart({ dataprop, TimeProp }) {
       .attr("stroke-width", 3)
       .attr("d", line);
 
-    // Draw points
+    // Background fill so gap has no line
     svg
       .selectAll(".dot-gap")
       .data(reversedTemp)
@@ -91,9 +85,9 @@ function LineChart({ dataprop, TimeProp }) {
       .attr("class", "dot-gap")
       .attr("cx", (d, i) => xScale(i))
       .attr("cy", (d) => yScale(d))
-      .attr("r", 10) // inner solid radius
+      .attr("r", drawData.background)
       .attr("fill", "var(--color-4)");
-
+    // Solid middle point
     svg
       .selectAll(".dot-inner")
       .data(reversedTemp)
@@ -103,25 +97,26 @@ function LineChart({ dataprop, TimeProp }) {
       .attr("cx", (d, i) => xScale(i))
       .attr("cy", (d) => yScale(d))
 
-      .attr("r", 5) // inner solid radius
-      .attr("fill", "var(--color-1)");
+      .attr("r", drawData.solid)
+      .attr("fill", "var(--color-2)");
 
-    // Draw points (outer outlined circle with space)
-    svg
-      .selectAll(".dot-outer")
-      .data(reversedTemp)
-      .enter()
-      .append("circle")
-      .attr("class", "dot-outer")
-      .attr("cx", (d, i) => xScale(i))
-      .attr("cy", (d) => yScale(d))
-      .attr("r", 10) // outer outline radius, larger than inner
-      .attr("fill", "none")
-      .attr("stroke", "var(--color-1)")
-      .attr("stroke-width", 2);
+    // Outlined circle
+    if (TimeProp < 28) {
+      svg
+        .selectAll(".dot-outer")
+        .data(reversedTemp)
+        .enter()
+        .append("circle")
+        .attr("class", "dot-outer")
+        .attr("cx", (d, i) => xScale(i))
+        .attr("cy", (d) => yScale(d))
+        .attr("r", 10)
+        .attr("fill", "none")
+        .attr("stroke", "var(--color-1)")
+        .attr("stroke-width", 2);
+    }
   }
-
-  //This is the main call we create the svg of defined size and call the related functions to fill it
+  //Main drawing function
   function MainCall() {
     let svgPointer = d3.select("#chart").select("svg");
     if (svgPointer.empty()) {
@@ -131,13 +126,12 @@ function LineChart({ dataprop, TimeProp }) {
         .attr("width", svgWidth)
         .attr("height", svgHeight);
     }
-
     // Clear previous content
     svgPointer.selectAll("*").remove();
-
     const PixelHeight = svgPointer.node().getBoundingClientRect().height;
     const PixelWidth = svgPointer.node().getBoundingClientRect().width;
-    DrawDailyGraph(svgPointer, PixelHeight, PixelWidth);
+    setCircleSizes();
+    DrawDailyGraph(svgPointer, PixelHeight, PixelWidth, drawDataRef.current);
   }
 
   useEffect(() => {

@@ -35,10 +35,10 @@ function NewDashboard() {
       <section className="dashboard-top">
         <div className="dashboard-top-chart">
           <button className="dashboard-time-btn">
-            <h4>Weekly</h4>
+            <h4>Average Weekly</h4>
           </button>
           <div className="dashboard-top-bar-chart">
-            <BarChart graphData={data?.formattedData} />
+            <BarChart graphData={data?.aggregate?.pastWeek} />
           </div>
           <div className="dashboard-bar-legend">
             <h5>Zone one</h5>
@@ -74,7 +74,7 @@ function NewDashboard() {
       </section>
       <section className="dashboard-bottom">
         <div className="dashboard-bottom-chart">
-          <LineChart dataprop={data?.allFitData} TimeProp={"year"} />
+          <LineChart dataprop={data?.allFitData} TimeProp={365} />
         </div>
         <div className="dashboard-card">
           <h2>Average Heart Rate</h2>
