@@ -41,7 +41,7 @@ async function aggregated(userId, timeFrame) {
     where: {
       userid: userId,
       DateRecorded: {
-        [Op.gte]: dateThresh(new Date(), timeFrame),
+        [Op.gte]: dateThresh(new Date(), 7),
       },
     },
     attributes: [
@@ -77,6 +77,8 @@ async function allRecordsQuery(userId, timeFrame, limit) {
       Zone3Time,
       Zone4Time,
       Zone5Time,
+      weight,
+      resting_heart,
       (Zone1Time + Zone2Time + Zone3Time + Zone4Time + Zone5Time) AS totalZoneTime
     FROM dailyfitinfo
     WHERE userid = :userId
@@ -90,8 +92,8 @@ async function allRecordsQuery(userId, timeFrame, limit) {
     type: sequelize.QueryTypes.SELECT,
   });
 
-  const percentage = getPercentage(fitData) || "0.00";
-  const validate = [{ percentage: percentage }];
+  // const percentage = getPercentage(fitData) || "0.00";
+  //const validate = [{ percentage: percentage }];
 
   //Validate data
   if (fitData.length === 0) {
@@ -100,7 +102,7 @@ async function allRecordsQuery(userId, timeFrame, limit) {
       success: false,
     };
   }
-  validateData(validate, [["percentage", "string"]]);
+  //validateData(validate, [["percentage", "string"]]);
   validateData(fitData, [
     ["DateRecorded", "string"],
     ["Zone1Time", "number"],
@@ -108,6 +110,8 @@ async function allRecordsQuery(userId, timeFrame, limit) {
     ["Zone3Time", "number"],
     ["Zone4Time", "number"],
     ["Zone5Time", "number"],
+    ["weight", "string"],
+    ["resting_heart", "number"],
     ["totalZoneTime", "number"],
   ]);
   isValidLength(
@@ -118,13 +122,14 @@ async function allRecordsQuery(userId, timeFrame, limit) {
       fitData[0].Zone3Time,
       fitData[0].Zone4Time,
       fitData[0].Zone5Time,
+      fitData[0].weight,
+      fitData[0].resting_heart,
       fitData[0].totalZoneTime,
-      percentage,
     ],
-    [10, 8, 8, 8, 8, 8, 8, 8]
+    [10, 8, 8, 8, 8, 8, 8, 8, 8]
   );
 
-  return { fitData, percentage };
+  return { ...fitData };
 }
 //
 // Healper functions

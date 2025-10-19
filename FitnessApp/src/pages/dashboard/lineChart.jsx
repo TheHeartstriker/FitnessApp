@@ -21,7 +21,13 @@ function LineChart({ dataprop, TimeProp }) {
   }
 
   async function fillTimeArr() {
-    if (!dataprop || dataprop.length === 0) return;
+    if (!dataprop || Object.keys(dataprop).length === 0) return;
+
+    // Convert dataprop to array if it's an object
+    const dataArray = Array.isArray(dataprop)
+      ? dataprop
+      : Object.values(dataprop);
+
     let currentDate = new Date();
     let tempTimeArr = Array(timeToDays(TimeProp)).fill(0);
     for (let i = 0; i < tempTimeArr.length; i++) {
@@ -29,7 +35,7 @@ function LineChart({ dataprop, TimeProp }) {
       const currentDateString = currentDate.toLocaleDateString("en-CA");
 
       // Find a matching record for the current date
-      const record = dataprop.find(
+      const record = dataArray.find(
         (item) => item.DateRecorded === currentDateString
       );
 

@@ -26,6 +26,10 @@ function NewDashboard() {
     fetchAwait();
   }, [Time]);
 
+  //We need to recived data like so:
+  //all data pages
+  //Agregated total for week, month, year plus previous period for comparison
+
   return (
     <div className="dashboard">
       <section className="dashboard-top">
@@ -70,7 +74,7 @@ function NewDashboard() {
       </section>
       <section className="dashboard-bottom">
         <div className="dashboard-bottom-chart">
-          <LineChart dataprop={data?.allFitData?.fitData} TimeProp={"year"} />
+          <LineChart dataprop={data?.allFitData} TimeProp={"year"} />
         </div>
         <div className="dashboard-card">
           <h2>Average Heart Rate</h2>

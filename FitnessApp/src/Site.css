@@ -29,11 +29,11 @@ h5 {
   --black-1: #1c1c1c;
   --black-2: #333333;
   /* Color palette */
-  --color-1: #d8f3dc;
-  --color-2: #95d5b2;
-  --color-3: #52b788;
-  --color-4: #2d6a4f;
-  --color-5: #081c15;
+  --color-1: #00df82;
+  --color-2: #2cc295;
+  --color-3: #03624c;
+  --color-4: #032221;
+  --color-5: #021b1a;
 
   --light-1: hsla(159, 56%, 7%, 0.15);
   /* Spacing */
