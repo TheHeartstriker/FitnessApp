@@ -91,8 +91,9 @@ export function addAggregate(data) {
   });
 
   const aggregate = {
-    pastWeek: calculateAverages(pastWeek, 7),
-    weekBefore: calculateAverages(weekBefore, 7),
+    //Current is the last period of days so for week its 7 days and week before is between 8-14 days ago
+    currentWeek: calculateAverages(pastWeek, 7),
+    lastWeek: calculateAverages(weekBefore, 7),
     currentMonth: calculateAverages(currentMonthData, 30),
     lastMonth: calculateAverages(lastMonthData, 30),
     currentYear: calculateAverages(currentYearData, 365),
