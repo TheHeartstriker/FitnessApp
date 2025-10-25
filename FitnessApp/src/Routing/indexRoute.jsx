@@ -1,11 +1,12 @@
 import { Routes, Route } from "react-router-dom";
 import PrivateRoutes from "./privateRoutes.jsx";
 import PublicRoutes from "./publicRoutes.jsx";
-import Daily from "../pages/daily/daily.jsx";
+import Daily from "../pages/daily/newDaily.jsx";
 import Share from "../pages/share/share.jsx";
 import LandingPage from "../pages/landing/landing.jsx";
 //Current work
 import NewDashboard from "../pages/dashboard/dashboardNew.jsx";
+import NewDaily from "../pages/daily/newDaily.jsx";
 
 function AppRoutes() {
   return (
@@ -21,7 +22,7 @@ function AppRoutes() {
         path="/daily"
         element={
           <PrivateRoutes>
-            <Daily />
+            <NewDaily />
           </PrivateRoutes>
         }
       />

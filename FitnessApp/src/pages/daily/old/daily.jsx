@@ -1,8 +1,12 @@
 import { useEffect, useState, useRef } from "react";
 import "./daily.css";
-import { formatDateToMySQL } from "../../utils/funcUtil";
-import { saveData, getShareInfo, updateShare } from "../../services/apiFitness";
-import ZoneTime from "../../components/daily/index.jsx";
+import { formatDateToMySQL } from "../../../utils/funcUtil.jsx";
+import {
+  saveData,
+  getShareInfo,
+  updateShare,
+} from "../../../services/apiFitness.jsx";
+import ZoneTime from "../../../components/daily/index.jsx";
 import zoneDescriptions from "./text.js";
 function Daily() {
   //Specific state for the daily page
