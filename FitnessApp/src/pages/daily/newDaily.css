@@ -44,7 +44,7 @@
   position: absolute;
   inset: 0;
   border-radius: 50px;
-  background: linear-gradient(315deg, var(--color-1) 10%, transparent 100%);
+  background: linear-gradient(315deg, var(--color-1) 0%, transparent 100%);
   opacity: 0.06;
   filter: blur(30px);
   pointer-events: none;
@@ -206,19 +206,25 @@
   background-color: transparent;
   font-size: 1.3rem;
   font-family: "Inter", sans-serif;
-  color: var(--white-1);
+  color: var(--color-1);
 }
 
 .daily-input input:focus {
   outline: none;
 }
 
+.daily-input input::placeholder {
+  color: var(--color-1);
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+}
+
 .daily-input h3 {
   position: absolute;
-  color: var(--black-1);
+  color: var(--white-2);
   top: 5%;
-  font-size: 1.1rem;
-  font-weight: 400;
+  font-size: 1rem;
+  font-weight: 300;
 }
 
 .daily-input-container svg {
@@ -229,13 +235,18 @@
   width: 40%;
   padding: var(--space-2) 0;
   background-color: var(--color-2);
+  height: auto;
   color: var(--white-1);
-  font-size: 1.25rem;
-  font-weight: 500;
   border: none;
   border-radius: 30px;
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
+}
+
+.daily-submit-button h4 {
+  margin: var(--space-0);
+  font-size: 1.25rem;
+  font-weight: 500;
 }
 
 /* Right side end */
