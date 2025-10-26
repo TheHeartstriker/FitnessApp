@@ -24,6 +24,7 @@ function Nav() {
 
   const navigate = useNavigate();
   const location = useLocation();
+  if (location.pathname === "/") return null;
   const [indicatorPositions, setIndicatorPositions] = useState(
     getIndicatorPositions()
   );

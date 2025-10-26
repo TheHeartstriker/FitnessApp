@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { fetchPublicShare } from "../../services/apiFitness";
+import { fetchPublicShare } from "../../../services/apiFitness";
 import "./share.css";
 
 function Share() {
   const [fitnessRecords, setFitnessRecords] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   async function retrieveData() {
     try {
