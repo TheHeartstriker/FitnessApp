@@ -18,10 +18,10 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  gap: var(--space-3);
 }
 
 .instruct-container {
-  width: 100%;
   flex: 1;
   display: flex;
   gap: var(--space-3);
@@ -250,3 +250,113 @@
 }
 
 /* Right side end */
+
+@media (max-width: 1500px) {
+  .instruct-card p {
+    font-size: 1.5rem;
+  }
+
+  .instruct-card pre {
+    font-size: 1.1rem;
+  }
+
+  .zone-button h5 {
+    font-size: 9rem;
+  }
+}
+
+@media (max-width: 1000px) {
+  .instruct-card h2 {
+    font-size: 3.5rem;
+    margin: var(--space-3) 0;
+  }
+
+  .instruct-card p {
+    font-size: 2rem;
+  }
+
+  .instruct-card pre {
+    font-size: 1.5rem;
+  }
+  /* Submit button */
+  .daily-submit-button {
+    width: 60%;
+    margin: var(--space-3);
+    padding: var(--space-3) 0;
+  }
+
+  .daily-submit-button h4 {
+    font-size: 1.5rem;
+  }
+  /* Input */
+
+  .daily-input h3 {
+    font-size: 1.25rem;
+  }
+
+  .daily-input input {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 800px) {
+  /* Top container styles */
+  .daily {
+    flex-direction: column;
+    height: auto;
+  }
+  .daily-container-left,
+  .daily-container-right {
+    width: 100%;
+    height: auto;
+  }
+
+  .instruct-container {
+    height: 100%;
+    flex: none;
+  }
+
+  .instruct-card {
+    height: auto;
+    padding: var(--space-4);
+  }
+
+  .zone-container {
+    height: auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-3);
+    flex: none;
+    padding: var(--space-3);
+  }
+
+  .zone-button {
+    width: auto;
+    height: auto;
+    flex: none;
+  }
+
+  .zone-button h4 {
+    margin: var(--space-2);
+  }
+
+  /* Bottom container styles */
+  .daily-submit-container {
+    height: 30vh;
+    flex: none;
+    padding: var(--space-4) 0;
+  }
+
+  .daily-submit-button {
+    margin: var(--space-4);
+    padding: var(--space-4) 0;
+  }
+
+  .daily-input h3 {
+    font-size: 1.5rem;
+  }
+
+  .daily-input input {
+    font-size: 2rem;
+  }
+}
