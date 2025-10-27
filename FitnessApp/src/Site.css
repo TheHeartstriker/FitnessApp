@@ -44,6 +44,7 @@ h5 {
   --space-4: 2rem;
   --space-5: 2.5rem;
   --space-6: 3rem;
+  --space-7: 4rem;
 }
 
 @media (min-width: 2000px) {

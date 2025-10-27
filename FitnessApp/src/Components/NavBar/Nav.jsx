@@ -10,41 +10,46 @@ function getRemInPx() {
   return parseFloat(getComputedStyle(document.documentElement).fontSize);
 }
 
-function getIndicatorPositions() {
-  const remPx = getRemInPx() * 1.5; // 2rem in px
-  return {
-    "/view": `${0}px`,
-    "/daily": `${35 + remPx}px`,
-    "/share": `${70 + remPx * 2}px`,
-  };
-}
-
 function Nav() {
   const navigate = useNavigate();
   const location = useLocation();
+  const [buttonHeight, setButtonHeight] = useState(
+    window.innerWidth <= 1000 ? 60 : 35
+  );
   //Position the bar indicator needs to move to reach different buttons
-  const [indicatorPositions, setIndicatorPositions] = useState(
-    getIndicatorPositions()
-  );
-  const [indicatorTop, setIndicatorTop] = useState(
-    indicatorPositions[location.pathname] || "0px"
-  );
+  const [indicatorPositions, setIndicatorPositions] = useState({});
+  const [indicatorTop, setIndicatorTop] = useState("0px");
+
+  function getIndicatorPositions(height) {
+    const remPx = getRemInPx() * 1.5; // 2rem in px
+    return {
+      "/view": `${0}px`,
+      "/daily": `${height + remPx}px`,
+      "/share": `${height * 2 + remPx * 2}px`,
+    };
+  }
 
   useEffect(() => {
     function handleResize() {
-      const newPositions = getIndicatorPositions();
+      const newHeight = window.innerWidth <= 1000 ? 60 : 35;
+      setButtonHeight(newHeight);
+      const newPositions = getIndicatorPositions(newHeight);
       setIndicatorPositions(newPositions);
       setIndicatorTop(
         newPositions[location.pathname] || `${0 + getRemInPx() * 2}px`
       );
     }
+
+    // Initialize on mount
+    handleResize();
+
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, [location.pathname]);
 
   useEffect(() => {
     setIndicatorTop(indicatorPositions[location.pathname] || "0px");
-  }, [location.pathname]);
+  }, [location.pathname, indicatorPositions]);
 
   if (location.pathname === "/") return null;
 

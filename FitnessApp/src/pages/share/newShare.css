@@ -3,7 +3,7 @@
   width: auto;
   margin-left: 14vw;
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 items per row */
+  grid-template-columns: repeat(4, 1fr);
   gap: var(--space-4);
   padding: 2.5vh 0;
   padding-right: 2vh;
@@ -114,4 +114,58 @@
 
 .share-button-text.active {
   transform: translateX(-100%);
+}
+
+@media (max-width: 1500px) {
+}
+
+@media (max-width: 1000px) {
+  .share-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .share-item {
+    padding: var(--space-4);
+  }
+
+  .share-item h2 {
+    font-size: 4rem;
+  }
+
+  .share-item li {
+    font-size: 1.8rem;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .share-button-container {
+    width: 25vw;
+    height: 150px;
+  }
+
+  .share-button-text h3 {
+    font-size: 1.3rem;
+  }
+
+  .share-button-text {
+    margin: var(--space-2);
+  }
+  .share-button {
+    margin: var(--space-2);
+  }
+}
+
+@media (max-width: 800px) {
+  .share-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .share-button-container {
+    width: 40vw;
+    height: 150px;
+  }
+
+  .share-button-text h3 {
+    font-size: 1.5rem;
+  }
 }
