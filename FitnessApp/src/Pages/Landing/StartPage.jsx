@@ -1,77 +1,146 @@
-import { useState, useEffect, useContext, useRef } from "react";
-import { animate } from "animejs";
-import { useNavigate } from "react-router-dom";
-import "./startPage.css";
+import { useEffect, useRef } from "react";
+import Tribackground from "../../assets/triBackground";
 
-function StartPage() {
-  //Holds vector names
-  const [vectorArray, setvectorArray] = useState([]);
-  //Amount of vectors to be filled
-  const amount = 105; // 109 is max
-  const svgRef = useRef(null);
-  const navigate = useNavigate();
-  //On click handler
-  function handleEnterClick() {
-    navigate("/login");
-  }
-  //Add the glow class to the vector
-  function addClass(id) {
-    const vectorElement = svgRef.current.querySelector(id);
-    if (vectorElement) {
-      vectorElement.classList.add("VectorAni");
-    }
-  }
-  //Fill the array with the vector names
-  function fillArray() {
-    let tempArr = [];
-    tempArr.push("#Vector");
-    for (let i = 0; i < 108; i++) {
-      tempArr.push(`#Vector_${i}`);
-    }
-    setvectorArray(tempArr);
-  }
-  //Randomly select vectors to add the glow effect
-  function randomVec() {
-    if (vectorArray.length < 50) return;
-    for (let i = 0; i < amount; i++) {
-      const Random = Math.floor(Math.random() * vectorArray.length);
-      addClass(vectorArray[Random]);
-    }
+function darkenColorDistance(
+  i,
+  distanceMax = 1000,
+  intensity = [0.01, 0.99],
+  dark = false
+) {
+  let el = document.getElementById(i.id);
+  if (!el) return;
+  let distance = i.distanceToMouse;
+  // Normalize distance
+  let norm = intensity[0] + intensity[1] * (distance / distanceMax);
+  norm = Math.min(norm, 1);
+  let lightness;
+  if (dark) {
+    lightness = Math.round(i.color[2] * norm);
+  } else {
+    lightness = Math.round(i.color[2] / norm);
   }
 
-  function startAnimation() {
-    animate(".EnterBtn", {
-      rotate: 90,
-      loop: true,
-      ease: "inOutExpo",
-    });
+  el.style.stroke = `hsl(${i.color[0]}, ${i.color[1]}%, ${lightness}%)`;
+  el.style.fill = `hsl(${i.color[0]}, ${i.color[1]}%, ${lightness}%)`;
+
+  el.style.transition = "fill 0.2s linear, stroke 0.2s linear";
+}
+
+export function rgbToHsl(rgb) {
+  const result = rgb.match(/\d+/g)?.map((num) => parseInt(num, 10));
+  if (!result || result.length < 3) return null;
+  let [r, g, b] = result;
+  r /= 255;
+  g /= 255;
+  b /= 255;
+  const max = Math.max(r, g, b);
+  const min = Math.min(r, g, b);
+  let h = 0,
+    s = 0,
+    l = (max + min) / 2;
+
+  if (max !== min) {
+    const d = max - min;
+    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+
+    if (max === r) {
+      h = (g - b) / d + (g < b ? 6 : 0);
+    } else if (max === g) {
+      h = (b - r) / d + 2;
+    } else if (max === b) {
+      h = (r - g) / d + 4;
+    }
+    h /= 6;
+  }
+  return [Math.round(h * 360), Math.round(s * 100), Math.round(l * 100)];
+}
+
+function TriAngleBackgroundAni() {
+  const mouseRef = useRef({ x: 0, y: 0 });
+  const otherPolyRef = useRef([]);
+
+  function mouseMove(e) {
+    mouseRef.current.x = e.clientX;
+    mouseRef.current.y = e.clientY;
+
+    for (const i of otherPolyRef.current) {
+      updateDistances(i);
+      darkenColorDistance(i, 1000, [0.7, 0.99], true);
+    }
+  }
+  //Loops and saves the intial distance, color and id of each poly
+  function fillPoly() {
+    let amount = 828;
+    for (let i = 1; i < amount; i++) {
+      let poly = {
+        id: "",
+        distanceToMouse: 0,
+        color: [0, 0, 0],
+        elCenter: new DOMRect(),
+      };
+      let el = document.getElementById(`Vector_${i}`);
+      if (!el) continue;
+      //id name
+      poly["id"] = `Vector_${i}`;
+      //distance
+      let elXY = el.getBoundingClientRect();
+      if (!elXY) continue;
+      const centerX = elXY.x + elXY.width / 2;
+      const centerY = elXY.y + elXY.height / 2;
+      const distance = Math.sqrt(
+        (centerX - mouseRef.current.x) ** 2 +
+          (centerY - mouseRef.current.y) ** 2
+      );
+      poly["distanceToMouse"] = distance;
+      //saving intial color and change to hsl
+      let hslColor = rgbToHsl(window.getComputedStyle(el).fill);
+      poly["color"] = hslColor ?? [0, 0, 0];
+      //Saving center
+      poly["elCenter"] = elXY;
+      //push to array
+      otherPolyRef.current.push(poly);
+    }
+  }
+
+  function updateCenter() {
+    for (const i of otherPolyRef.current) {
+      let elXY = document.getElementById(i.id)?.getBoundingClientRect();
+      if (!elXY) return;
+      i.elCenter = elXY;
+    }
+  }
+  //updates distance to mouse
+  function updateDistances(i) {
+    let elXY = i.elCenter;
+    if (!elXY) return;
+    const centerX = elXY.x + elXY.width / 2;
+    const centerY = elXY.y + elXY.height / 2;
+    const distance = Math.sqrt(
+      (centerX - mouseRef.current.x) ** 2 + (centerY - mouseRef.current.y) ** 2
+    );
+    i.distanceToMouse = distance;
   }
 
   useEffect(() => {
-    if (svgRef.current) {
-      if (vectorArray.length === 0) {
-        fillArray();
-      }
-      if (vectorArray.length == 109) {
-        randomVec();
-      }
-    }
-  }, [vectorArray]);
+    window.addEventListener("mousemove", mouseMove);
+    window.addEventListener("resize", updateCenter);
+    return () => {
+      window.removeEventListener("mousemove", mouseMove);
+      window.removeEventListener("resize", updateCenter);
+    };
+  }, []);
 
   useEffect(() => {
-    startAnimation();
+    if (otherPolyRef.current.length > 0) return;
+    fillPoly();
+    console.log(otherPolyRef.current);
   }, []);
 
   return (
-    <div className="StartPageContainer">
-      <div className="enterContainer">
-        <button className="EnterBtn" onClick={handleEnterClick}></button>
-        <h1 className="center-rotate-text">Enter?</h1>
-      </div>
-      {/* Normal svg background */}
-      {<FrontSvg ref={svgRef} />}
-    </div>
+    <>
+      <Tribackground />
+    </>
   );
 }
 
-export default StartPage;
+export default TriAngleBackgroundAni;

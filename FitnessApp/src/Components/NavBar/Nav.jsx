@@ -20,11 +20,9 @@ function getIndicatorPositions() {
 }
 
 function Nav() {
-  //Position the bar indicator needs to move to reach different buttons
-
   const navigate = useNavigate();
   const location = useLocation();
-  if (location.pathname === "/") return null;
+  //Position the bar indicator needs to move to reach different buttons
   const [indicatorPositions, setIndicatorPositions] = useState(
     getIndicatorPositions()
   );
@@ -47,6 +45,8 @@ function Nav() {
   useEffect(() => {
     setIndicatorTop(indicatorPositions[location.pathname] || "0px");
   }, [location.pathname]);
+
+  if (location.pathname === "/") return null;
 
   return (
     <nav className="nav-bar">
