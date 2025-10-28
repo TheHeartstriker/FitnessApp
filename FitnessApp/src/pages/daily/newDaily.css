@@ -1,10 +1,10 @@
 .daily {
   height: 100vh;
   width: auto;
-  margin-left: 14vw;
+  margin-left: 13vw;
   display: flex;
-  padding: 2.5vh 0;
-  padding-right: 2vh;
+  padding: 1vh 0;
+  padding-right: 1vh;
   align-items: center;
   gap: var(--space-3);
 }
@@ -304,6 +304,7 @@
   .daily {
     flex-direction: column;
     height: auto;
+    margin-left: 16vw;
   }
   .daily-container-left,
   .daily-container-right {

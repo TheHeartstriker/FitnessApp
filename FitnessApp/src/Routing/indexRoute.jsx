@@ -1,20 +1,18 @@
 import { Routes, Route } from "react-router-dom";
 import PrivateRoutes from "./privateRoutes.jsx";
 import PublicRoutes from "./publicRoutes.jsx";
-import Daily from "../pages/daily/old/daily.jsx";
-import Share from "../pages/share/old/share.jsx";
-import LandingPage from "../pages/landing/landing.jsx";
 //Current work
 import NewDashboard from "../pages/dashboard/dashboardNew.jsx";
 import NewDaily from "../pages/daily/newDaily.jsx";
 import NewShare from "../pages/share/newShare.jsx";
+import RootPath from "./rootPath.jsx";
 
 function AppRoutes() {
   return (
     <Routes>
       {/* Public Routes */}
       <Route element={<PublicRoutes />}>
-        <Route path="/" element={<LandingPage />} />
+        <Route path="/" element={<RootPath />} />
         <Route path="/share" element={<NewShare />} />
       </Route>
 

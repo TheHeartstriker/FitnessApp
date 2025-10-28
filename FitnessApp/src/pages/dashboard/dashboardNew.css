@@ -1,11 +1,11 @@
 .dashboard {
   height: 100vh;
   width: auto;
-  margin-left: 14vw;
+  margin-left: 13vw;
   display: flex;
   flex-direction: column;
-  padding: 2.5vh 0;
-  padding-right: 2vh;
+  padding: 1vh 0;
+  padding-right: 1vh;
   align-items: center;
   gap: var(--space-2);
 }
@@ -138,6 +138,8 @@
   /* Card and container adjustments to column */
   .dashboard {
     height: auto;
+    /* For the nav width increase */
+    margin-left: 16vw;
   }
   .dashboard-top,
   .dashboard-bottom {

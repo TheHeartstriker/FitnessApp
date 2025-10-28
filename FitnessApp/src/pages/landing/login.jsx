@@ -59,7 +59,7 @@ function Login() {
   return (
     <div className="login-section">
       <section className="login-welcome-section">
-        <h2>Welcome!</h2>
+        <h2>Welcome</h2>
         <div className="welcome-overlay"></div>
         <BackGround />
       </section>
