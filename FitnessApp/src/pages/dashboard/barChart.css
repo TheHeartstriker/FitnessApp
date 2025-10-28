@@ -30,6 +30,14 @@
   align-items: flex-end;
 }
 
+.dashboard-top-btn-container {
+  height: auto;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
 /* Bars */
 .dashboard-bar-zone {
   display: flex;
@@ -70,6 +78,9 @@
 }
 
 @media (max-width: 1500px) {
+  .dashboard-top-btn-container {
+    padding: var(--space-2);
+  }
 }
 
 @media (max-width: 1000px) {

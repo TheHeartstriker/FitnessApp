@@ -24,14 +24,12 @@ export async function fetchPublicShare() {
   }
 }
 //Gets all data related to a user
-export async function fetchData(timeRange, allRecords) {
+export async function fetchData() {
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), 10000);
   try {
     const response = await fetch(
-      `${
-        import.meta.env.VITE_API_BASE_URL
-      }/api/getFitData?timeRange=${timeRange}&allRecords=${allRecords}`,
+      `${import.meta.env.VITE_API_BASE_URL}/api/getFitData`,
       { signal: controller.signal, credentials: "include" }
     );
     clearTimeout(timeoutId);

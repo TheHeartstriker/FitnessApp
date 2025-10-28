@@ -10,6 +10,14 @@
   position: relative;
 }
 
+.dashboard-bottom-btn-container {
+  height: auto;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
 .dashboard-bottom-chart::before {
   content: "";
   position: absolute;
@@ -30,6 +38,9 @@
 }
 
 @media (max-width: 1500px) {
+  .dashboard-bottom-btn-container {
+    padding: var(--space-2);
+  }
 }
 
 @media (max-width: 1000px) {

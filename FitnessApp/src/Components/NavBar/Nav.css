@@ -37,6 +37,7 @@
   border-radius: 50%;
   padding: var(--space-1);
   display: flex;
+  cursor: pointer;
   align-items: center;
   justify-content: center;
   background-color: var(--color-1);

@@ -77,6 +77,30 @@ export function addAggregate(data) {
     };
   };
 
+  const calculatePercentageChange = (current, previous) => {
+    if (!current || !previous) return null;
+
+    const calcChange = (currentVal, previousVal) => {
+      if (previousVal === 0) return 0;
+      return (((currentVal - previousVal) / previousVal) * 100).toFixed(2);
+    };
+
+    return {
+      caloriesChange: calcChange(
+        parseFloat(current.avgCalories),
+        parseFloat(previous.avgCalories)
+      ),
+      weightChange: calcChange(
+        parseFloat(current.avgWeight),
+        parseFloat(previous.avgWeight)
+      ),
+      heartRateChange: calcChange(
+        parseFloat(current.avgRestingHeart),
+        parseFloat(previous.avgRestingHeart)
+      ),
+    };
+  };
+
   const pastWeek = filterByDateRange(oneWeekAgo, now);
   const weekBefore = filterByDateRange(twoWeeksAgo, oneWeekAgo);
   const currentMonthData = filterByMonth(currentMonth, currentYear);
@@ -90,14 +114,29 @@ export function addAggregate(data) {
     return entryDate.getFullYear() === currentYear - 1;
   });
 
+  const currentWeekAvg = calculateAverages(pastWeek, 7);
+  const lastWeekAvg = calculateAverages(weekBefore, 7);
+  const currentMonthAvg = calculateAverages(currentMonthData, 30);
+  const lastMonthAvg = calculateAverages(lastMonthData, 30);
+  const currentYearAvg = calculateAverages(currentYearData, 365);
+  const lastYearAvg = calculateAverages(lastYearData, 365);
+
   const aggregate = {
-    //Current is the last period of days so for week its 7 days and week before is between 8-14 days ago
-    currentWeek: calculateAverages(pastWeek, 7),
-    lastWeek: calculateAverages(weekBefore, 7),
-    currentMonth: calculateAverages(currentMonthData, 30),
-    lastMonth: calculateAverages(lastMonthData, 30),
-    currentYear: calculateAverages(currentYearData, 365),
-    lastYear: calculateAverages(lastYearData, 365),
+    currentWeek: {
+      ...currentWeekAvg,
+      ...calculatePercentageChange(currentWeekAvg, lastWeekAvg),
+    },
+    lastWeek: lastWeekAvg,
+    currentMonth: {
+      ...currentMonthAvg,
+      ...calculatePercentageChange(currentMonthAvg, lastMonthAvg),
+    },
+    lastMonth: lastMonthAvg,
+    currentYear: {
+      ...currentYearAvg,
+      ...calculatePercentageChange(currentYearAvg, lastYearAvg),
+    },
+    lastYear: lastYearAvg,
   };
 
   return { ...data, aggregate };

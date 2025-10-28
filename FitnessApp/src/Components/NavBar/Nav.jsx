@@ -56,7 +56,7 @@ function Nav() {
   return (
     <nav className="nav-bar">
       <div className="nav-logo-container">
-        <div className="nav-logo">
+        <div className="nav-logo" onClick={() => navigate("/")}>
           <Logo />
         </div>
         <h1>FGraphs</h1>
