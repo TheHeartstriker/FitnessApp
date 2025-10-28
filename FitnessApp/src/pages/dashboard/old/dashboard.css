@@ -1,0 +1,283 @@
+/* The overall container at the bottom of the screen */
+.ViewPageContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: var(--Background);
+  width: 100vw;
+  height: 200vh;
+  box-sizing: border-box;
+}
+
+.dataDisplayContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+  height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* The graph container */
+.GraphContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 55vw;
+  height: 70vh;
+  background: rgba(0, 14, 41, 0.25);
+  box-shadow: 0 0 30px 2px rgba(0, 94, 231, 0.25);
+  padding: 15px;
+  border-radius: 50px;
+  transition: transform 0.5s ease-in-out;
+}
+
+.GraphContainer:hover {
+  transform: scale(1.01);
+}
+
+/* The switch buttons under the graph */
+.GraphSwitchContainer {
+  position: relative;
+  align-items: center;
+  justify-content: space-between;
+  display: flex;
+}
+
+.GraphSwitchContainer button {
+  width: 10vw;
+  height: 7vh;
+  font-style: sans-serif;
+  font-family: "Teko", sans-serif;
+  border: 2px solid var(--Text-Blue);
+  border-radius: 10px;
+  margin: 15px;
+  background-color: Transparent;
+  color: var(--Text-Blue);
+  font-size: 2.5rem;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  cursor: pointer;
+  transition: 1s ease-in-out background-color, 1s ease-in-out color;
+}
+.GraphSwitchContainer button:hover {
+  background-color: var(--Blue-2);
+  color: #1b1b1b;
+}
+/* The percentage container */
+.PercentageContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  font-size: 1.5rem;
+  border-radius: 50px;
+  color: var(--Text-Blue);
+  left: 5%;
+  width: 30vw;
+  padding: 10px;
+  height: 95vh;
+  background: rgba(0, 14, 41, 0.25);
+  box-shadow: 0 0 30px 2px rgba(0, 94, 231, 0.25);
+  transition: transform 0.5s ease-in-out;
+}
+
+.PercentageContainer:hover {
+  transform: scale(1.01);
+}
+
+/* Holds the text based data at the bottom of the page */
+.DataContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 150px;
+  width: 90%;
+  height: 20%;
+  gap: 15px;
+}
+/* The data containers*/
+.Data {
+  color: var(--Blue-2);
+  font-size: 1rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 14, 41, 0.5);
+
+  border-radius: 25px;
+  margin-top: 15px;
+  width: 90%;
+  height: 100%;
+  transition: 0.35s ease-in-out box-shadow, 0.5s ease-in-out transform;
+}
+
+.Data:hover {
+  box-shadow: 0 0 30px 2px rgba(0, 94, 231, 0.5);
+  transform: scale(1.015);
+}
+
+.Data h1 {
+  position: relative;
+  color: var(--Blue-1);
+  left: -100px;
+  z-index: 1;
+}
+/* Glowing h1 bar */
+.Data h1::after {
+  content: "";
+  background-color: var(--Blue-2);
+  height: 5px;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  z-index: -1;
+  box-shadow: 0 -10px 20px var(--Blue-2);
+}
+
+.Data h3 {
+  position: relative;
+  font-size: 1.4em;
+}
+/* Button container html is inside of the graph and pushed down */
+.ButtonContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  justify-content: space-between;
+  width: 75%;
+  margin: 20px;
+  font-size: 3rem;
+}
+/* Button styles */
+.ButtonContainer button {
+  font-family: "Teko", sans-serif;
+  width: 40%;
+  height: 150px;
+  border-radius: 20px;
+  border: none;
+  margin: 15px;
+  background-color: var(--Blue-1);
+  color: var(--Card-Basic);
+  font-size: 3rem;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  cursor: pointer;
+  transition: 0.5s ease-in-out background-color;
+}
+
+.ButtonContainer button:hover {
+  background-color: #008ad3;
+}
+
+/* On styles */
+.On {
+  box-shadow: 0 0px 20px rgb(0, 14, 41), 0 0px 30px rgb(0, 94, 231),
+    0 0px 40px rgb(0, 212, 255);
+}
+/* Percentage chart */
+#pie {
+  --ng: 0deg; /* Default value */
+  --thickness: 15px;
+  --_inner: calc(70% - var(--thickness));
+  --_outer: calc(var(--_inner) + 1px);
+
+  /* Simplified mask */
+  mask: radial-gradient(circle, transparent var(--_inner), black var(--_outer));
+  -webkit-mask: radial-gradient(
+    circle,
+    transparent var(--_inner),
+    black var(--_outer)
+  );
+
+  /* Fixed conic-gradient */
+  background-image: conic-gradient(
+    #000e29 0deg,
+    #0051e7 var(--ng),
+    transparent var(--ng)
+  );
+  background-color: hsla(0, 0%, 5%, 0.5);
+
+  z-index: 999;
+  aspect-ratio: 1/1;
+  inline-size: 100%;
+  border-radius: 50%;
+  will-change: transform;
+  transform: rotate(0deg);
+}
+
+.chart {
+  width: 100%;
+  height: auto;
+  position: relative;
+}
+
+#pie {
+  aspect-ratio: 1/1;
+  inline-size: 100%;
+  border-radius: 50%;
+  background-color: var(--Gradient2);
+}
+
+/* Styles for the bar chart container */
+.BarChart {
+  --item-gap: 0;
+  --padding-block: 1.5rem;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  position: relative;
+  color: white;
+  font-size: 1.5rem;
+  grid-auto-flow: column;
+  gap: var(--item-gap);
+  align-items: end;
+  padding-inline: var(--item-gap);
+  padding-block: var(--padding-block);
+}
+/* The indivdual bars */
+.BarChart > .item {
+  height: calc(1% * var(--val));
+  background-color: var(--clr);
+  filter: drop-shadow(0 0 1rem var(--Shadow--clr));
+  position: relative;
+  border-radius: 25px;
+  transition: 0.5s ease-in-out transform;
+  animation: item-height 3s ease forwards;
+}
+
+.item:hover {
+  transform: scale(1.1);
+}
+
+@keyframes item-height {
+  from {
+    height: 0;
+  }
+}
+/* Text position */
+.BarChart > .item > * {
+  position: absolute;
+  text-align: center;
+}
+.BarChart > .item > .label {
+  inset: 100% 0 auto 0;
+}
+.BarChart > .item > .value {
+  inset: auto 0 100% 0;
+}
+
+.DayChart {
+  width: 100%;
+  height: 100%;
+  z-index: 500;
+}

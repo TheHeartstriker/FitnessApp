@@ -1,4 +1,5 @@
 import { errorChecker } from "../utils/apiError";
+import { addAggregate } from "../utils/funcUtil";
 //
 //Notes:
 // - Use a try catch block on frontend to catch errors from the server or store if there is no error
@@ -23,18 +24,18 @@ export async function fetchPublicShare() {
   }
 }
 //Gets all data related to a user
-export async function fetchData(timeRange, allRecords) {
+export async function fetchData() {
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), 10000);
   try {
     const response = await fetch(
-      `${
-        import.meta.env.VITE_API_BASE_URL
-      }/api/getFitData?timeRange=${timeRange}&allRecords=${allRecords}`,
+      `${import.meta.env.VITE_API_BASE_URL}/api/getFitData`,
       { signal: controller.signal, credentials: "include" }
     );
     clearTimeout(timeoutId);
-    return await errorChecker(response);
+    let result = await errorChecker(response);
+    let aggregate = addAggregate(result);
+    return aggregate;
   } catch (error) {
     console.error("Error:", error);
   }

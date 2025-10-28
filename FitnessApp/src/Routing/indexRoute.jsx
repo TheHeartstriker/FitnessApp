@@ -1,20 +1,19 @@
 import { Routes, Route } from "react-router-dom";
 import PrivateRoutes from "./privateRoutes.jsx";
 import PublicRoutes from "./publicRoutes.jsx";
-import StartPage from "../pages/landing/startPage.jsx";
-import LoginPage from "../pages/login/login.jsx";
-import Daily from "../pages/daily/daily.jsx";
-import Share from "../pages/share/share.jsx";
-import ViewPage from "../pages/dataView/viewPage.jsx";
+//Current work
+import NewDashboard from "../pages/dashboard/dashboardNew.jsx";
+import NewDaily from "../pages/daily/newDaily.jsx";
+import NewShare from "../pages/share/newShare.jsx";
+import RootPath from "./rootPath.jsx";
 
 function AppRoutes() {
   return (
     <Routes>
       {/* Public Routes */}
       <Route element={<PublicRoutes />}>
-        <Route path="/" element={<StartPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/share" element={<Share />} />
+        <Route path="/" element={<RootPath />} />
+        <Route path="/share" element={<NewShare />} />
       </Route>
 
       {/* Private Routes */}
@@ -22,7 +21,7 @@ function AppRoutes() {
         path="/daily"
         element={
           <PrivateRoutes>
-            <Daily />
+            <NewDaily />
           </PrivateRoutes>
         }
       />
@@ -30,7 +29,7 @@ function AppRoutes() {
         path="/view"
         element={
           <PrivateRoutes>
-            <ViewPage />
+            <NewDashboard />
           </PrivateRoutes>
         }
       />

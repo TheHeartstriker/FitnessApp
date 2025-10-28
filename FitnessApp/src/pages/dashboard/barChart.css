@@ -1,0 +1,102 @@
+/* Bar chart stuff */
+.dashboard-top-chart {
+  width: 55%;
+  height: 100%;
+  background-color: var(--color-4);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border-radius: 50px;
+}
+
+.dashboard-top-chart::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50px;
+  background: linear-gradient(315deg, var(--color-1) 0%, transparent 100%);
+  opacity: 0.06;
+  filter: blur(30px);
+  pointer-events: none;
+}
+
+.dashboard-top-bar-chart {
+  width: 90%;
+  height: 100%;
+  display: flex;
+  margin: 0 auto;
+  justify-content: space-evenly;
+  border-radius: 50px;
+  align-items: flex-end;
+}
+
+.dashboard-top-btn-container {
+  height: auto;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+/* Bars */
+.dashboard-bar-zone {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  border-radius: 100px;
+  width: 100%;
+  text-align: center;
+  margin: var(--space-1);
+  background-color: var(--color-2);
+  transition: 1.5s height ease-in-out;
+}
+
+/* Remove margin-top from h4 */
+.dashboard-bar-zone h4 {
+  margin-top: 0;
+  color: var(--white-1);
+  font-weight: 400;
+  font-size: 1.2rem;
+}
+
+.dashboard-bar-legend {
+  width: 90%;
+  display: flex;
+  justify-content: space-evenly;
+  margin: auto;
+  margin-top: var(--space-1);
+}
+
+.dashboard-bar-legend h5 {
+  color: var(--color-2);
+  font-weight: 300;
+  font-size: 1.1rem;
+  text-align: center;
+  margin: var(--space-1);
+  flex: 1;
+}
+
+@media (max-width: 1500px) {
+  .dashboard-top-btn-container {
+    padding: var(--space-2);
+  }
+}
+
+@media (max-width: 1000px) {
+}
+
+@media (max-width: 800px) {
+  .dashboard-top-chart {
+    width: 100%;
+    height: 33vh;
+  }
+
+  .dashboard-bar-legend h5 {
+    font-size: 1.5rem;
+  }
+
+  .dashboard-bar-zone p {
+    font-size: 1.4rem;
+  }
+}
