@@ -5,8 +5,8 @@ function TriBackground() {
       height="100%"
       viewBox="0 0 1980 1080"
       fill="none"
-      preserveAspectRatio="none"
       xmlns="http://www.w3.org/2000/svg"
+      preserveAspectRatio="xMidYMid slice"
     >
       <g id="triangles (12) 1" clipPath="url(#clip0_2487_1126)">
         <path

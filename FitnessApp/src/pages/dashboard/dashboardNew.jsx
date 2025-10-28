@@ -54,7 +54,7 @@ function NewDashboard() {
         </>
       );
     }
-    return <span>neutral</span>;
+    return <span> neutral </span>;
   }
 
   //The current periods for inside aggregate
@@ -151,7 +151,10 @@ function NewDashboard() {
           </h3>
           <p>
             Your average weight the last {handleLineTime(Time)} days you are
-            down <span>1.2%</span> from the preceding week!
+            {percentageToText(
+              data.aggregate?.[currentPeriods[Time]]?.weightChange
+            )}
+            from the preceding {periodLabels[Time]}!
           </p>
         </div>
       </section>
@@ -181,7 +184,11 @@ function NewDashboard() {
           <h3>{data.aggregate?.[currentPeriods[Time]]?.avgRestingHeart} bpm</h3>
           <p>
             Your average resting heart rate the last {handleLineTime(Time)} days
-            you are up <span>5%</span> from the preceding week
+            you are
+            {percentageToText(
+              data.aggregate?.[currentPeriods[Time]]?.heartRateChange
+            )}{" "}
+            from the preceding {periodLabels[Time]}!
           </p>
         </div>
       </section>

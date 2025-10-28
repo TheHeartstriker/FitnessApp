@@ -75,5 +75,29 @@
   color: var(--color-5);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1000px) {
+  .landing-content {
+    width: 75%;
+  }
+
+  .landing-content h2 {
+    font-size: 2rem;
+  }
+
+  .landing-content h1 {
+    font-size: 5rem;
+  }
+
+  .landing-content h3 {
+    font-size: 4rem;
+  }
+
+  .landing-content p {
+    font-size: 2rem;
+  }
+
+  .primary-action-btn {
+    font-size: 2rem;
+    padding: var(--space-4);
+  }
 }

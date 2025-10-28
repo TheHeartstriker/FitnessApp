@@ -58,16 +58,20 @@ export function rgbToHsl(rgb) {
 function TriAngleBackgroundAni() {
   const mouseRef = useRef({ x: 0, y: 0 });
   const otherPolyRef = useRef([]);
+  const parentRef = useRef(null);
 
   function mouseMove(e) {
-    mouseRef.current.x = e.clientX;
-    mouseRef.current.y = e.clientY;
+    if (!parentRef.current) return;
+    const rect = parentRef.current.getBoundingClientRect();
+    mouseRef.current.x = e.clientX - rect.left;
+    mouseRef.current.y = e.clientY - rect.top;
 
     for (const i of otherPolyRef.current) {
       updateDistances(i);
       darkenColorDistance(i, 1000, [0.7, 0.99], true);
     }
   }
+
   //Loops and saves the intial distance, color and id of each poly
   function fillPoly() {
     let amount = 828;
@@ -132,6 +136,7 @@ function TriAngleBackgroundAni() {
 
   useEffect(() => {
     if (otherPolyRef.current.length > 0) return;
+    parentRef.current = document.querySelector(".landing-background-svg");
     fillPoly();
     console.log(otherPolyRef.current);
   }, []);
