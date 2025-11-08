@@ -11,8 +11,8 @@ function BarChart({ graphData }) {
   ];
 
   function calculateBarHeight(value, maxValue) {
-    if (maxValue === 0) return 20; // Minimum height for zero values
-    const percentage = (value / maxValue) * 80 + 20; // Scale from 20% to 100%
+    if (maxValue === 0 || isNaN(maxValue)) return 20;
+    const percentage = (value / maxValue) * 80 + 20;
     return percentage;
   }
 
@@ -20,7 +20,9 @@ function BarChart({ graphData }) {
     if (!graphData || graphData.length === 0) return;
 
     // Extract zone values from graphData object
-    const zoneValues = zoneDataTypes.map((key) => graphData[key] || 0);
+    const zoneValues = zoneDataTypes.map((key) =>
+      graphData && graphData[key] ? graphData[key] : 0
+    );
     const maxZoneValue = Math.max(...zoneValues);
 
     const divs = zoneDataTypes.map((zoneKey, idx) => {

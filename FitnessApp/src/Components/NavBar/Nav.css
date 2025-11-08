@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 98vh;
+  height: 98dvh;
   width: 12vw;
   background-color: var(--color-3);
   top: 50%;

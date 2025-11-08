@@ -24,6 +24,8 @@
   background-color: var(--color-4);
   border-radius: 50px;
   padding: var(--space-3);
+  display: flex;
+  flex-direction: column;
   position: relative;
   overflow: hidden;
 }
@@ -59,7 +61,6 @@
   color: var(--white-1);
   font-weight: 300;
   font-size: 1.5rem;
-  margin-top: var(--space-2);
 }
 
 .dashboard-card p span {
@@ -183,19 +184,15 @@
     font-size: 1.3rem;
   }
 
-  .dashboard-time-btn {
-    font-size: 1.2rem;
-  }
   .dashboard-tooltip h4 {
     font-size: 1.2rem;
   }
 }
 
 @media (max-width: 800px) {
-  /* Card and container adjustments to column */
+  /* Sizing */
   .dashboard {
     height: auto;
-    /* For the nav width increase */
     margin-left: 16vw;
   }
   .dashboard-top,
@@ -203,41 +200,41 @@
     flex-direction: column;
     height: auto;
   }
-  .dashboard-top-chart {
-    width: 100%;
-    height: auto;
-  }
+
   .dashboard-card {
     width: 100%;
-    height: auto;
+    min-height: 45rem;
+    padding: var(--space-6);
   }
   .dashboard-card.larger {
     width: 100%;
-    height: auto;
-  }
-
-  /* Text adjustments */
-  .dashboard-card h2 {
-    font-size: 3.5rem;
-  }
-
-  .dashboard-card h3 {
-    font-size: 5.5rem;
-    line-height: 60px;
-  }
-
-  .dashboard-card p {
-    font-size: 2.5rem;
-  }
-
-  /* Padding and margin */
-  .dashboard-card {
-    padding: var(--space-4);
+    min-height: 45rem;
   }
 
   /* Button stuff */
   .dashboard-time-btn {
     width: 15rem;
-    font-size: 1.4rem;
+    font-size: 1.65rem;
+  }
+  .dashboard-tooltip {
+    width: 7.5rem;
+  }
+  /* Text adjustments */
+  .dashboard-card h2 {
+    font-size: 4rem;
+  }
+
+  .dashboard-card h3 {
+    font-size: 7rem;
+    line-height: 60px;
+  }
+
+  .dashboard-card p {
+    font-size: 3rem;
+    margin-top: auto;
+  }
+
+  .dashboard-tooltip h4 {
+    font-size: 1.75rem;
   }
 }

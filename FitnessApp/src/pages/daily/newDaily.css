@@ -252,6 +252,13 @@
 /* Right side end */
 
 @media (max-width: 1500px) {
+  .daily-input h3 {
+    font-size: 1.23rem;
+  }
+
+  .daily-input input {
+    font-size: 1.65rem;
+  }
   .instruct-card p {
     font-size: 1.5rem;
   }
@@ -289,14 +296,6 @@
     font-size: 1.5rem;
   }
   /* Input */
-
-  .daily-input h3 {
-    font-size: 1.25rem;
-  }
-
-  .daily-input input {
-    font-size: 1.5rem;
-  }
 }
 
 @media (max-width: 800px) {
@@ -314,11 +313,12 @@
 
   .instruct-container {
     height: 100%;
+    flex-direction: column;
     flex: none;
   }
 
   .instruct-card {
-    height: auto;
+    min-height: 35rem;
     padding: var(--space-4);
   }
 
@@ -337,10 +337,6 @@
     flex: none;
   }
 
-  .zone-button h4 {
-    margin: var(--space-2);
-  }
-
   /* Bottom container styles */
   .daily-submit-container {
     height: 30vh;
@@ -352,12 +348,33 @@
     margin: var(--space-4);
     padding: var(--space-4) 0;
   }
+  /* Text */
 
+  .instruct-container h2 {
+    font-size: 4.5rem;
+  }
+
+  .instruct-container pre {
+    font-size: 2rem;
+  }
+
+  .instruct-container p {
+    font-size: 2.5rem;
+  }
+
+  .zone-button h4 {
+    margin: var(--space-2);
+    font-size: 2rem;
+  }
+
+  .zone-button h5 {
+    font-size: 10rem;
+  }
   .daily-input h3 {
-    font-size: 1.5rem;
+    font-size: 1.55rem;
   }
 
   .daily-input input {
-    font-size: 2rem;
+    font-size: 2.25rem;
   }
 }

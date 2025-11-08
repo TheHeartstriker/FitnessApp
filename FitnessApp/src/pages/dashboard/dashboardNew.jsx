@@ -38,7 +38,7 @@ function NewDashboard() {
 
   function percentageToText(percentage) {
     if (percentage == null || isNaN(percentage)) {
-      return <span>neutral</span>;
+      return <span> neutral </span>;
     }
     if (Number(percentage) > 0) {
       return (
@@ -131,14 +131,14 @@ function NewDashboard() {
         <div className="dashboard-card larger">
           <h2>Calories burned</h2>
           <h3>
-            {data.aggregate?.[currentPeriods[Time]]?.avgCalories} <br />
+            {data.aggregate?.[currentPeriods[Time]]?.avgCalories ?? 0} <br />
             Cal
           </h3>
           <p>
             Your average calories burned the last {handleLineTime(Time)} days
             you are{" "}
             {percentageToText(
-              data.aggregate?.[currentPeriods[Time]]?.caloriesChange
+              data.aggregate?.[currentPeriods[Time]]?.caloriesChange ?? 0
             )}{" "}
             from the preceding {periodLabels[Time]}!
           </p>
@@ -147,7 +147,7 @@ function NewDashboard() {
         <div className="dashboard-card">
           <h2>Weight</h2>
           <h3>
-            {data.aggregate?.[currentPeriods[Time]]?.avgWeight} <br /> lb's
+            {data.aggregate?.[currentPeriods[Time]]?.avgWeight ?? 0} <br /> lb's
           </h3>
           <p>
             Your average weight the last {handleLineTime(Time)} days you are

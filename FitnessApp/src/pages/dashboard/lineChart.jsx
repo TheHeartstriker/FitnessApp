@@ -12,7 +12,10 @@ function LineChart({ dataprop, TimeProp }) {
   //Create's a array in order from most recent to least recent based on TimeProp length
   //Fills timeArr with totalZoneTime values from dataprop
   async function fillTimeArr() {
-    if (!dataprop || Object.keys(dataprop).length === 0) return;
+    if (!dataprop || Object.keys(dataprop).length === 0) {
+      setTimeArr(Array(TimeProp).fill(0));
+      return;
+    }
 
     // Convert dataprop to array if it's an object
     const dataArray = Array.isArray(dataprop)
