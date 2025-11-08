@@ -17,33 +17,26 @@ function BarChart({ graphData }) {
   }
 
   useEffect(() => {
-    if (!graphData || graphData.length === 0) return;
-
-    // Extract zone values from graphData object
+    // Always render five bars, even if graphData is null or missing values
     const zoneValues = zoneDataTypes.map((key) =>
       graphData && graphData[key] ? graphData[key] : 0
     );
     const maxZoneValue = Math.max(...zoneValues);
 
-    const divs = zoneDataTypes.map((zoneKey, idx) => {
-      if (graphData[zoneKey]) {
-        return (
-          <div
-            key={zoneKey}
-            className="dashboard-bar-zone"
-            style={{
-              height: `${calculateBarHeight(
-                graphData[zoneKey],
-                maxZoneValue
-              )}%`,
-            }}
-          >
-            <p>{graphData[zoneKey]}</p>
-          </div>
-        );
-      }
-      return null;
-    });
+    const divs = zoneDataTypes.map((zoneKey, idx) => (
+      <div
+        key={zoneKey}
+        className="dashboard-bar-zone"
+        style={{
+          height: `${calculateBarHeight(
+            graphData && graphData[zoneKey] ? graphData[zoneKey] : 0,
+            maxZoneValue
+          )}%`,
+        }}
+      >
+        <p>{graphData && graphData[zoneKey] ? graphData[zoneKey] : 0}</p>
+      </div>
+    ));
     setZoneDivs(divs);
   }, [graphData]);
 

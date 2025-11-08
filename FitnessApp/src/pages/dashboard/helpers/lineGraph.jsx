@@ -12,7 +12,7 @@ export function drawLineChart(svg, pixelH, pixelW, timeArr, drawData) {
     .range([padding, pixelW - padding]);
   const yScale = d3
     .scaleLinear()
-    .domain([0, maxValue])
+    .domain([0, maxValue || 1])
     .range([pixelH - padding, padding]);
 
   // Create line generator
