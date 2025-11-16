@@ -1,8 +1,8 @@
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { handleLogin, handleSignup } from "../../services/ApiAuth";
+import { handleLogin, handleSignup } from "../../../services/ApiAuth";
 import "./login.css";
-import BackGround from "../../assets/backGround";
+import BackGround from "../../../assets/backGround";
 
 const MAX_INPUT_LENGTH = 50;
 
@@ -57,7 +57,7 @@ function Login() {
   }
 
   return (
-    <div className="login-section">
+    <section className="login-section">
       <section className="login-welcome-section">
         <h2>Welcome</h2>
         <div className="welcome-overlay"></div>
@@ -103,7 +103,7 @@ function Login() {
           </form>
         </section>
       </div>
-    </div>
+    </section>
   );
 }
 

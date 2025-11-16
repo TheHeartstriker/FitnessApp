@@ -1,7 +1,8 @@
-import Login from "./login";
-import { ScrollDown } from "../../utils/scroll";
-import "./startPage.css";
+import Login from "../login/login.jsx";
+import { ScrollDown } from "../../../utils/scroll";
+import "./landing.css";
 import TriAngleBackgroundAni from "./startPage";
+import Featured from "../featured/featured.jsx";
 function LandingPage() {
   return (
     <>
@@ -25,6 +26,7 @@ function LandingPage() {
           </ScrollDown>
         </div>
       </section>
+      <Featured />
       <Login />
     </>
   );

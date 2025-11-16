@@ -1,4 +1,4 @@
-import LandingPage from "../pages/landing/landing.jsx";
+import LandingPage from "../pages/landing/startPage/landing.jsx";
 import { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import { checkAuthentication } from "../services/apiGuards";

@@ -3,6 +3,7 @@ import { BrowserRouter } from "react-router-dom";
 import { createRoot } from "react-dom/client";
 import Nav from "./components/navBar/Nav.jsx";
 import AppRoutes from "./routing/indexRoute.jsx";
+import { ReactLenis } from "lenis/react";
 
 import "./Site.css";
 
@@ -18,6 +19,12 @@ import "./Site.css";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter future={{ v7_startTransition: true }}>
+      <ReactLenis
+        root
+        options={{
+          duration: 1.25,
+        }}
+      />
       <Nav />
       <AppRoutes />
     </BrowserRouter>
