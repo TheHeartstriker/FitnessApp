@@ -22,7 +22,6 @@
 }
 
 /* Card */
-
 .featured-card {
   display: flex;
   justify-content: center;
@@ -33,6 +32,8 @@
   background-color: var(--color-4);
   padding: var(--space-2);
   margin: var(--space-3);
+  gap: var(--space-2);
+  border: 1px solid var(--color-1);
   border-radius: 50px;
   z-index: 2;
   position: relative;
@@ -50,6 +51,17 @@
   pointer-events: none;
 }
 
+/* Left card */
+
+.featured-card--left {
+  transform: translateX(-20%);
+}
+
+/* Right card */
+.featured-card--right {
+  flex-direction: row-reverse;
+  transform: translateX(20%);
+}
 /* Image area */
 .featured-card-image {
   flex: 1;
@@ -77,8 +89,78 @@
 }
 
 /* Text area */
-
 .featured-card-text {
   flex: 1;
+  display: flex;
+  flex-direction: column;
   height: 100%;
+}
+
+/* Main text */
+
+.featured-card-text h4 {
+  margin: 0;
+  font-weight: 600;
+  font-size: 3rem;
+  margin: var(--space-2) 0;
+  width: 70%;
+  color: var(--white-1);
+}
+
+.featured-card-text p {
+  margin: 0;
+  font-size: 1.25rem;
+  color: var(--white-2);
+}
+
+/* Featured pills */
+.featured-card-text-pill {
+  min-width: 10rem;
+  flex-shrink: 0;
+  align-self: flex-start;
+  background-color: var(--color-3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+}
+
+.featured-card-text-pill h3 {
+  margin: var(--space-2);
+  color: var(--color-2);
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.featured-card-text span {
+  height: 60%;
+  aspect-ratio: 1;
+  margin: var(--space-2);
+  margin-right: 0;
+  border-radius: 15px;
+  background-color: var(--color-1);
+}
+/* Second pill */
+.featured-card-text-pill--second {
+  background-color: var(--color-1);
+}
+.featured-card-text-pill--second h3 {
+  color: var(--color-4);
+}
+
+.featured-card-text-pill--second span {
+  background-color: var(--color-4);
+}
+
+/* Third pill */
+.featured-card-text-pill--third {
+  background-color: var(--color-2);
+}
+.featured-card-text-pill--third h3 {
+  color: var(--color-3);
+}
+
+.featured-card-text-pill--third span {
+  background-color: var(--color-4);
 }
