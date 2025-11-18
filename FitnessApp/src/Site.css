@@ -34,6 +34,10 @@ h5 {
   --color-3: #03624c;
   --color-4: #032221;
   --color-5: #021b1a;
+  /* Opacity versions */
+  --opacity-c1-normal: hsl(155, 100%, 44%);
+  --opacity-c1-light: rgb(0, 223, 130, 0.25);
+  --opacity-c1-s-light: rgb(0, 223, 130, 0.2);
 
   --light-1: rgb(0, 223, 130, 0.09);
   /* Spacing */

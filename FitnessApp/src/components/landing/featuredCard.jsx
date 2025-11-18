@@ -1,14 +1,10 @@
-export function FeaturedCard({
-  imageSrc,
-  imageAlt,
-  headerText,
-  bodyText,
-  pillClass,
-  sideClass,
-  id,
-}) {
+import React from "react";
+
+export const FeaturedCard = React.forwardRef((props, ref) => {
+  const { imageSrc, imageAlt, headerText, bodyText, pillClass, sideClass } =
+    props;
   return (
-    <div className={`featured-card featured-card--${sideClass}`} id={id}>
+    <div className={`featured-card featured-card--${sideClass}`} ref={ref}>
       <div className="featured-card-image">
         <img src={imageSrc} alt={imageAlt} />
       </div>
@@ -22,4 +18,6 @@ export function FeaturedCard({
       </div>
     </div>
   );
-}
+});
+
+FeaturedCard.displayName = "FeaturedCard";

@@ -35,14 +35,32 @@
   gap: var(--space-2);
   border: 1px solid var(--color-1);
   border-radius: 50px;
-  z-index: 2;
+  z-index: 5;
   position: relative;
   overflow: hidden;
   /* For animation */
   opacity: 0;
 }
-
+/* For the glowing hover effect */
 .featured-card::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    var(--opacity-c1-s-light),
+    transparent 40%
+  );
+
+  opacity: var(--glow-opacity, 0);
+  filter: blur(50px);
+  transition: opacity 0.4s ease-out;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.featured-card::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -51,6 +69,7 @@
   opacity: 0.06;
   filter: blur(30px);
   pointer-events: none;
+  z-index: 10;
 }
 
 /* Left card */
@@ -64,7 +83,7 @@
   flex-direction: row-reverse;
   transform: translateX(40%);
 }
-/* Image area */
+/* Card internals Image area */
 .featured-card-image {
   flex: 1;
   height: 100%;
@@ -90,7 +109,7 @@
   object-fit: cover;
 }
 
-/* Text area */
+/* Card internals Text area */
 .featured-card-text {
   flex: 1;
   display: flex;
