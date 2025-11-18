@@ -38,6 +38,8 @@
   z-index: 2;
   position: relative;
   overflow: hidden;
+  /* For animation */
+  opacity: 0;
 }
 
 .featured-card::before {
@@ -54,13 +56,13 @@
 /* Left card */
 
 .featured-card--left {
-  transform: translateX(-20%);
+  transform: translateX(-40%);
 }
 
 /* Right card */
 .featured-card--right {
   flex-direction: row-reverse;
-  transform: translateX(20%);
+  transform: translateX(40%);
 }
 /* Image area */
 .featured-card-image {
