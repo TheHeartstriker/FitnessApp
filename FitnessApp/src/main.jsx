@@ -22,7 +22,7 @@ createRoot(document.getElementById("root")).render(
       <ReactLenis
         root
         options={{
-          duration: 1.25,
+          duration: 1.35,
         }}
       />
       <Nav />

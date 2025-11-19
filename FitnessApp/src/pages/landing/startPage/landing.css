@@ -40,6 +40,7 @@
   color: var(--white-1);
   margin: 0;
   margin-bottom: var(--space-2);
+  font-weight: 700;
 }
 .landing-content h3 {
   font-size: 3rem;
@@ -67,8 +68,11 @@
   border: none;
   border-radius: 25px;
   color: var(--color-1);
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  opacity: 0;
   cursor: pointer;
-  transition: color 0.45s, background-color 0.45s ease-in-out;
+  transition: color 0.5s, background-color 0.5s ease-in-out;
 }
 
 .primary-action-btn:hover {

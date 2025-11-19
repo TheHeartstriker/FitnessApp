@@ -1,6 +1,6 @@
 import { useLenis } from "lenis/react";
 
-export function ScrollDown({ percent, className, children }) {
+export function ScrollDown({ percent, className, children, id = null }) {
   const lenis = useLenis();
 
   function scrollDown(targetPercent) {
@@ -15,7 +15,7 @@ export function ScrollDown({ percent, className, children }) {
   }
 
   return (
-    <button className={className} onClick={() => scrollDown(percent)}>
+    <button id={id} className={className} onClick={() => scrollDown(percent)}>
       {children}
     </button>
   );

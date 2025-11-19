@@ -1,4 +1,5 @@
-import React from "react";
+import { animate, onScroll } from "animejs";
+//Card array and a - if left and positive if right
 
 export function simpleHoverGlow(e, cardRefs) {
   for (const i of cardRefs) {
@@ -22,4 +23,35 @@ export function simpleHoverGlow(e, cardRefs) {
     card.style.setProperty("--mouse-y", `${y}px`);
     card.style.setProperty("--glow-opacity", opacity.toString());
   }
+}
+
+export function animateCard(card, side) {
+  animate(card, {
+    translateX: [
+      `${side === "left" ? "-" : ""}40%`,
+      `${side === "left" ? "-" : ""}20%`,
+    ],
+    duration: 1500,
+    ease: "inOutQuad",
+    autoplay: onScroll({
+      leave: "center 300%",
+      enter: "center -30%",
+      onLeaveBackward: () => {
+        animate(card, {
+          opacity: 0,
+          duration: 1500,
+          ease: "inOutQuad",
+          translateX: `${side === "left" ? "-" : ""}40%`,
+        });
+      },
+      onEnterForward: () => {
+        animate(card, {
+          opacity: 1,
+          duration: 1500,
+          ease: "inOutQuad",
+          translateX: `${side === "left" ? "-" : ""}20%`,
+        });
+      },
+    }),
+  });
 }
