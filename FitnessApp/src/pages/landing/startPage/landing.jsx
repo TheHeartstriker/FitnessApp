@@ -23,7 +23,7 @@ function LandingPage() {
         y: [{ to: ["100%", "0%"] }],
         opacity: [0, 1],
         ease: "cubicBezier(0.7, 0.1,0.5,0.9)",
-        delay: stagger(50, { start: 900 }), // Faster stagger for h tags
+        delay: stagger(50, { start: 750 }), // Faster stagger for h tags
       });
     });
 
@@ -36,15 +36,15 @@ function LandingPage() {
         y: [{ to: ["100%", "0%"] }],
         opacity: [0, 1],
         ease: "cubicBezier(0.7, 0.1,0.5,0.9)",
-        delay: stagger(20, { start: 900 }), // Slower stagger for p tag
+        delay: stagger(15, { start: 750 }), // Slower stagger for p tag
       });
     });
     animate(landingButton, {
       translateY: [{ from: 20, to: 0 }],
       opacity: [0, 1],
-      duration: 750,
+      duration: 500,
       ease: "cubicBezier(0.7, 0.1,0.5,0.9)",
-      delay: 3400,
+      delay: 2750,
     });
   }, []);
 

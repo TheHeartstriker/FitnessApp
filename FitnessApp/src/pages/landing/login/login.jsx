@@ -59,14 +59,17 @@ function Login() {
   return (
     <section className="login-section">
       <section className="login-welcome-section">
-        <h2>Welcome</h2>
+        <h2>
+          Want to try
+          <br /> FGraphs?
+        </h2>
         <div className="welcome-overlay"></div>
         <BackGround />
       </section>
       <div className="login-container">
         <section className="login-form-section">
           <h3>{login ? "Welcome Back!" : "Create Account"}</h3>
-          <p>Welcome back please login or create a account :)</p>
+          <p>Hi! Please login or create a account :)</p>
 
           <form className="login-form" onSubmit={handleSignOrLog}>
             <h4>Username</h4>

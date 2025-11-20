@@ -6,6 +6,7 @@ import landingGraphs from "@/assets/landing/graphs.png";
 import designImg from "@/assets/landing/design.png";
 import { useEffect, useRef } from "react";
 import { simpleHoverGlow, animateCard } from "./cardEffects";
+import { sharingText, analyisText, designText } from "./text.js";
 
 function Featured() {
   const cardRef1 = useRef(null);
@@ -35,8 +36,8 @@ function Featured() {
       <FeaturedCard
         imageSrc={connectionImg}
         imageAlt="Sharing Image"
-        headerText="Integrated data sharing system"
-        bodyText="Proin quis cras euismod sit et metus risus ut. Semper nam vel morbi sit cursus tincidunt massa et a. Dolor odio parturient cursus justo nunc enim, a, sit facilisi."
+        headerText="Custom data sharing system"
+        bodyText={sharingText}
         pillClass=""
         sideClass="left"
         ref={cardRef1}
@@ -46,8 +47,8 @@ function Featured() {
       <FeaturedCard
         imageSrc={landingGraphs}
         imageAlt="Analytics Image"
-        headerText="Advanced data analysis tools"
-        bodyText="Proin quis cras euismod sit et metus risus ut. Semper nam vel morbi sit cursus tincidunt massa et a. Dolor odio parturient cursus justo nunc enim, a, sit facilisi."
+        headerText="Cool data analysis tools"
+        bodyText={analyisText}
         pillClass="featured-card-text-pill--second"
         sideClass="right"
         ref={cardRef2}
@@ -56,8 +57,8 @@ function Featured() {
       <FeaturedCard
         imageSrc={designImg}
         imageAlt="Design Image"
-        headerText="Customizable design tools"
-        bodyText="Proin quis cras euismod sit et metus risus ut. Semper nam vel morbi sit cursus tincidunt massa et a. Dolor odio parturient cursus justo nunc enim, a, sit facilisi."
+        headerText="Custom built design"
+        bodyText={designText}
         pillClass="featured-card-text-pill--third"
         sideClass="left"
         ref={cardRef3}
