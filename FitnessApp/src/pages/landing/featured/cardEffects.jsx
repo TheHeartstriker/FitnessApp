@@ -25,11 +25,11 @@ export function simpleHoverGlow(e, cardRefs) {
   }
 }
 
-export function animateCard(card, side) {
+export function animateCard(card, side, from, to) {
   animate(card, {
     translateX: [
-      `${side === "left" ? "-" : ""}40%`,
-      `${side === "left" ? "-" : ""}20%`,
+      `${side === "left" ? "-" : ""}${from}`,
+      `${side === "left" ? "-" : ""}${to}`,
     ],
     duration: 1500,
     ease: "inOutQuad",
@@ -41,7 +41,7 @@ export function animateCard(card, side) {
           opacity: 0,
           duration: 1500,
           ease: "inOutQuad",
-          translateX: `${side === "left" ? "-" : ""}40%`,
+          translateX: `${side === "left" ? "-" : ""}${from}`,
         });
       },
       onEnterForward: () => {
@@ -49,7 +49,7 @@ export function animateCard(card, side) {
           opacity: 1,
           duration: 1500,
           ease: "inOutQuad",
-          translateX: `${side === "left" ? "-" : ""}20%`,
+          translateX: `${side === "left" ? "-" : ""}${to}`,
         });
       },
     }),
