@@ -32,7 +32,7 @@
 .login-welcome-section h2 {
   position: relative;
   color: var(--white-1);
-  font-weight: 700;
+  font-weight: 6000;
   font-size: 7.5rem;
   text-align: center;
   z-index: 5;
@@ -73,7 +73,7 @@
 
 .login-form-section h3 {
   color: var(--color-1);
-  font-weight: 700;
+  font-weight: 500;
   font-size: 2.5rem;
   margin-bottom: var(--space-1);
   text-align: center;

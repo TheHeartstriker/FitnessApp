@@ -4,49 +4,48 @@ import "./landing.css";
 import TriAngleBackgroundAni from "./startPage";
 import Featured from "../featured/featured.jsx";
 import OpeningPage from "../opening.jsx";
-import { animate, set, splitText, stagger } from "animejs";
-import { useEffect } from "react";
+import { animate, splitText, stagger } from "animejs";
+import { useEffect, useRef } from "react";
 function LandingPage() {
+  const hasAnimatedButtons = useRef(false);
   useEffect(() => {
-    const hTargets = document.querySelectorAll(
-      "h1#landing-char, h2#landing-char, h3#landing-char"
-    );
-    const pTargets = document.querySelectorAll("p#landing-char");
-    const landingButton = document.querySelectorAll(
-      ".primary-action-btn, #button-char"
-    );
-
-    // Animate h tags with faster stagger
-    hTargets.forEach((target) => {
-      const { words } = splitText(target, {
-        words: { wrap: "clip" },
-      });
-      animate(words, {
-        y: [{ to: ["100%", "0%"] }],
-        opacity: [0, 1],
-        ease: "out(3)",
-        delay: stagger(75, { start: 750 }), // Faster stagger for h tags
-      });
+    hasAnimatedButtons.current = false;
+    // Collecting h words
+    const { words: h1Words } = splitText(".landing-content h1 ", {
+      words: { wrap: "clip" },
     });
-
-    // Animate p tag with slower stagger
-    pTargets.forEach((target) => {
-      const { words } = splitText(target, {
-        words: { wrap: "clip" },
-      });
-      animate(words, {
-        y: [{ to: ["100%", "0%"] }],
-        opacity: [0, 1],
-        ease: "out(3)",
-        delay: stagger(15, { start: 800 }), // Slower stagger for p tag
-      });
+    const { words: h2Words } = splitText("#landing-char-2", {
+      words: { wrap: "clip" },
     });
-    animate(landingButton, {
-      translateY: [{ from: 30, to: 0 }],
+    const hWords = [...h1Words, ...h2Words];
+    //Animating h words
+    animate(hWords, {
+      y: [{ to: ["100%", "0%"] }],
       opacity: [0, 1],
-      duration: 1250,
       ease: "out(3)",
-      delay: 2500,
+      delay: stagger(75, { start: 750 }),
+    });
+    // Animate p tag with slower stagger
+    const { words: pWords } = splitText("p#landing-char", {
+      words: { wrap: "clip" },
+    });
+    animate(pWords, {
+      y: [{ to: ["100%", "0%"] }],
+      opacity: [0, 1],
+      ease: "out(3)",
+      delay: stagger(15, { start: 800 }),
+      onComplete: () => {
+        if (hasAnimatedButtons.current) return;
+        hasAnimatedButtons.current = true;
+        animate(".primary-action-btn, #button-char, .landing-button-section", {
+          translateY: [{ from: 30, to: 0 }],
+          opacity: [0, 1],
+          duration: 1250,
+          ease: "out(3)",
+          delay: 100,
+          once: true,
+        });
+      },
     });
   }, []);
 
@@ -60,7 +59,7 @@ function LandingPage() {
         </div>
         <div className="landing-content">
           <h1 id="landing-char">FGraphs</h1>
-          <h2 id="landing-char">A simplistic take on fitness tracking</h2>
+          <h2 id="landing-char-2">A simplistic take on fitness tracking</h2>
           <p id="landing-char">
             Hi there! FGraphs is a fitness tracking app! Mainly made in my spare
             time to learn, have fun and showcase my skills and understanding of
