@@ -39,6 +39,9 @@ h5 {
   --opacity-c1-normal: hsl(155, 100%, 44%);
   --opacity-c1-light: rgb(0, 223, 130, 0.25);
   --opacity-c1-s-light: rgb(0, 223, 130, 0.2);
+  /*  */
+  --opacity-c5-normal: rgba(2, 27, 26, 0.5);
+  --opacity-c5-s-light: rgba(2, 27, 26, 0.2);
 
   --light-1: rgb(0, 223, 130, 0.09);
   /* Spacing */

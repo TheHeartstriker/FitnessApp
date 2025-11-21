@@ -28,89 +28,149 @@
   z-index: 1;
   color: var(--black-2);
   padding: var(--space-4);
+  margin-left: 7.5vw;
 }
 
 .landing-content h2 {
-  font-size: 1.75rem;
-  color: var(--color-1);
-  font-weight: 500;
+  font-size: 2.5rem;
+  color: var(--white-1);
   margin: 0;
-  margin-bottom: var(--space-3);
+  font-weight: 500;
+  margin-bottom: var(--space-4);
 }
 .landing-content h1 {
-  font-size: 4.25rem;
-  color: var(--white-1);
+  font-size: 7.5rem;
+  color: var(--color-1);
   margin: 0;
   margin-bottom: var(--space-0);
-  font-weight: 700;
-}
-.landing-content h3 {
-  font-size: 3.25rem;
-  color: var(--white-1);
-  font-weight: 600;
-  margin: 0;
-  margin-bottom: var(--space-1);
+  transform: translateX(-2.5px);
+  font-weight: 500;
 }
 
 .landing-content p {
   font-size: 1.5rem;
   color: var(--white-2);
   max-width: 850px;
+  font-weight: 400;
 }
+/*  Button section*/
 
-.primary-action-btn {
-  display: block;
-  margin-left: auto;
-  margin-right: -50px;
-  width: auto;
+.landing-button-section {
+  width: 80%;
   height: auto;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: left;
+}
+/* button */
+.primary-action-btn {
+  display: flex;
+  align-items: center;
+  width: auto;
+  height: 5rem;
   font-size: 1.25rem;
-  background-color: var(--color-2);
+  background-color: var(--color-5);
   padding: var(--space-3);
   border: none;
   border-radius: 50px;
-  color: var(--color-4);
-  font-family: "Inter", sans-serif;
-  font-weight: 500;
-  opacity: 0;
+  color: var(--color-2);
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  opacity: 1;
   cursor: pointer;
   transition: color 0.5s, background-color 0.5s ease-in-out;
 }
 
+.primary-action-btn.circle-btn {
+  width: 5rem;
+  justify-content: center;
+}
+
 .primary-action-btn:hover {
-  background-color: var(--color-1);
+  background-color: var(--color-2);
   color: var(--color-5);
+}
+/* separator */
+.landing-button-section hr {
+  height: 5rem;
+  width: 2px;
+  color: var(--color-2);
+  margin: 0 var(--space-7);
+}
+
+/* side text */
+.landing-button-section h3 {
+  font-size: 1.25rem;
+  color: var(--color-2);
+  margin: 0 var(--space-3);
+  align-self: center;
+  text-shadow: 0 4px 8px var(--opacity-c5-normal);
+  font-weight: 400;
 }
 
 @media (max-width: 1000px) {
   .landing-content {
     width: 75%;
   }
-
-  .landing-content h2 {
-    font-size: 2.5rem;
+  .landing-button-section {
+    margin-top: var(--space-7);
   }
 
   .landing-content h1 {
-    font-size: 6rem;
+    font-size: 9rem;
   }
-
-  .landing-content h3 {
-    font-size: 5rem;
+  .landing-content h2 {
+    font-size: 3.5rem;
   }
-
   .landing-content p {
-    font-size: 2.25rem;
+    font-size: 2rem;
   }
 
   .primary-action-btn {
-    font-size: 2rem;
-    padding: var(--space-4);
+    height: 7rem;
+    font-size: 1.5rem;
+  }
+  .primary-action-btn.circle-btn {
+    width: 7rem;
+  }
+  .landing-button-section hr {
+    height: 7rem;
+    width: 2px;
+  }
+  .landing-button-section h3 {
+    font-size: 1.5rem;
   }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 650px) {
   .landing-content {
     width: 90%;
+  }
+  /* Main text */
+  .landing-content h1 {
+    font-size: 9.5rem;
+  }
+  .landing-content h2 {
+    font-size: 4rem;
+  }
+  /* UPDATE IN LOGIN AND FEATURES */
+  .landing-content p {
+    font-size: 2.25rem;
+  }
+  /* Button stuff */
+  .primary-action-btn {
+    height: 8rem;
+    font-size: 2rem;
+  }
+  .primary-action-btn.circle-btn {
+    width: 8rem;
+  }
+  .landing-button-section hr {
+    height: 8rem;
+    width: 2px;
+  }
+  .landing-button-section h3 {
+    font-size: 2rem;
   }
 }
