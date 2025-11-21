@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import Tribackground from "../../assets/triBackground";
+import Tribackground from "../../../assets/triBackground";
 
 function darkenColorDistance(
   i,

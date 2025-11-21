@@ -3,6 +3,7 @@ body {
   padding: 0;
   font-family: "Inter", sans-serif;
   background-color: var(--color-5);
+  overflow-x: hidden;
 }
 
 html {
@@ -34,6 +35,19 @@ h5 {
   --color-3: #03624c;
   --color-4: #032221;
   --color-5: #021b1a;
+  /* Opacity versions */
+  --opacity-c1-normal: hsl(155, 100%, 44%);
+  --opacity-c1-light: rgb(0, 223, 130, 0.25);
+  --opacity-c1-s-light: rgb(0, 223, 130, 0.2);
+  --opacity-c1-ul-light: rgb(0, 223, 130, 0.15);
+  /*  */
+  --opacity-c5-normal: rgba(2, 27, 26, 0.5);
+  --opacity-c5-s-light: rgba(2, 27, 26, 0.2);
+  /*  */
+  --opacity-c2-normal: rgba(44, 194, 149, 0.5);
+  --opacity-c2-light: rgba(44, 194, 149, 0.25);
+  --opacity-c2-s-light: rgba(44, 194, 149, 0.2);
+  --opacity-c2-ul-light: rgba(44, 194, 149, 0.15);
 
   --light-1: rgb(0, 223, 130, 0.09);
   /* Spacing */

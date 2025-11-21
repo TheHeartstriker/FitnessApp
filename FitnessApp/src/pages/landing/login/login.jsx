@@ -1,8 +1,8 @@
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { handleLogin, handleSignup } from "../../services/ApiAuth";
+import { handleLogin, handleSignup } from "../../../services/ApiAuth";
 import "./login.css";
-import BackGround from "../../assets/backGround";
+import BackGround from "../../../assets/backGround";
 
 const MAX_INPUT_LENGTH = 50;
 
@@ -57,16 +57,19 @@ function Login() {
   }
 
   return (
-    <div className="login-section">
+    <section className="login-section">
       <section className="login-welcome-section">
-        <h2>Welcome</h2>
+        <h2>
+          Want to try
+          <br /> FGraphs?
+        </h2>
         <div className="welcome-overlay"></div>
         <BackGround />
       </section>
       <div className="login-container">
         <section className="login-form-section">
           <h3>{login ? "Welcome Back!" : "Create Account"}</h3>
-          <p>Welcome back please login or create a account :)</p>
+          <p>Hi! Please login or create a account :)</p>
 
           <form className="login-form" onSubmit={handleSignOrLog}>
             <h4>Username</h4>
@@ -103,7 +106,7 @@ function Login() {
           </form>
         </section>
       </div>
-    </div>
+    </section>
   );
 }
 
