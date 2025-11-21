@@ -84,6 +84,7 @@
   border-radius: inherit;
   overflow: hidden;
   z-index: 5;
+  transition: transform 0.5s ease;
 }
 
 .featured-card-image::before {
@@ -100,6 +101,14 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.featured-card-image img:hover {
+  transform: scale(1.05);
+}
+.featured-card-image:hover {
+  transform: scale(1.025);
 }
 
 /* Card internals Text area */
@@ -114,8 +123,8 @@
 
 .featured-card-text h4 {
   margin: 0;
-  font-weight: 600;
-  font-size: 3rem;
+  font-weight: 500;
+  font-size: 3.15rem;
   margin: var(--space-2) 0;
   width: 70%;
   color: var(--white-1);
@@ -132,18 +141,41 @@
   min-width: 10rem;
   flex-shrink: 0;
   align-self: flex-start;
+  position: relative;
   background-color: var(--color-3);
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 50px;
+  transition: filter 0.5s ease-in-out;
+}
+.featured-card-text-pill::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--opacity-c2-light)
+  ); /* Adjust color/opacity as needed */
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  z-index: 1;
+}
+
+.featured-card-text-pill:hover::before {
+  opacity: 1;
 }
 
 .featured-card-text-pill h3 {
   margin: var(--space-2);
   color: var(--color-2);
   font-family: "Poppins", sans-serif;
-  font-weight: 700;
+  font-weight: 600;
   font-size: 1.5rem;
 }
 
@@ -159,6 +191,7 @@
 .featured-card-text-pill--second {
   background-color: var(--color-1);
 }
+
 .featured-card-text-pill--second h3 {
   color: var(--color-4);
 }
@@ -171,6 +204,15 @@
 .featured-card-text-pill--third {
   background-color: var(--color-2);
 }
+
+.featured-card-text-pill--third:before {
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--opacity-c1-light)
+  ); /* Adjust color/opacity as needed */
+}
+
 .featured-card-text-pill--third h3 {
   color: var(--color-3);
 }
@@ -203,7 +245,7 @@
   }
 
   .featured-card-text h4 {
-    font-size: 4.25rem;
+    font-size: 4rem;
   }
 }
 
@@ -232,7 +274,4 @@
   .featured-card-text h4 {
     font-size: 4.5rem;
   }
-}
-
-@media (max-width: 590px) {
 }

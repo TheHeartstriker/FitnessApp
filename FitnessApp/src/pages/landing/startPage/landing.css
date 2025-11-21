@@ -124,7 +124,7 @@
     font-size: 3.5rem;
   }
   .landing-content p {
-    font-size: 2rem;
+    font-size: 2.25rem;
   }
 
   .primary-action-btn {
@@ -154,10 +154,7 @@
   .landing-content h2 {
     font-size: 4rem;
   }
-  /* UPDATE IN LOGIN AND FEATURES */
-  .landing-content p {
-    font-size: 2.25rem;
-  }
+
   /* Button stuff */
   .primary-action-btn {
     height: 8rem;

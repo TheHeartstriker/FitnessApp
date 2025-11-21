@@ -179,10 +179,10 @@
   }
 
   .login-form-section h3 {
-    font-size: 3.5rem;
+    font-size: 4rem;
   }
   .login-form-section p {
-    font-size: 2rem;
+    font-size: 2.25rem;
     margin-bottom: var(--space-6);
   }
 
@@ -206,8 +206,13 @@
 
 @media (max-width: 800px) {
   .login-form-section {
-    width: 50vw;
+    width: 100%;
     padding: var(--space-3);
+  }
+
+  .login-welcome-section {
+    flex: none;
+    width: 40%;
   }
 
   .login-welcome-section h2 {

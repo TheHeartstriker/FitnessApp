@@ -24,7 +24,7 @@ function LandingPage() {
       animate(words, {
         y: [{ to: ["100%", "0%"] }],
         opacity: [0, 1],
-        ease: "cubicBezier(0.7, 0.1,0.5,0.9)",
+        ease: "out(3)",
         delay: stagger(75, { start: 750 }), // Faster stagger for h tags
       });
     });
@@ -37,16 +37,16 @@ function LandingPage() {
       animate(words, {
         y: [{ to: ["100%", "0%"] }],
         opacity: [0, 1],
-        ease: "cubicBezier(0.7, 0.1,0.5,0.9)",
+        ease: "out(3)",
         delay: stagger(15, { start: 800 }), // Slower stagger for p tag
       });
     });
     animate(landingButton, {
-      translateY: [{ from: 20, to: 0 }],
+      translateY: [{ from: 30, to: 0 }],
       opacity: [0, 1],
-      duration: 650,
-      ease: "cubicBezier(0.7, 0.1,0.5,0.9)",
-      delay: 2750,
+      duration: 1250,
+      ease: "out(3)",
+      delay: 2500,
     });
   }, []);
 
