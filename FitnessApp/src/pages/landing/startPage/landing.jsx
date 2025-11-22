@@ -4,6 +4,8 @@ import "./landing.css";
 import TriAngleBackgroundAni from "./startPage";
 import Featured from "../featured/featured.jsx";
 import OpeningPage from "../opening.jsx";
+import Why from "../why/why.jsx";
+import Preview from "../preview/preview.jsx";
 import { animate, splitText, stagger } from "animejs";
 import { useEffect, useRef } from "react";
 function LandingPage() {
@@ -83,7 +85,9 @@ function LandingPage() {
           </div>
         </div>
       </section>
+      <Why />
       <Featured />
+      <Preview />
       <Login />
     </>
   );

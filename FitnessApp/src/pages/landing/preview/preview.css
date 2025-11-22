@@ -1,0 +1,91 @@
+.preview-section {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  background-color: var(--color-5);
+  z-index: 10;
+  position: relative;
+  flex-direction: column;
+}
+/* Text header */
+.preview-header {
+  width: 100%;
+  height: 30vh;
+  background-color: var(--color-3);
+  border-bottom-left-radius: 50px;
+  border-bottom-right-radius: 250px;
+  display: flex;
+  align-items: center;
+}
+
+.preview-header h3 {
+  font-size: 6.5rem;
+  font-weight: 500;
+  margin-left: var(--space-7);
+  color: var(--color-2);
+}
+/* Preview content container */
+.preview-content {
+  width: 90%;
+  height: 100%;
+  margin: 5rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+/* Preview main content container */
+.preview-main-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  width: 100%;
+
+  flex: 1;
+}
+
+.preview-main-content--middle {
+  border-top: 2px solid var(--color-2);
+  border-bottom: 2px solid var(--color-2);
+  flex-direction: row-reverse;
+}
+
+/* Big num container styles */
+.preview-content-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  height: 100%;
+}
+
+.preview-content-num h4 {
+  font-size: 17.5rem;
+  font-family: "inter", sans-serif;
+  color: var(--color-2);
+  margin: 0;
+}
+
+/* Text container styles */
+
+.preview-content-text {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  padding: var(--space-5);
+  flex: 1;
+  height: 100%;
+}
+
+.preview-content-text h4 {
+  font-size: 4.5rem;
+  font-weight: 400;
+  margin: var(--space-3) 0;
+  color: var(--color-2);
+}
+
+.preview-content-text p {
+  font-size: 1.5rem;
+  color: var(--white-2);
+}
