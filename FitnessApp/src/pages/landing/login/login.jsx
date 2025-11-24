@@ -1,9 +1,10 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { handleLogin, handleSignup } from "../../../services/ApiAuth";
 import "./login.css";
 import BackGround from "../../../assets/backGround";
-
+import { animateText } from "@/components/animation/textAni";
+import { splitText } from "animejs";
 const MAX_INPUT_LENGTH = 50;
 
 function Login() {
@@ -33,6 +34,16 @@ function Login() {
     }
   }
 
+  function handleAnimation() {
+    const { words: loginWords } = splitText(".login-welcome-section h2", {
+      words: { wrap: "clip" },
+    });
+    loginWords.forEach((word) => {
+      word.style.opacity = 0;
+    });
+    animateText(loginWords);
+  }
+
   // Call controllers to handle login and signup
   function handleSwitch() {
     setLogin(!login);
@@ -55,6 +66,10 @@ function Login() {
       setError(error.message || "An error occurred");
     }
   }
+
+  useEffect(() => {
+    handleAnimation();
+  }, []);
 
   return (
     <section className="login-section">

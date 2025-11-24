@@ -1,48 +1,7 @@
 import "./why.css";
 import { useEffect } from "react";
-import { animate, splitText, stagger } from "animejs";
+import { animateWhySection } from "./animateWhy";
 function Why() {
-  function animateWhySection() {
-    const { words: Words1 } = splitText(".why-section-header h3", {
-      words: { wrap: "clip" },
-    });
-    const { words: Words2 } = splitText(".why-section-story h4", {
-      words: { wrap: "clip" },
-    });
-    const words = [...Words1, ...Words2];
-    const { words: pWords1 } = splitText("#why-p-text-1", {
-      words: { wrap: "clip" },
-    });
-    const { words: pWords2 } = splitText("#why-p-text-2", {
-      words: { wrap: "clip" },
-    });
-    const pWords = [...pWords1, ...pWords2];
-    pWords.forEach((word) => {
-      word.style.opacity = 0;
-    });
-
-    // Calculate the total duration including stagger
-    const staggerDelay = 50;
-    const startDelay = 750;
-    const wordsDuration = startDelay + words.length * staggerDelay + 500;
-
-    animate(words, {
-      y: [{ to: ["100%", "0%"] }],
-      opacity: [0, 1],
-      ease: "out(3)",
-      delay: stagger(staggerDelay, { start: startDelay }),
-    });
-    // Start pWords animation at the calculated time
-    animate(pWords, {
-      y: [{ to: ["100%", "0%"] }],
-      opacity: [0, 1],
-      translateY: [{ from: 30, to: 0 }],
-      duration: 1250,
-      ease: "out(3)",
-      delay: wordsDuration,
-    });
-  }
-
   useEffect(() => {
     animateWhySection();
   }, []);
