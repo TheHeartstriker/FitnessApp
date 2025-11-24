@@ -48,8 +48,6 @@
   justify-content: center;
   flex-direction: row;
   width: 100%;
-  opacity: 0;
-
   flex: 1;
 }
 
@@ -99,4 +97,21 @@
 .preview-content-text p {
   font-size: 1.5rem;
   color: var(--white-2);
+}
+
+@media (max-width: 1000px) {
+  .preview-header h3 {
+    font-size: 9.5rem;
+  }
+  .preview-content-text p {
+    font-size: 2.25rem;
+    color: var(--white-2);
+  }
+}
+
+@media (max-width: 500px) {
+  .preview-main-content {
+    flex-direction: column;
+    flex-direction: column-reverse;
+  }
 }

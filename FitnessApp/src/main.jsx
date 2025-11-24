@@ -23,6 +23,8 @@ createRoot(document.getElementById("root")).render(
         root
         options={{
           duration: 1.5,
+          smoothTouch: false,
+          wheelMultiplier: 0.8,
         }}
       />
       <Nav />

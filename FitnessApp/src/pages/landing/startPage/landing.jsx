@@ -35,19 +35,15 @@ function LandingPage() {
       y: [{ to: ["100%", "0%"] }],
       opacity: [0, 1],
       ease: "out(3)",
-      delay: stagger(15, { start: 800 }),
-      onComplete: () => {
-        if (hasAnimatedButtons.current) return;
-        hasAnimatedButtons.current = true;
-        animate(".primary-action-btn, #button-char, .landing-button-section", {
-          translateY: [{ from: 30, to: 0 }],
-          opacity: [0, 1],
-          duration: 1250,
-          ease: "out(3)",
-          delay: 100,
-          once: true,
-        });
-      },
+      delay: stagger(15, { start: 850 }),
+    });
+    animate(".primary-action-btn, #button-char, .landing-button-section", {
+      translateY: [{ from: 30, to: 0 }],
+      opacity: [0, 1],
+      duration: 1000,
+      delay: 2000,
+      ease: "out(3)",
+      once: true,
     });
   }, []);
 
@@ -77,9 +73,15 @@ function LandingPage() {
             <hr id="button-char"></hr>
             {/*  */}
             {/* btn2 */}
-            <ScrollDown percent={100} className="primary-action-btn circle-btn">
-              K
-            </ScrollDown>
+            <button className="primary-action-btn circle-button">
+              <a
+                href="https://www.kadenwildauer.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                K
+              </a>
+            </button>
             {/* Text */}
             <h3 id="button-char">More from me</h3>
           </div>

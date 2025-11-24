@@ -14,6 +14,9 @@ export function animateWhySection() {
     words: { wrap: "clip" },
   });
   const pWords = [...pWords1, ...pWords2];
+  const allText = [...words, ...pWords];
+
+  // Set initial opacity to 0
   pWords.forEach((word) => {
     word.style.opacity = 0;
   });
@@ -23,14 +26,14 @@ export function animateWhySection() {
 
   // Calculate the total duration including stagger
   const staggerDelay = 10;
-  const startDelay = 400;
+  const startDelay = 300;
   const wordsDuration = startDelay + pWords1.length * staggerDelay - 700;
 
   animate(words, {
     autoplay: onScroll({
       leave: "center 300%",
       enter: "center -200%",
-      repeat: false,
+      repeat: true,
       onEnterForward: () => {
         //Header text
         animate(words, {
@@ -52,6 +55,13 @@ export function animateWhySection() {
           opacity: [0, 1],
           ease: "out(3)",
           delay: stagger(staggerDelay, { start: wordsDuration }),
+        });
+      },
+      onLeaveBackward: () => {
+        animate(allText, {
+          y: [{ to: ["0%", "100%"] }],
+          opacity: [1, 0],
+          ease: "in(3)",
         });
       },
     }),

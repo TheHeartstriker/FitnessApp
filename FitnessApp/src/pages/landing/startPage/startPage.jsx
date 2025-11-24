@@ -10,7 +10,6 @@ function darkenColorDistance(
   let el = document.getElementById(i.id);
   if (!el) return;
   let distance = i.distanceToMouse;
-  // Normalize distance
   let norm = intensity[0] + intensity[1] * (distance / distanceMax);
   norm = Math.min(norm, 1);
   let lightness;
@@ -20,10 +19,8 @@ function darkenColorDistance(
     lightness = Math.round(i.color[2] / norm);
   }
 
-  el.style.stroke = `hsl(${i.color[0]}, ${i.color[1]}%, ${lightness}%)`;
-  el.style.fill = `hsl(${i.color[0]}, ${i.color[1]}%, ${lightness}%)`;
-
-  el.style.transition = "fill 0.2s linear, stroke 0.2s linear";
+  // Use CSS custom properties for better performance
+  el.style.cssText = `stroke: hsl(${i.color[0]}, ${i.color[1]}%, ${lightness}%); fill: hsl(${i.color[0]}, ${i.color[1]}%, ${lightness}%); transition: fill 0.2s linear, stroke 0.2s linear`;
 }
 
 export function rgbToHsl(rgb) {
@@ -59,6 +56,8 @@ function TriAngleBackgroundAni() {
   const mouseRef = useRef({ x: 0, y: 0 });
   const otherPolyRef = useRef([]);
   const parentRef = useRef(null);
+  const rafIdRef = useRef(null);
+  const elementsRef = useRef(new Map());
 
   function mouseMove(e) {
     if (!parentRef.current) return;
@@ -66,12 +65,19 @@ function TriAngleBackgroundAni() {
     mouseRef.current.x = e.clientX - rect.left;
     mouseRef.current.y = e.clientY - rect.top;
 
-    for (const i of otherPolyRef.current) {
-      updateDistances(i);
-      darkenColorDistance(i, 1000, [0.7, 0.99], true);
+    // Cancel previous animation frame
+    if (rafIdRef.current) {
+      cancelAnimationFrame(rafIdRef.current);
     }
-  }
 
+    // Use requestAnimationFrame for smooth updates
+    rafIdRef.current = requestAnimationFrame(() => {
+      for (const i of otherPolyRef.current) {
+        updateDistances(i);
+        darkenColorDistance(i, 1000, [0.7, 0.99], true);
+      }
+    });
+  }
   //Loops and saves the intial distance, color and id of each poly
   function fillPoly() {
     let amount = 828;
@@ -108,11 +114,13 @@ function TriAngleBackgroundAni() {
 
   function updateCenter() {
     for (const i of otherPolyRef.current) {
-      let elXY = document.getElementById(i.id)?.getBoundingClientRect();
-      if (!elXY) return;
+      let el = elementsRef.current.get(i.id); // Use cached element
+      let elXY = el?.getBoundingClientRect();
+      if (!elXY) continue;
       i.elCenter = elXY;
     }
   }
+
   //updates distance to mouse
   function updateDistances(i) {
     let elXY = i.elCenter;
@@ -126,11 +134,25 @@ function TriAngleBackgroundAni() {
   }
 
   useEffect(() => {
-    window.addEventListener("mousemove", mouseMove);
+    // Throttle mousemove for better performance
+    let throttleTimeout;
+    const throttledMouseMove = (e) => {
+      if (!throttleTimeout) {
+        throttleTimeout = setTimeout(() => {
+          mouseMove(e);
+          throttleTimeout = null;
+        }, 16); // ~60fps
+      }
+    };
+
+    window.addEventListener("mousemove", throttledMouseMove);
     window.addEventListener("resize", updateCenter);
     return () => {
-      window.removeEventListener("mousemove", mouseMove);
+      window.removeEventListener("mousemove", throttledMouseMove);
       window.removeEventListener("resize", updateCenter);
+      if (rafIdRef.current) {
+        cancelAnimationFrame(rafIdRef.current);
+      }
     };
   }, []);
 

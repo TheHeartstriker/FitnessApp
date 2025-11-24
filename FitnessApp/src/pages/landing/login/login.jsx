@@ -79,8 +79,8 @@ function Login() {
           <br /> FGraphs?
         </h2>
         <div className="welcome-overlay"></div>
-        <BackGround />
       </section>
+      <BackGround />
       <div className="login-container">
         <section className="login-form-section">
           <h3>{login ? "Welcome Back!" : "Create Account"}</h3>

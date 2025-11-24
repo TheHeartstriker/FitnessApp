@@ -21,6 +21,12 @@ function RootPath() {
     }
     validateUser();
   }, []);
+
+  useEffect(() => {
+    if (isAuthenticated !== null && !shouldRedirect) {
+      window.scrollTo(0, 0);
+    }
+  }, [isAuthenticated, shouldRedirect]);
   // Show nothing while checking authentication
   if (isAuthenticated === null) {
     return null;

@@ -7,6 +7,7 @@
   align-items: center;
   justify-content: row;
   justify-content: center;
+  overflow: hidden;
   background-color: var(--color-5);
   border-top: 2.5px solid var(--color-1);
   border-radius: 50px;
@@ -22,12 +23,16 @@
   border-top-left-radius: 50px;
   align-items: center;
   justify-content: center;
+  z-index: 5;
 }
 
-.login-welcome-section svg {
+.login-section svg {
   position: absolute;
-  width: 100%;
+  left: 0;
+  top: 0;
+  width: 50%;
   height: 100%;
+  z-index: 1;
 }
 .login-welcome-section h2 {
   position: relative;
@@ -35,7 +40,7 @@
   font-weight: 6000;
   font-size: 7.5rem;
   text-align: center;
-  z-index: 5;
+  z-index: 10;
 }
 
 .welcome-overlay {
@@ -69,6 +74,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  z-index: 5;
 }
 
 .login-form-section h3 {
@@ -205,17 +211,51 @@
 }
 
 @media (max-width: 800px) {
+  .login-section {
+    flex-direction: column;
+  }
+  /* Login half */
   .login-form-section {
+    width: 60%;
+    height: 70%;
+    padding: var(--space-6);
+    background-color: var(--color-4);
+  }
+  .login-container {
+    flex: none;
     width: 100%;
-    padding: var(--space-3);
+    height: 70%;
+  }
+  /* Login text half / sizing el*/
+  .login-form-section h3 {
+    font-size: 4.5rem;
+  }
+  .login-form {
+    height: 100%;
+  }
+  .login-form h5 {
+    font-size: 1.75rem;
+  }
+
+  /* Welcome half */
+  .welcome-overlay {
+    display: none;
   }
 
   .login-welcome-section {
+    width: 100%;
     flex: none;
-    width: 40%;
+    height: 30%;
   }
 
   .login-welcome-section h2 {
-    font-size: 5rem;
+    font-size: 6.5rem;
+  }
+}
+
+@media (max-width: 450px) {
+  .login-form-section {
+    width: 65%;
+    height: 75%;
   }
 }

@@ -80,9 +80,22 @@
   font-weight: 400;
   cursor: pointer;
   transition: color 0.5s, background-color 0.5s ease-in-out;
+  position: relative;
+}
+.primary-action-btn a {
+  text-decoration: none;
+  color: inherit;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.primary-action-btn.circle-btn {
+.primary-action-btn.circle-button {
   width: 5rem;
   justify-content: center;
 }
@@ -158,17 +171,20 @@
 
   /* Button stuff */
   .primary-action-btn {
-    height: 8rem;
+    height: 9rem;
     font-size: 2rem;
   }
   .primary-action-btn.circle-btn {
-    width: 8rem;
+    width: 9rem;
   }
   .landing-button-section hr {
-    height: 8rem;
+    height: 9rem;
     width: 2px;
   }
   .landing-button-section h3 {
     font-size: 2rem;
+  }
+  .landing-button-section {
+    width: 100%;
   }
 }
