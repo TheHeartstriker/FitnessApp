@@ -38,8 +38,6 @@
   z-index: 5;
   position: relative;
   overflow: hidden;
-  /* For animation */
-  opacity: 0;
 }
 /* For the glowing hover effect */
 .featured-card::before {

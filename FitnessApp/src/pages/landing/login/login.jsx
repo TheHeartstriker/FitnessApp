@@ -4,7 +4,6 @@ import { handleLogin, handleSignup } from "../../../services/ApiAuth";
 import "./login.css";
 import BackGround from "../../../assets/backGround";
 import { animateText } from "@/components/animation/textAni";
-import { splitText } from "animejs";
 const MAX_INPUT_LENGTH = 50;
 
 function Login() {
@@ -35,13 +34,8 @@ function Login() {
   }
 
   function handleAnimation() {
-    const { words: loginWords } = splitText(".login-welcome-section h2", {
-      words: { wrap: "clip" },
-    });
-    loginWords.forEach((word) => {
-      word.style.opacity = 0;
-    });
-    animateText(loginWords);
+    const wordClass = document.querySelectorAll(".login-welcome-section h2");
+    animateText([wordClass], "110%", "100%");
   }
 
   // Call controllers to handle login and signup

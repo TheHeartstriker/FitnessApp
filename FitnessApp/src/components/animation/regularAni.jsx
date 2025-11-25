@@ -1,39 +1,38 @@
-import { animate, onScroll } from "animejs";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-// export function animateLeftRight(className, from, to) {
-//   animate(className, {
-//     duration: 1250,
+gsap.registerPlugin(ScrollTrigger);
 
-//     autoplay: onScroll({
-//       leave: "center 300%",
-//       enter: "center -30%",
-//       onEnterForward: () => {
-//         animate(className, {
-//           opacity: [0, 1],
-//           translateX: [{ from: from, to: to }],
-//           repeat: false,
-//         });
-//       },
-//       onLeaveBackward: () => {
-//         animate(className, {
-//           opacity: 0,
-//           translateX: from,
-//           repeat: false,
-//         });
-//       },
-//     }),
-//   });
-// }
+export function animateLeftRight(element, from, to) {
+  // Set initial state
+  gsap.set(element, {
+    x: from,
+    opacity: 0,
+  });
 
-export function animateLeftRight(className, from, to) {
-  animate(className, {
-    opacity: [0, 1],
-    translateX: [from, to],
-    duration: 1250,
-    ease: "out(3)",
-    autoplay: onScroll({
-      leave: "center 300%",
-      enter: "center -30%",
-    }),
+  // Main animation
+  gsap.to(element, {
+    scrollTrigger: {
+      trigger: element,
+      start: "top 80%",
+      end: "bottom 70%",
+      markers: true,
+      onEnter: () => {
+        gsap.to(element, {
+          opacity: 1,
+          x: to,
+          duration: 1.25,
+          ease: "power2.out",
+        });
+      },
+      onLeaveBack: () => {
+        gsap.to(element, {
+          opacity: 0,
+          x: from,
+          duration: 1.25,
+          ease: "power2.out",
+        });
+      },
+    },
   });
 }

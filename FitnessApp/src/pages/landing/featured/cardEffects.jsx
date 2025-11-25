@@ -1,4 +1,5 @@
-import { animate, onScroll } from "animejs";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 //Card array and a - if left and positive if right
 
 export function simpleHoverGlow(e, cardRefs) {
@@ -26,32 +27,39 @@ export function simpleHoverGlow(e, cardRefs) {
 }
 
 export function animateCard(card, side, from, to) {
-  animate(card, {
-    translateX: [
-      `${side === "left" ? "-" : ""}${from}`,
-      `${side === "left" ? "-" : ""}${to}`,
-    ],
-    duration: 1500,
-    ease: "inOutQuad",
-    autoplay: onScroll({
-      leave: "center 300%",
-      enter: "center -30%",
-      onLeaveBackward: () => {
-        animate(card, {
-          opacity: 0,
-          duration: 1500,
-          ease: "inOutQuad",
-          translateX: `${side === "left" ? "-" : ""}${from}`,
-        });
-      },
-      onEnterForward: () => {
-        animate(card, {
+  const direction = side === "left" ? "-" : "";
+
+  // Set initial state
+  gsap.set(card, {
+    x: `${direction}${from}`,
+    opacity: 0,
+  });
+
+  // Main animation
+  gsap.to(card, {
+    x: `${direction}${to}`,
+    duration: 1.5,
+    ease: "power2.inOut",
+    scrollTrigger: {
+      trigger: card,
+      start: "top 80%",
+      end: "bottom 90%",
+      onEnter: () => {
+        gsap.to(card, {
           opacity: 1,
-          duration: 1500,
-          ease: "inOutQuad",
-          translateX: `${side === "left" ? "-" : ""}${to}`,
+          x: `${direction}${to}`,
+          duration: 1.5,
+          ease: "power2.inOut",
         });
       },
-    }),
+      onLeaveBack: () => {
+        gsap.to(card, {
+          opacity: 0,
+          x: `${direction}${from}`,
+          duration: 1.5,
+          ease: "power2.inOut",
+        });
+      },
+    },
   });
 }
