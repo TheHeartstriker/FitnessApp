@@ -1,11 +1,12 @@
 import { Routes, Route } from "react-router-dom";
+import { lazy } from "react";
 import PrivateRoutes from "./privateRoutes.jsx";
 import PublicRoutes from "./publicRoutes.jsx";
 //Current work
-import NewDashboard from "../pages/dashboard/dashboardNew.jsx";
-import NewDaily from "../pages/daily/newDaily.jsx";
-import NewShare from "../pages/share/newShare.jsx";
-import RootPath from "./rootPath.jsx";
+const NewDashboard = lazy(() => import("../pages/dashboard/dashboardNew.jsx"));
+const NewDaily = lazy(() => import("../pages/daily/newDaily.jsx"));
+const NewShare = lazy(() => import("../pages/share/newShare.jsx"));
+const RootPath = lazy(() => import("./rootPath.jsx"));
 
 function AppRoutes() {
   return (

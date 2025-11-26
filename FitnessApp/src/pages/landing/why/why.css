@@ -1,0 +1,125 @@
+.why-section {
+  width: 100%;
+  height: 60vh;
+  background-color: var(--color-5);
+  z-index: 10;
+  position: relative;
+  border-bottom: 2.5px solid var(--color-1);
+  border-bottom-right-radius: 50px;
+  border-bottom-left-radius: 50px;
+  display: flex;
+  flex-direction: row;
+}
+
+.why-section-header {
+  height: 100%;
+  width: 55%;
+  display: flex;
+  align-items: center;
+}
+
+.why-section h3 {
+  font-size: 6.5rem;
+  margin-left: var(--space-7);
+  color: var(--color-1);
+  font-weight: 500;
+  width: 60%;
+}
+
+.why-section-story {
+  width: 50%;
+  height: 100%;
+  padding: var(--space-5);
+  padding-left: 5rem;
+  background-color: var(--color-4);
+  border-top-left-radius: 150px;
+  border-bottom-left-radius: 150px;
+  border-bottom-right-radius: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.why-section-story::before {
+  content: "";
+  position: absolute;
+  top: -100px;
+  right: 0;
+  width: 100px;
+  height: 100px;
+  background-color: var(--color-4);
+  z-index: 100;
+}
+
+.why-section-story h4 {
+  font-size: 5rem;
+  margin: 0;
+  color: var(--color-2);
+  font-weight: 500;
+}
+
+.why-section-story p {
+  font-size: 1.2rem;
+  color: var(--white-2);
+  margin-top: var(--space-3);
+  font-weight: 400;
+}
+
+@media (max-width: 1800px) {
+  .why-section-story p {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 1500px) {
+  .why-section-story p {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 1000px) {
+  .why-section-story p {
+    font-size: 2rem;
+  }
+  .why-section-story {
+    width: 90%;
+    height: 100%;
+  }
+  .why-section {
+    height: 70vh;
+  }
+  .why-section-story {
+    padding: 5.5rem;
+    padding-right: var(--space-5);
+  }
+}
+
+@media (max-width: 800px) {
+  .why-section h3 {
+    font-size: 9rem;
+    width: 100%;
+  }
+  .why-section-story p {
+    font-size: 2.25rem;
+  }
+  .why-section-story h4 {
+    margin: var(--space-3) 0;
+  }
+
+  .why-section {
+    flex-direction: column;
+    height: auto;
+  }
+  .why-section-header {
+    width: 100%;
+    height: auto;
+    padding: var(--space-5);
+  }
+  .why-section-story {
+    width: 100%;
+    border-radius: 0;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+    padding: var(--space-5);
+  }
+}

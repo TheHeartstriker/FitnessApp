@@ -4,49 +4,79 @@ import "./landing.css";
 import TriAngleBackgroundAni from "./startPage";
 import Featured from "../featured/featured.jsx";
 import OpeningPage from "../opening.jsx";
-import { animate, splitText, stagger } from "animejs";
+import Why from "../why/why.jsx";
+import Preview from "../preview/preview.jsx";
 import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { SplitText } from "gsap/SplitText";
+
+gsap.registerPlugin(SplitText);
+
 function LandingPage() {
   const hasAnimatedButtons = useRef(false);
+
   useEffect(() => {
     hasAnimatedButtons.current = false;
-    // Collecting h words
-    const { words: h1Words } = splitText(".landing-content h1 ", {
-      words: { wrap: "clip" },
+
+    // Split text into words
+    const h1Split = new SplitText(".landing-content h1", { type: "words" });
+    const h2Split = new SplitText("#landing-char-2", { type: "words" });
+    const pSplit = new SplitText("p#landing-char", { type: "words" });
+
+    // Set initial states
+    gsap.set([h1Split.words, h2Split.words], { y: "100%", opacity: 0 });
+    gsap.set(pSplit.words, { y: "100%", opacity: 0 });
+    gsap.set(
+      [".primary-action-btn", "#button-char", ".landing-button-section"],
+      {
+        y: 30,
+        opacity: 0,
+      }
+    );
+
+    // Create timeline
+    const tl = gsap.timeline();
+    // Animate h1 and h2 words
+    tl.to([...h1Split.words, ...h2Split.words], {
+      y: "0%",
+      opacity: 1,
+      duration: 0.8,
+      ease: "power3.out",
+      stagger: 0.075,
+      delay: 1.5,
     });
-    const { words: h2Words } = splitText("#landing-char-2", {
-      words: { wrap: "clip" },
-    });
-    const hWords = [...h1Words, ...h2Words];
-    //Animating h words
-    animate(hWords, {
-      y: [{ to: ["100%", "0%"] }],
-      opacity: [0, 1],
-      ease: "out(3)",
-      delay: stagger(75, { start: 750 }),
-    });
-    // Animate p tag with slower stagger
-    const { words: pWords } = splitText("p#landing-char", {
-      words: { wrap: "clip" },
-    });
-    animate(pWords, {
-      y: [{ to: ["100%", "0%"] }],
-      opacity: [0, 1],
-      ease: "out(3)",
-      delay: stagger(15, { start: 800 }),
-      onComplete: () => {
-        if (hasAnimatedButtons.current) return;
-        hasAnimatedButtons.current = true;
-        animate(".primary-action-btn, #button-char, .landing-button-section", {
-          translateY: [{ from: 30, to: 0 }],
-          opacity: [0, 1],
-          duration: 1250,
-          ease: "out(3)",
-          delay: 100,
-          once: true,
-        });
+    // Animate p words
+    tl.to(
+      pSplit.words,
+      {
+        y: "0%",
+        opacity: 1,
+        duration: 0.8,
+        ease: "power3.out",
+        stagger: 0.015,
       },
-    });
+      "-=0.4"
+    ); // Start slightly before previous animation ends
+
+    // Animate buttons
+    tl.to(
+      [".primary-action-btn", "#button-char", ".landing-button-section"],
+      {
+        y: 0,
+        opacity: 1,
+        duration: 1.25,
+        ease: "power3.out",
+        stagger: 0.1,
+      },
+      "-=0.8"
+    );
+    // Cleanup
+    return () => {
+      tl.kill();
+      h1Split.revert();
+      h2Split.revert();
+      pSplit.revert();
+    };
   }, []);
 
   return (
@@ -67,23 +97,26 @@ function LandingPage() {
             fitness if you into that.
           </p>
           <div className="landing-button-section">
-            {/* btn1 */}
             <ScrollDown percent={100} className="primary-action-btn">
               Want to give it a try?
             </ScrollDown>
-            {/* separator */}
             <hr id="button-char"></hr>
-            {/*  */}
-            {/* btn2 */}
-            <ScrollDown percent={100} className="primary-action-btn circle-btn">
-              K
-            </ScrollDown>
-            {/* Text */}
+            <button className="primary-action-btn circle-button">
+              <a
+                href="https://www.kadenwildauer.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                K
+              </a>
+            </button>
             <h3 id="button-char">More from me</h3>
           </div>
         </div>
       </section>
+      <Why />
       <Featured />
+      <Preview />
       <Login />
     </>
   );

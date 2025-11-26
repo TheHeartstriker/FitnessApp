@@ -1,9 +1,9 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { handleLogin, handleSignup } from "../../../services/ApiAuth";
 import "./login.css";
 import BackGround from "../../../assets/backGround";
-
+import { animateText } from "@/components/animation/textAni";
 const MAX_INPUT_LENGTH = 50;
 
 function Login() {
@@ -33,6 +33,11 @@ function Login() {
     }
   }
 
+  function handleAnimation() {
+    const wordClass = document.querySelectorAll(".login-welcome-section h2");
+    animateText([wordClass], "110%", "100%");
+  }
+
   // Call controllers to handle login and signup
   function handleSwitch() {
     setLogin(!login);
@@ -56,6 +61,10 @@ function Login() {
     }
   }
 
+  useEffect(() => {
+    handleAnimation();
+  }, []);
+
   return (
     <section className="login-section">
       <section className="login-welcome-section">
@@ -64,8 +73,8 @@ function Login() {
           <br /> FGraphs?
         </h2>
         <div className="welcome-overlay"></div>
-        <BackGround />
       </section>
+      <BackGround />
       <div className="login-container">
         <section className="login-form-section">
           <h3>{login ? "Welcome Back!" : "Create Account"}</h3>
