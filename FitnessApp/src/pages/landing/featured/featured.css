@@ -248,6 +248,11 @@
 }
 
 @media (max-width: 700px) {
+  .featured-section svg {
+    width: 225%;
+    height: 225%;
+  }
+
   .featured-card-image {
     position: absolute;
     width: 100%;

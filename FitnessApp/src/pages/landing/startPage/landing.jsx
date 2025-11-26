@@ -43,7 +43,7 @@ function LandingPage() {
       duration: 0.8,
       ease: "power3.out",
       stagger: 0.075,
-      delay: 1,
+      delay: 1.5,
     });
     // Animate p words
     tl.to(

@@ -16,7 +16,6 @@ export function animateLeftRight(element, from, to) {
       trigger: element,
       start: "top 80%",
       end: "bottom 70%",
-      markers: true,
       onEnter: () => {
         gsap.to(element, {
           opacity: 1,

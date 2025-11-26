@@ -216,8 +216,8 @@
   }
   /* Login half */
   .login-form-section {
-    width: 60%;
-    height: 70%;
+    width: auto;
+    height: auto;
     padding: var(--space-6);
     background-color: var(--color-4);
   }
@@ -250,12 +250,5 @@
 
   .login-welcome-section h2 {
     font-size: 6.5rem;
-  }
-}
-
-@media (max-width: 450px) {
-  .login-form-section {
-    width: 65%;
-    height: 75%;
   }
 }

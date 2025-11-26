@@ -17,10 +17,9 @@ function Why() {
           This site exists for a variety of reasons. The main one is that I, the
           dev, Kaden Wildauer, want to prove and improve my skill in full-stack
           web development. So I needed something simple to get my hands on, but
-          also something I can use to relentlessly improve my skills. Because as
-          a human, one of my greatest fears is being average in something that
-          is so important to me and that I spend thousands of hours doing. If I
-          am, please come roast me at my email: serkadenwildauer@gmail.com.
+          also something I can use to relentlessly improve my skills. One of my
+          greatest fears is being average at something I care about deeply and
+          spend thousands of hours on. So that's why I made this!
         </p>
         <p id="why-p-text-2">
           Another large reason is that I enjoy fitness! I am a calisthenics guy.
