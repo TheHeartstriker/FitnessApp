@@ -1,4 +1,4 @@
-### Fgraphs
+# Fgraphs
 A lightweight fitness application. I built this to be actually useful and something I could see myself using when I got started. It's also its own sort of training area for me to evolve my skills in web development.
 
 ## Where its going 
@@ -19,9 +19,3 @@ Currently my plan for expansion is as follows: better data visualization for use
 ## Link
 www.fgraphs.com 
 
-## ScreenShots
-
-![](./readmeAssets/FitscreenShot1.png)  
-![](./readmeAssets/FitscreenShot2.png)  
-![](./readmeAssets/FitscreenShot3.png)  
-![](./readmeAssets/FitscreenShot4.png)
