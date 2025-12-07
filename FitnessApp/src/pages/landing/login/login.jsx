@@ -53,8 +53,18 @@ function Login() {
       } else {
         await handleSignup(usernameRef.current, passwordRef.current);
       }
-      // If successful, navigate to dashboard
+      // Before navigating zoom out
+      const timer = setTimeout(() => {
+        const viewport = document.querySelector('meta[name="viewport"]');
+        if (viewport) {
+          viewport.setAttribute(
+            "content",
+            "width=device-width, initial-scale=1"
+          );
+        }
+      }, 100);
       navigate("/view");
+      clearTimeout(timer);
     } catch (error) {
       console.error("Error:", error.message);
       setError(error.message || "An error occurred");

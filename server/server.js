@@ -16,7 +16,7 @@ const app = express();
 app.use(corsMiddleware);
 app.use(express.json());
 app.use(cookieParser());
-app.use(limiter);
+//app.use(limiter);
 
 //Route middleware
 app.use(errorHandler);

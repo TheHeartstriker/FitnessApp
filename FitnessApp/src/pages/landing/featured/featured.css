@@ -288,3 +288,15 @@
     margin-right: auto;
   }
 }
+
+@media (max-height: 750px) {
+  .featured-section {
+    height: 225vh;
+  }
+}
+
+@media (max-height: 700px) {
+  .featured-section {
+    height: 250vh;
+  }
+}

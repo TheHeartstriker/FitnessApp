@@ -14,7 +14,7 @@ function Nav() {
   const navigate = useNavigate();
   const location = useLocation();
   const [buttonHeight, setButtonHeight] = useState(
-    window.innerWidth <= 1000 ? 60 : 35
+    window.innerWidth <= 1500 ? 60 : 50
   );
   //Position the bar indicator needs to move to reach different buttons
   const [indicatorPositions, setIndicatorPositions] = useState({});

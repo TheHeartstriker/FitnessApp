@@ -172,7 +172,6 @@
   /* Sizing */
   .dashboard {
     height: auto;
-    margin-left: 16vw;
   }
   .dashboard-top,
   .dashboard-bottom {
@@ -207,5 +206,11 @@
   }
   .dashboard-tooltip::after {
     font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 800px) {
+  .dashboard {
+    margin-left: 16vw;
   }
 }

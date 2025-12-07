@@ -131,6 +131,7 @@
   .preview-content-text {
     width: 100%;
     padding: var(--space-3);
+    padding-top: 0;
   }
   .preview-content-text h4 {
     margin: var(--space-1) 0;
