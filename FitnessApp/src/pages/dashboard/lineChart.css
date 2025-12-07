@@ -1,13 +1,14 @@
 .dashboard-bottom-chart {
   width: 80%;
+  height: 100%;
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: flex-start;
-  flex: 1;
   background-color: var(--color-4);
   border-radius: 50px;
   position: relative;
+  overflow: hidden;
 }
 
 .dashboard-bottom-btn-container {
@@ -37,18 +38,9 @@
   border-radius: 8px;
 }
 
-@media (max-width: 1500px) {
-  .dashboard-bottom-btn-container {
-    padding: var(--space-2);
-  }
-}
-
-@media (max-width: 1000px) {
-}
-
-@media (max-width: 800px) {
+@media (max-width: 1200px) {
   .dashboard-bottom-chart {
     width: 100%;
-    height: 60rem;
+    height: 25rem;
   }
 }

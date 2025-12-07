@@ -179,9 +179,11 @@ function NewDashboard() {
             TimeProp={handleLineTime(Time)}
           />
         </div>
-        <div className="dashboard-card">
+        <div className="dashboard-card dashboard-bottom-card">
           <h2>Average Heart Rate</h2>
-          <h3>{data.aggregate?.[currentPeriods[Time]]?.avgRestingHeart} bpm</h3>
+          <h3>
+            {data.aggregate?.[currentPeriods[Time]]?.avgRestingHeart ?? 0} bpm
+          </h3>
           <p>
             Your average resting heart rate the last {handleLineTime(Time)} days
             you are

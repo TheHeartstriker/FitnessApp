@@ -6,7 +6,7 @@
   padding: 1vh 0;
   padding-right: 1vh;
   align-items: center;
-  gap: var(--space-3);
+  gap: var(--space-2);
 }
 /*  */
 /* The left side css */
@@ -18,13 +18,13 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  gap: var(--space-3);
+  gap: var(--space-2);
 }
 
 .instruct-container {
   flex: 1;
   display: flex;
-  gap: var(--space-3);
+  gap: var(--space-2);
   position: relative;
   overflow: hidden;
 }
@@ -34,7 +34,7 @@
   height: 100%;
   background-color: var(--color-4);
   border-radius: 50px;
-  padding: var(--space-3);
+  padding: var(--space-2);
   overflow: hidden;
   position: relative;
 }
@@ -52,15 +52,15 @@
 
 .instruct-card h2 {
   color: var(--color-2);
-  font-size: 3.5rem;
-  font-weight: 500;
+  font-size: 3rem;
+  font-weight: 400;
   margin: 0;
   margin-bottom: var(--space-3);
 }
 
 .instruct-card p {
   color: var(--white-1);
-  font-size: 1.6rem;
+  font-size: 1.2rem;
   margin: 0;
   font-weight: 300;
   font-family: "Inter", sans-serif;
@@ -69,7 +69,7 @@
 .instruct-card pre {
   white-space: pre-wrap;
   color: var(--white-1);
-  font-size: 0.95rem;
+  font-size: 0.75rem;
   margin: 0;
   font-weight: 300;
   font-family: "Inter", sans-serif;
@@ -84,7 +84,7 @@
   align-items: flex-end;
   justify-content: space-evenly;
   overflow: hidden;
-  gap: var(--space-4);
+  gap: var(--space-2);
 }
 
 .zone-button {
@@ -139,7 +139,7 @@
 .zone-button h5 {
   color: var(--color-2);
   font-weight: 400;
-  font-size: 7.5rem;
+  font-size: 7rem;
   margin: auto 0;
 }
 /*  */
@@ -151,7 +151,7 @@
   background-color: var(--color-5);
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
+  gap: var(--space-2);
   position: relative;
   overflow: hidden;
 }
@@ -183,7 +183,7 @@
   width: 90%;
   height: 50%;
   background-color: var(--color-3);
-  margin: var(--space-3);
+  margin: var(--space-2);
   border-radius: 50px;
   display: flex;
   align-items: center;
@@ -204,7 +204,7 @@
   height: 50%;
   border: none;
   background-color: transparent;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   font-family: "Inter", sans-serif;
   color: var(--color-1);
 }
@@ -223,17 +223,17 @@
   position: absolute;
   color: var(--white-2);
   top: 5%;
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 300;
 }
 
 .daily-input-container svg {
-  margin: var(--space-3);
+  margin: var(--space-2);
 }
 
 .daily-submit-button {
   width: 40%;
-  padding: var(--space-2) 0;
+  padding: var(--space-1) 0;
   background-color: var(--color-2);
   height: auto;
   color: var(--white-1);
@@ -245,60 +245,41 @@
 
 .daily-submit-button h4 {
   margin: var(--space-0);
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   font-weight: 500;
 }
 
 /* Right side end */
 
 @media (max-width: 1500px) {
-  .daily-input h3 {
-    font-size: 1.23rem;
-  }
-
-  .daily-input input {
-    font-size: 1.65rem;
-  }
-  .instruct-card p {
-    font-size: 1.5rem;
-  }
-
-  .instruct-card pre {
-    font-size: 1.1rem;
-  }
-
-  .zone-button h5 {
-    font-size: 9rem;
-  }
-}
-
-@media (max-width: 1000px) {
+  /* Text decrease by -10% */
   .instruct-card h2 {
-    font-size: 3.5rem;
-    margin: var(--space-3) 0;
+    font-size: 2.7rem;
   }
-
   .instruct-card p {
-    font-size: 2rem;
+    font-size: 1.08rem;
   }
-
   .instruct-card pre {
-    font-size: 1.5rem;
+    font-size: 0.675rem;
   }
-  /* Submit button */
-  .daily-submit-button {
-    width: 60%;
-    margin: var(--space-3);
-    padding: var(--space-3) 0;
+  .zone-button h4 {
+    font-size: 1.35rem;
   }
-
+  .zone-button h5 {
+    font-size: 6.3rem;
+  }
+  .daily-input input {
+    font-size: 1.08rem;
+  }
+  .daily-input h3 {
+    font-size: 0.81rem;
+  }
   .daily-submit-button h4 {
-    font-size: 1.5rem;
+    font-size: 1.08rem;
   }
-  /* Input */
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1100px) {
   /* Top container styles */
   .daily {
     flex-direction: column;
@@ -318,17 +299,16 @@
   }
 
   .instruct-card {
-    min-height: 35rem;
-    padding: var(--space-4);
+    min-height: 20rem;
   }
 
   .zone-container {
     height: auto;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-3);
+    margin: var(--space-4) 0;
+    overflow: visible;
     flex: none;
-    padding: var(--space-3);
   }
 
   .zone-button {
@@ -336,45 +316,48 @@
     height: auto;
     flex: none;
   }
-
   /* Bottom container styles */
   .daily-submit-container {
     height: 30vh;
     flex: none;
-    padding: var(--space-4) 0;
   }
 
-  .daily-submit-button {
-    margin: var(--space-4);
-    padding: var(--space-4) 0;
+  /* Turned back to orginal sizing*/
+  .instruct-card h2 {
+    font-size: 3rem;
   }
-  /* Text */
-
-  .instruct-container h2 {
-    font-size: 4.5rem;
+  .instruct-card p {
+    font-size: 1.2rem;
   }
-
-  .instruct-container pre {
-    font-size: 2rem;
+  /* Increased to same size as p */
+  .instruct-card pre {
+    font-size: 1.2rem;
   }
-
-  .instruct-container p {
-    font-size: 2.5rem;
-  }
-
   .zone-button h4 {
-    margin: var(--space-2);
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
-
   .zone-button h5 {
-    font-size: 10rem;
+    font-size: 7rem;
+  }
+  .daily-input input {
+    font-size: 1.2rem;
   }
   .daily-input h3 {
-    font-size: 1.55rem;
+    font-size: 0.9rem;
+  }
+  .daily-submit-button h4 {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .daily-input-container {
+    width: 100%;
+    margin: 0;
+    margin-bottom: var(--space-3);
   }
 
-  .daily-input input {
+  .instruct-card h2 {
     font-size: 2.25rem;
   }
 }

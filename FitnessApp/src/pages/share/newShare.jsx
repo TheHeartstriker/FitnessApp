@@ -41,22 +41,24 @@ function NewShare() {
   }, []);
 
   return (
-    <div className="share-container">
-      {errorRecords && <p>Record collecting Error: {errorRecords}</p>}
-      {errorShare && <p>Individual share data Error: {errorShare}</p>}
+    <>
+      <div className="share-container">
+        {errorRecords && <p>Record collecting Error: {errorRecords}</p>}
+        {errorShare && <p>Individual share data Error: {errorShare}</p>}
 
-      {!errorRecords &&
-        fitnessRecords.map((fitnessRecord) => (
-          <div className="share-item" key={fitnessRecord.UserName}>
-            <h2>{fitnessRecord.UserName}</h2>
-            <ul>
-              <li>Total Time tracked: {fitnessRecord.totalTime}</li>
-              <li>Heart Rate: {fitnessRecord.RestingHeart}</li>
-              <li>Total Calories Burned: {fitnessRecord.totalCalories}</li>
-              <li>Calories per day: {fitnessRecord.caloriesPerDay}</li>
-            </ul>
-          </div>
-        ))}
+        {!errorRecords &&
+          fitnessRecords.map((fitnessRecord) => (
+            <div className="share-item" key={fitnessRecord.UserName}>
+              <h2>{fitnessRecord.UserName}</h2>
+              <ul>
+                <li>Total Time tracked: {fitnessRecord.totalTime}</li>
+                <li>Heart Rate: {fitnessRecord.RestingHeart}</li>
+                <li>Total Calories Burned: {fitnessRecord.totalCalories}</li>
+                <li>Calories per day: {fitnessRecord.caloriesPerDay}</li>
+              </ul>
+            </div>
+          ))}
+      </div>
 
       <div className="share-button-container">
         <button
@@ -72,7 +74,7 @@ function NewShare() {
           <h3>{share ? "You are sharing!" : "You are not sharing!"}</h3>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
