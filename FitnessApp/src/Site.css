@@ -4,11 +4,13 @@ body {
   font-family: "Inter", sans-serif;
   background-color: var(--color-5);
   overflow-x: hidden;
+  font-size: 100%;
 }
 
 html {
   line-height: 1.6;
   overflow-x: hidden;
+  font-size: clamp(1rem, 0.9rem + 0.7vw, 1.25rem);
 }
 
 * {
@@ -60,34 +62,4 @@ h5 {
   --space-5: 2.5rem;
   --space-6: 3rem;
   --space-7: 4rem;
-}
-
-@media (min-width: 2000px) {
-  html {
-    font-size: 20px;
-  }
-}
-
-@media (max-width: 1500px) {
-  html {
-    font-size: 13px;
-  }
-}
-
-@media (max-width: 1300px) {
-  html {
-    font-size: 11px;
-  }
-}
-
-@media (max-width: 1000px) {
-  html {
-    font-size: 9px;
-  }
-}
-
-@media (max-width: 600px) {
-  html {
-    font-size: 7px;
-  }
 }
