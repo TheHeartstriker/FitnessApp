@@ -1,5 +1,5 @@
 .featured-section {
-  height: 160vh;
+  height: 165vh;
   width: 100%;
   background-color: var(--color4);
   position: relative;
@@ -27,8 +27,8 @@
   justify-content: center;
   align-items: center;
   flex-direction: row;
-  width: 70rem;
-  min-height: 27.5rem;
+  width: 55rem;
+  min-height: 25rem;
   background-color: var(--color-4);
   padding: var(--space-2);
   margin: var(--space-3);
@@ -122,21 +122,22 @@
 .featured-card-text h4 {
   margin: 0;
   font-weight: 500;
-  font-size: 3.15rem;
+  font-size: 2.5rem;
   margin: var(--space-2) 0;
+  margin-bottom: var(--space-1);
   width: 70%;
   color: var(--white-1);
 }
 
 .featured-card-text p {
   margin: 0;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   color: var(--white-2);
 }
 
 /* Featured pills */
 .featured-card-text-pill {
-  min-width: 10rem;
+  min-width: 7.5rem;
   flex-shrink: 0;
   align-self: flex-start;
   position: relative;
@@ -174,7 +175,7 @@
   color: var(--color-2);
   font-family: "Poppins", sans-serif;
   font-weight: 600;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
 }
 
 .featured-card-text span {
@@ -219,6 +220,20 @@
   background-color: var(--color-4);
 }
 
+@media (max-width: 1500px) {
+  /* Decrease by 10% */
+  .featured-card {
+    width: 49.5rem;
+    min-height: 25.5rem;
+  }
+  .featured-section {
+    height: 181.5vh;
+  }
+  .featured-card-text h4 {
+    width: 100%;
+  }
+}
+
 @media (max-width: 1000px) {
   .featured-section svg {
     width: 175%;
@@ -227,30 +242,27 @@
 
   .featured-card {
     width: 90%;
-    padding: var(--space-4);
+    padding: var(--space-2);
   }
+}
 
-  .featured-card-text-pill {
-    min-width: 20rem;
-  }
-
-  .featured-card-text-pill h3 {
-    font-size: 2.5rem;
-  }
-
-  .featured-card p {
-    font-size: 2.25rem;
-  }
-
+@media (max-width: 800px) {
+  /* Decrease by 20% */
   .featured-card-text h4 {
-    font-size: 4rem;
+    font-size: 2.2rem;
+  }
+  .featured-card-text p {
+    font-size: 0.96rem;
+  }
+  .featured-card-text-pill h3 {
+    font-size: 1rem;
   }
 }
 
 @media (max-width: 700px) {
   .featured-section svg {
-    width: 225%;
-    height: 225%;
+    width: 325%;
+    height: 325%;
   }
 
   .featured-card-image {
@@ -259,22 +271,20 @@
     height: 100%;
   }
 
+  .featured-card-image img {
+    filter: blur(1px);
+  }
+
   .featured-card-image::before {
     opacity: 0.5;
+    z-index: 10;
     background-color: var(--color-5) !important;
   }
+
   .featured-card-text {
     z-index: 15;
     width: 75%;
     flex: none;
     margin-right: auto;
-  }
-
-  .featured-card {
-    min-height: 55rem;
-  }
-
-  .featured-card-text h4 {
-    font-size: 4.5rem;
   }
 }

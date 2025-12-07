@@ -16,12 +16,12 @@ function Featured() {
   const prevWindowWidth = useRef(window.innerWidth);
   function onScrollAnimation() {
     let from, to;
-    if (window.innerWidth < 1000) {
+    if (window.innerWidth < 1300) {
       from = "20%";
       to = "0%";
     } else {
       from = "40%";
-      to = "20%";
+      to = "17.5%";
     }
     const leftCards = document.getElementsByClassName("featured-card--left");
     const rightCards = document.getElementsByClassName("featured-card--right");

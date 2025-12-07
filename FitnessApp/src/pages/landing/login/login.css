@@ -37,8 +37,8 @@
 .login-welcome-section h2 {
   position: relative;
   color: var(--white-1);
-  font-weight: 6000;
-  font-size: 7.5rem;
+  font-weight: 600;
+  font-size: 6rem;
   text-align: center;
   z-index: 10;
 }
@@ -80,7 +80,7 @@
 .login-form-section h3 {
   color: var(--color-1);
   font-weight: 500;
-  font-size: 2.5rem;
+  font-size: 2rem;
   margin-bottom: var(--space-1);
   text-align: center;
 }
@@ -88,8 +88,8 @@
 .login-form-section p {
   color: var(--white-1);
   margin: 0;
-  font-size: 1.3rem;
-  margin-bottom: var(--space-4);
+  font-size: 1.2rem;
+  margin-bottom: var(--space-3);
   font-weight: 400;
 }
 
@@ -105,16 +105,16 @@
   color: var(--color-2);
   margin: 0;
   margin-bottom: var(--space-1);
-  margin-left: var(--space-2);
-  font-size: 1.25rem;
+  margin-left: var(--space-1);
+  font-size: 1rem;
   font-weight: 500;
 }
 .login-form input {
   padding: var(--space-2);
-  font-size: 1.25rem;
+  font-size: 1rem;
   border: none;
   color: var(--white-1);
-  margin-bottom: var(--space-3);
+  margin-bottom: var(--space-2);
   background-color: var(--color-3);
   border-radius: 25px;
   z-index: 5;
@@ -124,6 +124,7 @@
   color: var(--white-1);
   font-weight: 500;
   font-size: 1rem;
+  margin-top: var(--space-1);
   margin-bottom: var(--space-2);
   cursor: pointer;
 }
@@ -140,7 +141,6 @@
 .login-form button {
   border: none;
   background-color: var(--color-1);
-  font-size: 1.25rem;
   color: var(--white-2);
   padding: var(--space-2);
   border-radius: 25px;
@@ -148,6 +148,7 @@
 }
 
 .login-form button h4 {
+  font-size: 1rem;
   margin: auto;
   font-weight: 600;
   color: var(--white-1);
@@ -161,58 +162,19 @@
 
 @media (max-width: 1500px) {
   .login-form-section {
-    width: 35vw;
-  }
-
-  .login-form-section h3 {
-    font-size: 2.8rem;
-  }
-  .login-form-section p {
-    font-size: 1.5rem;
-  }
-
-  .login-form h4 {
-    font-size: 1.5rem;
-  }
-  .login-form input {
-    font-size: 1.5rem;
+    width: 50vw;
   }
 }
 
 @media (max-width: 1000px) {
-  .login-form-section {
-    width: 40vw;
-  }
-
-  .login-form-section h3 {
-    font-size: 4rem;
-  }
-  .login-form-section p {
-    font-size: 2.25rem;
-    margin-bottom: var(--space-6);
-  }
-
-  .login-form h4 {
-    font-size: 2rem;
-  }
-  .login-form input {
-    font-size: 2rem;
-  }
-  .login-form input {
-    padding: var(--space-3);
-  }
-  .login-form h5 {
-    font-size: 1.5rem;
-  }
-  .login-form button {
-    font-size: 2rem;
-    padding: var(--space-3);
-  }
-}
-
-@media (max-width: 800px) {
   .login-section {
     flex-direction: column;
+  }
+  .welcome-overlay {
+    display: none;
+  }
+  .login-welcome-section h2 {
+    margin: 0;
   }
   /* Login half */
   .login-form-section {
@@ -226,29 +188,34 @@
     width: 100%;
     height: 70%;
   }
-  /* Login text half / sizing el*/
-  .login-form-section h3 {
-    font-size: 4.5rem;
+}
+
+@media (max-width: 800px) {
+  .login-welcome-section h2 {
+    font-size: 4.8rem;
   }
-  .login-form {
-    height: 100%;
+  .login-form-section h3 {
+    font-size: 1.6rem;
+  }
+  .login-form-section p {
+    font-size: 0.96rem;
+  }
+  .login-form h4 {
+    font-size: 0.8rem;
+  }
+  .login-form input {
+    font-size: 0.8rem;
   }
   .login-form h5 {
-    font-size: 1.75rem;
+    font-size: 0.8rem;
   }
-
-  /* Welcome half */
-  .welcome-overlay {
-    display: none;
+  .login-form button h4 {
+    font-size: 0.8rem;
   }
+}
 
-  .login-welcome-section {
-    width: 100%;
-    flex: none;
-    height: 30%;
-  }
-
+@media (max-width: 400px) {
   .login-welcome-section h2 {
-    font-size: 6.5rem;
+    font-size: 4.5rem;
   }
 }
