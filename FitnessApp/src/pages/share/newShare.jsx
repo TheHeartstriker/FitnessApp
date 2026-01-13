@@ -1,14 +1,16 @@
 import "./newShare.css";
 import { fetchPublicShare } from "../../services/apiFitness.jsx";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import PeopleIcon from "../../assets/icons/people.jsx";
 import { getShareInfo, updateShare } from "../../services/apiFitness.jsx";
-
+import gsap from "gsap";
 function NewShare() {
   const [fitnessRecords, setFitnessRecords] = useState([]);
   const [errorRecords, setErrorRecords] = useState(null);
   const [errorShare, setErrorShare] = useState(null);
   const [share, setShare] = useState(true);
+  const buttonRef = useRef(null);
+  const textRef = useRef(null);
   //Collects all shared user data
   async function retrieveData() {
     try {
@@ -30,6 +32,22 @@ function NewShare() {
       console.error("Error fetching share info:", error);
       setErrorShare(error.message || "An error occurred");
     }
+  }
+  function handleShareToggle() {
+    const next = !share;
+    setShare(next);
+    updateShare();
+
+    gsap.to(buttonRef.current, {
+      xPercent: next ? 100 : 0,
+      duration: 0.4,
+      overwrite: "auto",
+    });
+    gsap.to(textRef.current, {
+      xPercent: next ? -100 : 0,
+      duration: 0.4,
+      overwrite: "auto",
+    });
   }
 
   useEffect(() => {
@@ -62,15 +80,13 @@ function NewShare() {
 
       <div className="share-button-container">
         <button
-          className={`share-button ${share ? "active" : ""}`}
-          onClick={() => {
-            setShare(!share);
-            updateShare();
-          }}
+          ref={buttonRef}
+          className="share-button"
+          onClick={handleShareToggle}
         >
           <PeopleIcon />
         </button>
-        <div className={`share-button-text ${share ? "active" : ""}`}>
+        <div ref={textRef} className="share-button-text">
           <h3>{share ? "You are sharing!" : "You are not sharing!"}</h3>
         </div>
       </div>
