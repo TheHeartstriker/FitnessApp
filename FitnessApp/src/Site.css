@@ -33,8 +33,11 @@ h5 {
   --black-1: #1c1c1c;
   --black-2: #333333;
   /* Color palette */
+  /* Bellow is the 10% */
   --color-1: #00df82;
+  /* Bellow is the 30% */
   --color-2: #2cc295;
+  /* Bellow is the 60% */
   --color-3: #03624c;
   --color-4: #032221;
   --color-5: #021b1a;
