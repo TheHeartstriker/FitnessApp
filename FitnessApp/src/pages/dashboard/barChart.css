@@ -55,7 +55,7 @@
 }
 
 .dashboard-bar-zone p {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
 }
 
 /* Remove margin-top from h4 */
@@ -76,7 +76,7 @@
 .dashboard-bar-legend h5 {
   color: var(--color-2);
   font-weight: 300;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   text-align: center;
   margin: var(--space-1);
   flex: 1;
@@ -85,10 +85,10 @@
 @media (max-width: 1500px) {
   /* Decrease by 10% */
   .dashboard-bar-zone p {
-    font-size: 0.72rem;
+    font-size: 0.675rem;
   }
   .dashboard-bar-legend h5 {
-    font-size: 1.08rem;
+    font-size: 0.99rem;
   }
 }
 @media (max-width: 1200px) {
@@ -98,16 +98,10 @@
     height: 25rem;
   }
   .dashboard-bar-zone p {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
   }
   /* Not original */
   .dashboard-bar-legend h5 {
-    font-size: 1rem;
-  }
-}
-
-@media (max-width: 400px) {
-  .dashboard-bar-legend h5 {
-    font-size: 0.85rem;
+    font-size: 1.1rem;
   }
 }

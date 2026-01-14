@@ -66,3 +66,14 @@ h5 {
   --space-6: 3rem;
   --space-7: 4rem;
 }
+/* P tags should be set between either 1rem, 1.25rem, 1.5rem or 1.1rem IF used as readable text. H tags should use increments of 0.5rem otherwise no restrictions. As for scaling font at smaller size's around 800px should be decrease
+by 20% as needed for all present fonts in file and we don't use varables so font can easily be calculate lesser by percentages 
+To be clear
+For buttons or small interactive elements:
+0.75rem -> is for small buttons
+0.85rem -> is for button text
+For readable text aka body:
+1.1rem -> is for dense copy of important text like a blog article or of text of less importance
+1.25rem -> is for regular for things like descriptions on cards this should be the default for most text
+1.5rem -> is rarely used but if so mainly in a hero setting
+ */

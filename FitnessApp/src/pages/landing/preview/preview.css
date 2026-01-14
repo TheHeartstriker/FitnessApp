@@ -95,11 +95,12 @@
 }
 
 .preview-content-text p {
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   color: var(--white-2);
 }
 
 @media (max-width: 800px) {
+  /* Decreased by 20% */
   .preview-header h3 {
     font-size: 4.8rem;
   }
@@ -110,7 +111,7 @@
     font-size: 2.8rem;
   }
   .preview-content-text p {
-    font-size: 0.96rem;
+    font-size: 1rem;
   }
 }
 @media (max-width: 700px) {

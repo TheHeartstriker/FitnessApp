@@ -123,15 +123,14 @@
   margin: 0;
   font-weight: 500;
   font-size: 2.5rem;
-  margin: var(--space-2) 0;
-  margin-bottom: var(--space-1);
+  margin: var(--space-0) 0;
   width: 70%;
   color: var(--white-1);
 }
 
 .featured-card-text p {
   margin: 0;
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   color: var(--white-2);
 }
 
@@ -249,10 +248,10 @@
 @media (max-width: 800px) {
   /* Decrease by 20% */
   .featured-card-text h4 {
-    font-size: 2.2rem;
+    font-size: 2rem;
   }
   .featured-card-text p {
-    font-size: 0.96rem;
+    font-size: 1rem;
   }
   .featured-card-text-pill h3 {
     font-size: 1rem;

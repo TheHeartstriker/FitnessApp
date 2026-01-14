@@ -33,7 +33,7 @@
 
 .share-item li {
   color: var(--white-2);
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   font-family: "Inter", sans-serif;
   font-weight: 300;
 }
@@ -113,23 +113,24 @@
   color: var(--white-1);
   font-weight: 500;
   margin: 0;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
 }
 
 @media (max-width: 1500px) {
   .share-container {
     grid-template-columns: repeat(3, 1fr);
   }
+  /* Decreased by 10% */
   .share-item h2 {
     font-size: 2.25rem;
   }
 
   .share-item li {
-    font-size: 1.08rem;
+    font-size: 1.125rem;
   }
 
   .share-button-text h3 {
-    font-size: 0.81rem;
+    font-size: 0.765rem;
   }
   .share-button-container {
     width: 17.5vw;
@@ -154,16 +155,17 @@
   .share-item {
     min-height: 25vh;
   }
+  /* Return font to original */
   .share-item h2 {
     font-size: 2.5rem;
   }
 
   .share-item li {
-    font-size: 1.2rem;
+    font-size: 1.25rem;
   }
 
   .share-button-text h3 {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
   }
 
   .share-button-container {
