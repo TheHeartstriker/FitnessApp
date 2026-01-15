@@ -1,6 +1,7 @@
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-
+const rootStyles = getComputedStyle(document.documentElement);
+const long2 = parseFloat(rootStyles.getPropertyValue("--duration-long-1"));
 gsap.registerPlugin(ScrollTrigger);
 
 export function animateText(
@@ -23,7 +24,7 @@ export function animateText(
           gsap.to(element, {
             y: "0%",
             opacity: 1,
-            duration: 2,
+            duration: long2,
             ease: "power3.out",
             delay: index * 0.06,
           });
@@ -32,7 +33,7 @@ export function animateText(
           gsap.to(element, {
             y: "100%",
             opacity: 0,
-            duration: 2,
+            duration: long2,
             ease: "power3.out",
             delay: index * 0.06,
           });

@@ -65,6 +65,25 @@ h5 {
   --space-5: 2.5rem;
   --space-6: 3rem;
   --space-7: 4rem;
+  /* Animation durations */
+  /* Micro-interactions & instant feedback -> 50–200 ms */
+  --duration-fast-1: 0.1s;
+  --duration-fast-2: 0.2s;
+  --duration-fast-3: 0.3s;
+
+  /* Standard UI animations -> 400–800 ms */
+  --duration-normal-1: 0.4s;
+  --duration-normal-2: 0.55s;
+  --duration-normal-3: 0.8s;
+
+  /* Bigger / storytelling -> 1.5s-3.5s*/
+  --duration-long-1: 1.5s;
+  --duration-long-2: 2s;
+  --duration-long-3: 3.5s;
+  /* Easing we use power3 and circle */
+  /* Easing (cubic-bezier approximations for GSAP power3 and circ) */
+  --easing-power3-out: cubic-bezier(0.215, 0.61, 0.355, 1);
+  --easing-circ-out: cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 /* P tags should be set between either 1rem, 1.25rem, 1.5rem or 1.1rem IF used as readable text. H tags should use increments of 0.5rem otherwise no restrictions. As for scaling font at smaller size's around 800px should be decrease
 by 20% as needed for all present fonts in file and we don't use varables so font can easily be calculate lesser by percentages 

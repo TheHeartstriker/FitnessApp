@@ -1,6 +1,7 @@
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-
+const rootStyles = getComputedStyle(document.documentElement);
+const normal3 = parseFloat(rootStyles.getPropertyValue("--duration-normal-3"));
 gsap.registerPlugin(ScrollTrigger);
 
 export function animateLeftRight(element, from, to) {
@@ -20,7 +21,7 @@ export function animateLeftRight(element, from, to) {
         gsap.to(element, {
           opacity: 1,
           x: to,
-          duration: 1.25,
+          duration: normal3,
           ease: "power2.out",
         });
       },
@@ -28,7 +29,7 @@ export function animateLeftRight(element, from, to) {
         gsap.to(element, {
           opacity: 0,
           x: from,
-          duration: 1.25,
+          duration: normal3,
           ease: "power2.out",
         });
       },

@@ -2,6 +2,8 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 //Card array and a - if left and positive if right
 
+const rootStyles = getComputedStyle(document.documentElement);
+
 export function simpleHoverGlow(e, cardRefs) {
   for (const i of cardRefs) {
     const card = i.current;
@@ -28,6 +30,7 @@ export function simpleHoverGlow(e, cardRefs) {
 
 export function animateCard(card, side, from, to) {
   const direction = side === "left" ? "-" : "";
+  const long2 = parseFloat(rootStyles.getPropertyValue("--duration-long-1"));
 
   // Set initial state
   gsap.set(card, {
@@ -38,7 +41,7 @@ export function animateCard(card, side, from, to) {
   // Main animation
   gsap.to(card, {
     x: `${direction}${to}`,
-    duration: 1.5,
+    duration: long2,
     ease: "power2.inOut",
     scrollTrigger: {
       trigger: card,

@@ -22,6 +22,11 @@ function LandingPage() {
     const h1Split = new SplitText(".landing-content h1", { type: "words" });
     const h2Split = new SplitText("#landing-char-2", { type: "words" });
     const pSplit = new SplitText("p#landing-char", { type: "words" });
+    const rootStyles = getComputedStyle(document.documentElement);
+    const durationNormal3 = parseFloat(
+      rootStyles.getPropertyValue("--duration-normal-3")
+    );
+    const long2 = parseFloat(rootStyles.getPropertyValue("--duration-long-1"));
 
     // Set initial states
     gsap.set([h1Split.words, h2Split.words], { y: "100%", opacity: 0 });
@@ -40,7 +45,7 @@ function LandingPage() {
     tl.to([...h1Split.words, ...h2Split.words], {
       y: "0%",
       opacity: 1,
-      duration: 0.8,
+      duration: durationNormal3,
       ease: "power3.out",
       stagger: 0.075,
       delay: 1.5,
@@ -51,7 +56,7 @@ function LandingPage() {
       {
         y: "0%",
         opacity: 1,
-        duration: 0.8,
+        duration: durationNormal3,
         ease: "power3.out",
         stagger: 0.015,
       },
@@ -64,11 +69,11 @@ function LandingPage() {
       {
         y: 0,
         opacity: 1,
-        duration: 1.25,
+        duration: long2,
         ease: "power3.out",
         stagger: 0.1,
       },
-      "-=0.8"
+      "-=1"
     );
     // Cleanup
     return () => {
