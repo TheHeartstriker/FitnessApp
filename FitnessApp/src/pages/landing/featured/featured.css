@@ -1,3 +1,6 @@
+/*  */
+/* Main parents */
+/*  */
 .featured-section {
   height: 170vh;
   width: 100%;
@@ -6,8 +9,20 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
+  flex-direction: row;
   border-radius: 0 0 50px 50px;
+}
+
+.featured-section-leftside {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.featured-section-rightside {
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 
 .featured-section svg {
@@ -20,26 +35,25 @@
   object-fit: cover;
   z-index: 5;
 }
-
-/* Card */
+/*  */
+/* Cards */
+/*  */
+/* Featured Cards left side small */
 .featured-card {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: row;
-  width: 55rem;
-  min-height: 25rem;
+  width: auto;
+  height: 30%;
   background-color: var(--color-4);
   padding: var(--space-2);
-  margin: var(--space-3);
-  gap: var(--space-2);
   border: 1px solid var(--color-1);
   border-radius: 50px;
   z-index: 5;
   position: relative;
   overflow: hidden;
 }
-/* For the glowing hover effect */
 .featured-card::before {
   content: "";
   position: absolute;
@@ -69,12 +83,63 @@
   pointer-events: none;
   z-index: 10;
 }
-
-/* Right card */
+/* Basic featured card but reversed */
 .featured-card--right {
   flex-direction: row-reverse;
 }
-/* Card internals Image area */
+/* Introduction variant */
+.featured-card--introduction {
+  width: 100%;
+  height: 40%;
+  border: none;
+  border-radius: 0px;
+  border-bottom-left-radius: 50px;
+  background-color: var(--color-4);
+}
+
+.featured-card.featured-card--introduction h4 {
+  color: var(--color-1);
+  font-size: 3.5rem;
+  width: 80%;
+  margin-bottom: var(--space-6);
+}
+/* Large featured card variant */
+.featured-card--big {
+  width: 100%;
+  height: 50%;
+  border: none;
+  background-color: var(--color-4);
+  border-radius: 0px;
+  border-bottom-left-radius: 50px;
+  border-bottom-right-radius: 50px;
+}
+
+.featured-card--big:nth-child(even) {
+  border-radius: 50px;
+}
+
+.featured-card.featured-card--big h4 {
+  font-size: 4rem;
+  margin: var(--space-7) 0;
+}
+
+.featured-card.featured-card--big p {
+  font-size: 2rem;
+}
+
+.featured-card--big .featured-card-image {
+  position: absolute;
+  border-radius: 50px;
+  width: calc(100% - 2 * var(--space-2) + 5px);
+  height: calc(100% - 2 * var(--space-2) + 5px);
+}
+
+.featured-card--big .featured-card-image::before {
+  background-color: var(--color-3);
+  opacity: 0.6;
+  mix-blend-mode: multiply;
+}
+
 .featured-card-image {
   flex: 1;
   height: 100%;
@@ -117,8 +182,6 @@
   height: 100%;
 }
 
-/* Main text */
-
 .featured-card-text h4 {
   margin: 0;
   font-weight: 500;
@@ -126,12 +189,14 @@
   margin: var(--space-0) 0;
   width: 70%;
   color: var(--white-1);
+  z-index: 10;
 }
 
 .featured-card-text p {
   margin: 0;
   font-size: 1.25rem;
   color: var(--white-2);
+  z-index: 10;
 }
 
 /* Featured pills */
@@ -146,27 +211,6 @@
   align-items: center;
   border-radius: 50px;
   transition: filter 0.5s ease-in-out;
-}
-.featured-card-text-pill::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 50px;
-  background: linear-gradient(
-    to right,
-    transparent,
-    var(--opacity-c2-light)
-  ); /* Adjust color/opacity as needed */
-  opacity: 0;
-  transition: opacity 0.5s ease-in-out;
-  z-index: 1;
-}
-
-.featured-card-text-pill:hover::before {
-  opacity: 1;
 }
 
 .featured-card-text-pill h3 {
@@ -185,7 +229,6 @@
   border-radius: 15px;
   background-color: var(--color-1);
 }
-/* Second pill */
 .featured-card-text-pill--second {
   background-color: var(--color-1);
 }
@@ -198,17 +241,12 @@
   background-color: var(--color-4);
 }
 
-/* Third pill */
 .featured-card-text-pill--third {
   background-color: var(--color-2);
 }
 
 .featured-card-text-pill--third:before {
-  background: linear-gradient(
-    to right,
-    transparent,
-    var(--opacity-c1-light)
-  ); /* Adjust color/opacity as needed */
+  background: linear-gradient(to right, transparent, var(--opacity-c1-light));
 }
 
 .featured-card-text-pill--third h3 {
@@ -220,14 +258,6 @@
 }
 
 @media (max-width: 1500px) {
-  /* Decrease by 10% */
-  .featured-card {
-    width: 49.5rem;
-    min-height: 25.5rem;
-  }
-  .featured-section {
-    height: 181.5vh;
-  }
   .featured-card-text h4 {
     width: 100%;
   }
@@ -237,11 +267,6 @@
   .featured-section svg {
     width: 175%;
     height: 175%;
-  }
-
-  .featured-card {
-    width: 90%;
-    padding: var(--space-2);
   }
 }
 
