@@ -19,6 +19,13 @@ export const FeaturedCard = React.forwardRef((props, ref) => {
           <img src={imageSrc} alt={imageAlt} />
         </div>
       )}
+      {sideClass === "introduction" && (
+        <>
+          <span></span>
+          <span></span>
+          <span></span>
+        </>
+      )}
       <div className="featured-card-text">
         {pill && (
           <div className={`featured-card-text-pill ${pillClass}`}>

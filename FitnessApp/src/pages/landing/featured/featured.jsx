@@ -96,8 +96,8 @@ function Featured() {
           ref={cardRef1}
         />
         <FeaturedCard
-          headerText="Custom data sharing system"
-          bodyText={sharingText}
+          headerText="Progressive update's and endless support"
+          bodyText={testLorem}
           pillClass=""
           sideClass="big"
           ref={cardRef1}
