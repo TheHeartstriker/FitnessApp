@@ -55,7 +55,6 @@ function Featured() {
       className="featured-section"
       onMouseMove={(e) => simpleHoverGlow(e, cardRefs)}
     >
-      {/* <Ellipse /> */}
       <div className="featured-section-leftside">
         <FeaturedCard
           headerText="Creative, meaning full and simple features"

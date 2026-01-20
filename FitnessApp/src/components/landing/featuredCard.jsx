@@ -23,7 +23,6 @@ export const FeaturedCard = React.forwardRef((props, ref) => {
         <>
           <span></span>
           <span></span>
-          <span></span>
         </>
       )}
       <div className="featured-card-text">
