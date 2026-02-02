@@ -1,7 +1,7 @@
 import React, { StrictMode } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { createRoot } from "react-dom/client";
-import Nav from "./components/navBar/Nav.jsx";
+import Nav from "./components/navBar/nav.jsx";
 import AppRoutes from "./routing/indexRoute.jsx";
 import { ReactLenis } from "lenis/react";
 
@@ -30,5 +30,5 @@ createRoot(document.getElementById("root")).render(
       <Nav />
       <AppRoutes />
     </BrowserRouter>
-  </StrictMode>
+  </StrictMode>,
 );
