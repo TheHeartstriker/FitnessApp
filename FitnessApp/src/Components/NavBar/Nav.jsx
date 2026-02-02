@@ -1,7 +1,7 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Logo from "../../assets/icons/logo.jsx";
-import "./Nav.css";
+import "./nav.css";
 import CubeIcon from "../../assets/icons/cube.jsx";
 import HeartIcon from "../../assets/icons/heart.jsx";
 import PeopleIcon from "../../assets/icons/people.jsx";
@@ -14,7 +14,7 @@ function Nav() {
   const navigate = useNavigate();
   const location = useLocation();
   const [buttonHeight, setButtonHeight] = useState(
-    window.innerWidth <= 1500 ? 60 : 50
+    window.innerWidth <= 1500 ? 60 : 50,
   );
   //Position the bar indicator needs to move to reach different buttons
   const [indicatorPositions, setIndicatorPositions] = useState({});
@@ -36,7 +36,7 @@ function Nav() {
       const newPositions = getIndicatorPositions(newHeight);
       setIndicatorPositions(newPositions);
       setIndicatorTop(
-        newPositions[location.pathname] || `${0 + getRemInPx() * 2}px`
+        newPositions[location.pathname] || `${0 + getRemInPx() * 2}px`,
       );
     }
 
