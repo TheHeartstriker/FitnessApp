@@ -33,7 +33,7 @@
 
 .share-item li {
   color: var(--white-2);
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   font-family: "Inter", sans-serif;
   font-weight: 300;
 }
@@ -59,15 +59,26 @@
   bottom: 0;
   right: 0;
   background-color: var(--color-4);
-  justify-content: center;
+  justify-content: space-around;
   margin: 1vh;
   border-radius: 30px;
   transition: right 0.3s ease;
+  padding: var(--space-1);
+}
+
+.share-button {
+  width: 50%;
+  height: 80%;
+  background-color: var(--color-3);
+  border-radius: 20px;
+  border: none;
+  padding: 0;
+  cursor: pointer;
 }
 
 .share-button {
   flex: 1;
-  height: 80%;
+  height: 100%;
   border-radius: 20px;
   background-color: var(--color-3);
   border: none;
@@ -76,10 +87,6 @@
   z-index: 5;
   position: relative;
   padding: 0;
-  margin: var(--space-1);
-  cursor: pointer;
-  transition: transform 0.6s ease;
-  transition: left 0.3s ease;
 }
 
 .share-button svg {
@@ -93,44 +100,37 @@
 }
 
 .share-button-text {
-  flex: 1;
-  height: 80%;
+  width: 50%;
+  height: 100%;
+  border-radius: 20px;
   display: flex;
-  position: relative;
-  justify-content: center;
   align-items: center;
-  margin: var(--space-1);
-  transition: left 0.3s ease;
-}
-.share-button.active {
-  transform: translateX(0);
+  justify-content: center;
+  text-align: center;
 }
 
 .share-button-text h3 {
   color: var(--white-1);
   font-weight: 500;
   margin: 0;
-  font-size: 0.9rem;
-}
-
-.share-button-text.active {
-  transform: translateX(0);
+  font-size: 0.85rem;
 }
 
 @media (max-width: 1500px) {
   .share-container {
     grid-template-columns: repeat(3, 1fr);
   }
+  /* Decreased by 10% */
   .share-item h2 {
     font-size: 2.25rem;
   }
 
   .share-item li {
-    font-size: 1.08rem;
+    font-size: 1.125rem;
   }
 
   .share-button-text h3 {
-    font-size: 0.81rem;
+    font-size: 0.765rem;
   }
   .share-button-container {
     width: 17.5vw;
@@ -142,16 +142,6 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .share-item {
-    padding: var(--space-4);
-  }
-
-  .share-button-text {
-    margin: var(--space-2);
-  }
-  .share-button {
-    margin: var(--space-2);
-  }
   .share-button-container {
     width: 25vw;
   }
@@ -165,20 +155,21 @@
   .share-item {
     min-height: 25vh;
   }
+  /* Return font to original */
   .share-item h2 {
     font-size: 2.5rem;
   }
 
   .share-item li {
-    font-size: 1.2rem;
+    font-size: 1.25rem;
   }
 
   .share-button-text h3 {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
   }
 
   .share-button-container {
-    width: 45vw;
+    width: 35vw;
   }
 }
 

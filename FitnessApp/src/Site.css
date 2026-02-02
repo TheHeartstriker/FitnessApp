@@ -33,8 +33,11 @@ h5 {
   --black-1: #1c1c1c;
   --black-2: #333333;
   /* Color palette */
+  /* Bellow is the 10% */
   --color-1: #00df82;
+  /* Bellow is the 30% */
   --color-2: #2cc295;
+  /* Bellow is the 60% */
   --color-3: #03624c;
   --color-4: #032221;
   --color-5: #021b1a;
@@ -62,4 +65,39 @@ h5 {
   --space-5: 2.5rem;
   --space-6: 3rem;
   --space-7: 4rem;
+  /* Shadows */
+  --shadow-small: 0 4px 8px rgba(0, 0, 0, 0.6), 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-medium: 0 8px 16px rgba(0, 0, 0, 0.6), 0 2px 4px rgba(0, 0, 0, 0.3);
+  --shadow-large: 0 16px 32px rgba(0, 0, 0, 0.6), 0 4px 8px rgba(0, 0, 0, 0.3);
+
+  /* Animation durations */
+  /* Micro-interactions & instant feedback -> 50–200 ms */
+  --duration-fast-1: 0.1s;
+  --duration-fast-2: 0.2s;
+  --duration-fast-3: 0.3s;
+
+  /* Standard UI animations -> 400–800 ms */
+  --duration-normal-1: 0.4s;
+  --duration-normal-2: 0.5s;
+  --duration-normal-3: 0.8s;
+
+  /* Bigger / storytelling -> 1.5s-3.5s*/
+  --duration-long-1: 1.5s;
+  --duration-long-2: 2s;
+  --duration-long-3: 3.5s;
+  /* Easing we use power3 and circle */
+  /* Easing (cubic-bezier approximations for GSAP power3 and circ) */
+  --easing-power3-out: cubic-bezier(0.215, 0.61, 0.355, 1);
+  --easing-circ-out: cubic-bezier(0.075, 0.82, 0.165, 1);
 }
+/* P tags should be set between either 1rem, 1.25rem, 1.5rem or 1.1rem IF used as readable text. H tags should use increments of 0.5rem otherwise no restrictions. As for scaling font at smaller size's around 800px should be decrease
+by 20% as needed for all present fonts in file and we don't use varables so font can easily be calculate lesser by percentages 
+To be clear
+For buttons or small interactive elements:
+0.75rem -> is for small buttons
+0.85rem -> is for button text
+For readable text aka body:
+1.1rem -> is for dense copy of important text like a blog article or of text of less importance
+1.25rem -> is for regular for things like descriptions on cards this should be the default for most text
+1.5rem -> is rarely used but if so mainly in a hero setting
+ */

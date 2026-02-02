@@ -1,45 +1,63 @@
+/*  */
+/* Main parents */
+/*  */
 .featured-section {
-  height: 170vh;
+  height: auto;
   width: 100%;
   background-color: var(--color4);
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
+  flex-direction: row;
   border-radius: 0 0 50px 50px;
+  padding-bottom: var(--space-3);
+  border-bottom: 2.5px solid var(--color-1);
+  padding-top: var(--space-2);
 }
 
-.featured-section svg {
-  position: absolute;
-  top: 50%;
-  left: -15%;
-  width: 150%;
-  height: 150%;
-  transform: translate(-50%, -50%);
-  object-fit: cover;
-  z-index: 5;
+.featured-section-leftside {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.4fr 0.3fr 0.3fr;
+  width: 100%;
+  height: 175vh;
+  overflow: visible;
+
+  gap: var(--space-3);
 }
 
-/* Card */
+.featured-section-rightside {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.5fr 0.5fr;
+  gap: var(--space-3);
+  width: 100%;
+  height: 175vh;
+}
+
+/*  */
+/* Cards */
+/*  */
+/* Featured Cards left side small with image attached*/
 .featured-card {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: row;
-  width: 55rem;
-  min-height: 25rem;
+  width: auto;
+  height: 100%;
   background-color: var(--color-4);
   padding: var(--space-2);
-  margin: var(--space-3);
-  gap: var(--space-2);
-  border: 1px solid var(--color-1);
+  border: none;
   border-radius: 50px;
   z-index: 5;
   position: relative;
   overflow: hidden;
+  margin-right: var(--space-3);
 }
-/* For the glowing hover effect */
 .featured-card::before {
   content: "";
   position: absolute;
@@ -67,22 +85,22 @@
   opacity: 0.06;
   filter: blur(30px);
   pointer-events: none;
+
   z-index: 10;
 }
 
-/* Right card */
-.featured-card--right {
-  flex-direction: row-reverse;
-}
-/* Card internals Image area */
 .featured-card-image {
-  flex: 1;
+  width: 40%;
   height: 100%;
   position: relative;
   border-radius: inherit;
   overflow: hidden;
   z-index: 5;
-  transition: transform 0.5s ease;
+  transition: box-shadow var(--duration-normal-3) var(--easing-power3-out);
+}
+
+.featured-card-image:hover {
+  box-shadow: var(--shadow-medium);
 }
 
 .featured-card-image::before {
@@ -102,43 +120,184 @@
   transition: transform 0.5s ease;
 }
 
-.featured-card-image img:hover {
-  transform: scale(1.05);
-}
-.featured-card-image:hover {
-  transform: scale(1.025);
-}
-
 /* Card internals Text area */
 .featured-card-text {
-  flex: 1;
+  width: 60%;
   display: flex;
   flex-direction: column;
   height: 100%;
 }
 
-/* Main text */
-
 .featured-card-text h4 {
   margin: 0;
   font-weight: 500;
   font-size: 2.5rem;
-  margin: var(--space-2) 0;
-  margin-bottom: var(--space-1);
-  width: 70%;
+  margin: var(--space-0) 0;
+  width: 90%;
   color: var(--white-1);
+  z-index: 10;
 }
 
 .featured-card-text p {
   margin: 0;
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   color: var(--white-2);
+  z-index: 10;
 }
+
+/*  */
+/* Left and right variants */
+/*  */
+.featured-card--right .featured-card-image {
+  margin-left: var(--space-2);
+}
+
+.featured-card--left .featured-card-image {
+  margin-right: var(--space-2);
+}
+
+.featured-card--right {
+  flex-direction: row-reverse;
+}
+/*  */
+/* Introduction variant aka top left card*/
+/*  */
+.featured-card--introduction {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 0px;
+  border-bottom-left-radius: 50px;
+  background-color: var(--color-4);
+  overflow: visible;
+}
+/* These are splip's used to coverup spaces that use the background color color-5 where I dont want them to show through */
+.featured-card--introduction span {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  z-index: 100;
+  background-color: var(--color-4);
+}
+
+.featured-card--introduction span:nth-child(1) {
+  top: -100px;
+  left: 0%;
+  width: 100vw;
+}
+
+.featured-card--introduction span:nth-child(1)::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(270deg, var(--color-1) 10%, transparent 50%);
+  opacity: 0.06;
+  filter: blur(30px);
+}
+
+/* This add's the corner in the bottom right of the card on desktop */
+.featured-card--introduction span:nth-child(2) {
+  width: 75px;
+  height: 75px;
+  left: calc(100% - 75px);
+  top: 100%;
+  mask-image: radial-gradient(circle at 100% 0%, transparent 69%, black 71%);
+  -webkit-mask-image: radial-gradient(
+    circle at 100% 0%,
+    transparent 69%,
+    black 71%
+  );
+  transform: rotate(180deg);
+}
+
+.featured-card--introduction::after {
+  background: none;
+}
+/* Introduction text */
+.featured-card--introduction .featured-card-text {
+  width: 100%;
+}
+.featured-card.featured-card--introduction h4 {
+  color: var(--color-1);
+  font-size: 3.5rem;
+  width: 80%;
+  margin-bottom: var(--space-6);
+}
+/*  */
+/* Large featured card variant */
+/*  */
+.featured-card--big {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background-color: var(--color-4);
+  border-radius: 0px;
+  border-bottom-left-radius: 50px;
+  border-bottom-right-radius: 50px;
+  padding: var(--space-5);
+}
+
+.featured-card--big:nth-child(even) {
+  border-radius: 50px;
+  padding: var(--space-4);
+}
+
+.featured-card--big:nth-child(odd)::after {
+  background: linear-gradient(270deg, var(--color-1) 10%, transparent 100%);
+}
+
+.featured-card--big .featured-card-image {
+  position: absolute;
+  border-radius: 50px;
+  width: calc(100% - 2 * var(--space-4) + 5px);
+  height: calc(100% - 2 * var(--space-4) + 5px);
+  transition: box-shadow var(--duration-normal-3) var(--easing-power3-out);
+}
+
+.featured-card--big:hover .featured-card-image {
+  box-shadow: var(--shadow-large);
+}
+
+.featured-card--big .featured-card-image::before {
+  background-color: var(--color-3);
+  opacity: 0.6;
+  mix-blend-mode: multiply;
+}
+/* Text sizing for big variant */
+.featured-card--big .featured-card-text {
+  width: 100%;
+  z-index: 5;
+}
+.featured-card.featured-card--big p {
+  font-size: 2rem;
+}
+
+.featured-card--big:nth-child(even) h4 {
+  margin: var(--space-5) 0 !important;
+  color: var(--white-1) !important;
+}
+
+.featured-card--big:nth-child(even) p {
+  color: var(--white-1) !important;
+  font-size: 1.25rem !important;
+}
+.featured-card.featured-card--big h4 {
+  font-size: 4rem;
+  margin: var(--space-7) 0;
+  color: var(--white-2);
+  margin-top: 10%;
+}
+/*  */
+/* End  of variants*/
+/*  */
+/* Defining the text pills */
 
 /* Featured pills */
 .featured-card-text-pill {
-  min-width: 7.5rem;
-  flex-shrink: 0;
+  min-width: 12.5rem;
+  height: 3.5rem;
+
   align-self: flex-start;
   position: relative;
   background-color: var(--color-3);
@@ -146,28 +305,11 @@
   justify-content: center;
   align-items: center;
   border-radius: 50px;
-  transition: filter 0.5s ease-in-out;
+  transition: box-shadow var(--duration-fast-3) ease-in-out;
+  z-index: 10;
 }
-.featured-card-text-pill::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 50px;
-  background: linear-gradient(
-    to right,
-    transparent,
-    var(--opacity-c2-light)
-  ); /* Adjust color/opacity as needed */
-  opacity: 0;
-  transition: opacity 0.5s ease-in-out;
-  z-index: 1;
-}
-
-.featured-card-text-pill:hover::before {
-  opacity: 1;
+.featured-card-text-pill:hover {
+  box-shadow: var(--shadow-small);
 }
 
 .featured-card-text-pill h3 {
@@ -186,7 +328,6 @@
   border-radius: 15px;
   background-color: var(--color-1);
 }
-/* Second pill */
 .featured-card-text-pill--second {
   background-color: var(--color-1);
 }
@@ -199,17 +340,12 @@
   background-color: var(--color-4);
 }
 
-/* Third pill */
 .featured-card-text-pill--third {
   background-color: var(--color-2);
 }
 
 .featured-card-text-pill--third:before {
-  background: linear-gradient(
-    to right,
-    transparent,
-    var(--opacity-c1-light)
-  ); /* Adjust color/opacity as needed */
+  background: linear-gradient(to right, transparent, var(--opacity-c1-light));
 }
 
 .featured-card-text-pill--third h3 {
@@ -220,83 +356,203 @@
   background-color: var(--color-4);
 }
 
-@media (max-width: 1500px) {
-  /* Decrease by 10% */
-  .featured-card {
-    width: 49.5rem;
-    min-height: 25.5rem;
+@media (max-width: 1600px) {
+  /* Decreased font by 10% */
+  .featured-card.featured-card--introduction h4 {
+    font-size: 3.15rem;
   }
-  .featured-section {
-    height: 181.5vh;
+
+  .featured-card--big:nth-child(even) p {
+    font-size: 1.125rem !important;
   }
+
+  .featured-card.featured-card--big h4 {
+    font-size: 3.6rem;
+  }
+
+  .featured-card.featured-card--big p {
+    font-size: 1.8rem;
+  }
+
   .featured-card-text h4 {
-    width: 100%;
-  }
-}
-
-@media (max-width: 1000px) {
-  .featured-section svg {
-    width: 175%;
-    height: 175%;
+    font-size: 2.25rem;
   }
 
-  .featured-card {
-    width: 90%;
-    padding: var(--space-2);
-  }
-}
-
-@media (max-width: 800px) {
-  /* Decrease by 20% */
-  .featured-card-text h4 {
-    font-size: 2.2rem;
-  }
   .featured-card-text p {
-    font-size: 0.96rem;
+    font-size: 1.125rem;
   }
+
+  .featured-card-text-pill h3 {
+    font-size: 1.125rem;
+  }
+}
+
+@media (max-width: 1400px) {
+  /* Decrease by 20% */
+  .featured-card.featured-card--introduction h4 {
+    font-size: 2.8rem;
+  }
+
+  .featured-card--big:nth-child(even) p {
+    font-size: 1rem !important;
+  }
+
+  .featured-card.featured-card--big h4 {
+    font-size: 3.2rem;
+  }
+
+  .featured-card.featured-card--big p {
+    font-size: 1.6rem;
+  }
+
+  .featured-card-text h4 {
+    font-size: 2rem;
+  }
+
+  .featured-card-text p {
+    font-size: 1rem;
+  }
+
   .featured-card-text-pill h3 {
     font-size: 1rem;
   }
 }
 
-@media (max-width: 700px) {
-  .featured-section svg {
-    width: 325%;
-    height: 325%;
+@media (max-width: 1400px) {
+  /* Chnages to handle mobile sizing change to column */
+  .featured-section {
+    flex-direction: column;
+  }
+  .featured-card--big:nth-child(odd) {
+    border-radius: 50px;
+  }
+  .featured-section-leftside {
+    margin-bottom: var(--space-3);
+  }
+  .featured-section-rightside {
+    margin-bottom: var(--space-3);
   }
 
-  .featured-card-image {
+  .featured-card--left .featured-card-image,
+  .featured-card--right .featured-card-image {
+    width: calc(100% - var(--space-4));
+    height: calc(100% - var(--space-4));
     position: absolute;
-    width: 100%;
-    height: 100%;
+    top: 50%;
+    left: 50%;
+    margin: 0;
+    transform: translate(-50%, -50%);
   }
 
-  .featured-card-image img {
-    filter: blur(1px);
+  .featured-card--left .featured-card-image::before,
+  .featured-card--right .featured-card-image::before {
+    background-color: var(--color-3);
+    opacity: 0.6;
+    mix-blend-mode: multiply;
+  }
+  .featured-card--left .featured-card-text,
+  .featured-card--right .featured-card-text {
+    width: calc(100% - var(--space-4));
+  }
+  .featured-card--left .featured-card-text-pill,
+  .featured-card--right .featured-card-text-pill {
+    margin: var(--space-2) 0;
+  }
+  /* Return back to orginal font sizes */
+  .featured-card.featured-card--introduction h4 {
+    font-size: 3.5rem;
   }
 
-  .featured-card-image::before {
-    opacity: 0.5;
-    z-index: 10;
-    background-color: var(--color-5) !important;
+  .featured-card--big:nth-child(even) p {
+    font-size: 1.25rem !important;
   }
 
-  .featured-card-text {
-    z-index: 15;
-    width: 75%;
-    flex: none;
-    margin-right: auto;
+  .featured-card.featured-card--big h4 {
+    font-size: 4rem;
+  }
+
+  .featured-card.featured-card--big p {
+    font-size: 2rem;
+  }
+
+  .featured-card-text h4 {
+    font-size: 2.5rem;
+  }
+
+  .featured-card-text p {
+    font-size: 1.25rem;
+  }
+
+  .featured-card-text-pill h3 {
+    font-size: 1.25rem;
   }
 }
 
-@media (max-height: 750px) {
-  .featured-section {
-    height: 225vh;
+@media (max-width: 800px) {
+  /* Decreased font by 10% */
+  .featured-card.featured-card--introduction h4 {
+    font-size: 3.15rem;
+  }
+
+  .featured-card--big:nth-child(even) p {
+    font-size: 1.125rem !important;
+  }
+
+  .featured-card.featured-card--big h4 {
+    font-size: 3.6rem;
+  }
+
+  .featured-card.featured-card--big p {
+    font-size: 1.8rem;
+  }
+
+  .featured-card-text h4 {
+    font-size: 2.25rem;
+  }
+
+  .featured-card-text p {
+    font-size: 1.125rem;
+  }
+
+  .featured-card-text-pill h3 {
+    font-size: 1.125rem;
   }
 }
 
-@media (max-height: 700px) {
-  .featured-section {
-    height: 250vh;
+@media (max-width: 650px) {
+  .featured-card--left {
+    overflow: visible;
+  }
+
+  .featured-card--right {
+    overflow: visible;
+  }
+  /* Decrease by 20% */
+  .featured-card.featured-card--introduction h4 {
+    font-size: 2.8rem;
+  }
+
+  .featured-card--big:nth-child(even) p {
+    font-size: 1rem !important;
+  }
+
+  .featured-card.featured-card--big h4 {
+    font-size: 3.2rem;
+  }
+
+  .featured-card.featured-card--big p {
+    font-size: 1.6rem;
+  }
+
+  .featured-card-text h4 {
+    font-size: 2rem;
+  }
+
+  .featured-card-text p {
+    font-size: 1rem;
+  }
+
+  .featured-card-text-pill h3 {
+    font-size: 1rem;
   }
 }

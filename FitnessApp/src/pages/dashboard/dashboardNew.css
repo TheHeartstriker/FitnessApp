@@ -61,7 +61,7 @@
 .dashboard-card p {
   color: var(--white-1);
   font-weight: 300;
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   margin: 0;
 }
 
@@ -101,11 +101,12 @@
   width: 10rem;
   height: auto;
   margin: var(--space-2);
+  padding: 0;
   border: none;
   border-radius: 50px;
   color: var(--color-5);
   background-color: var(--color-1);
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   cursor: pointer;
   z-index: 5;
 }
@@ -124,7 +125,7 @@
 }
 
 .dashboard-tooltip h4 {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-style: italic;
 }
 
@@ -156,13 +157,13 @@
     font-size: 3.6rem;
   }
   .dashboard-card p {
-    font-size: 1.08rem;
+    font-size: 1.125rem;
   }
   .dashboard-time-btn {
-    font-size: 0.81rem;
+    font-size: 0.765rem;
   }
   .dashboard-tooltip h4 {
-    font-size: 0.81rem;
+    font-size: 0.765rem;
   }
   .dashboard-tooltip::after {
     font-size: 0.765rem;
@@ -196,13 +197,13 @@
     font-size: 4rem;
   }
   .dashboard-card p {
-    font-size: 1.2rem;
+    font-size: 1.25rem;
   }
   .dashboard-time-btn {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
   }
   .dashboard-tooltip h4 {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
   }
   .dashboard-tooltip::after {
     font-size: 0.85rem;

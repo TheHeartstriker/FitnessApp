@@ -60,7 +60,7 @@
 
 .instruct-card p {
   color: var(--white-1);
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   margin: 0;
   font-weight: 300;
   font-family: "Inter", sans-serif;
@@ -134,7 +134,7 @@
 .zone-button h4 {
   color: var(--white-1);
   font-weight: 500;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   transition: color 0.5s ease-in-out;
 }
 
@@ -206,7 +206,7 @@
   height: 50%;
   border: none;
   background-color: transparent;
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   font-family: "Inter", sans-serif;
   color: var(--color-1);
 }
@@ -225,7 +225,7 @@
   position: absolute;
   color: var(--white-2);
   top: 5%;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 300;
 }
 
@@ -247,7 +247,7 @@
 
 .daily-submit-button h4 {
   margin: var(--space-0);
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   font-weight: 500;
 }
 
@@ -259,25 +259,25 @@
     font-size: 2.7rem;
   }
   .instruct-card p {
-    font-size: 1.08rem;
+    font-size: 1.125rem;
   }
   .instruct-card pre {
     font-size: 0.675rem;
   }
   .zone-button h4 {
-    font-size: 1.35rem;
+    font-size: 1.125rem;
   }
   .zone-button h5 {
     font-size: 6.3rem;
   }
   .daily-input input {
-    font-size: 1.08rem;
+    font-size: 1.125rem;
   }
   .daily-input h3 {
-    font-size: 0.81rem;
+    font-size: 0.765rem;
   }
   .daily-submit-button h4 {
-    font-size: 1.08rem;
+    font-size: 1.125rem;
   }
 }
 
@@ -323,31 +323,31 @@
     flex: none;
   }
 
-  /* Turned back to orginal sizing*/
+  /* Turned back to original sizing*/
   .instruct-card h2 {
     font-size: 3rem;
   }
   .instruct-card p {
-    font-size: 1.2rem;
+    font-size: 1.25rem;
   }
-  /* Increased to same size as p */
+  /* Pre now matches p above */
   .instruct-card pre {
-    font-size: 1.2rem;
+    font-size: 1.25rem;
   }
   .zone-button h4 {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
   }
   .zone-button h5 {
     font-size: 7rem;
   }
   .daily-input input {
-    font-size: 1.2rem;
+    font-size: 1.25rem;
   }
   .daily-input h3 {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
   }
   .daily-submit-button h4 {
-    font-size: 1.2rem;
+    font-size: 1.25rem;
   }
 }
 

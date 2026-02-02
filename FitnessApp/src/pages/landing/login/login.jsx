@@ -35,7 +35,7 @@ function Login() {
 
   function handleAnimation() {
     const wordClass = document.querySelectorAll(".login-welcome-section h2");
-    animateText([wordClass], "110%", "100%");
+    animateText(-200, 0, wordClass);
   }
 
   // Call controllers to handle login and signup
@@ -59,7 +59,7 @@ function Login() {
         if (viewport) {
           viewport.setAttribute(
             "content",
-            "width=device-width, initial-scale=1"
+            "width=device-width, initial-scale=1",
           );
         }
       }, 100);
