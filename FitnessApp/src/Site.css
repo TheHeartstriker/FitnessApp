@@ -65,6 +65,11 @@ h5 {
   --space-5: 2.5rem;
   --space-6: 3rem;
   --space-7: 4rem;
+  /* Shadows */
+  --shadow-small: 0 4px 8px rgba(0, 0, 0, 0.6), 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-medium: 0 8px 16px rgba(0, 0, 0, 0.6), 0 2px 4px rgba(0, 0, 0, 0.3);
+  --shadow-large: 0 16px 32px rgba(0, 0, 0, 0.6), 0 4px 8px rgba(0, 0, 0, 0.3);
+
   /* Animation durations */
   /* Micro-interactions & instant feedback -> 50–200 ms */
   --duration-fast-1: 0.1s;
@@ -73,7 +78,7 @@ h5 {
 
   /* Standard UI animations -> 400–800 ms */
   --duration-normal-1: 0.4s;
-  --duration-normal-2: 0.55s;
+  --duration-normal-2: 0.5s;
   --duration-normal-3: 0.8s;
 
   /* Bigger / storytelling -> 1.5s-3.5s*/

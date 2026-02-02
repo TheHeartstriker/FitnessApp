@@ -1,44 +1,35 @@
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { SplitText } from "gsap/SplitText";
+
 const rootStyles = getComputedStyle(document.documentElement);
 const long2 = parseFloat(rootStyles.getPropertyValue("--duration-long-1"));
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, SplitText);
 
-export function animateText(
-  textElements,
-  startClass = "80%",
-  endClass = "70%"
-) {
-  textElements.forEach((element, index) => {
-    gsap.set(element, {
-      y: "100%",
-      opacity: 0,
-    });
+export function animateText(startPos, endPos, wordClass) {
+  const letters = new SplitText(wordClass, { type: "chars" }).chars;
 
-    gsap.to(element, {
-      scrollTrigger: {
-        trigger: textElements[0],
-        start: `top ${startClass}`,
-        end: `bottom ${endClass}`,
-        onEnter: () => {
-          gsap.to(element, {
-            y: "0%",
-            opacity: 1,
-            duration: long2,
-            ease: "power3.out",
-            delay: index * 0.06,
-          });
-        },
-        onLeaveBack: () => {
-          gsap.to(element, {
-            y: "100%",
-            opacity: 0,
-            duration: long2,
-            ease: "power3.out",
-            delay: index * 0.06,
-          });
-        },
-      },
-    });
+  gsap.set(letters, {
+    x: startPos,
+    opacity: 0,
+  });
+
+  const tl = gsap.timeline({
+    scrollTrigger: {
+      trigger: wordClass,
+      start: "top 80%",
+      end: "bottom 70%",
+      onEnter: () => tl.play(),
+      onLeaveBack: () => tl.reverse(),
+      markers: false,
+    },
+  });
+
+  tl.to(letters, {
+    x: endPos,
+    opacity: 1,
+    duration: long2,
+    ease: "power3.out",
+    stagger: 0.03,
   });
 }

@@ -1,6 +1,4 @@
-import React from "react";
-
-export const FeaturedCard = React.forwardRef((props, ref) => {
+export function FeaturedCard(props) {
   const {
     imageSrc,
     imageAlt,
@@ -11,7 +9,7 @@ export const FeaturedCard = React.forwardRef((props, ref) => {
     pill,
   } = props;
   return (
-    <div className={`featured-card featured-card--${sideClass}`} ref={ref}>
+    <div className={`featured-card featured-card--${sideClass}`}>
       {imageSrc && (
         <div
           className={`featured-card-image featured-card-image--${sideClass}`}
@@ -37,6 +35,4 @@ export const FeaturedCard = React.forwardRef((props, ref) => {
       </div>
     </div>
   );
-});
-
-FeaturedCard.displayName = "FeaturedCard";
+}

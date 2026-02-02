@@ -79,7 +79,10 @@
   font-family: "Poppins", sans-serif;
   font-weight: 400;
   cursor: pointer;
-  transition: color 0.5s, background-color 0.5s ease-in-out;
+  transition:
+    color var(--duration-normal-3) var(--easing-power3-out),
+    background-color var(--duration-normal-3) var(--easing-power3-out),
+    box-shadow var(--duration-normal-3) var(--easing-power3-out);
   position: relative;
 }
 .primary-action-btn a {
@@ -103,6 +106,7 @@
 .primary-action-btn:hover {
   background-color: var(--color-2);
   color: var(--color-5);
+  box-shadow: var(--shadow-small);
 }
 /* separator */
 .landing-button-section hr {

@@ -1,6 +1,8 @@
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
+const rootStyles = getComputedStyle(document.documentElement);
+const normal3 = parseFloat(rootStyles.getPropertyValue("--duration-normal-3"));
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -20,13 +22,14 @@ export function animateWhySection() {
   gsap.set(allWords, { y: "100%", opacity: 0 });
 
   // Create timeline with ScrollTrigger
-  // Create timeline with ScrollTrigger
   const tl = gsap.timeline({
     scrollTrigger: {
       trigger: ".why-section",
-      start: "top 90%",
-      end: "bottom 80%",
-      scrub: true,
+      start: "top 80%",
+      end: "bottom 70%",
+      onEnter: () => tl.play(),
+      onLeaveBack: () => tl.reverse(),
+      markers: false,
     },
   });
 
@@ -34,7 +37,7 @@ export function animateWhySection() {
   tl.to(headerWords, {
     y: "0%",
     opacity: 1,
-    duration: 0.8,
+    duration: normal3,
     ease: "power3.out",
     stagger: 0.06,
   });
@@ -45,11 +48,11 @@ export function animateWhySection() {
     {
       y: "0%",
       opacity: 1,
-      duration: 0.8,
+      duration: normal3,
       ease: "power3.out",
       stagger: 0.01,
     },
-    "-=0.5"
+    "-=0.3",
   );
 
   // Animate second paragraph
@@ -58,11 +61,11 @@ export function animateWhySection() {
     {
       y: "0%",
       opacity: 1,
-      duration: 0.8,
+      duration: normal3,
       ease: "power3.out",
       stagger: 0.01,
     },
-    "-=0.3"
+    "-=0.3",
   );
 
   // Cleanup function

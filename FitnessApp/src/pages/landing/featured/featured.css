@@ -96,7 +96,11 @@
   border-radius: inherit;
   overflow: hidden;
   z-index: 5;
-  transition: transform 0.5s ease;
+  transition: box-shadow var(--duration-normal-3) var(--easing-power3-out);
+}
+
+.featured-card-image:hover {
+  box-shadow: var(--shadow-medium);
 }
 
 .featured-card-image::before {
@@ -248,6 +252,11 @@
   border-radius: 50px;
   width: calc(100% - 2 * var(--space-4) + 5px);
   height: calc(100% - 2 * var(--space-4) + 5px);
+  transition: box-shadow var(--duration-normal-3) var(--easing-power3-out);
+}
+
+.featured-card--big:hover .featured-card-image {
+  box-shadow: var(--shadow-large);
 }
 
 .featured-card--big .featured-card-image::before {
@@ -258,6 +267,7 @@
 /* Text sizing for big variant */
 .featured-card--big .featured-card-text {
   width: 100%;
+  z-index: 5;
 }
 .featured-card.featured-card--big p {
   font-size: 2rem;
@@ -295,8 +305,11 @@
   justify-content: center;
   align-items: center;
   border-radius: 50px;
-  transition: filter 0.5s ease-in-out;
+  transition: box-shadow var(--duration-fast-3) ease-in-out;
   z-index: 10;
+}
+.featured-card-text-pill:hover {
+  box-shadow: var(--shadow-small);
 }
 
 .featured-card-text-pill h3 {
