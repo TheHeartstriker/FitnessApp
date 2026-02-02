@@ -1,0 +1,147 @@
+.nav-bar {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 98dvh;
+  width: 12vw;
+  background-color: var(--color-3);
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  border-radius: 50px;
+  margin-left: 1vh;
+  z-index: 50;
+}
+
+.nav-logo-container {
+  display: flex;
+  justify-content: center;
+  width: 95%;
+  height: auto;
+  margin-top: var(--space-2);
+  margin-bottom: var(--space-4);
+  align-items: center;
+  gap: var(--space-1);
+  color: var(--white-1);
+}
+
+.nav-logo-container h1 {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.nav-logo {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  padding: var(--space-1);
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-1);
+}
+
+.nav-bar-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  color: var(--color-5);
+  margin-bottom: var(--space-3);
+  width: 100%;
+  height: 35px;
+  border: none;
+  cursor: pointer;
+  background: none;
+}
+
+.nav-bar-button.active {
+  color: var(--color-2);
+}
+
+.nav-bar-button.active svg path {
+  fill: var(--color-2);
+}
+
+.nav-bar-button.activeShare {
+  color: var(--color-2);
+}
+
+.nav-bar-button.activeShare svg path {
+  stroke: var(--color-2) !important;
+}
+
+.on-bar-indicator {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 6px;
+  height: 100%;
+  background-color: var(--color-2);
+  border-radius: 0 50px 50px 0;
+  margin: 0;
+  padding: 0;
+  transition: top 0.3s ease;
+}
+
+.nav-bar-button h2 {
+  font-size: 0.85rem;
+  font-weight: 400;
+}
+
+/* Svg styles */
+
+.nav-bar-button svg path {
+  fill: var(--color-4);
+}
+
+#share-button svg path {
+  fill: transparent;
+  stroke-width: 2.5;
+  stroke: var(--color-4);
+}
+
+.nav-bar-button svg {
+  width: 35px;
+  height: 35px;
+  margin: 0 var(--space-2);
+}
+
+@media (max-width: 1500px) {
+  .nav-logo-container h1 {
+    display: none;
+  }
+
+  .nav-bar-button h2 {
+    display: none;
+    height: auto;
+  }
+
+  .nav-bar-button svg {
+    width: 50px;
+    height: 50px;
+    margin: 0 auto;
+  }
+
+  .nav-bar-button {
+    height: 60px;
+  }
+}
+
+@media (max-width: 800px) {
+  .nav-logo {
+    width: 55px;
+    height: 55px;
+  }
+  .nav-bar {
+    width: 15vw;
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 500px) {
+  .on-bar-indicator {
+    display: none;
+  }
+}
