@@ -228,9 +228,9 @@
   }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 550px) {
   .login-welcome-section h2 {
-    font-size: 4.5rem;
+    font-size: 3.8rem;
   }
 }
 

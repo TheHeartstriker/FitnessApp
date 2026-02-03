@@ -4,7 +4,13 @@ import connectionImg from "@/assets/landing/connection.png";
 import landingGraphs from "@/assets/landing/graphs.png";
 import designImg from "@/assets/landing/design.png";
 import { useEffect } from "react";
-import { sharingText, analyisText, designText, testLorem } from "./text.js";
+import {
+  sharingText,
+  analyisText,
+  textCopy,
+  creativeText,
+  supportText,
+} from "./text.js";
 import { AnimatedFeatured } from "./animatedFeatured";
 
 function Featured() {
@@ -17,8 +23,8 @@ function Featured() {
     <section className="featured-section">
       <div className="featured-section-leftside">
         <FeaturedCard
-          headerText="Creative, meaning full and simple features"
-          bodyText={testLorem}
+          headerText="Creative, and experimental design"
+          bodyText={creativeText}
           pillClass=""
           sideClass="introduction"
         />
@@ -34,8 +40,8 @@ function Featured() {
         <FeaturedCard
           imageSrc={designImg}
           imageAlt="Design Image"
-          headerText="Custom built design"
-          bodyText={designText}
+          headerText="Text copy"
+          bodyText={textCopy}
           pillClass="featured-card-text-pill--third"
           sideClass="left"
           pill={true}
@@ -52,7 +58,7 @@ function Featured() {
         />
         <FeaturedCard
           headerText="Progressive update's and endless support"
-          bodyText={testLorem}
+          bodyText={supportText}
           pillClass=""
           sideClass="big"
           pill={true}

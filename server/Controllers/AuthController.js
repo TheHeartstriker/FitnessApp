@@ -53,13 +53,13 @@ async function register(req, res, next) {
       process.env.ACCESS_TOKEN_SECRET,
       {
         expiresIn: "1d",
-      }
+      },
     );
     // Set the token in a cookie
     res.cookie("jwtToken", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "true",
-      sameSite: "strict",
+      sameSite: "none",
       maxAge: 24 * 60 * 60 * 1000,
     });
     //Send
@@ -107,12 +107,12 @@ async function login(req, res, next) {
       process.env.ACCESS_TOKEN_SECRET,
       {
         expiresIn: "1d",
-      }
+      },
     );
     res.cookie("jwtToken", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "true",
-      sameSite: "strict",
+      sameSite: "none",
       maxAge: 24 * 60 * 60 * 1000,
     });
     return res.status(200).json({
