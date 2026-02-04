@@ -1,5 +1,9 @@
 import "./featured.css";
-import { FeaturedCard } from "@/components/landing/featuredCard";
+import {
+  FeaturedCard,
+  SmallFeatured,
+  LargeFeatured,
+} from "@/components/landing/featuredCard";
 import connectionImg from "@/assets/landing/connection.png";
 import landingGraphs from "@/assets/landing/graphs.png";
 import designImg from "@/assets/landing/design.png";
@@ -21,49 +25,40 @@ function Featured() {
 
   return (
     <section className="featured-section">
-      <div className="featured-section-leftside">
-        <FeaturedCard
-          headerText="Creative, and experimental design"
-          bodyText={creativeText}
-          pillClass=""
-          sideClass="introduction"
-        />
-        <FeaturedCard
-          imageSrc={landingGraphs}
-          imageAlt="Analytics Image"
-          headerText="Hopefully Cool data analysis tools"
-          bodyText={analyisText}
-          pillClass="featured-card-text-pill--second"
-          sideClass="right"
-          pill={true}
-        />
-        <FeaturedCard
-          imageSrc={designImg}
-          imageAlt="Design Image"
-          headerText="Text copy"
-          bodyText={textCopy}
-          pillClass="featured-card-text-pill--third"
-          sideClass="left"
-          pill={true}
-        />
+      <div className="medium-featured">
+        <span></span>
+        <span></span>
+        <span></span>
+        <div className="medium-featured-text">
+          <h4>Creative, and experimental design</h4>
+          <p>{creativeText}</p>
+        </div>
       </div>
-      <div className="featured-section-rightside">
-        <FeaturedCard
-          imageSrc={connectionImg}
-          imageAlt="Sharing Image"
-          headerText="Integrated yet data sharing system"
-          bodyText={sharingText}
-          pillClass=""
-          sideClass="big"
-        />
-        <FeaturedCard
-          headerText="Progressive update's and endless support"
-          bodyText={supportText}
-          pillClass=""
-          sideClass="big"
-          pill={true}
-        />
-      </div>
+      <SmallFeatured
+        title="Hopefully Cool data analysis tools"
+        description={analyisText}
+        imageSrc={landingGraphs}
+        imageAlt="Graphs Image"
+        pillClass="text-pill--second"
+      />
+      <SmallFeatured
+        title="Text copy"
+        description={textCopy}
+        imageSrc={designImg}
+        imageAlt="Design Image"
+      />
+      <LargeFeatured
+        title="Integrated yet data sharing system"
+        description={sharingText}
+        imageSrc={connectionImg}
+        imageAlt="Sharing Image"
+      />
+      <LargeFeatured
+        title="Progressive update's and endless support"
+        description={supportText}
+        textPill={true}
+        pillClass="text-pill--third"
+      />
     </section>
   );
 }

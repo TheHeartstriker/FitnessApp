@@ -1,37 +1,40 @@
-export function FeaturedCard(props) {
-  const {
-    imageSrc,
-    imageAlt,
-    headerText,
-    bodyText,
-    pillClass,
-    sideClass,
-    pill,
-  } = props;
+export function SmallFeatured(props) {
+  const { title, description, imageSrc, imageAlt, pillClass } = props;
   return (
-    <div className={`featured-card featured-card--${sideClass}`}>
+    <div className="small-featured">
+      <div className="small-featured-image">
+        <img src={imageSrc} alt={imageAlt} />
+      </div>
+      <div className="small-featured-text">
+        <div className={`text-pill ${pillClass}`}>
+          <span />
+          <h3>Featured</h3>
+        </div>
+        <h4>{title}</h4>
+        <p>{description}</p>
+      </div>
+    </div>
+  );
+}
+
+export function LargeFeatured(props) {
+  const { title, description, imageSrc, imageAlt, textPill, pillClass } = props;
+  return (
+    <div className="large-featured">
       {imageSrc && (
-        <div
-          className={`featured-card-image featured-card-image--${sideClass}`}
-        >
+        <div className="large-featured-image">
           <img src={imageSrc} alt={imageAlt} />
         </div>
       )}
-      {sideClass === "introduction" && (
-        <>
-          <span></span>
-          <span></span>
-        </>
-      )}
-      <div className="featured-card-text">
-        {pill && (
-          <div className={`featured-card-text-pill ${pillClass}`}>
-            <span></span>
-            <h3>Feature</h3>
+      <div className="large-featured-text">
+        {textPill && (
+          <div className={`text-pill ${pillClass}`}>
+            <span />
+            <h3>Featured</h3>
           </div>
         )}
-        <h4>{headerText}</h4>
-        <p>{bodyText}</p>
+        <h4>{title}</h4>
+        <p>{description}</p>
       </div>
     </div>
   );
