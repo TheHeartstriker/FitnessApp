@@ -1,6 +1,5 @@
 import "./featured.css";
 import {
-  FeaturedCard,
   SmallFeatured,
   LargeFeatured,
 } from "@/components/landing/featuredCard";
