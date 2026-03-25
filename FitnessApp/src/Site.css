@@ -8,7 +8,7 @@ body {
 }
 
 html {
-  line-height: 1.6;
+  line-height: 1.5;
   overflow-x: hidden;
   font-size: clamp(1rem, 0.9rem + 0.7vw, 1.25rem);
 }
@@ -27,77 +27,73 @@ h5 {
 }
 
 :root {
-  /* Neutrals */
-  --white-1: #f5f5f5;
-  --white-2: #dfdfdf;
-  --black-1: #1c1c1c;
-  --black-2: #333333;
+  /*  */
   /* Color palette */
   /* Bellow is the 10% */
-  --color-1: #00df82;
+  --color-1: #00f58f;
   /* Bellow is the 30% */
-  --color-2: #2cc295;
+  --color-2: #3eb489;
   /* Bellow is the 60% */
-  --color-3: #03624c;
-  --color-4: #032221;
-  --color-5: #021b1a;
-  /* Opacity versions */
-  --opacity-c1-normal: hsl(155, 100%, 44%);
-  --opacity-c1-light: rgb(0, 223, 130, 0.25);
-  --opacity-c1-s-light: rgb(0, 223, 130, 0.2);
-  --opacity-c1-ul-light: rgb(0, 223, 130, 0.15);
+  --color-3: #075854;
+  --color-4: #053835;
+  --color-5: #021817;
   /*  */
-  --opacity-c5-normal: rgba(2, 27, 26, 0.5);
-  --opacity-c5-s-light: rgba(2, 27, 26, 0.2);
+  /* Font color's */
   /*  */
-  --opacity-c2-normal: rgba(44, 194, 149, 0.5);
-  --opacity-c2-light: rgba(44, 194, 149, 0.25);
-  --opacity-c2-s-light: rgba(44, 194, 149, 0.2);
-  --opacity-c2-ul-light: rgba(44, 194, 149, 0.15);
+  --typo-color-high: #f2f2f2;
+  --typo-color-medium: #e1e1e1;
+  --typo-color-low: #d0d0d0;
 
-  --light-1: rgb(0, 223, 130, 0.09);
+  /* */
   /* Spacing */
-  --space-0: 0.25rem;
-  --space-1: 0.5rem;
-  --space-2: 1rem;
-  --space-3: 1.5rem;
-  --space-4: 2rem;
-  --space-5: 2.5rem;
-  --space-6: 3rem;
-  --space-7: 4rem;
+  /*  */
+  --space-8: 0.5rem; /* 8px */
+  --space-16: 1rem; /* 16px */
+  --space-24: 1.5rem; /* 24px */
+  --space-32: 2rem; /* 32px */
+  --space-40: 2.5rem; /* 40px */
+  --space-48: 3rem; /* 48px */
+  --space-56: 3.5rem; /* 56px */
+  --space-64: 4rem; /* 64px */
+  --space-72: 4.5rem; /* 72px */
+  --space-80: 5rem; /* 80px */
+  --space-88: 5.5rem; /* 88px */
+  --space-96: 6rem; /* 96px */
+  --space-104: 6.5rem; /* 104px */
+  --space-120: 7.5rem; /* 120px */
+  --space-128: 8rem; /* 128px */
+
+  /*  */
+  /* Typography scale */
+  /*  */
+  --typo-size-10: 0.625rem; /* 10px */
+  --typo-size-12: 0.75rem; /* 12px */
+  --typo-size-14: 0.875rem; /* 14px */
+  --typo-size-16: 1rem; /* 16px */
+  --typo-size-20: 1.25rem; /* 20px */
+  --typo-size-24: 1.5rem; /* 24px */
+  --typo-size-32: 2rem; /* 32px */
+  --typo-size-36: 2.25rem; /* 36px */
+  --typo-size-40: 2.5rem; /* 40px */
+  --typo-size-48: 3rem; /* 48px */
+  --typo-size-64: 4rem; /* 64px */
+  --typo-size-96: 6rem; /* 96px */
+  --typo-size-128: 8rem; /* 128px */
+  /*  */
+  /* Typography weights */
+  /*  */
+  --typo-weight-thin: 100;
+  --typo-weight-extra-light: 200;
+  --typo-weight-light: 300;
+  --typo-weight-regular: 400;
+  --typo-weight-medium: 500;
+  --typo-weight-semi-bold: 600;
+  --typo-weight-bold: 700;
+  --typo-weight-extra-bold: 800;
+  --typo-weight-black: 900;
+
   /* Shadows */
   --shadow-small: 0 4px 8px rgba(0, 0, 0, 0.6), 0 1px 2px rgba(0, 0, 0, 0.3);
   --shadow-medium: 0 8px 16px rgba(0, 0, 0, 0.6), 0 2px 4px rgba(0, 0, 0, 0.3);
   --shadow-large: 0 16px 32px rgba(0, 0, 0, 0.6), 0 4px 8px rgba(0, 0, 0, 0.3);
-
-  /* Animation durations */
-  /* Micro-interactions & instant feedback -> 50–200 ms */
-  --duration-fast-1: 0.1s;
-  --duration-fast-2: 0.2s;
-  --duration-fast-3: 0.3s;
-
-  /* Standard UI animations -> 400–800 ms */
-  --duration-normal-1: 0.4s;
-  --duration-normal-2: 0.5s;
-  --duration-normal-3: 0.8s;
-
-  /* Bigger / storytelling -> 1.5s-3.5s*/
-  --duration-long-1: 1.5s;
-  --duration-long-2: 2s;
-  --duration-long-3: 3.5s;
-  /* Easing we use power3 and circle */
-  /* Easing (cubic-bezier approximations for GSAP power3 and circ) */
-  --easing-power3-out: cubic-bezier(0.215, 0.61, 0.355, 1);
-  --easing-circ-out: cubic-bezier(0.075, 0.82, 0.165, 1);
 }
-/* P tags should be set between either 1rem, 1.25rem, 1.5rem or 1.1rem IF used as readable text. H tags should use increments of 0.5rem otherwise no restrictions. As for scaling font at smaller size's around 800px should be decrease
-by 20% as needed for all present fonts in file and we don't use varables so font can easily be calculate lesser by percentages 
-To be clear
-For buttons or small interactive elements:
-0.75rem -> is for small buttons
-0.85rem -> is for button text
-For readable text aka body:
-1.1rem -> is for dense copy of important text like a blog article or of text of less importance
-1.25rem -> is for regular for things like descriptions on cards this should be the default for most text
-1.5rem -> is rarely used but if so mainly in a hero setting
- */

@@ -1,0 +1,149 @@
+/*  */
+/* Main section container */
+/*  */
+.about-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-32);
+  gap: var(--space-32);
+}
+/*  */
+/* Top text area */
+/*  */
+.about-section-header {
+  display: flex;
+  gap: var(--space-64);
+}
+/*  */
+/* Left side text */
+.about-section-header h2 {
+  font-size: var(--typo-size-96);
+  margin: 0;
+  color: var(--color-2);
+  margin-bottom: auto;
+  width: 40%;
+}
+
+/*  */
+/* Right side text */
+.about-section-header-text {
+  display: flex;
+  flex-direction: column;
+  width: auto;
+  margin-top: auto;
+}
+
+.about-section-header-text h3 {
+  font-size: var(--typo-size-24);
+  font-weight: var(--typo-weight-medium);
+  color: var(--color-1);
+  margin: 0;
+}
+
+/* Bottom para's */
+.about-section-header-text-para {
+  display: flex;
+  gap: var(--space-32);
+}
+
+.about-section-header-text-para p {
+  font-size: var(--typo-size-16);
+  font-weight: var(--typo-weight-regular);
+  width: 50%;
+  color: var(--typo-color-medium);
+}
+/*  */
+/* Bottom card area */
+/*  */
+.about-section-cards {
+  display: flex;
+  gap: var(--space-24);
+}
+/*  */
+/* Left side cards */
+.about-section-cards-left {
+  width: 50%;
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-24);
+}
+
+/* Cards */
+.about-section-cards-left-item {
+  width: 100%;
+  height: fit-content;
+  background-color: var(--color-4);
+  padding: var(--space-32);
+  border-radius: 40px;
+}
+
+/* Cards text */
+.about-section-cards-left-item-text {
+  display: flex;
+  flex-direction: column;
+  margin-top: var(--space-128);
+  gap: var(--space-16);
+}
+
+.about-section-cards-left-item-text h3 {
+  color: var(--color-2);
+  font-weight: var(--typo-weight-regular);
+  font-size: var(--typo-size-36);
+  margin: 0;
+}
+
+.about-section-cards-left-item-text p {
+  color: var(--typo-color-medium);
+  font-weight: var(--typo-weight-regular);
+  font-size: var(--typo-size-16);
+  margin: 0;
+}
+
+/*  */
+/* Right side cards */
+
+.about-section-cards-right {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 40px;
+  background-color: var(--color-4);
+}
+
+.about-section-cards-right-text {
+  width: 100%;
+  height: 50%;
+  padding: var(--space-32);
+}
+
+.about-section-cards-right-text h3 {
+  color: var(--color-2);
+  font-weight: var(--typo-weight-regular);
+  font-size: var(--typo-size-36);
+  margin: 0;
+  margin-bottom: var(--space-16);
+}
+
+.about-section-cards-right-text p {
+  color: var(--typo-color-medium);
+  font-weight: var(--typo-weight-regular);
+  font-size: var(--typo-size-16);
+  margin: 0;
+}
+
+.about-section-cards-right-image {
+  width: 100%;
+  height: 50%;
+  position: relative;
+}
+
+.about-section-cards-right-image img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 40px;
+}

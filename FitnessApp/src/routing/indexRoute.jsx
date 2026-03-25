@@ -3,9 +3,9 @@ import { lazy } from "react";
 import PrivateRoutes from "./privateRoutes.jsx";
 import PublicRoutes from "./publicRoutes.jsx";
 //Current work
-const NewDashboard = lazy(() => import("../pages/dashboard/dashboardNew.jsx"));
-const NewDaily = lazy(() => import("../pages/daily/newDaily.jsx"));
-const NewShare = lazy(() => import("../pages/share/newShare.jsx"));
+const NewDashboard = lazy(() => import("../view/dashboard/dashboardNew.jsx"));
+const NewDaily = lazy(() => import("../view/daily/newDaily.jsx"));
+const NewShare = lazy(() => import("../view/share/newShare.jsx"));
 const RootPath = lazy(() => import("./rootPath.jsx"));
 
 function AppRoutes() {

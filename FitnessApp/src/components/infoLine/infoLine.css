@@ -1,0 +1,24 @@
+.infoLine {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  gap: var(--space-16);
+}
+
+.infoLine hr {
+  width: 75px;
+  height: 2px;
+  border: none;
+  background-color: var(--color-1);
+  margin: 0;
+  z-index: 5;
+}
+
+.infoLine h5 {
+  font-size: var(--typo-size-12);
+  color: var(--color-1);
+  font-weight: var(--typo-weight-regular);
+  margin: 0;
+  z-index: 5;
+}
