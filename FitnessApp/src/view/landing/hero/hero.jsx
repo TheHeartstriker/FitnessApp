@@ -1,39 +1,40 @@
-import { ScrollDown } from "../../../utils/scroll";
+import { ScrollButton } from "@/utils/scroll";
 import "./hero.css";
 import TriAngleBackgroundAni from "./helper";
 
-function HeroView() {
+function Hero() {
   return (
     <>
-      <section className="landing-page">
-        <div className="landing-background-svg">
-          <div className="test-blur"></div>
+      <section className="landing-section">
+        <div className="landing-section-svg">
           <TriAngleBackgroundAni />
         </div>
-        <div className="landing-content">
-          <h1 id="landing-char">FGraphs</h1>
-          <h2 id="landing-char-2">A simplistic take on fitness tracking</h2>
-          <p id="landing-char">
+        <div className="landing-section-content">
+          <h1>FGraphs</h1>
+          <h2>A simplistic take on fitness tracking</h2>
+          <p>
             Hi there! FGraphs is a fitness tracking app! Mainly made in my spare
             time to learn, have fun and showcase my skills and understanding of
             web development. But! Its also a pretty neat app to track your
             fitness if you into that.
           </p>
-          <div className="landing-button-section">
-            <ScrollDown percent={100} className="primary-action-btn">
-              Want to give it a try?
-            </ScrollDown>
-            <hr id="button-char"></hr>
-            <button className="primary-action-btn circle-button">
+          <div className="landing-section-content-details">
+            <ScrollButton
+              percent={125}
+              className={"landing-section-content-details-button-1"}
+            >
+              <h3>Want to give it a try?</h3>
+            </ScrollButton>
+            <hr></hr>
+            <button className="landing-section-content-details-button-2">
+              <h3>K</h3>
               <a
                 href="https://www.kadenwildauer.com"
                 target="_blank"
                 rel="noopener noreferrer"
-              >
-                K
-              </a>
+              ></a>
             </button>
-            <h3 id="button-char">More from me</h3>
+            <h3>More from me</h3>
           </div>
         </div>
       </section>
@@ -41,4 +42,4 @@ function HeroView() {
   );
 }
 
-export default HeroView;
+export default Hero;

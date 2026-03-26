@@ -158,7 +158,7 @@ function TriAngleBackgroundAni() {
 
   useEffect(() => {
     if (otherPolyRef.current.length > 0) return;
-    parentRef.current = document.querySelector(".landing-background-svg");
+    parentRef.current = document.querySelector(".landing-section-svg");
     fillPoly();
     console.log(otherPolyRef.current);
   }, []);
