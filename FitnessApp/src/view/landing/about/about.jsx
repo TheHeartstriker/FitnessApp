@@ -2,18 +2,21 @@ import "./about.css";
 import { useEffect } from "react";
 import { lorem, smallLorem, largeLorem } from "@/utils/text";
 import InfoLine from "@/components/infoLine/infoLine";
+import AboutAni from "./aboutAni";
 function About() {
   return (
     <section className="about-section">
+      <AboutAni />
       {/*  */}
       {/* Top intro header */}
       {/*  */}
       <div className="about-section-header">
         {/*  */}
         {/* Left side text */}
-        <h2>
-          About <br /> FGraph's
-        </h2>
+        <div className="about-section-header-container">
+          <h2>About</h2>
+          <h2>FGraphs</h2>
+        </div>
         {/*  */}
         {/* Right side text */}
         <div className="about-section-header-text">

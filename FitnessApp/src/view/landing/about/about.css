@@ -18,12 +18,18 @@
 }
 /*  */
 /* Left side text */
+
+.about-section-header-container {
+  display: flex;
+  flex-direction: column;
+}
+
 .about-section-header h2 {
   font-size: var(--typo-size-96);
   margin: 0;
   color: var(--color-2);
-  margin-bottom: auto;
-  width: 40%;
+  width: fit-content;
+  white-space: nowrap;
 }
 
 /*  */

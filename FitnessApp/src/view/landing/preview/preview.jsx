@@ -2,12 +2,14 @@ import "./preview.css";
 import { useEffect } from "react";
 import { lorem, smallLorem, largeLorem } from "@/utils/text";
 import InfoLine from "@/components/infoLine/infoLine";
+import PreviewAni from "./previewAni";
 function Preview() {
   return (
     <section className="preview-section">
       {/*  */}
       {/* Preview header */}
       {/*  */}
+      <PreviewAni />
       <div className="preview-section-header">
         <InfoLine text="Some info" />
         <div className="preview-section-header-text">

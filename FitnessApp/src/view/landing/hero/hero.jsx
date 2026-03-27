@@ -1,6 +1,7 @@
 import { ScrollButton } from "@/utils/scroll";
 import "./hero.css";
 import TriAngleBackgroundAni from "./helper";
+import HeroAni from "./heroAni";
 
 function Hero() {
   return (
@@ -9,6 +10,7 @@ function Hero() {
         <div className="landing-section-svg">
           <TriAngleBackgroundAni />
         </div>
+        <HeroAni />
         <div className="landing-section-content">
           <h1>FGraphs</h1>
           <h2>A simplistic take on fitness tracking</h2>

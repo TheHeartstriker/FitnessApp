@@ -11,18 +11,17 @@
   width: 100%;
   border-radius: 0 0 50px 50px;
   padding: var(--space-40);
-  overflow: hidden;
 }
 /*  */
 /* Absolute background for landing section */
 .landing-section-svg {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   height: 100%;
   width: 100%;
   overflow: hidden;
-  transform: scale(1.02);
 }
 
 /*  */

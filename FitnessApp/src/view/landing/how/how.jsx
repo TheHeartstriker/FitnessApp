@@ -2,9 +2,11 @@ import "./how.css";
 import { useEffect } from "react";
 import { lorem, smallLorem, largeLorem } from "@/utils/text";
 import InfoLine from "@/components/infoLine/infoLine";
+import HowAni from "./howAni";
 function How() {
   return (
     <section className="how-section">
+      <HowAni />
       {/*  */}
       {/* Left side text, cards and divider */}
       {/*  */}

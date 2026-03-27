@@ -11,6 +11,7 @@ html {
   line-height: 1.5;
   overflow-x: hidden;
   font-size: clamp(1rem, 0.9rem + 0.7vw, 1.25rem);
+  scrollbar-gutter: stable;
 }
 
 * {
