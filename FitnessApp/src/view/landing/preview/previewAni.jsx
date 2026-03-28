@@ -57,16 +57,28 @@ function PreviewAni() {
     const subHeader = document.querySelectorAll(
       ".preview-section-header-text-para h3",
     );
-    animateText({ start: -75, end: 0 }, [header, subHeader], tl, {
-      duration: 0.7,
-      easing: "bounce.out",
-    });
+    animateText(
+      { start: -75, end: 0 },
+      [header, subHeader],
+      tl,
+      {
+        duration: 0.7,
+        easing: "bounce.out",
+      },
+      {
+        start: "top 90%",
+        end: "bottom 40%",
+      },
+    );
   }
 
   useEffect(() => {
-    elAnimation1(gsap.timeline());
-    elAnimation2(gsap.timeline());
-    textAnimation(gsap.timeline());
+    const tl1 = gsap.timeline({ paused: true });
+    const tl2 = gsap.timeline({ paused: true });
+    const tl3 = gsap.timeline({ paused: true });
+    elAnimation1(tl1);
+    elAnimation2(tl2);
+    textAnimation(tl3);
   }, []);
 }
 

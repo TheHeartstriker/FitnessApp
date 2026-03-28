@@ -3,9 +3,11 @@ import { useEffect } from "react";
 import { lorem, smallLorem, largeLorem } from "@/utils/text";
 import InfoLine from "@/components/infoLine/infoLine";
 import ArrowSmRight from "@/../public/icons/arrow-sm-right";
+import LoginAni from "./loginAni";
 function Login() {
   return (
     <section className="login-section">
+      <LoginAni />
       {/*  */}
       {/* Left side */}
       {/*  */}

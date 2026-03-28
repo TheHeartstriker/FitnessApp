@@ -4,12 +4,14 @@ import { lorem, smallLorem, largeLorem } from "@/utils/text";
 import InfoLine from "@/components/infoLine/infoLine";
 import PlusSm from "@/../public/icons/plus-sm";
 import ArrowSmRight from "@/../public/icons/arrow-sm-right";
+import BenefitsAni from "./benefitsAni";
 function Benefits() {
   return (
     <section className="benefits-section">
       {/*  */}
       {/* Benefits top section */}
       {/*  */}
+      <BenefitsAni />
       <div className="benefits-section-header">
         <InfoLine text="Some info" />
         <div className="benefits-section-header-text">
