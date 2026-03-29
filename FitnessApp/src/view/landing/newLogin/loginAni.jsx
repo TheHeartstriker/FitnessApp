@@ -1,7 +1,9 @@
 import { gsap } from "gsap/gsap-core";
 import { animateText, animateBlocks } from "@/utils/animations";
 import { useEffect } from "react";
-import Login from "./login";
+const TEXT_DURATION = 0.6;
+const INPUT_DURATION = 0.4;
+
 function LoginAni() {
   //
   // Animate elements
@@ -16,14 +18,14 @@ function LoginAni() {
 
     animateBlocks(
       { start: -50, end: 0, type: "y" },
-      { el: "top", scroll: "95%" },
+      { el: "top", scroll: "90%" },
       { el: "bottom", scroll: "40%" },
       [elInput, elSubmit],
       {
-        duration: 0.85,
+        duration: INPUT_DURATION,
         delay: 0,
-        stagger: 0.15,
-        easing: "bounce.out",
+        stagger: 0.06,
+        easing: "myBounce",
       },
       tl,
     );
@@ -43,8 +45,8 @@ function LoginAni() {
       [headerRight, headerLeft],
       tl,
       {
-        duration: 0.7,
-        easing: "bounce.out",
+        duration: TEXT_DURATION,
+        easing: "myBounce",
       },
       {
         start: "top 90%",

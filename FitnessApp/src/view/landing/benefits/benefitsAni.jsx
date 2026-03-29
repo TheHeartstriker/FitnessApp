@@ -1,6 +1,10 @@
 import { gsap } from "gsap/gsap-core";
 import { animateText, animateBlocks } from "@/utils/animations";
 import { useEffect } from "react";
+
+const TEXT_DURATION = 0.6;
+const ELEMENT_DURATION = 0.4;
+
 function BenefitsAni() {
   //
   // Animate elements
@@ -15,14 +19,14 @@ function BenefitsAni() {
 
     animateBlocks(
       { start: -50, end: 0, type: "y" },
-      { el: "top", scroll: "95%" },
+      { el: "top", scroll: "90%" },
       { el: "bottom", scroll: "40%" },
       [cardText, cardIcons],
       {
-        duration: 0.85,
+        duration: ELEMENT_DURATION,
         delay: 0,
-        stagger: 0.15,
-        easing: "bounce.out",
+        stagger: 0.06,
+        easing: "myBounce",
       },
       tl,
     );
@@ -41,8 +45,8 @@ function BenefitsAni() {
       [header],
       tl,
       {
-        duration: 0.7,
-        easing: "bounce.out",
+        duration: TEXT_DURATION,
+        easing: "myBounce",
       },
       {
         start: "top 90%",

@@ -1,9 +1,14 @@
 import { gsap } from "gsap/gsap-core";
 import { animateText, animateBlocks } from "@/utils/animations";
 import { useEffect } from "react";
+
+const IMAGE_DURATION = 0.7;
+const BOTTOM_DURATION = 0.4;
+const TEXT_DURATION = 0.6;
+
 function PreviewAni() {
   //
-  // Animate elements
+  // Image animation
   //
   function elAnimation1(tl) {
     const cardLeft = document.querySelector(
@@ -12,18 +17,20 @@ function PreviewAni() {
     const cardRight = document.querySelectorAll(
       ".preview-section-images-container-right",
     );
-    const stats = document.querySelectorAll(".preview-section-images-stats");
+    const stats = document.querySelectorAll(
+      ".preview-section-images-stats-item",
+    );
 
     animateBlocks(
       { start: -50, end: 0, type: "y" },
-      { el: "top", scroll: "95%" },
+      { el: "top", scroll: "90%" },
       { el: "bottom", scroll: "40%" },
       [cardLeft, cardRight, stats],
       {
-        duration: 0.85,
+        duration: IMAGE_DURATION,
         delay: 0,
-        stagger: 0.15,
-        easing: "bounce.out",
+        stagger: 0.06,
+        easing: "myBounce",
       },
       tl,
     );
@@ -32,19 +39,19 @@ function PreviewAni() {
   // Animate elements
   //
   function elAnimation2(tl) {
-    const previewStats = document.querySelectorAll(".preview-section-ending");
+    const previewStats = document.querySelectorAll(".preview-section-ending *");
 
     animateBlocks(
       { start: -50, end: 0, type: "y" },
-      { el: "top", scroll: "95%" },
+      { el: "top", scroll: "90%" },
       { el: "bottom", scroll: "40%" },
       [previewStats],
 
       {
-        duration: 0.85,
+        duration: BOTTOM_DURATION,
         delay: 0,
-        stagger: 0.15,
-        easing: "bounce.out",
+        stagger: 0.06,
+        easing: "myBounce",
       },
       tl,
     );
@@ -62,8 +69,8 @@ function PreviewAni() {
       [header, subHeader],
       tl,
       {
-        duration: 0.7,
-        easing: "bounce.out",
+        duration: TEXT_DURATION,
+        easing: "myBounce",
       },
       {
         start: "top 90%",

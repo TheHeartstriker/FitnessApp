@@ -8,7 +8,9 @@ gsap.registerPlugin(MotionPathPlugin, ScrollTrigger);
 //
 //Animation durations
 //
-const OPENING_DURATION = 1.25;
+const OPENING_DURATION = 1;
+const TEXT_DURATION = 0.6;
+const SLIDE_DURATION = 0.4;
 
 function HeroAni() {
   //
@@ -24,9 +26,10 @@ function HeroAni() {
   // Opening animation
   //
   function openingAnimation(tl, svgBackground, fullWidth, fullHeight) {
+    gsap.set(svgBackground, { opacity: 1 });
     tl.fromTo(
       svgBackground,
-      { width: 0, height: 0, borderRadius: "200px" },
+      { width: 0, height: 0, borderRadius: "500px" },
       {
         width: `${fullWidth * reductionHW.width}px`,
         height: `${fullHeight * reductionHW.height}px`,
@@ -56,7 +59,7 @@ function HeroAni() {
         scrollTrigger: {
           trigger: document.body,
           start: "top top",
-          end: "50px top",
+          end: "75px top",
           scrub: true,
         },
         width: `100%`,
@@ -72,12 +75,12 @@ function HeroAni() {
     const header = document.querySelector(".landing-section-content h1");
     const subHeader = document.querySelector(".landing-section-content h2");
     animateText({ start: -75, end: 0 }, [header, subHeader], tl, {
-      duration: 0.7,
-      easing: "bounce.out",
+      duration: TEXT_DURATION,
+      easing: "myBounce",
     });
   }
   //
-  // Block animations
+  // Slide in animations
   //
   function blockAnimations(tl) {
     const para = document.querySelector(".landing-section-content p");
@@ -95,15 +98,15 @@ function HeroAni() {
     );
     const arr = [para, button1, seperator, button2, sepinfo];
     animateBlocks(
-      { start: -100, end: 0, type: "y" },
+      { start: -50, end: 0, type: "y" },
       { el: "top", scroll: "90%" },
       { el: "bottom", scroll: "40%" },
       arr,
       {
-        duration: 0.85,
+        duration: SLIDE_DURATION,
         delay: 0,
-        stagger: 0.15,
-        easing: "bounce.out",
+        stagger: 0.06,
+        easing: "myBounce",
       },
       tl,
     );
