@@ -14,11 +14,8 @@ function How() {
         {/*  */}
         {/* Header */}
         <div className="how-section-left-header">
-          <h2>
-            {" "}
-            How FGraphs works and <br />
-            why it was created
-          </h2>
+          <h2> How FGraphs works and</h2>
+          <h2> why it was created</h2>
           <p>{lorem + smallLorem}</p>
         </div>
         {/*  */}

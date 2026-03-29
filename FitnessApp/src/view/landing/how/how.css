@@ -22,7 +22,6 @@
 .how-section-left-header {
   display: flex;
   flex-direction: column;
-  gap: var(--space-16);
 }
 
 .how-section-left-header h2 {
@@ -38,6 +37,7 @@
   font-weight: var(--typo-weight-regular);
   font-size: var(--typo-size-16);
   margin: 0;
+  margin-top: var(--space-16);
 }
 /*  */
 /* Left side content bottom*/
@@ -80,7 +80,12 @@
   gap: var(--space-8);
   background-color: var(--color-4);
   border-radius: 40px;
-  padding: var(--space-16);
+  padding: var(--space-24);
+  transition: background-color var(--motion-medium-1) var(--power-2-out);
+}
+
+.how-section-left-content-cards-item:hover {
+  background-color: var(--color-3);
 }
 
 .how-section-left-content-cards-item h3 {
@@ -107,6 +112,11 @@
   background-color: var(--color-4);
   border-radius: 40px;
   padding: var(--space-24);
+  transition: background-color var(--motion-medium-1) var(--power-2-out);
+}
+
+.how-section-right:hover {
+  background-color: var(--color-3);
 }
 
 .how-section-right-text {
@@ -128,4 +138,32 @@
   font-weight: var(--typo-weight-regular);
   font-size: var(--typo-size-16);
   margin: 0;
+}
+
+@media (max-width: 1350px) {
+  .how-section {
+    flex-direction: column;
+  }
+  .how-section-right {
+    width: 100%;
+  }
+  .how-section-left {
+    width: 100%;
+  }
+}
+
+@media (max-width: 1000px) {
+  .how-section-left-header p {
+    width: 100%;
+  }
+}
+
+@media (max-width: 700px) {
+  .how-section-left-content-cards {
+    flex-direction: column;
+  }
+
+  .how-section-left-header h2 {
+    font-size: var(--typo-size-40);
+  }
 }

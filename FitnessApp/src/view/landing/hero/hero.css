@@ -38,7 +38,7 @@
 /*  */
 /* Land section text */
 .landing-section-content h1 {
-  font-size: 6rem;
+  font-size: var(--typo-size-96);
   color: var(--color-1);
   margin: 0;
   margin-bottom: var(--space-0);
@@ -46,16 +46,17 @@
   font-weight: var(--typo-weight-bold);
 }
 .landing-section-content h2 {
-  font-size: 2rem;
+  font-size: var(--typo-size-32);
   color: var(--typo-color-medium);
   margin-top: 0;
   margin-bottom: var(--space-3);
-  font-weight: var(--typo-weight-medium);
+  font-weight: var(--typo-weight-semi-bold);
 }
 
 .landing-section-content p {
   font-size: var(--typo-size-20);
   color: var(--typo-color-low);
+  margin: var(--space-16) 0;
   max-width: 850px;
   font-weight: 400;
 }
@@ -109,7 +110,7 @@
   background-color: var(--color-5);
   margin-left: var(--space-16);
   padding: var(--space-24);
-  height: calc(100% - var(--space-16));
+  height: 100%;
   aspect-ratio: 1 / 1;
   border-radius: 50%;
   border: none;
@@ -146,7 +147,7 @@
 }
 /* separator */
 .landing-section-content-details hr {
-  height: 5rem;
+  height: 100%;
   width: 2px;
   background-color: var(--color-2);
   margin: 0 var(--space-7);
@@ -155,10 +156,44 @@
 
 /* side text */
 .landing-section-content-details h3 {
-  font-size: 0.85rem;
+  font-size: var(--typo-size-14);
   color: var(--color-2);
   margin: 0 var(--space-3);
   align-self: center;
   text-shadow: 0 4px 8px var(--opacity-c5-normal);
   font-weight: 400;
+}
+
+@media (max-width: 850px) {
+  .landing-section-content h2 {
+    font-size: var(--typo-size-24);
+  }
+
+  .landing-section-content p {
+    font-size: var(--typo-size-16);
+  }
+}
+
+@media (max-width: 600px) {
+  .landing-section-content h1 {
+    font-size: var(--typo-size-64);
+  }
+  .landing-section-content-details-button-1 h3 {
+    font-size: var(--typo-size-12);
+  }
+  .landing-section-content-details-button-2 h3 {
+    font-size: var(--typo-size-12);
+  }
+  .landing-section-content-details h3 {
+    font-size: var(--typo-size-12);
+  }
+}
+
+@media (max-width: 500px) {
+  .landing-section-content-details-button-1 {
+    margin: 0;
+  }
+  .landing-section-content-details-button-2 {
+    margin: 0;
+  }
 }
