@@ -95,13 +95,18 @@ h5 {
   /*  */
   /* Motion durations */
   /*  */
+  /* Think micro interactions */
   --motion-small-1: 100ms;
   --motion-small-2: 200ms;
   --motion-medium-1: 300ms;
+  /* Think standard interactions */
   --motion-medium-2: 400ms;
   --motion-large-1: 500ms;
   --motion-large-2: 600ms;
-  --motion-extra: 700ms;
+  /* Think large interactions */
+  --motion-extra-1: 700ms;
+  --motion-extra-2: 800ms;
+  --motion-ultra-1: 900ms;
   /*  */
   /* Shadows */
   /*  */
@@ -111,5 +116,6 @@ h5 {
   /*  */
   /* Easing functions */
   /*  */
+  --power-1-out: cubic-bezier(0.25, 0.46, 0.45, 0.94);
   --power-2-out: cubic-bezier(0.17, 0.67, 0.83, 0.67);
 }

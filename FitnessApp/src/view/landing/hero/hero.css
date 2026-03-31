@@ -81,14 +81,14 @@
   border-radius: 30px;
   border: none;
   transition:
-    background-color var(--motion-small-2) ease-in-out,
-    box-shadow var(--motion-small-2) ease-in-out;
+    background-color var(--motion-small-2) var(--power-2-out),
+    box-shadow var(--motion-small-2) var(--power-2-out);
 }
 .landing-section-content-details-button-1 h3 {
   font-size: var(--typo-size-14);
   margin: 0;
   color: var(--color-2);
-  transition: color var(--motion-small-2) ease-in-out;
+  transition: color var(--motion-small-2) var(--power-2-out);
 }
 /* First button hover */
 .landing-section-content-details-button-1:hover {
@@ -115,15 +115,15 @@
   border-radius: 50%;
   border: none;
   transition:
-    background-color var(--motion-small-2) ease-in-out,
-    box-shadow var(--motion-small-2) ease-in-out;
+    background-color var(--motion-small-2) var(--power-2-out),
+    box-shadow var(--motion-small-2) var(--power-2-out);
 }
 
 .landing-section-content-details-button-2 h3 {
   font-size: var(--typo-size-14);
   margin: 0;
   color: var(--color-2);
-  transition: color var(--motion-small-2) ease-in-out;
+  transition: color var(--motion-small-2) var(--power-2-out);
 }
 
 .landing-section-content-details-button-2 a {

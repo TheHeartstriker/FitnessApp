@@ -11,11 +11,8 @@ function PreviewAni() {
   // Image animation
   //
   function elAnimation1(tl) {
-    const cardLeft = document.querySelector(
-      ".preview-section-images-container-left",
-    );
-    const cardRight = document.querySelectorAll(
-      ".preview-section-images-container-right",
+    const previewImages = document.querySelectorAll(
+      ".preview-section-images-container-item",
     );
     const stats = document.querySelectorAll(
       ".preview-section-images-stats-item",
@@ -25,7 +22,7 @@ function PreviewAni() {
       { start: -50, end: 0, type: "y" },
       { el: "top", scroll: "90%" },
       { el: "bottom", scroll: "40%" },
-      [cardLeft, cardRight, stats],
+      [previewImages, stats],
       {
         duration: IMAGE_DURATION,
         delay: 0,

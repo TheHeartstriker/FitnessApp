@@ -6,6 +6,10 @@
   gap: var(--space-16);
 }
 
+.infoLine.reverse {
+  flex-direction: row-reverse;
+}
+
 .infoLine hr {
   width: 75px;
   height: 2px;

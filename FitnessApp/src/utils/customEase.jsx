@@ -8,3 +8,9 @@ CustomBounce.create("myBounce", {
   squash: 0,
   squashID: "myBounce",
 });
+
+CustomBounce.create("myBounceSmooth", {
+  strength: 0.2,
+  squash: 0,
+  squashID: "myBounceSmooth",
+});

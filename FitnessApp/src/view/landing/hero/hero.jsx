@@ -22,7 +22,7 @@ function Hero() {
           </p>
           <div className="landing-section-content-details">
             <ScrollButton
-              percent={125}
+              percent={1000}
               className={"landing-section-content-details-button-1"}
             >
               <h3>Want to give it a try?</h3>

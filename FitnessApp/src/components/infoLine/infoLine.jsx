@@ -1,8 +1,8 @@
 import "./infoLine.css";
 
-function InfoLine({ text }) {
+function InfoLine({ text, reverse }) {
   return (
-    <div className="infoLine">
+    <div className={`infoLine ${reverse ? "reverse" : ""}`}>
       <hr></hr>
       <h5>{text}</h5>
     </div>

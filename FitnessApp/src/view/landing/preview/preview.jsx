@@ -1,9 +1,10 @@
 import "./preview.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { lorem, smallLorem, largeLorem } from "@/utils/text";
 import InfoLine from "@/components/infoLine/infoLine";
 import PreviewAni from "./previewAni";
 function Preview() {
+  const [activePreview, setActivePreview] = useState(0);
   return (
     <section className="preview-section">
       {/*  */}
@@ -11,7 +12,7 @@ function Preview() {
       {/*  */}
       <PreviewAni />
       <div className="preview-section-header">
-        <InfoLine text="Some info" />
+        <InfoLine text="Some info" reverse={true} />
         <div className="preview-section-header-text">
           <h2>
             The preview of the intresting, <br />
@@ -31,19 +32,29 @@ function Preview() {
         {/*  */}
         {/* Image container */}
         <div className="preview-section-images-container">
-          <div className="preview-section-images-container-left">
+          <div
+            className={`preview-section-images-container-item ${activePreview === 0 ? "active" : ""}`}
+            onMouseEnter={() => setActivePreview(0)}
+          >
             <img src="/landing/grid.png" alt="Feature image" />
           </div>
-          <div className="preview-section-images-container-right">
-            <div className="preview-section-images-container-right-item">
-              <img src="/landing/grid.png" alt="Feature image" />
-            </div>
-            <div className="preview-section-images-container-right-item">
-              <img src="/landing/grid.png" alt="Feature image" />
-            </div>
-            <div className="preview-section-images-container-right-item">
-              <img src="/landing/grid.png" alt="Feature image" />
-            </div>
+          <div
+            className={`preview-section-images-container-item ${activePreview === 1 ? "active" : ""}`}
+            onMouseEnter={() => setActivePreview(1)}
+          >
+            <img src="/landing/grid.png" alt="Feature image" />
+          </div>
+          <div
+            className={`preview-section-images-container-item ${activePreview === 2 ? "active" : ""}`}
+            onMouseEnter={() => setActivePreview(2)}
+          >
+            <img src="/landing/grid.png" alt="Feature image" />
+          </div>
+          <div
+            className={`preview-section-images-container-item ${activePreview === 3 ? "active" : ""}`}
+            onMouseEnter={() => setActivePreview(3)}
+          >
+            <img src="/landing/grid.png" alt="Feature image" />
           </div>
         </div>
         {/*  */}
