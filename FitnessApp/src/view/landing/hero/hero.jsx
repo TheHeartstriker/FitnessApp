@@ -1,25 +1,26 @@
 import { ScrollButton } from "@/utils/scroll";
 import "./hero.css";
-import TriAngleBackgroundAni from "./helper";
+import BackGroundGen from "@/components/backGroundGen";
+import { header, subHeader, para } from "./text";
+
 import HeroAni from "./heroAni";
+import BackGround from "@/../public/landing/backGround";
 
 function Hero() {
   return (
     <>
       <section className="landing-section">
         <div className="landing-section-svg">
-          <TriAngleBackgroundAni />
+          <BackGroundGen
+            svgComponent={<BackGround />}
+            parent={".landing-section-svg"}
+          />
         </div>
         <HeroAni />
         <div className="landing-section-content">
-          <h1>FGraphs</h1>
-          <h2>A simplistic take on fitness tracking</h2>
-          <p>
-            Hi there! FGraphs is a fitness tracking app! Mainly made in my spare
-            time to learn, have fun and showcase my skills and understanding of
-            web development. But! Its also a pretty neat app to track your
-            fitness if you into that.
-          </p>
+          <h1>{header}</h1>
+          <h2>{subHeader}</h2>
+          <p>{para}</p>
           <div className="landing-section-content-details">
             <ScrollButton
               percent={1000}

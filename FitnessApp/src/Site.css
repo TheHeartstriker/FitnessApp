@@ -118,4 +118,31 @@ h5 {
   /*  */
   --power-1-out: cubic-bezier(0.25, 0.46, 0.45, 0.94);
   --power-2-out: cubic-bezier(0.17, 0.67, 0.83, 0.67);
+  /*  */
+  /* Temp */
+  /*  */
+  /* Opacity versions */
+  --opacity-c1-normal: hsl(155, 100%, 44%);
+  --opacity-c1-light: rgb(0, 223, 130, 0.25);
+  --opacity-c1-s-light: rgb(0, 223, 130, 0.2);
+  --opacity-c1-ul-light: rgb(0, 223, 130, 0.15);
+  /*  */
+  --opacity-c5-normal: rgba(2, 27, 26, 0.5);
+  --opacity-c5-s-light: rgba(2, 27, 26, 0.2);
+  /*  */
+  --opacity-c2-normal: rgba(44, 194, 149, 0.5);
+  --opacity-c2-light: rgba(44, 194, 149, 0.25);
+  --opacity-c2-s-light: rgba(44, 194, 149, 0.2);
+  --opacity-c2-ul-light: rgba(44, 194, 149, 0.15);
+
+  --light-1: rgb(0, 223, 130, 0.09);
+  /* Spacing */
+  /* --space-0: 0.25rem;
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2rem;
+  --space-5: 2.5rem;
+  --space-6: 3rem;
+  --space-7: 4rem; */
 }
