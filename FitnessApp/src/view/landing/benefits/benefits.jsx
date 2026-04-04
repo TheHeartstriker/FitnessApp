@@ -17,7 +17,7 @@ function Benefits() {
       {/*  */}
       <BenefitsAni />
       <div className="benefits-section-header">
-        <InfoLine text="Some info" reverse={true} />
+        <InfoLine text="Benefits" reverse={true} />
         <div className="benefits-section-header-text">
           <h2>
             The possible benefits of <br /> using a fitness tracker

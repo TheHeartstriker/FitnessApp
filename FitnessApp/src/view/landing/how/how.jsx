@@ -44,7 +44,7 @@ function How() {
       {/* Right side card*/}
       {/*  */}
       <div className="how-section-right">
-        <InfoLine text="Some info" />
+        <InfoLine text="How" />
         <div className="how-section-right-text">
           <h3>{card3.header}</h3>
           <p>{card3.para}</p>

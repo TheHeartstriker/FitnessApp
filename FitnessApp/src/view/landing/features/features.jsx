@@ -84,9 +84,10 @@ function Features() {
           >
             <ArrowSmRight />
           </button>
-          <span></span>
-          <span></span>
-          <span></span>
+          <span className={` ${cardNumber[0] === "01" ? "active" : ""}`}></span>
+          <span className={` ${cardNumber[0] === "02" ? "active" : ""}`}></span>
+          <span className={` ${cardNumber[0] === "03" ? "active" : ""}`}></span>
+          <span className={` ${cardNumber[0] === "04" ? "active" : ""}`}></span>
         </div>
       </div>
     </section>

@@ -13,10 +13,10 @@ function Preview() {
       {/*  */}
       <PreviewAni />
       <div className="preview-section-header">
-        <InfoLine text="Some info" reverse={true} />
+        <InfoLine text="Preview" reverse={true} />
         <div className="preview-section-header-text">
           <h2>
-            The preview of the intresting, <br />
+            The preview of the interesting, <br />
             design, innovation and inspiration <br />
             of FGraphs
           </h2>

@@ -1,1 +1,1 @@
-export const para = `Hi if your intrested you can login or create an account it's free. Otherwise have a great day :)`;
+export const para = `Hi, if you're interested, you can login or create an account. It's free. Otherwise, have a great day :)`;

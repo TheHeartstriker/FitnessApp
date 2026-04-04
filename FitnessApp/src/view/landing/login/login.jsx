@@ -69,7 +69,7 @@ function Login() {
       <div className="login-section-left">
         {/*  */}
         {/* Intro text */}
-        <InfoLine text="Some info" reverse={true} />
+        <InfoLine text="Login" reverse={true} />
         <h4>
           Get access to a personalized <br /> fitness app made by a <br />{" "}
           enthusiast

@@ -97,7 +97,7 @@
   background-size: cover;
   background-position: center;
   background-image:
-    linear-gradient(var(--img-opacity-medium), var(--img-opacity-medium)),
+    linear-gradient(var(--img-opacity-high), var(--img-opacity-high)),
     url("/landing/features/change.webp");
   height: 100%;
 }
@@ -210,6 +210,11 @@
   aspect-ratio: 1 / 1;
   background-color: var(--color-4);
   border-radius: 50%;
+  transition: background-color var(--motion-small-2) var(--power-2-out);
+}
+
+.features-section-next-nav span.active {
+  background-color: var(--color-2);
 }
 
 @media (max-width: 1500px) {
