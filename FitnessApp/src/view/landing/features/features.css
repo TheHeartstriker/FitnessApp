@@ -97,7 +97,7 @@
   background-size: cover;
   background-position: center;
   background-image:
-    linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+    linear-gradient(var(--img-opacity-medium), var(--img-opacity-medium)),
     url("/landing/features/change.webp");
   height: 100%;
 }

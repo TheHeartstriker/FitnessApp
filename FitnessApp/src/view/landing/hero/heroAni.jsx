@@ -8,7 +8,7 @@ gsap.registerPlugin(MotionPathPlugin, ScrollTrigger);
 //
 //Animation durations
 //
-const OPENING_DURATION = 1;
+const OPENING_DURATION = 1.2;
 const TEXT_DURATION = 0.6;
 const SLIDE_DURATION = 0.4;
 
@@ -71,9 +71,10 @@ function HeroAni() {
   //
   // Text animation
   //
-  function textAnimation(tl) {
+  function textAnimation(tl, openingContent) {
     const header = document.querySelector(".landing-section-content h1");
     const subHeader = document.querySelector(".landing-section-content h2");
+    gsap.set(openingContent, { opacity: 1 });
     animateText({ start: -75, end: 0 }, [header, subHeader], tl, {
       duration: TEXT_DURATION,
       easing: "myBounce",
@@ -118,12 +119,13 @@ function HeroAni() {
     const parent = svgRef.current.parentElement;
     const fullWidth = parent.offsetWidth;
     const fullHeight = parent.offsetHeight;
+    const openingContent = document.querySelector(".landing-section-content");
 
     const tl = gsap.timeline();
 
     openingAnimation(tl, svgRef.current, fullWidth, fullHeight);
     scrollAnimation(tl, svgRef.current, fullWidth, fullHeight);
-    textAnimation(tl);
+    textAnimation(tl, openingContent);
     blockAnimations(tl);
   }, []);
 }

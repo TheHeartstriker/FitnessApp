@@ -1,23 +1,25 @@
-import { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { handleLogin, handleSignup } from "../../../services/ApiAuth";
 import "./login.css";
-import BackGround from "../../../../public/landing/backGround";
-import { animateText } from "@/components/animation/textAni";
+import { useEffect, useState, useRef } from "react";
+import { smallLorem, largeLorem } from "@/utils/text";
+import { useNavigate } from "react-router-dom";
+import InfoLine from "@/components/infoLine/infoLine";
+import LoginAni from "./loginAni";
+import { handleLogin, handleSignup } from "@/services/ApiAuth";
+import BackGroundGen from "@/components/backGroundGen";
+import BackGround2 from "@/../public/landing/backGround2";
+import { para } from "./text";
+
 const MAX_INPUT_LENGTH = 50;
 
-function LoginView() {
+function Login() {
+  const usernameRef = useRef(null);
+  const passwordRef = useRef(null);
+  const [loginSign, setLoginSign] = useState(false);
   const navigate = useNavigate();
-  // Use refs for username and password
-  const usernameRef = useRef("");
-  const passwordRef = useRef("");
-  // Used to see which button name and function to use
-  const [login, setLogin] = useState(false);
-  // Loading and error states
-  const [error, setError] = useState(null);
-
-  // Length validation
-  function handleChange(event, refType) {
+  //
+  //Input validation
+  //
+  function handleInput(event, refType) {
     if (event.target.value.length > MAX_INPUT_LENGTH) {
       alert("Username or password cannot be longer than 50 characters");
       return;
@@ -32,101 +34,101 @@ function LoginView() {
       }
     }
   }
-
-  function handleAnimation() {
-    const wordClass = document.querySelectorAll(".login-welcome-section h2");
-    animateText(-200, 0, wordClass);
+  //
+  // Type switch
+  //
+  function handleTypeSwitch() {
+    setLoginSign(!loginSign);
   }
-
-  // Call controllers to handle login and signup
-  function handleSwitch() {
-    setLogin(!login);
-    setError(null);
-  }
-
-  async function handleSignOrLog(event) {
-    event.preventDefault();
-    setError(null);
+  //
+  // Handle Sign In or log
+  //
+  async function handleSignOrLog() {
     try {
-      if (login) {
+      console.log("Username:", usernameRef.current);
+      console.log("Password:", passwordRef.current);
+
+      if (loginSign) {
         await handleLogin(usernameRef.current, passwordRef.current);
       } else {
         await handleSignup(usernameRef.current, passwordRef.current);
       }
-      // Before navigating zoom out
-      const timer = setTimeout(() => {
-        const viewport = document.querySelector('meta[name="viewport"]');
-        if (viewport) {
-          viewport.setAttribute(
-            "content",
-            "width=device-width, initial-scale=1",
-          );
-        }
-      }, 100);
       navigate("/view");
-      clearTimeout(timer);
     } catch (error) {
       console.error("Error:", error.message);
-      setError(error.message || "An error occurred");
+      alert(error.message || "An error occurred");
     }
   }
 
-  useEffect(() => {
-    handleAnimation();
-  }, []);
-
   return (
     <section className="login-section">
-      <section className="login-welcome-section">
-        <h2>
-          Want to try
-          <br /> FGraphs?
-        </h2>
-        <div className="welcome-overlay"></div>
-      </section>
-      <BackGround />
-      <div className="login-container">
-        <section className="login-form-section">
-          <h3>{login ? "Welcome Back!" : "Create Account"}</h3>
-          <p>Hi! Please login or create a account :)</p>
-
-          <form className="login-form" onSubmit={handleSignOrLog}>
+      <LoginAni />
+      {/*  */}
+      {/* Left side */}
+      {/*  */}
+      <div className="login-section-left">
+        {/*  */}
+        {/* Intro text */}
+        <InfoLine text="Some info" reverse={true} />
+        <h4>
+          Get access to a personalized <br /> fitness app made by a <br />{" "}
+          enthusiast
+        </h4>
+        <BackGroundGen
+          svgComponent={<BackGround2 />}
+          parent={".login-section-left"}
+        />
+      </div>
+      {/*  */}
+      {/* Left side */}
+      {/*  */}
+      <div className="login-section-right">
+        {/*  */}
+        {/* Text area */}
+        <div className="login-section-right-header">
+          <InfoLine text="Forever free" reverse={true} />
+          <h2>{loginSign ? "Sign In" : "Create new account"}</h2>
+          <p>{para}</p>
+        </div>
+        {/*  */}
+        {/* Input area */}
+        <form
+          className="login-section-right-body"
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSignOrLog();
+          }}
+        >
+          {/* Input fields */}
+          <div className="login-section-right-body-input">
             <h4>Username</h4>
             <input
               type="text"
-              defaultValue=""
-              onChange={(event) => handleChange(event, "username")}
-              required
+              placeholder="Enter your username"
+              onChange={(e) => handleInput(e, "username")}
             />
+          </div>
+          <div className="login-section-right-body-input">
             <h4>Password</h4>
             <input
               type="password"
-              defaultValue=""
-              onChange={(event) => handleChange(event, "password")}
-              required
+              placeholder="Enter your password"
+              onChange={(e) => handleInput(e, "password")}
             />
-            <h5 onClick={handleSwitch}>
-              {!login ? (
-                <>
-                  Already have an <br /> account<span>?</span> <br />
-                </>
-              ) : (
-                <>
-                  Don't have an <br /> account<span>?</span> <br />
-                </>
-              )}
-            </h5>
-            <button
-              type="submit"
-              className={error !== null ? "form-btn-error" : ""}
-            >
-              <h4>{login ? "Login" : "Sign Up"}</h4>
+          </div>
+          {/* Submit area */}
+          <div className="login-section-right-body-submit">
+            <button onClick={handleTypeSwitch} type="button">
+              <h5>Change method</h5>
             </button>
-          </form>
-        </section>
+            <button type="submit">
+              <h5>Submit</h5>
+            </button>
+          </div>
+        </form>
       </div>
     </section>
   );
 }
 
-export default LoginView;
+export default Login;

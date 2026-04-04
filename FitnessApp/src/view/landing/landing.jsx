@@ -5,7 +5,7 @@ import How from "./how/how.jsx";
 import Features from "./features/features.jsx";
 import Preview from "./preview/preview.jsx";
 import Benefits from "./benefits/benefits.jsx";
-import Login from "./newLogin/login.jsx";
+import Login from "./login/login.jsx";
 import "./landing.css";
 function LandingPage() {
   return (

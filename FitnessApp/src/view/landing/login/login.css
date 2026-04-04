@@ -1,242 +1,201 @@
-/* Overhead container */
 .login-section {
+  display: flex;
+  justify-content: center;
   width: 100%;
-  height: 100vh;
-  display: flex;
-  position: relative;
-  align-items: center;
-  justify-content: row;
-  justify-content: center;
-  overflow: hidden;
-  background-color: var(--color-5);
-  border-top: 2.5px solid var(--color-1);
-  border-top-left-radius: 50px;
-  border-top-right-radius: 50px;
-
-  z-index: 10;
+  padding: var(--space-32);
+  gap: var(--space-48);
+  justify-content: flex-start;
 }
-/* Left side section */
-.login-welcome-section {
-  flex: 1;
-  height: 100%;
+/*  */
+/* Left side card */
+/*  */
+.login-section-left {
   position: relative;
-  overflow: hidden;
   display: flex;
-  border-top-left-radius: 50px;
-  align-items: center;
-  justify-content: center;
-  z-index: 5;
-}
-
-.login-section svg {
-  position: absolute;
-  left: 0;
-  top: 0;
+  flex-direction: column;
+  justify-content: flex-end;
   width: 50%;
-  height: 100%;
-  z-index: 1;
+  padding: var(--space-24);
+  overflow: hidden;
 }
-.login-welcome-section h2 {
-  position: relative;
-  color: var(--white-1);
-  font-weight: 600;
-  font-size: 6rem;
-  text-align: center;
-  z-index: 10;
-}
-
-.welcome-overlay {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  inset: 0;
-  background: linear-gradient(90deg, hsla(0, 0%, 0%, 0.5) 0%, transparent 90%);
-
-  opacity: 0.6;
-  filter: blur(30px);
-  z-index: 1;
-}
-
-/* Right side section */
-
-.login-container {
-  flex: 1;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.login-form-section {
-  padding: var(--space-6);
-  border-radius: 50px;
-  width: 30vw;
-  height: auto;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  z-index: 5;
-}
-
-.login-form-section h3 {
-  color: var(--color-1);
-  font-weight: 500;
-  font-size: 2rem;
-  margin-bottom: var(--space-1);
-  text-align: center;
-}
-
-.login-form-section p {
-  color: var(--white-1);
-  margin: 0;
-  font-size: 1.25rem;
-  margin-bottom: var(--space-3);
-  font-weight: 400;
-}
-
-.login-form {
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-  width: 100%;
-  border: none;
-}
-
-.login-form h4 {
+/* Text */
+.login-section-left h4 {
   color: var(--color-2);
-  margin: 0;
-  margin-bottom: var(--space-1);
-  margin-left: var(--space-1);
-  font-size: 1.1rem;
-  font-weight: 500;
-}
-.login-form input {
-  padding: var(--space-2);
-  font-size: 1.1rem;
-  border: none;
-  color: var(--white-1);
-  margin-bottom: var(--space-2);
-  background-color: var(--color-3);
-  border-radius: 25px;
-  box-shadow: var(--shadow-small);
+  position: relative;
+  font-weight: var(--typo-weight-medium);
   z-index: 5;
+  font-size: var(--typo-size-32);
+  margin: 0;
+  margin-top: var(--space-16);
 }
 
-.login-form h5 {
-  color: var(--white-1);
-  font-weight: 500;
-  font-size: 1.1rem;
-  margin-top: var(--space-1);
-  margin-bottom: var(--space-2);
-  cursor: pointer;
+.login-section-left svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 40px;
 }
 
-.login-form span {
+.login-section-left:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    200deg,
+    transparent 0%,
+    var(--img-opacity-medium) 100%
+  );
+  border-radius: 40px;
+  z-index: 1;
+}
+
+.login-section-left:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--img-opacity-low);
+  border-radius: 40px;
+  z-index: 1;
+}
+/*  */
+/* Left side card */
+/*  */
+.login-section-right {
+  width: 35%;
+  flex-direction: column;
+  padding: var(--typo-size-128) 0;
+}
+/*  */
+/* Header area */
+.login-section-right-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+  margin-bottom: var(--space-32);
+}
+
+.login-section-right-header h2 {
+  font-size: var(--typo-size-48);
+  color: var(--color-2);
+  font-weight: var(--typo-weight-semi-bold);
+  margin: 0;
+}
+
+.login-section-right-header p {
+  font-size: var(--typo-size-16);
+  color: var(--typo-color-medium);
+  font-weight: var(--typo-weight-regular);
+  margin: 0;
+  width: 100%;
+}
+/*  */
+/* Input area */
+.login-section-right-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+}
+/* Input fields container*/
+.login-section-right-body-input {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  padding: var(--space-16);
+  border-radius: 30px;
+  background-color: var(--color-4);
+}
+
+.login-section-right-body-input input {
+  border: none;
+  background-color: transparent;
+  outline: none;
+  min-height: var(--typo-size-24);
+  color: var(--color-2);
+  font-size: var(--typo-size-16);
+  font-weight: var(--typo-weight-medium);
+  font-family: "Inter", sans-serif;
+}
+
+.login-section-right-body-input input::placeholder {
+  color: var(--color-2);
+  font-size: var(--typo-size-16);
+  font-weight: var(--typo-weight-medium);
+  font-family: "Inter", sans-serif;
+}
+
+.login-section-right-body-input h4 {
+  color: var(--color-3);
+  font-weight: var(--typo-weight-medium);
+  font-size: var(--typo-size-13);
+  margin: 0;
+}
+
+/* Submit section */
+.login-section-right-body-submit {
+  display: flex;
+  gap: var(--space-16);
+}
+
+.login-section-right-body-submit button {
+  background-color: var(--color-3);
+  width: 100%;
+  border-radius: 30px;
+  padding: var(--space-24);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+}
+
+.login-section-right-body-submit button h5 {
+  margin: 0;
+  color: var(--color-5);
+  font-weight: var(--typo-weight-regular);
+  font-size: var(--typo-size-14);
+  transition: color var(--motion-small-2) var(--power-2-out);
+}
+
+.login-section-right-body-submit button:nth-last-child(1) {
+  background-color: var(--color-2);
+}
+
+.login-section-right-body-submit button:nth-child(1):hover h5 {
+  color: var(--color-2);
+}
+
+.login-section-right-body-submit button:nth-last-child(1):hover h5 {
   color: var(--color-1);
 }
 
-.login-form input:focus {
-  outline: none;
-  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.2);
-}
-
-.login-form button {
-  border: none;
-  background-color: var(--color-1);
-  color: var(--white-2);
-  padding: var(--space-2);
-  border-radius: 25px;
-  cursor: pointer;
-  transition: box-shadow var(--duration-fast-3) var(--easing-power3-out);
-}
-
-.login-form button:hover {
-  box-shadow: var(--shadow-small);
-}
-
-.login-form button h4 {
-  font-size: 0.85rem;
-  margin: auto;
-  font-weight: 600;
-  color: var(--white-1);
-}
-
-.form-btn-error {
-  transition: background-color 0.3s ease;
-  background-color: red !important;
-  color: var(--white-2);
-}
-
-@media (max-width: 1500px) {
-  .login-form-section {
-    width: 50vw;
+@media (max-width: 1300px) {
+  .login-section-right {
+    width: 80%;
   }
 }
 
 @media (max-width: 1000px) {
   .login-section {
     flex-direction: column;
+    align-items: center;
+    gap: var(--space-96);
   }
-  .welcome-overlay {
-    display: none;
-  }
-  .login-welcome-section h2 {
-    margin: 0;
-  }
-  /* Login half */
-  .login-form-section {
-    width: auto;
-    height: auto;
-    padding: var(--space-6);
-    background-color: var(--color-4);
-  }
-  .login-container {
-    flex: none;
+
+  .login-section-right {
     width: 100%;
-    height: 70%;
+    padding: 0;
   }
-}
-
-@media (max-width: 800px) {
-  /* Decreased by 20% */
-  .login-welcome-section h2 {
-    font-size: 4.8rem;
-  }
-  .login-form-section h3 {
-    font-size: 1.6rem;
-  }
-  .login-form-section p {
-    font-size: 1rem;
-  }
-  .login-form h4 {
-    font-size: 0.8rem;
-  }
-  .login-form input {
-    font-size: 0.8rem;
-  }
-  .login-form h5 {
-    font-size: 0.88rem;
-  }
-  .login-form button h4 {
-    font-size: 0.8rem;
-  }
-
-  .login-welcome-section {
-    margin-top: var(--space-4);
-    padding: var(--space-2);
-  }
-}
-
-@media (max-width: 550px) {
-  .login-welcome-section h2 {
-    font-size: 3.8rem;
-  }
-}
-
-@media (max-height: 700px) {
-  .login-section {
+  .login-section-left {
     width: 100%;
-    height: 150vh;
+    height: 500px;
   }
 }
