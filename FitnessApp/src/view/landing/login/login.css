@@ -1,0 +1,201 @@
+.login-section {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: var(--space-32);
+  gap: var(--space-48);
+  justify-content: flex-start;
+}
+/*  */
+/* Left side card */
+/*  */
+.login-section-left {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 50%;
+  padding: var(--space-24);
+  overflow: hidden;
+}
+/* Text */
+.login-section-left h4 {
+  color: var(--color-2);
+  position: relative;
+  font-weight: var(--typo-weight-medium);
+  z-index: 5;
+  font-size: var(--typo-size-32);
+  margin: 0;
+  margin-top: var(--space-16);
+}
+
+.login-section-left svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 40px;
+}
+
+.login-section-left:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    200deg,
+    transparent 0%,
+    var(--img-opacity-medium) 100%
+  );
+  border-radius: 40px;
+  z-index: 1;
+}
+
+.login-section-left:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--img-opacity-low);
+  border-radius: 40px;
+  z-index: 1;
+}
+/*  */
+/* Left side card */
+/*  */
+.login-section-right {
+  width: 35%;
+  flex-direction: column;
+  padding: var(--typo-size-128) 0;
+}
+/*  */
+/* Header area */
+.login-section-right-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+  margin-bottom: var(--space-32);
+}
+
+.login-section-right-header h2 {
+  font-size: var(--typo-size-48);
+  color: var(--color-2);
+  font-weight: var(--typo-weight-semi-bold);
+  margin: 0;
+}
+
+.login-section-right-header p {
+  font-size: var(--typo-size-16);
+  color: var(--typo-color-medium);
+  font-weight: var(--typo-weight-regular);
+  margin: 0;
+  width: 100%;
+}
+/*  */
+/* Input area */
+.login-section-right-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+}
+/* Input fields container*/
+.login-section-right-body-input {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  padding: var(--space-16);
+  border-radius: 30px;
+  background-color: var(--color-4);
+}
+
+.login-section-right-body-input input {
+  border: none;
+  background-color: transparent;
+  outline: none;
+  min-height: var(--typo-size-24);
+  color: var(--color-2);
+  font-size: var(--typo-size-16);
+  font-weight: var(--typo-weight-medium);
+  font-family: "Inter", sans-serif;
+}
+
+.login-section-right-body-input input::placeholder {
+  color: var(--color-2);
+  font-size: var(--typo-size-16);
+  font-weight: var(--typo-weight-medium);
+  font-family: "Inter", sans-serif;
+}
+
+.login-section-right-body-input h4 {
+  color: var(--color-3);
+  font-weight: var(--typo-weight-medium);
+  font-size: var(--typo-size-13);
+  margin: 0;
+}
+
+/* Submit section */
+.login-section-right-body-submit {
+  display: flex;
+  gap: var(--space-16);
+}
+
+.login-section-right-body-submit button {
+  background-color: var(--color-3);
+  width: 100%;
+  border-radius: 30px;
+  padding: var(--space-24);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+}
+
+.login-section-right-body-submit button h5 {
+  margin: 0;
+  color: var(--color-5);
+  font-weight: var(--typo-weight-regular);
+  font-size: var(--typo-size-14);
+  transition: color var(--motion-small-2) var(--power-2-out);
+}
+
+.login-section-right-body-submit button:nth-last-child(1) {
+  background-color: var(--color-2);
+}
+
+.login-section-right-body-submit button:nth-child(1):hover h5 {
+  color: var(--color-2);
+}
+
+.login-section-right-body-submit button:nth-last-child(1):hover h5 {
+  color: var(--color-1);
+}
+
+@media (max-width: 1300px) {
+  .login-section-right {
+    width: 80%;
+  }
+}
+
+@media (max-width: 1000px) {
+  .login-section {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-96);
+  }
+
+  .login-section-right {
+    width: 100%;
+    padding: 0;
+  }
+  .login-section-left {
+    width: 100%;
+    height: 500px;
+  }
+}

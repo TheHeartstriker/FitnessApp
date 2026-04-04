@@ -4,6 +4,7 @@ import { createRoot } from "react-dom/client";
 import Nav from "./components/navBar/nav.jsx";
 import AppRoutes from "./routing/indexRoute.jsx";
 import { ReactLenis } from "lenis/react";
+import "@/utils/customEase.jsx";
 
 import "./Site.css";
 

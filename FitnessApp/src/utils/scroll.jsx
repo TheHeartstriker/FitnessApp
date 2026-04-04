@@ -1,21 +1,21 @@
+"use client";
 import { useLenis } from "lenis/react";
-
-export function ScrollDown({ percent, className, children, id = null }) {
+export function ScrollButton({ percent, className, children, ...props }) {
   const lenis = useLenis();
 
-  function scrollDown(targetPercent) {
-    if (!lenis) return; // Ensure lenis is available
-    const scrollPosition =
-      (targetPercent / 100) * document.documentElement.scrollHeight;
-    lenis.scrollTo(scrollPosition, {
-      duration: 1,
-      //Cubic easing
-      easing: (t) => 1 - Math.pow(1 - t, 3),
-    });
-  }
+  function scrollToPercent() {
+    if (!lenis) return;
 
+    const vh = window.innerHeight;
+    const targetScroll = (percent / 100) * vh;
+    lenis.scrollTo(targetScroll, { duration: 1.2 });
+  }
   return (
-    <button id={id} className={className} onClick={() => scrollDown(percent)}>
+    <button
+      className={className ? className : ""}
+      onClick={scrollToPercent}
+      {...props}
+    >
       {children}
     </button>
   );

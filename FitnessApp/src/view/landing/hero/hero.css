@@ -1,0 +1,197 @@
+/*  */
+/* Landing Section */
+/*  */
+.landing-section {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  height: 100vh;
+  width: 100%;
+  border-radius: 0 0 50px 50px;
+  padding: var(--space-40);
+}
+/*  */
+/* Absolute background for landing section */
+.landing-section-svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  opacity: 0;
+}
+
+/*  */
+/* Landing Section */
+/*  */
+.landing-section-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  z-index: 5;
+  opacity: 0;
+}
+/*  */
+/* Land section text */
+.landing-section-content h1 {
+  font-size: var(--typo-size-96);
+  color: var(--color-1);
+  margin: 0;
+  transform: translateX(-2.5px);
+  font-weight: var(--typo-weight-bold);
+}
+.landing-section-content h2 {
+  font-size: var(--typo-size-32);
+  color: var(--typo-color-medium);
+  margin-top: 0;
+  margin: 0;
+  font-weight: var(--typo-weight-semi-bold);
+}
+
+.landing-section-content p {
+  font-size: var(--typo-size-20);
+  color: var(--typo-color-low);
+  margin: var(--space-16) 0;
+  max-width: 850px;
+  font-weight: 400;
+}
+
+/*  */
+/* Landing Section Details / button and text */
+.landing-section-content-details {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-16);
+}
+/* First button */
+.landing-section-content-details-button-1 {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-5);
+  padding: var(--space-24);
+  margin-right: var(--space-16);
+  border-radius: 30px;
+  border: none;
+  transition:
+    background-color var(--motion-small-2) var(--power-2-out),
+    box-shadow var(--motion-small-2) var(--power-2-out);
+}
+.landing-section-content-details-button-1 h3 {
+  font-size: var(--typo-size-14);
+  margin: 0;
+  color: var(--color-2);
+  transition: color var(--motion-small-2) var(--power-2-out);
+}
+/* First button hover */
+.landing-section-content-details-button-1:hover {
+  background-color: var(--color-2);
+  color: var(--color-5);
+  box-shadow: var(--shadow-small);
+}
+
+.landing-section-content-details-button-1:hover h3 {
+  color: var(--color-5);
+}
+
+/* Circle button */
+.landing-section-content-details-button-2 {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-5);
+  margin-left: var(--space-16);
+  padding: var(--space-24);
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  border: none;
+  transition:
+    background-color var(--motion-small-2) var(--power-2-out),
+    box-shadow var(--motion-small-2) var(--power-2-out);
+}
+
+.landing-section-content-details-button-2 h3 {
+  font-size: var(--typo-size-14);
+  margin: 0;
+  color: var(--color-2);
+  transition: color var(--motion-small-2) var(--power-2-out);
+}
+
+.landing-section-content-details-button-2 a {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  text-decoration: none;
+  margin: 0;
+  border-radius: 50%;
+}
+
+.landing-section-content-details-button-2:hover {
+  background-color: var(--color-2);
+  box-shadow: var(--shadow-small);
+}
+
+.landing-section-content-details-button-2:hover h3 {
+  color: var(--color-5);
+}
+/* separator */
+.landing-section-content-details hr {
+  height: 100%;
+  width: 2px;
+  background-color: var(--color-2);
+  border: none;
+}
+
+/* side text */
+.landing-section-content-details h3 {
+  font-size: var(--typo-size-14);
+  color: var(--color-2);
+  align-self: center;
+  text-shadow: 0 4px 8px var(--opacity-c5-normal);
+  font-weight: 400;
+}
+
+@media (max-width: 850px) {
+  .landing-section-content h2 {
+    font-size: var(--typo-size-24);
+  }
+
+  .landing-section-content p {
+    font-size: var(--typo-size-16);
+  }
+}
+
+@media (max-width: 600px) {
+  .landing-section-content h1 {
+    font-size: var(--typo-size-64);
+  }
+  .landing-section-content-details-button-1 h3 {
+    font-size: var(--typo-size-12);
+  }
+  .landing-section-content-details-button-2 h3 {
+    font-size: var(--typo-size-12);
+  }
+  .landing-section-content-details h3 {
+    font-size: var(--typo-size-12);
+  }
+}
+
+@media (max-width: 500px) {
+  .landing-section-content-details-button-1 {
+    margin: 0;
+  }
+  .landing-section-content-details-button-2 {
+    margin: 0;
+  }
+}

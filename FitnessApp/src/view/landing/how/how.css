@@ -1,0 +1,169 @@
+/*  */
+/* Section container */
+/*  */
+.how-section {
+  display: flex;
+  justify-content: center;
+  padding: var(--space-32);
+  gap: var(--space-16);
+}
+/*  */
+/* Left side container */
+/*  */
+.how-section-left {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-64);
+  width: 70%;
+}
+
+/*  */
+/* Left side header top*/
+.how-section-left-header {
+  display: flex;
+  flex-direction: column;
+}
+
+.how-section-left-header h2 {
+  color: var(--color-2);
+  font-weight: var(--typo-weight-semi-bold);
+  font-size: var(--typo-size-48);
+  margin: 0;
+}
+
+.how-section-left-header p {
+  width: 70%;
+  color: var(--typo-color-medium);
+  font-weight: var(--typo-weight-regular);
+  font-size: var(--typo-size-16);
+  margin: 0;
+  margin-top: var(--space-16);
+}
+/*  */
+/* Left side content bottom*/
+.how-section-left-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+}
+/* Divider */
+.how-section-left-content-divider {
+  display: flex;
+  gap: var(--space-16);
+  align-items: center;
+  padding-left: var(--space-16);
+}
+
+.how-section-left-content-divider hr {
+  height: 2px;
+  width: 100%;
+  background-color: var(--color-2);
+  border: none;
+}
+
+.how-section-left-content-divider h3 {
+  color: var(--color-1);
+  font-weight: var(--typo-weight-medium);
+  font-size: var(--typo-size-24);
+  width: auto;
+  white-space: nowrap;
+  margin: 0;
+}
+/* Cards */
+.how-section-left-content-cards {
+  display: flex;
+  gap: var(--space-16);
+}
+.how-section-left-content-cards-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  background-color: var(--color-4);
+  border-radius: 40px;
+  padding: var(--space-24);
+  transition: background-color var(--motion-medium-1) var(--power-2-out);
+}
+
+.how-section-left-content-cards-item:hover {
+  background-color: var(--color-3);
+}
+
+.how-section-left-content-cards-item h3 {
+  margin: 0;
+  color: var(--color-2);
+  font-weight: var(--typo-weight-medium);
+  font-size: var(--typo-size-24);
+}
+
+.how-section-left-content-cards-item p {
+  margin: 0;
+  color: var(--typo-color-low);
+  font-weight: var(--typo-weight-regular);
+  font-size: var(--typo-size-16);
+}
+
+/*  */
+/* Right side container */
+/*  */
+.how-section-right {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  background-color: var(--color-4);
+  border-radius: 40px;
+  padding: var(--space-24);
+  transition: background-color var(--motion-medium-1) var(--power-2-out);
+}
+
+.how-section-right:hover {
+  background-color: var(--color-3);
+}
+
+.how-section-right-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+  margin-top: auto;
+}
+
+.how-section-right-text h3 {
+  color: var(--color-2);
+  font-weight: var(--typo-weight-medium);
+  font-size: var(--typo-size-40);
+  margin: 0;
+}
+
+.how-section-right-text p {
+  color: var(--typo-color-low);
+  font-weight: var(--typo-weight-regular);
+  font-size: var(--typo-size-16);
+  margin: 0;
+}
+
+@media (max-width: 1350px) {
+  .how-section {
+    flex-direction: column;
+  }
+  .how-section-right {
+    width: 100%;
+  }
+  .how-section-left {
+    width: 100%;
+  }
+}
+
+@media (max-width: 1000px) {
+  .how-section-left-header p {
+    width: 100%;
+  }
+}
+
+@media (max-width: 700px) {
+  .how-section-left-content-cards {
+    flex-direction: column;
+  }
+
+  .how-section-left-header h2 {
+    font-size: var(--typo-size-40);
+  }
+}

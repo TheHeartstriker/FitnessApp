@@ -1,10 +1,10 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-import Logo from "../../assets/icons/logo.jsx";
+import Logo from "../../../public/icons/logo.jsx";
 import "./nav.css";
-import CubeIcon from "../../assets/icons/cube.jsx";
-import HeartIcon from "../../assets/icons/heart.jsx";
-import PeopleIcon from "../../assets/icons/people.jsx";
+import CubeIcon from "../../../public/icons/cube.jsx";
+import HeartIcon from "../../../public/icons/heart.jsx";
+import PeopleIcon from "../../../public/icons/people.jsx";
 
 function getRemInPx() {
   return parseFloat(getComputedStyle(document.documentElement).fontSize);
