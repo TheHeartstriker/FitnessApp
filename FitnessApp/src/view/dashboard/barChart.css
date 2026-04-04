@@ -58,13 +58,6 @@
   font-size: 0.75rem;
 }
 
-/* Remove margin-top from h4 */
-.dashboard-bar-zone h4 {
-  margin-top: 0;
-  color: var(--white-1);
-  font-weight: 400;
-}
-
 .dashboard-bar-legend {
   width: 90%;
   display: flex;

@@ -6,7 +6,8 @@ import InfoLine from "@/components/infoLine/infoLine";
 import LoginAni from "./loginAni";
 import { handleLogin, handleSignup } from "@/services/ApiAuth";
 import BackGroundGen from "@/components/backGroundGen";
-import BackGroundInvert from "@/../public/landing/backGroundInvert";
+import BackGround2 from "@/../public/landing/backGround2";
+import { para } from "./text";
 
 const MAX_INPUT_LENGTH = 50;
 
@@ -74,7 +75,7 @@ function Login() {
           enthusiast
         </h4>
         <BackGroundGen
-          svgComponent={<BackGroundInvert />}
+          svgComponent={<BackGround2 />}
           parent={".login-section-left"}
         />
       </div>
@@ -87,7 +88,7 @@ function Login() {
         <div className="login-section-right-header">
           <InfoLine text="Forever free" reverse={true} />
           <h2>{loginSign ? "Sign In" : "Create new account"}</h2>
-          <p>{smallLorem}</p>
+          <p>{para}</p>
         </div>
         {/*  */}
         {/* Input area */}

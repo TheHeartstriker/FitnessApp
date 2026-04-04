@@ -4,7 +4,7 @@ import { lorem, smallLorem } from "@/utils/text";
 import ArrowSmRight from "@/../public/icons/arrow-sm-right";
 import PlusSm from "@/../public/icons/plus-sm";
 
-function BenefitsEl({ active, title, onMouseEnter }) {
+function BenefitsEl({ active, title, onMouseEnter, text, imgSrc }) {
   const bottomRef = useRef(null);
 
   useEffect(() => {
@@ -28,7 +28,7 @@ function BenefitsEl({ active, title, onMouseEnter }) {
       </div>
       <div ref={bottomRef} className="benefits-section-image-right-item-bottom">
         <div className="benefits-section-image-right-item-bottom-info">
-          <p>{lorem + smallLorem}</p>
+          <p>{text}</p>
           <div className="benefits-section-image-right-item-bottom-info-text">
             <h4>Review other's</h4>
             <div className="benefits-section-image-right-item-bottom-info-text-icon">
@@ -37,7 +37,7 @@ function BenefitsEl({ active, title, onMouseEnter }) {
           </div>
         </div>
         <div className="benefits-section-image-right-item-bottom-image">
-          <img src="/landing/grid.png" alt="Benefit 4" />
+          <img src={imgSrc} alt={`Benefit ${title}`} />
         </div>
       </div>
     </div>

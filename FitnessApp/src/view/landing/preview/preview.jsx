@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { lorem, smallLorem, largeLorem } from "@/utils/text";
 import InfoLine from "@/components/infoLine/infoLine";
 import PreviewAni from "./previewAni";
+import { card1, card2, card3, para } from "./text";
 function Preview() {
   const [activePreview, setActivePreview] = useState(0);
   return (
@@ -21,7 +22,7 @@ function Preview() {
           </h2>
           <div className="preview-section-header-text-para">
             <h3>Details</h3>
-            <p>{lorem}</p>
+            <p>{para}</p>
           </div>
         </div>
       </div>
@@ -36,25 +37,25 @@ function Preview() {
             className={`preview-section-images-container-item ${activePreview === 0 ? "active" : ""}`}
             onMouseEnter={() => setActivePreview(0)}
           >
-            <img src="/landing/grid.png" alt="Feature image" />
+            <img src="/landing/preview/home.webp" alt="Feature image" />
           </div>
           <div
             className={`preview-section-images-container-item ${activePreview === 1 ? "active" : ""}`}
             onMouseEnter={() => setActivePreview(1)}
           >
-            <img src="/landing/grid.png" alt="Feature image" />
+            <img src="/landing/preview/dash.webp" alt="Feature image" />
           </div>
           <div
             className={`preview-section-images-container-item ${activePreview === 2 ? "active" : ""}`}
             onMouseEnter={() => setActivePreview(2)}
           >
-            <img src="/landing/grid.png" alt="Feature image" />
+            <img src="/landing/preview/input.webp" alt="Feature image" />
           </div>
           <div
             className={`preview-section-images-container-item ${activePreview === 3 ? "active" : ""}`}
             onMouseEnter={() => setActivePreview(3)}
           >
-            <img src="/landing/grid.png" alt="Feature image" />
+            <img src="/landing/preview/share.webp" alt="Feature image" />
           </div>
         </div>
         {/*  */}
@@ -79,16 +80,16 @@ function Preview() {
           Fueling growth through <br /> insight and creative <br /> application
         </h3>
         <div className="preview-section-ending-card">
-          <h4>Creative</h4>
-          <p>{smallLorem}</p>
+          <h4>{card1.header}</h4>
+          <p>{card1.para}</p>
         </div>
         <div className="preview-section-ending-card">
-          <h4>Creative</h4>
-          <p>{smallLorem}</p>
+          <h4>{card2.header}</h4>
+          <p>{card2.para}</p>
         </div>
         <div className="preview-section-ending-card">
-          <h4>Creative</h4>
-          <p>{smallLorem}</p>
+          <h4>{card3.header}</h4>
+          <p>{card3.para}</p>
         </div>
       </div>
     </section>

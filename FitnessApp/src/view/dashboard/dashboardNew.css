@@ -59,7 +59,7 @@
 }
 
 .dashboard-card p {
-  color: var(--white-1);
+  color: var(--typo-color-medium);
   font-weight: 300;
   font-size: 1.25rem;
   margin: 0;

@@ -1,9 +1,10 @@
 import "./benefits.css";
-import { useEffect, useState } from "react";
-import { lorem, smallLorem, largeLorem } from "@/utils/text";
+import { useState } from "react";
+import { lorem } from "@/utils/text";
 import InfoLine from "@/components/infoLine/infoLine";
-import PlusSm from "@/../public/icons/plus-sm";
-import ArrowSmRight from "@/../public/icons/arrow-sm-right";
+
+import { para, health, sleep, activity, nutrition } from "./text";
+
 import BenefitsAni from "./benefitsAni";
 import BenefitsEl from "./benefitsEl";
 function Benefits() {
@@ -21,7 +22,7 @@ function Benefits() {
           <h2>
             The possible benefits of <br /> using a fitness tracker
           </h2>
-          <p>{lorem}</p>
+          <p>{para}</p>
         </div>
       </div>
       {/*  */}
@@ -31,7 +32,7 @@ function Benefits() {
         {/*  */}
         {/* Left side image */}
         <div className="benefits-section-image-left">
-          <img src="/landing/grid.png" alt="Left benefit" />
+          <img src="/landing/benefits/leftBrain.webp" alt="Left benefit" />
         </div>
         {/*  */}
         {/* Right side elements */}
@@ -40,24 +41,32 @@ function Benefits() {
           <BenefitsEl
             active={activeIndex === 0}
             title="Health"
+            text={health.para}
+            imgSrc={health.imgSrc}
             onMouseEnter={() => setActiveIndex(0)}
           />
           {/* Element 2 */}
           <BenefitsEl
             active={activeIndex === 1}
             title="Sleep"
+            text={sleep.para}
+            imgSrc={sleep.imgSrc}
             onMouseEnter={() => setActiveIndex(1)}
           />
           {/* Element 3 */}
           <BenefitsEl
             active={activeIndex === 2}
             title="Activity"
+            text={activity.para}
+            imgSrc={activity.imgSrc}
             onMouseEnter={() => setActiveIndex(2)}
           />
           {/* Element 4 active */}
           <BenefitsEl
             active={activeIndex === 3}
             title="Nutrition"
+            text={nutrition.para}
+            imgSrc={nutrition.imgSrc}
             onMouseEnter={() => setActiveIndex(3)}
           />
         </div>

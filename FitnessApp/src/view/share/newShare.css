@@ -32,7 +32,7 @@
 }
 
 .share-item li {
-  color: var(--white-2);
+  color: var(--typo-color-medium);
   font-size: 1.25rem;
   font-family: "Inter", sans-serif;
   font-weight: 300;
@@ -110,7 +110,7 @@
 }
 
 .share-button-text h3 {
-  color: var(--white-1);
+  color: var(--typo-color-medium);
   font-weight: 500;
   margin: 0;
   font-size: 0.85rem;

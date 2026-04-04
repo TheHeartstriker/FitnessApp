@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { lorem, smallLorem, largeLorem } from "@/utils/text";
 import InfoLine from "@/components/infoLine/infoLine";
 import HowAni from "./howAni";
+import { para, card1, card2, card3 } from "./text";
 function How() {
   return (
     <section className="how-section">
@@ -16,7 +17,7 @@ function How() {
         <div className="how-section-left-header">
           <h2> How FGraphs works and</h2>
           <h2> why it was created</h2>
-          <p>{lorem + smallLorem}</p>
+          <p>{para}</p>
         </div>
         {/*  */}
         {/* cards and divider */}
@@ -29,12 +30,12 @@ function How() {
           {/* Card container and cards */}
           <div className="how-section-left-content-cards">
             <div className="how-section-left-content-cards-item">
-              <h3>Login</h3>
-              <p>{lorem}</p>
+              <h3>{card1.header}</h3>
+              <p>{card1.para}</p>
             </div>
             <div className="how-section-left-content-cards-item">
-              <h3>Login</h3>
-              <p>{lorem}</p>
+              <h3>{card2.header}</h3>
+              <p>{card2.para}</p>
             </div>
           </div>
         </div>
@@ -45,12 +46,8 @@ function How() {
       <div className="how-section-right">
         <InfoLine text="Some info" />
         <div className="how-section-right-text">
-          <h3>
-            Here <br />
-            I need to <br />
-            put random text
-          </h3>
-          <p>{lorem}</p>
+          <h3>{card3.header}</h3>
+          <p>{card3.para}</p>
         </div>
       </div>
     </section>

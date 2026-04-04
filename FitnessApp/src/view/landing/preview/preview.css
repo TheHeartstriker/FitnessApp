@@ -75,6 +75,8 @@
   width: 16.66%;
   height: 500px;
   transition: width var(--motion-large-2) var(--power-1-out);
+  border: 1px solid var(--color-2);
+  border-radius: 40px;
 }
 
 .preview-section-images-container-item.active {

@@ -59,7 +59,7 @@
 }
 
 .instruct-card p {
-  color: var(--white-1);
+  color: var(--typo-color-medium);
   font-size: 1.25rem;
   margin: 0;
   font-weight: 300;
@@ -68,7 +68,7 @@
 
 .instruct-card pre {
   white-space: pre-wrap;
-  color: var(--white-1);
+  color: var(--typo-color-medium);
   font-size: 0.75rem;
   margin: 0;
   font-weight: 300;
@@ -132,7 +132,7 @@
 }
 
 .zone-button h4 {
-  color: var(--white-1);
+  color: var(--typo-color-medium);
   font-weight: 500;
   font-size: 1.25rem;
   transition: color 0.5s ease-in-out;
@@ -223,7 +223,7 @@
 
 .daily-input h3 {
   position: absolute;
-  color: var(--white-2);
+  color: var(--typo-color-medium);
   top: 5%;
   font-size: 0.85rem;
   font-weight: 300;
@@ -238,7 +238,7 @@
   padding: var(--space-1) 0;
   background-color: var(--color-2);
   height: auto;
-  color: var(--white-1);
+  color: var(--color-4);
   border: none;
   border-radius: 30px;
   cursor: pointer;
