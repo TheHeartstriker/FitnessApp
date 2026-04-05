@@ -97,6 +97,7 @@
   background-size: cover;
   background-position: center;
   background-image:
+    linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.2)),
     linear-gradient(var(--img-opacity-high), var(--img-opacity-high)),
     url("/landing/features/change.webp");
   height: 100%;
@@ -119,7 +120,7 @@
 
 .features-section-current-card-text p {
   margin: 0;
-  color: var(--typo-color-low);
+  color: var(--typo-color-medium);
   font-weight: var(--typo-weight-regular);
   font-size: var(--typo-size-16);
   z-index: 5;

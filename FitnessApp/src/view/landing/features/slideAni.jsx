@@ -37,7 +37,8 @@ export function animateSlide(
     opacity: 1,
     duration: 0.8,
     ease: "myBounce",
-    backgroundImage: `linear-gradient(var(--img-opacity-medium), var(--img-opacity-medium)), url(${stringNumMap[cardNumber[1]].imgSrc})`,
+    backgroundImage: ` 
+        linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.6)), linear-gradient(var(--img-opacity-medium), var(--img-opacity-medium)), url(${stringNumMap[cardNumber[1]].imgSrc})`,
   });
   // Reappear the current card at the same height as the next card
   // And reset the next back to its original state
@@ -45,7 +46,7 @@ export function animateSlide(
     opacity: 1,
     duration: 0.0,
     height: `${next90Height}px`,
-    backgroundImage: `linear-gradient(var(--img-opacity-medium), var(--img-opacity-medium)), url(${stringNumMap[cardNumber[1]].imgSrc})`,
+    backgroundImage: `linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.6)), linear-gradient(var(--img-opacity-medium), var(--img-opacity-medium)), url(${stringNumMap[cardNumber[1]].imgSrc})`,
   });
   tl.to(nextCard, {
     x: "0%",

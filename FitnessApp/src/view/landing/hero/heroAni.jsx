@@ -36,12 +36,6 @@ function HeroAni() {
         borderRadius: "40px",
         duration: OPENING_DURATION,
         ease: "power2.out",
-        onStart: () => {
-          document.body.style.position = "fixed";
-        },
-        onComplete: () => {
-          document.body.style.position = "static";
-        },
       },
     );
   }
@@ -121,7 +115,16 @@ function HeroAni() {
     const fullHeight = parent.offsetHeight;
     const openingContent = document.querySelector(".landing-section-content");
 
-    const tl = gsap.timeline();
+    const blockScroll = (e) => e.preventDefault();
+    window.addEventListener("wheel", blockScroll, { passive: false });
+    window.addEventListener("touchmove", blockScroll, { passive: false });
+
+    const tl = gsap.timeline({
+      onComplete: () => {
+        window.removeEventListener("wheel", blockScroll);
+        window.removeEventListener("touchmove", blockScroll);
+      },
+    });
 
     openingAnimation(tl, svgRef.current, fullWidth, fullHeight);
     scrollAnimation(tl, svgRef.current, fullWidth, fullHeight);
