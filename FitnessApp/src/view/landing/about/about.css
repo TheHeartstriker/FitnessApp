@@ -220,4 +220,7 @@
   .about-section-cards-left-item {
     padding: var(--space-24);
   }
+  .about-section-header h2 {
+    font-size: var(--typo-size-64);
+  }
 }
