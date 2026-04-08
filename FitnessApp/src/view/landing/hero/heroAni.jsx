@@ -8,7 +8,7 @@ gsap.registerPlugin(MotionPathPlugin, ScrollTrigger);
 //
 //Animation durations
 //
-const OPENING_DURATION = 1.2;
+const OPENING_DURATION = 1.4;
 const TEXT_DURATION = 0.6;
 const SLIDE_DURATION = 0.4;
 
@@ -26,7 +26,6 @@ function HeroAni() {
   // Opening animation
   //
   function openingAnimation(tl, svgBackground, fullWidth, fullHeight) {
-    gsap.set(svgBackground, { opacity: 1 });
     tl.fromTo(
       svgBackground,
       { width: 0, height: 0, borderRadius: "500px" },
@@ -36,6 +35,8 @@ function HeroAni() {
         borderRadius: "40px",
         duration: OPENING_DURATION,
         ease: "power2.out",
+        delay: 0.5,
+        opacity: 1,
       },
     );
   }

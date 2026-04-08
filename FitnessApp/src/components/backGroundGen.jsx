@@ -79,12 +79,17 @@ function TriAngleBackgroundAni({ svgComponent, parent }) {
 
   useEffect(() => {
     window.addEventListener("mousemove", mouseMove);
-    window.addEventListener("resize", updateCenter);
     window.addEventListener("scroll", updateCenter);
+
+    const resizeObserver = new ResizeObserver(updateCenter);
+    if (parentRef.current) {
+      resizeObserver.observe(parentRef.current);
+    }
+
     return () => {
       window.removeEventListener("mousemove", mouseMove);
-      window.removeEventListener("resize", updateCenter);
       window.removeEventListener("scroll", updateCenter);
+      resizeObserver.disconnect();
       if (rafIdRef.current) {
         cancelAnimationFrame(rafIdRef.current);
       }
