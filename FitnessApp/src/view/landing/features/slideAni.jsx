@@ -14,7 +14,20 @@ export function animateSlide(
   setAnimating,
   cardNumber,
 ) {
-  if (isMobile() || window.innerWidth < 1250) return;
+  if (isMobile() || window.innerWidth < 1250) {
+    // Instant switch on mobile without animation
+    const currentCard = document.querySelector(
+      ".features-section-current-card",
+    );
+    const nextCard = document.querySelector(".features-section-next-card");
+
+    nextCard.style.backgroundImage = `none`;
+    currentCard.style.backgroundImage = `linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.6)), linear-gradient(var(--img-opacity-medium), var(--img-opacity-medium)), url(${stringNumMap[cardNumber[1]].imgSrc})`;
+
+    setCurrentContent(stringNumMap[cardNumber[1]]);
+    setNextContent(stringNumMap[cardNumber[2]]);
+    return;
+  }
   setAnimating(true);
   const currentCard = document.querySelector(".features-section-current-card");
   const nextCard = document.querySelector(".features-section-next-card");
